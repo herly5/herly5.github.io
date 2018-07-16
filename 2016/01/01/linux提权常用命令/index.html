@@ -1,0 +1,464 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>linux提权常用命令 | Bug&#39;小虫</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小虫">
+    
+
+    
+    <meta name="description" content="uname输出一组系统信息。如果不跟随选项，则视为只附加-s选项。常跟的参数有-a，在我的Ubuntu10.10的终端中执行uname-a命令后显示，其中最前面的Linux表示是基于Linux内核的，2.6.35-28是具体的内核版本号。这个内核版本号非常重要，因为如果是采用溢出漏洞提权的话内核版本号是寻找溢出漏洞利用程序最重要的参考信息，根据当前的内核版本号寻找适用于这个版本号的漏洞利用程序。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux提权常用命令">
+<meta property="og:url" content="http://yoursite.com/2016/01/01/linux提权常用命令/index.html">
+<meta property="og:site_name" content="Bug&#39;小虫">
+<meta property="og:description" content="uname输出一组系统信息。如果不跟随选项，则视为只附加-s选项。常跟的参数有-a，在我的Ubuntu10.10的终端中执行uname-a命令后显示，其中最前面的Linux表示是基于Linux内核的，2.6.35-28是具体的内核版本号。这个内核版本号非常重要，因为如果是采用溢出漏洞提权的话内核版本号是寻找溢出漏洞利用程序最重要的参考信息，根据当前的内核版本号寻找适用于这个版本号的漏洞利用程序。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-15T16:04:48.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux提权常用命令">
+<meta name="twitter:description" content="uname输出一组系统信息。如果不跟随选项，则视为只附加-s选项。常跟的参数有-a，在我的Ubuntu10.10的终端中执行uname-a命令后显示，其中最前面的Linux表示是基于Linux内核的，2.6.35-28是具体的内核版本号。这个内核版本号非常重要，因为如果是采用溢出漏洞提权的话内核版本号是寻找溢出漏洞利用程序最重要的参考信息，根据当前的内核版本号寻找适用于这个版本号的漏洞利用程序。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Bug&#39;小虫" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Bug&#39;小虫">Bug&#39;小虫</a></h1>
+				<h2 class="blog-motto">走过黑暗，前面便是光</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="[layout]" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/linux提权常用命令/" title="linux提权常用命令" itemprop="url">linux提权常用命令</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#uname"><span class="toc-number">1.</span> <span class="toc-text">uname</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pwd"><span class="toc-number">2.</span> <span class="toc-text">pwd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ifconfig"><span class="toc-number">3.</span> <span class="toc-text">ifconfig</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#netstat"><span class="toc-number">4.</span> <span class="toc-text">netstat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ps"><span class="toc-number">5.</span> <span class="toc-text">ps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gcc"><span class="toc-number">6.</span> <span class="toc-text">gcc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cat-bash-history"><span class="toc-number">7.</span> <span class="toc-text">cat .bash_history</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cat-etc-passwd-cat-etc-shadow"><span class="toc-number">8.</span> <span class="toc-text">cat/etc/passwd cat/etc/shadow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chmod"><span class="toc-number">9.</span> <span class="toc-text">chmod</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="uname"><a href="#uname" class="headerlink" title="uname"></a>uname</h3><p>输出一组系统信息。如果不跟随选项，则视为只附加-s选项。常跟的参数有-a，在我的Ubuntu10.10的终端中执行uname-a命令后显示，其中最前面的Linux表示是基于Linux内核的，2.6.35-28是具体的内核版本号。这个内核版本号非常重要，因为如果是采用溢出漏洞提权的话内核版本号是寻找溢出漏洞利用程序最重要的参考信息，根据当前的内核版本号寻找适用于这个版本号的漏洞利用程序。</p>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>获得当前目录，在用webshell上传漏洞和用程序前执行一下pwd命令获得当前目录，把漏洞利用程序直接上传到当前目录，在执行漏洞利用程序时就可以免去输入目录的麻烦。执行pwd命令后显示/home/test，说明当前目录为/home/test/。另外，通过webshell比如PhpSpy的“Back Connect”反弹回来的shell默认的当前目录为webshell所在的目录。</p>
+<h3 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h3><p>显示网络配置信息，比如显示有哪些网卡，每块网卡的配置信息（IP地址、MAC地址、子网掩码）等，常用参数-a执行ifconfig-a命令后显示。从信息可以知道，当前系统共有一块网卡etho，IP地址为192.168.19.138，子网掩码为255.255.255.0。</p>
+<h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><p>显示当前的网络连接状态，与Windows系统下的netstat命令写法相同，功能也差不多。</p>
+<p>执行netstat后显示了很多网络连接的信息。</p>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>ps是用来报告程序执行状况的指令，你可以搭配kill指令随时中断，删除不必要的程序。常用的参数有a，u，x<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a 显示现行终端机下的所有程序，包括其他用户的程序。</span><br><span class="line">u 以用户为主的格式来显示程序状况。</span><br><span class="line">x 显示所有程序，不以终端机来区分。</span><br></pre></td></tr></table></figure></p>
+<p>执行ps aux命令后显示，显示了程序的进程id，CPU占用率等详细信息，如果要结束某个程序，只需要用命令kill-9 PID就可以结束，其中PID就是在执行ps aux命令时显示的程序的PID，当然前提是要有相应的权限。</p>
+<h3 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h3><p>很多Linux下的漏洞利用程序都是用C语言写的，我们得到的很多时候是漏洞利用程序的C语言的源代码，要想得到可执行程序，需要对源代码进行编辑，这时候就用到大名鼎鼎的gcc了。个别情况下可能因为兼容性的原因必须需要在要提权的Linux主机上编译漏洞利用程序，这时候也需要用到gcc。GCC（GNU Compiler Collection，GNU编译器套装），是一套由GNU开发的编程语言编译器。它是一套以GPL及LGPL许可证所发行的自由软件，也是GNU计划的关键部分，亦是自由的类Unix及苹果电脑Mac OS X操作系统的标准编译器。GCC原名为GNUC语言编译器，因为它原本只能处理C语言，GCC很快地扩展，变得可处理C++，之后也变得可处理Fortran、Pascal、Objective-C、Java，以及Ada与其他语言。</p>
+<p>在大多数情况下，你在本地的Linux系统中编译好的溢出漏洞利用程序直接上传到要提权的Linux主机上也能正常使用，不是必须要在要提权的主机上编译溢出漏洞的利用程序。因为gcc特别强大，功能特别多，用法也特别多，要讲全的话估计要一本厚书的篇幅，这里不可能一一介绍，只介绍Linux提权中常用到的两个方面：</p>
+<p>(1)gcc-v<br>查看安装的gcc的版本，我们的目的是通过执行gcc-v命令确认系统是否安装了gcc，如果安装了会显示安装的gcc的版本号如果提示找不到命令等说明gcc没有安装。Ubuntu 10.10默认安装了gcc。</p>
+<p>(2)另一个用到的重要功能就是把漏洞利用程序的源代码编译成可执行程序了。假设溢出漏洞利用程序源代码文件是exp.c，通过websbell把exp.c上传到了要提权的Linux主机的当前目录下，在反弹回来的命令窗口中执行gcc-o exp exp.c，就会把exp.c编程成可执行程序exp，其中-o参数后面跟着的是编译生成的可执行程序的名字，这里为exp，另一个参数exp.c是要编译的溢出漏洞利用程序源代码的文件名，这里为exp.c。执行命令后如果没有错误提示就说明编译成功了。执行一下命令ls，发现可执行文件exp已经生成了。<br>接下来输入./exp就可以运行漏洞利用程序exp了，如果溢出成功会显示，注意下面的那个#，对Linux有点了解的都知道#对应的是root权限，看到#就说明提权成功了，接下来你就可以以root权限运行各种命令了。<br>在通过溢出漏洞获得root权限后，能执行的命令就多了，很多没提权前没权限执行的命令现在都可以执行了。这时候可以执行一些命令来获取一些敏感信息或进行留后门清理日志等操作，方便更好的控制提权成功的服务器。</p>
+<h3 id="cat-bash-history"><a href="#cat-bash-history" class="headerlink" title="cat .bash_history"></a>cat .bash_history</h3><p>查看该用户曾经执行过的命令，也就是查看root用户执行过的命令。因为Linux下很多管理操作都是在命令行下完成的，而正常情况下用root用户执行命令的是管理员，通过查看管理员输入的命令，可能得到很多敏感信息。       </p>
+<h3 id="cat-etc-passwd-cat-etc-shadow"><a href="#cat-etc-passwd-cat-etc-shadow" class="headerlink" title="cat/etc/passwd cat/etc/shadow"></a>cat/etc/passwd cat/etc/shadow</h3><p>分别执行cat/etc/passwd，cat/etc/shadow命令后得到passwd和shadow的内容，把两个文件的内容保存到本地用john挂字典尝试破解root用户的密码，具体怎么破可以自己查询相关信息。cat/etc/shadow只有root权限才能执行。</p>
+<h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>在提权成功获得root权限后你如果想下载服务器上的一个文件到本地，我的方法是先执行cp命令把要下载的文件复制到网站的Web目录下，但复制过去的文件只有root用户能访问，直接用浏览器下载会提示没有权限，这时候就需要用到chmod命令了。chmod命令的作用是变更文件或目录的权限。如果要下载的文件是shadow1，执行命令chmod 777./shadow1后就可以直接用浏览器下载了，不会再有权限问题了。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/01/01/linux提权常用命令/" data-title="linux提权常用命令 | Bug&#39;小虫" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/01/01/渗透前期准备之靶机搭建/" title="渗透测试前期准备之靶机搭建">
+  <strong>上一篇：</strong><br/>
+  <span>
+  渗透测试前期准备之靶机搭建</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/01/01/windows提权常用命令/"  title="windows提权常用命令">
+ <strong>下一篇：</strong><br/> 
+ <span>windows提权常用命令
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="category-block">
+  <h3 class="asidetitle">分类</h3>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li></ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://dillinger.io" target="_blank" title="在线看makedown编译出的效果">makedown</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://mochazz.github.io" target="_blank" title="一个审计大佬的博客">审计</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.php.cn/course/74.html" target="_blank" title="php官方网站">php</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.51cto.com/simeon" target="_blank" title="一个经常发布资源大佬的博客">资源</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.liaoxuefeng.com" target="_blank" title="学习python的个人博客">python</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.kanxue.com" target="_blank" title="二进制安全学习窝">看雪</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="www.secquan.org" target="_blank" title="常混的论坛">圈子</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.2cto.com" target="_blank" title="各种渗透书籍随便挑">红黑联盟</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.cnblogs.com" target="_blank" title="一个内网大佬的博客">linuxsec</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.runoob.com" target="_blank" title="学习各种编程脚本的好地方">W3C</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Bug`小虫 Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="小虫">小虫</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+ </html>

