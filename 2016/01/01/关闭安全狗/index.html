@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>关闭安全狗 | Bug&#39;小虫</title>
+    <title>杀狗提权 | Bug&#39;小虫</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="小虫">
@@ -13,19 +13,19 @@
     
     <meta name="description" content="前言：提权时遇到安全狗，可以添加账户，但是提到管理组老是失败，查看了一下服务，发现一条狗如图：虽然提示加入管理组成功，但是仍然没有成功因为杀狗要system权限，所以反弹system到msf如图，表示成功反弹依次执行下面六条语句1sc delete &quot;服务名&quot; //删除自启动 123sc delete &quot;Safedog Update Center&quot;sc delete &quot;SafeDogCloudHe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关闭安全狗">
+<meta property="og:title" content="杀狗提权">
 <meta property="og:url" content="http://yoursite.com/2016/01/01/关闭安全狗/index.html">
 <meta property="og:site_name" content="Bug&#39;小虫">
 <meta property="og:description" content="前言：提权时遇到安全狗，可以添加账户，但是提到管理组老是失败，查看了一下服务，发现一条狗如图：虽然提示加入管理组成功，但是仍然没有成功因为杀狗要system权限，所以反弹system到msf如图，表示成功反弹依次执行下面六条语句1sc delete &quot;服务名&quot; //删除自启动 123sc delete &quot;Safedog Update Center&quot;sc delete &quot;SafeDogCloudHe">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/24.png">
-<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/25.png">
-<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/26.png">
-<meta property="og:updated_time" content="2018-07-16T15:51:48.233Z">
+<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/24.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
+<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/25.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
+<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/26.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
+<meta property="og:updated_time" content="2018-07-16T16:24:24.991Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关闭安全狗">
+<meta name="twitter:title" content="杀狗提权">
 <meta name="twitter:description" content="前言：提权时遇到安全狗，可以添加账户，但是提到管理组老是失败，查看了一下服务，发现一条狗如图：虽然提示加入管理组成功，但是仍然没有成功因为杀狗要system权限，所以反弹system到msf如图，表示成功反弹依次执行下面六条语句1sc delete &quot;服务名&quot; //删除自启动 123sc delete &quot;Safedog Update Center&quot;sc delete &quot;SafeDogCloudHe">
-<meta name="twitter:image" content="http://opgnaclz6.bkt.clouddn.com/24.png">
+<meta name="twitter:image" content="http://opgnaclz6.bkt.clouddn.com/24.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
 
     
     <link rel="alternative" href="/atom.xml" title="Bug&#39;小虫" type="application/atom+xml">
@@ -81,7 +81,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/01/关闭安全狗/" title="关闭安全狗" itemprop="url">关闭安全狗</a>
+      <a href="/2016/01/01/关闭安全狗/" title="杀狗提权" itemprop="url">杀狗提权</a>
   </h1>
   <p class="article-author">By
        
@@ -101,7 +101,7 @@
 		
 		</div>
 		
-		<p>前言：<br>提权时遇到安全狗，可以添加账户，但是提到管理组老是失败，查看了一下服务，发现一条狗<br>如图：虽然提示加入管理组成功，但是仍然没有成功<br><img src="http://opgnaclz6.bkt.clouddn.com/24.png"><br>因为杀狗要system权限，所以反弹system到msf<br><img src="http://opgnaclz6.bkt.clouddn.com/25.png"><br>如图，表示成功反弹<br><img src="http://opgnaclz6.bkt.clouddn.com/26.png"><br>依次执行下面六条语句<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc delete <span class="string">"服务名"</span> //删除自启动</span><br></pre></td></tr></table></figure></p>
+		<p>前言：<br>提权时遇到安全狗，可以添加账户，但是提到管理组老是失败，查看了一下服务，发现一条狗<br>如图：虽然提示加入管理组成功，但是仍然没有成功<br><img src="http://opgnaclz6.bkt.clouddn.com/24.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>因为杀狗要system权限，所以反弹system到msf<br><img src="http://opgnaclz6.bkt.clouddn.com/25.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>如图，表示成功反弹<br><img src="http://opgnaclz6.bkt.clouddn.com/26.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>依次执行下面六条语句<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc delete <span class="string">"服务名"</span> //删除自启动</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sc delete <span class="string">"Safedog Update Center"</span></span><br><span class="line">sc delete <span class="string">"SafeDogCloudHelper"</span></span><br><span class="line">sc delete <span class="string">"SafeDogGuardCenter"</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc config <span class="string">"服务名"</span> start= disabled  //把这个服务禁止</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sc config <span class="string">"Safedog Update Center"</span> start= disabled</span><br><span class="line">sc config <span class="string">"SafeDogCloudHelper"</span> start= disabled</span><br><span class="line">sc config <span class="string">"SafeDogGuardCenter"</span> start= disabled</span><br></pre></td></tr></table></figure>
@@ -124,7 +124,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/01/01/关闭安全狗/" data-title="关闭安全狗 | Bug&#39;小虫" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/01/01/关闭安全狗/" data-title="杀狗提权 | Bug&#39;小虫" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -138,18 +138,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/01/01/dedeCMS常用EXP/" title="dedeCMS常用EXP">
+ <a href="/2016/03/07/记一次metInfo4-0漏洞渗透过程/" title="记一次metInfo4.0漏洞拿后台">
   <strong>上一篇：</strong><br/>
   <span>
-  dedeCMS常用EXP</span>
+  记一次metInfo4.0漏洞拿后台</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/05/07/记一次白帽学院解题过程/"  title="记一次白帽学院解题过程">
+<a href="/2016/01/01/dedeCMS常用EXP/"  title="dedeCMS常用EXP">
  <strong>下一篇：</strong><br/> 
- <span>记一次白帽学院解题过程
+ <span>dedeCMS常用EXP
 </span>
 </a>
 </div>

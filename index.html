@@ -284,7 +284,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/03/windows下删除不掉文件夹：找不到该项目无法删除文件夹/" title="windows下删除不掉文件夹：找不到该项目无法删除文件夹" itemprop="url">windows下删除不掉文件夹：找不到该项目无法删除文件夹</a>
+      <a href="/2018/04/03/Apache设置反向代理目录的方法/" title="Apache设置反向代理" itemprop="url">Apache设置反向代理</a>
   </h1>
   <p class="article-author">By
        
@@ -297,77 +297,14 @@
 </header>
     <div class="article-content">
         
-        <p><img src="http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在cmd中rd /S 文件夹名或路径</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
+        <p>设置反向代理有三个文件要用apache目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\conf\httpd.conf</span><br><span class="line">\conf\extra\httpd-proxy.conf</span><br><span class="line">\conf\extra\httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p>
+<p>1.设置httpd.conf<br>打开Apache24/conf文件夹下的httpd.conf设置文件，找到一下几行把前面的注释‘#’删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module modules/mod_proxy.so</span><br><span class="line">LoadModule proxy_connect_modulemodules/mod_proxy_connect.so</span><br><span class="line">LoadModule proxy_ftp_modulemodules/mod_proxy_ftp.so</span><br><span class="line">LoadModuleproxy_http_modulemodules/mod_proxy_http.so</span><br></pre></td></tr></table></figure></p>
+<p>(Ps:很多人都会注释LoadModuleproxy_balancer_modulemodules/mod_proxy_balancer.so，然而这个是做负载均衡用的一个功能，单纯做反向代理的话，不需要用这个，而且取消了这里的注释不进行相应的设置的话，会导致apache服务无法开启)<br>然后找到<br>Include conf/extra/httpd-vhosts.conf<br>这一行前面的注释‘#’也删除，引入这个文件 </p>
+<p>apache反向代理全站<br><code>`</code>bash</p>
+<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /  <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a><br><br></virtualhost> 
 
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/windows7/">windows7</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/03/Nginx反向代理泛目录、目录、整站方法 nginx反向代理配置详解/" title="nginx设置反向代理" itemprop="url">nginx设置反向代理</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-03T10:04:51.000Z" itemprop="datePublished"> 发表于 2018-04-03</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>常见的nginx代理配置 nginx反向代理配置<br>有前缀二级泛目录反向代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;                                                         </span><br><span class="line">    server_name  ***.com;                                               </span><br><span class="line"></span><br><span class="line">    location /abc &#123;</span><br><span class="line">        proxy_pass http://ip/abc;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>目录反向代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;                                                         </span><br><span class="line">    server_name  ***.com;                                               </span><br><span class="line"></span><br><span class="line">    location /abc/ &#123;</span><br><span class="line">        proxy_pass http://ip/abc/;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>整站反向代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;                                                         </span><br><span class="line">    server_name ***.com;                                               </span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://www.***.com/;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>重定向报文代理<br>即便配置了nginx代理，当服务返回重定向报文时（http code为301或302），会将重定向的目标url地址放入http response报文的header的location字段内。用户浏览器收到重定向报文时，会解析出该字段并作跳转。此时新的请求报文将直接发送给服务地址，而非nginx地址。为了能让nginx拦截此类请求，必须修改重定向报文的location信息。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /my/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用proxy_redirect可以修改重定向报文的location字段，例子中会将所有的根路径下的url代理到nginx的/my/路径下返回给用户。比如服务返回的重定向报文的location原始值为/login，那么经过nginx代理后，用户收到的报文的location字段为/my/login。此时，浏览器将会跳转到nginx的/my/login地址进行访问。 </p>
-<p>需要注意的是，服务返回的重定向报文的location字段有时会填写绝对路径（包含服务的ip/域名和端口），有时候会填写相对路径，此时需要根据实际情况进行甄别。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect http://my_server/ http://<span class="variable">$host</span>:<span class="variable">$server_port</span>/my/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上述配置便是将my_server服务的根路径下的所有路径代理到nginx地址的/my/路径下。当nginx配置只有一个server时，http://$host:$server_port前缀可以省略。 </p>
-<p>报文数据替换<br>使用nginx代理最牛（dan）逼（sui）的情况就是http响应报文内写死了服务地址或web绝对路径。写死服务地址的情况比较少见，但也偶尔存在。最棘手的是写死了web绝对路径，尤其是绝对路径都没有公共前缀。举个例子来说： </p>
-<p>一般的web页面会包含如下类似路径：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/public：用于静态页面资源，如js脚本/public/js，样式表/public/css，图片/public/img等。 </span><br><span class="line">/static：和/public类似。 </span><br><span class="line">/api：用于后台服务API接口。 </span><br><span class="line">/login：用于登录验证。</span><br></pre></td></tr></table></figure></p>
-<p>其他。<br>对于这样的服务，可能的代理配置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /my/;</span><br><span class="line">&#125;</span><br><span class="line">location /login/ &#123;</span><br><span class="line">    proxy_pass http://my_server/public;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">&#125;</span><br><span class="line">location /public/ &#123;</span><br><span class="line">    proxy_pass http://my_server/public;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">&#125;</span><br><span class="line">location /api/ &#123;</span><br><span class="line">    proxy_pass http://my_server/api;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>由于web页面或静态资源内写死了类似的绝对路径，那么对于用户来说，通过页面内的链接进行跳转时，都会请求到nginx服务对应的路径上。一旦存在另一个服务也包含类似的路径，也需要nginx进行代理，那么矛盾就出现了：访问nginx的同一个路径下的请求究竟转发给哪一个服务？ </p>
-<p>要解决这个问题，必须在用户收到报文前，将报文的数据中包含的绝对路径都添加统一的前缀，如/my/public，/my/api，/my/login，这样nginx代理配置则可以简化为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /my/;</span><br><span class="line">&#125;</span><br><span class="line">location /other/ &#123;</span><br><span class="line">    proxy_pass http://other_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /other/;</span><br><span class="line">&#125;nginx的ngx_http_sub_module模块提供了类似的报文数据替换功能，该模块默认不会安装，需要在编译nginx时添加–with-http_sub_module参数，或者直接下载nginx的rpm包。</span><br></pre></td></tr></table></figure></p>
-<p>使用sub_filter对数据包进行替换的语法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">    </span><br><span class="line">    sub_filter <span class="string">'href="/'</span> <span class="string">'href="/my/'</span>;</span><br><span class="line">    sub_filter <span class="string">'src="/'</span> <span class="string">'src="/my/'</span>;</span><br><span class="line">    sub_filter_types text/html;</span><br><span class="line">    sub_filter_once  off;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上述配置会将/my/下的所有响应报文内容的href=”/替换为href=”/my，以及src=”/替换为src=”/my，即为所有的绝对路径添加公共前缀。 </p>
-<p>注意，如果需要配置多个sub_filter，必须保证nginx是1.9.4版本之上的。即便如此，sub_filter也不能解决所有问题。目前流行的js框架都会有自动渲染url的功能，也就是说，很多绝对路径并非写死在静态页面内，也是由js代码框架动态生成的，面对这样的情况，sub_filter也是无能为力了。对于这样的情况，笔者只能由衷地奉劝，还是安静的改代码吧！ </p>
-
+<p>apache反向代理二级目录 </p>
+<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /abc  <a href="http://127.0.0.1:8888/abc" target="_blank" rel="noopener">http://127.0.0.1:8888/abc</a><br><br></virtualhost> 
         
         
         <p class="article-more-link">
@@ -470,7 +407,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/03/Apache设置反向代理目录的方法/" title="Apache设置反向代理" itemprop="url">Apache设置反向代理</a>
+      <a href="/2018/04/03/windows下删除不掉文件夹：找不到该项目无法删除文件夹/" title="windows下删除不掉文件夹：找不到该项目无法删除文件夹" itemprop="url">windows下删除不掉文件夹：找不到该项目无法删除文件夹</a>
   </h1>
   <p class="article-author">By
        
@@ -483,14 +420,77 @@
 </header>
     <div class="article-content">
         
-        <p>设置反向代理有三个文件要用apache目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\conf\httpd.conf</span><br><span class="line">\conf\extra\httpd-proxy.conf</span><br><span class="line">\conf\extra\httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p>
-<p>1.设置httpd.conf<br>打开Apache24/conf文件夹下的httpd.conf设置文件，找到一下几行把前面的注释‘#’删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module modules/mod_proxy.so</span><br><span class="line">LoadModule proxy_connect_modulemodules/mod_proxy_connect.so</span><br><span class="line">LoadModule proxy_ftp_modulemodules/mod_proxy_ftp.so</span><br><span class="line">LoadModuleproxy_http_modulemodules/mod_proxy_http.so</span><br></pre></td></tr></table></figure></p>
-<p>(Ps:很多人都会注释LoadModuleproxy_balancer_modulemodules/mod_proxy_balancer.so，然而这个是做负载均衡用的一个功能，单纯做反向代理的话，不需要用这个，而且取消了这里的注释不进行相应的设置的话，会导致apache服务无法开启)<br>然后找到<br>Include conf/extra/httpd-vhosts.conf<br>这一行前面的注释‘#’也删除，引入这个文件 </p>
-<p>apache反向代理全站<br><code>`</code>bash</p>
-<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /  <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a><br><br></virtualhost> 
+        <p><img src="http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在cmd中rd /S 文件夹名或路径</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
 
-<p>apache反向代理二级目录 </p>
-<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /abc  <a href="http://127.0.0.1:8888/abc" target="_blank" rel="noopener">http://127.0.0.1:8888/abc</a><br><br></virtualhost> 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/windows7/">windows7</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/03/Nginx反向代理泛目录、目录、整站方法 nginx反向代理配置详解/" title="nginx设置反向代理" itemprop="url">nginx设置反向代理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-03T10:04:51.000Z" itemprop="datePublished"> 发表于 2018-04-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>常见的nginx代理配置 nginx反向代理配置<br>有前缀二级泛目录反向代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;                                                         </span><br><span class="line">    server_name  ***.com;                                               </span><br><span class="line"></span><br><span class="line">    location /abc &#123;</span><br><span class="line">        proxy_pass http://ip/abc;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>目录反向代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;                                                         </span><br><span class="line">    server_name  ***.com;                                               </span><br><span class="line"></span><br><span class="line">    location /abc/ &#123;</span><br><span class="line">        proxy_pass http://ip/abc/;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>整站反向代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;                                                         </span><br><span class="line">    server_name ***.com;                                               </span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://www.***.com/;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重定向报文代理<br>即便配置了nginx代理，当服务返回重定向报文时（http code为301或302），会将重定向的目标url地址放入http response报文的header的location字段内。用户浏览器收到重定向报文时，会解析出该字段并作跳转。此时新的请求报文将直接发送给服务地址，而非nginx地址。为了能让nginx拦截此类请求，必须修改重定向报文的location信息。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /my/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用proxy_redirect可以修改重定向报文的location字段，例子中会将所有的根路径下的url代理到nginx的/my/路径下返回给用户。比如服务返回的重定向报文的location原始值为/login，那么经过nginx代理后，用户收到的报文的location字段为/my/login。此时，浏览器将会跳转到nginx的/my/login地址进行访问。 </p>
+<p>需要注意的是，服务返回的重定向报文的location字段有时会填写绝对路径（包含服务的ip/域名和端口），有时候会填写相对路径，此时需要根据实际情况进行甄别。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect http://my_server/ http://<span class="variable">$host</span>:<span class="variable">$server_port</span>/my/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述配置便是将my_server服务的根路径下的所有路径代理到nginx地址的/my/路径下。当nginx配置只有一个server时，http://$host:$server_port前缀可以省略。 </p>
+<p>报文数据替换<br>使用nginx代理最牛（dan）逼（sui）的情况就是http响应报文内写死了服务地址或web绝对路径。写死服务地址的情况比较少见，但也偶尔存在。最棘手的是写死了web绝对路径，尤其是绝对路径都没有公共前缀。举个例子来说： </p>
+<p>一般的web页面会包含如下类似路径：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/public：用于静态页面资源，如js脚本/public/js，样式表/public/css，图片/public/img等。 </span><br><span class="line">/static：和/public类似。 </span><br><span class="line">/api：用于后台服务API接口。 </span><br><span class="line">/login：用于登录验证。</span><br></pre></td></tr></table></figure></p>
+<p>其他。<br>对于这样的服务，可能的代理配置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /my/;</span><br><span class="line">&#125;</span><br><span class="line">location /login/ &#123;</span><br><span class="line">    proxy_pass http://my_server/public;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">&#125;</span><br><span class="line">location /public/ &#123;</span><br><span class="line">    proxy_pass http://my_server/public;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">&#125;</span><br><span class="line">location /api/ &#123;</span><br><span class="line">    proxy_pass http://my_server/api;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于web页面或静态资源内写死了类似的绝对路径，那么对于用户来说，通过页面内的链接进行跳转时，都会请求到nginx服务对应的路径上。一旦存在另一个服务也包含类似的路径，也需要nginx进行代理，那么矛盾就出现了：访问nginx的同一个路径下的请求究竟转发给哪一个服务？ </p>
+<p>要解决这个问题，必须在用户收到报文前，将报文的数据中包含的绝对路径都添加统一的前缀，如/my/public，/my/api，/my/login，这样nginx代理配置则可以简化为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /my/;</span><br><span class="line">&#125;</span><br><span class="line">location /other/ &#123;</span><br><span class="line">    proxy_pass http://other_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">    proxy_redirect / /other/;</span><br><span class="line">&#125;nginx的ngx_http_sub_module模块提供了类似的报文数据替换功能，该模块默认不会安装，需要在编译nginx时添加–with-http_sub_module参数，或者直接下载nginx的rpm包。</span><br></pre></td></tr></table></figure></p>
+<p>使用sub_filter对数据包进行替换的语法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location /my/ &#123;</span><br><span class="line">    proxy_pass http://my_server/;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">    </span><br><span class="line">    sub_filter <span class="string">'href="/'</span> <span class="string">'href="/my/'</span>;</span><br><span class="line">    sub_filter <span class="string">'src="/'</span> <span class="string">'src="/my/'</span>;</span><br><span class="line">    sub_filter_types text/html;</span><br><span class="line">    sub_filter_once  off;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述配置会将/my/下的所有响应报文内容的href=”/替换为href=”/my，以及src=”/替换为src=”/my，即为所有的绝对路径添加公共前缀。 </p>
+<p>注意，如果需要配置多个sub_filter，必须保证nginx是1.9.4版本之上的。即便如此，sub_filter也不能解决所有问题。目前流行的js框架都会有自动渲染url的功能，也就是说，很多绝对路径并非写死在静态页面内，也是由js代码框架动态生成的，面对这样的情况，sub_filter也是无能为力了。对于这样的情况，笔者只能由衷地奉劝，还是安静的改代码吧！ </p>
+
         
         
         <p class="article-more-link">
