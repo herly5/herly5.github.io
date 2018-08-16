@@ -1,0 +1,492 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>端口渗透及方法 | Bug&#39;小虫</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小虫">
+    
+
+    
+    <meta name="description" content="常见的端口扫描类型及原理 更新中常见的扫描类型有以下几种： 秘密扫描秘密扫描是一种不被审计工具所检测的扫描技术。它通常用于在通过普通的防火墙或路由器的筛选（filtering）时隐藏自己。秘密扫描能躲避IDS、防火墙、包过滤器和日志审计，从而获取目标端口的开放或关闭的信息。由于没有包含TCP 3次握手协议的任何部分，所以无法被记录下来，比半连接扫描更为隐蔽。但是这种扫描的缺点是扫描结果的不可靠性会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="端口渗透及方法">
+<meta property="og:url" content="http://yoursite.com/2016/01/01/常见的端口扫描类型及原理/index.html">
+<meta property="og:site_name" content="Bug&#39;小虫">
+<meta property="og:description" content="常见的端口扫描类型及原理 更新中常见的扫描类型有以下几种： 秘密扫描秘密扫描是一种不被审计工具所检测的扫描技术。它通常用于在通过普通的防火墙或路由器的筛选（filtering）时隐藏自己。秘密扫描能躲避IDS、防火墙、包过滤器和日志审计，从而获取目标端口的开放或关闭的信息。由于没有包含TCP 3次握手协议的任何部分，所以无法被记录下来，比半连接扫描更为隐蔽。但是这种扫描的缺点是扫描结果的不可靠性会">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-16T02:40:39.276Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="端口渗透及方法">
+<meta name="twitter:description" content="常见的端口扫描类型及原理 更新中常见的扫描类型有以下几种： 秘密扫描秘密扫描是一种不被审计工具所检测的扫描技术。它通常用于在通过普通的防火墙或路由器的筛选（filtering）时隐藏自己。秘密扫描能躲避IDS、防火墙、包过滤器和日志审计，从而获取目标端口的开放或关闭的信息。由于没有包含TCP 3次握手协议的任何部分，所以无法被记录下来，比半连接扫描更为隐蔽。但是这种扫描的缺点是扫描结果的不可靠性会">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Bug&#39;小虫" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Bug&#39;小虫">Bug&#39;小虫</a></h1>
+				<h2 class="blog-motto">走过黑暗，前面便是光</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="[layout]" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/常见的端口扫描类型及原理/" title="端口渗透及方法" itemprop="url">端口渗透及方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#秘密扫描"><span class="toc-number">1.</span> <span class="toc-text">秘密扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Connect-扫描："><span class="toc-number">1.1.</span> <span class="toc-text">Connect()扫描：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程："><span class="toc-number">1.1.1.</span> <span class="toc-text">TCP connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程："><span class="toc-number">1.1.2.</span> <span class="toc-text">TCP connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SYN扫描："><span class="toc-number">1.2.</span> <span class="toc-text">SYN扫描：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#端口开放："><span class="toc-number">1.2.1.</span> <span class="toc-text">端口开放：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#端口关闭："><span class="toc-number">1.2.2.</span> <span class="toc-text">端口关闭：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NULL扫描："><span class="toc-number">1.3.</span> <span class="toc-text">NULL扫描：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#端口开放：Client发送Null，server没有响应"><span class="toc-number">1.3.1.</span> <span class="toc-text">端口开放：Client发送Null，server没有响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#端口关闭：1、Client发送NUll-2、Server回复RST"><span class="toc-number">1.3.2.</span> <span class="toc-text">端口关闭：1、Client发送NUll   2、Server回复RST</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FIN扫描："><span class="toc-number">1.4.</span> <span class="toc-text">FIN扫描：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#端口开放：-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">端口开放：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#端口关闭：-1"><span class="toc-number">1.4.2.</span> <span class="toc-text">端口关闭：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ACK扫描："><span class="toc-number">1.5.</span> <span class="toc-text">ACK扫描：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Xmas-Tree扫描："><span class="toc-number">1.6.</span> <span class="toc-text">Xmas-Tree扫描：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#端口开放：-2"><span class="toc-number">1.6.1.</span> <span class="toc-text">端口开放：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#端口关闭：-2"><span class="toc-number">1.6.2.</span> <span class="toc-text">端口关闭：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dump扫描："><span class="toc-number">1.7.</span> <span class="toc-text">Dump扫描：</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>常见的端口扫描类型及原理</p>
+<p>更新中<br>常见的扫描类型有以下几种：</p>
+<h1 id="秘密扫描"><a href="#秘密扫描" class="headerlink" title="秘密扫描"></a>秘密扫描</h1><p>秘密扫描是一种不被审计工具所检测的扫描技术。<br>它通常用于在通过普通的防火墙或路由器的筛选（filtering）时隐藏自己。<br>秘密扫描能躲避IDS、防火墙、包过滤器和日志审计，从而获取目标端口的开放或关闭的信息。由于没有包含TCP 3次握手协议的任何部分，所以无法被记录下来，比半连接扫描更为隐蔽。<br>但是这种扫描的缺点是扫描结果的不可靠性会增加，而且扫描主机也需要自己构造IP包。现有的秘密扫描有TCP FIN扫描、TCP ACK扫描、NULL扫描、XMAS扫描和SYN/ACK扫描等。 </p>
+<h2 id="Connect-扫描："><a href="#Connect-扫描：" class="headerlink" title="Connect()扫描："></a>Connect()扫描：</h2><p>此扫描试图与每一个TCP端口进行“三次握手”通信。如果能够成功建立接连，则证明端口开发，否则为关闭。准确度很高，但是最容易被防火墙和IDS检测到，并且在目标主机的日志中会记录大量的连接请求以及错误信息。</p>
+<h3 id="TCP-connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程："><a href="#TCP-connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程：" class="headerlink" title="TCP connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程："></a>TCP connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程：</h3><p>① Client端发送SYN；<br>② Server端返回SYN/ACK，表明端口开放；<br>③ Client端返回ACK，表明连接已建立；<br>④ Client端主动断开连接。<br>建立连接成功（目标端口开放）如图所示</p>
+<h3 id="TCP-connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程："><a href="#TCP-connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程：" class="headerlink" title="TCP connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程："></a>TCP connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程：</h3><p>① Client端发送SYN；<br>② Server端返回RST/ACK，表明端口未开放。<br>未建立连接成功(目标端口关闭)如图所示。</p>
+<p><b>优点：</b><br>实现简单，对操作者的权限没有严格要求（有些类型的端口扫描需要操作者具有root权限），系统中的任何用户都有权力使用这个调用，而且如果想要得到从目标端口返回banners信息，也只能采用这一方法。<br>另一优点是扫描速度快。如果对每个目标端口以线性的方式，使用单独的connect()调用，可以通过同时打开多个套接字，从而加速扫描。<br><b>缺点：</b><br>是会在目标主机的日志记录中留下痕迹，易被发现，并且数据包会被过滤掉。目标主机的logs文件会显示一连串的连接和连接出错的服务信息，并且能很快地使它关闭。</p>
+<h2 id="SYN扫描："><a href="#SYN扫描：" class="headerlink" title="SYN扫描："></a>SYN扫描：</h2><p>扫描器向目标主机的一个端口发送请求连接的SYN包，扫描器在收到SYN/ACK后，不是发送的ACK应答而是发送RST包请求断开连接。这样，三次握手就没有完成，无法建立正常的TCP连接，因此，这次扫描就不会被记录到系统日志中。这种扫描技术一般不会在目标主机上留下扫描痕迹。但是，这种扫描需要有root权限。</p>
+<h3 id="端口开放："><a href="#端口开放：" class="headerlink" title="端口开放："></a>端口开放：</h3><p>1、Client发送SYN<br>2、Server端发送SYN/ACK<br>Client发送RST断开（只需要前两步就可以判断端口开放）</p>
+<h3 id="端口关闭："><a href="#端口关闭：" class="headerlink" title="端口关闭："></a>端口关闭：</h3><p>1、Client发送SYN<br>2、Server端回复RST（表示端口关闭）</p>
+<p><b>优点：</b><br>SYN扫描要比TCP         Connect()扫描隐蔽一些，SYN仅仅需要发送初始的SYN数据包给目标主机，如果端口开放，则相应SYN-ACK数据包；如果关闭，则响应RST数据包；</p>
+<h2 id="NULL扫描："><a href="#NULL扫描：" class="headerlink" title="NULL扫描："></a>NULL扫描：</h2><p>反向扫描—-原理是将一个没有设置任何标志位的数据包发送给TCP端口，在正常的通信中至少要设置一个标志位，根据FRC 793的要求，在端口关闭的情况下，若收到一个没有设置标志位的数据字段，那么主机应该舍弃这个分段，并发送一个RST数据包，否则不会响应发起扫描的客户端计算机。也就是说，如果TCP端口处于关闭则响应一个RST数据包，若处于开放则无相应。但是应该知道理由NULL扫描要求所有的主机都符合RFC 793规定，但是windows系统主机不遵从RFC 793标准，且只要收到没有设置任何标志位的数据包时，不管端口是处于开放还是关闭都响应一个RST数据包。但是基于Unix(<em>nix,如Linux)遵从RFC 793标准，所以可以用NULL扫描。   经过上面的分析，我们知道NULL可以辨别某台主机运行的操作系统是什么操作系统，是为windows呢？还是</em>nix？</p>
+<h3 id="端口开放：Client发送Null，server没有响应"><a href="#端口开放：Client发送Null，server没有响应" class="headerlink" title="端口开放：Client发送Null，server没有响应"></a>端口开放：Client发送Null，server没有响应</h3><h3 id="端口关闭：1、Client发送NUll-2、Server回复RST"><a href="#端口关闭：1、Client发送NUll-2、Server回复RST" class="headerlink" title="端口关闭：1、Client发送NUll   2、Server回复RST"></a>端口关闭：1、Client发送NUll   2、Server回复RST</h3><p>说明：Null扫描和前面的TCP Connect（）和SYN的判断条件正好相反。在前两种扫描中，有响应数据包的表示端口开放，但在NUll扫描中，收到响应数据包表示端口关闭。反向扫描比前两种隐蔽性高些，当精确度也相对低一些。</p>
+<p>用途：判断是否为Windows系统还是*nix</p>
+<h2 id="FIN扫描："><a href="#FIN扫描：" class="headerlink" title="FIN扫描："></a>FIN扫描：</h2><p>与NULL有点类似，只是FIN为指示TCP会话结束，在FIN扫描中一个设置了FIN位的数据包被发送后，若响应RST数据包，则表示端口关闭，没有响应则表示开放。此类扫描同样不能准确判断windows系统上端口开发情况。</p>
+<h3 id="端口开放：-1"><a href="#端口开放：-1" class="headerlink" title="端口开放："></a>端口开放：</h3><p>发送FIN，没有响应</p>
+<h3 id="端口关闭：-1"><a href="#端口关闭：-1" class="headerlink" title="端口关闭："></a>端口关闭：</h3><p>1、发送FIN<br>2、回复RST</p>
+<h2 id="ACK扫描："><a href="#ACK扫描：" class="headerlink" title="ACK扫描："></a>ACK扫描：</h2><p>扫描主机向目标主机发送ACK数据包。根据返回的RST数据包有两种方法可以得到端口的信息。方法一是： 若返回的RST数据包的TTL值小于或等于64，则端口开放，反之端口关闭，如图所示。</p>
+<h2 id="Xmas-Tree扫描："><a href="#Xmas-Tree扫描：" class="headerlink" title="Xmas-Tree扫描："></a>Xmas-Tree扫描：</h2><p>通过发送带有下列标志位的tcp数据包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">URG：指示数据时紧急数据，应立即处理。</span><br><span class="line">PSH：强制将数据压入缓冲区。</span><br><span class="line">FIN：在结束TCP会话时使用。</span><br></pre></td></tr></table></figure></p>
+<p>正常情况下，三个标志位不能被同时设置，但在此种扫描中可以用来判断哪些端口关闭还是开放，与上面的反向扫描情况相同，依然不能判断windows平台上的端口。</p>
+<h3 id="端口开放：-2"><a href="#端口开放：-2" class="headerlink" title="端口开放："></a>端口开放：</h3><p>发送URG/PSH/FIN,没有响应</p>
+<h3 id="端口关闭：-2"><a href="#端口关闭：-2" class="headerlink" title="端口关闭："></a>端口关闭：</h3><p>1、发送URG/PSH/FIN,没有响应<br>2、响应RST</p>
+<p>XMAS扫描原理和NULL扫描的类似，将TCP数据包中的ACK、FIN、RST、SYN、URG、PSH标志位置1后发送给目标主机。在目标端口开放的情况下，目标主机将不返回任何信息。</p>
+<h2 id="Dump扫描："><a href="#Dump扫描：" class="headerlink" title="Dump扫描："></a>Dump扫描：</h2><p>也被称为Idle扫描或反向扫描，在扫描主机时应用了第三方僵尸计算机扫描。由僵尸主机向目标主机发送SYN包。目标主机端口开发时回应SYN|ACK，关闭时返回RST，僵尸主机对SYN|ACK回应RST，对RST不做回应。从僵尸主机上进行扫描时，进行的是一个从本地计算机到僵尸主机的、连续的ping操作。查看僵尸主机返回的Echo响应的ID字段，能确定目标主机上哪些端口是开放的还是关闭的。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/端口/">端口</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/01/01/常见的端口扫描类型及原理/" data-title="端口渗透及方法 | Bug&#39;小虫" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/01/01/pyton之with open as用法/" title="pyton之with open as用法">
+  <strong>上一篇：</strong><br/>
+  <span>
+  pyton之with open as用法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/01/01/汇编masm32的用法/"  title="记一次曲折的搜搜!CMSgetshell">
+ <strong>下一篇：</strong><br/> 
+ <span>记一次曲折的搜搜!CMSgetshell
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="category-block">
+  <h3 class="asidetitle">分类</h3>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/上传/">上传</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/内网/">内网</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提取/">提取</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/端口/">端口</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程/">逆向工程</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程/mips/">mips</a><span class="category-list-count">1</span></li></ul></li></ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://dillinger.io" target="_blank" title="在线看makedown编译出的效果">makedown</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://mochazz.github.io" target="_blank" title="一个审计大佬的博客">审计</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.php.cn/course/74.html" target="_blank" title="php官方网站">php</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.51cto.com/simeon" target="_blank" title="一个经常发布资源大佬的博客">资源</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.liaoxuefeng.com" target="_blank" title="学习python的个人博客">python</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.kanxue.com" target="_blank" title="二进制安全学习窝">看雪</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="www.secquan.org" target="_blank" title="常混的论坛">圈子</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.2cto.com" target="_blank" title="各种渗透书籍随便挑">红黑联盟</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.cnblogs.com" target="_blank" title="一个内网大佬的博客">linuxsec</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.runoob.com" target="_blank" title="学习各种编程脚本的好地方">W3C</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.91ri.org" target="_blank" title="内网挺可以">91安全</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.kali.org.cn" target="_blank" title="kali linux">kali linux</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.shiyanlou.com" target="_blank" title="实验楼">实验楼</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Bug`小虫 Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="小虫">小虫</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+ </html>

